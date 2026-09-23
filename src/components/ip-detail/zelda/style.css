@@ -1,0 +1,143 @@
+.zelda-content {
+  --zelda-gold: #c7952f;
+  color: var(--color-white);
+  background: var(--zelda-gold);
+}
+
+.zelda-hero,
+.zelda-explore {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.zelda-hero__background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zelda-hero__navigation {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding-inline: var(--space-4);
+  z-index: var(--z-header);
+}
+
+.zelda-navigation {
+  --navigation-bg: var(--zelda-gold);
+  --navigation-brand-bg: var(--zelda-gold);
+  --navigation-border: rgb(255 255 255 / 30%);
+}
+
+.zelda-hero__title {
+  position: absolute;
+  top: 38.7037%;
+  left: 50%;
+  width: 32.8646%;
+  aspect-ratio: 631 / 250;
+  transform: translateX(-50%);
+  margin: 0;
+  mix-blend-mode: plus-lighter;
+}
+
+.zelda-hero__title img { display: block; width: 100%; height: 100%; }
+
+.zelda-hero__scroll {
+  position: absolute;
+  top: 83.7037%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  min-height: var(--size-touch-min);
+  font-size: clamp(14px, 1.25vw, 24px);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.zelda-hero__scroll-line {
+  position: absolute;
+  top: 90.2778%;
+  left: 50%;
+  width: 12.5%;
+  height: 1px;
+  transform-origin: left center;
+  transform: rotate(90deg);
+}
+
+.zelda-explore { display: grid; place-items: center; }
+
+.zelda-explore__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5625vw;
+  margin: 0;
+  padding: 0 5%;
+  font-family: 'Heir of Light', 'Times New Roman', serif;
+  font-size: clamp(28px, 6.25vw, 160px);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.zelda-explore__divider {
+  position: relative;
+  flex: 0 0 1px;
+  width: 1px;
+  height: 17.1875vw;
+}
+
+.zelda-explore__divider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 17.1875vw;
+  max-width: none;
+  height: 1px;
+  transform-origin: left center;
+  transform: rotate(90deg);
+}
+
+.zelda-explore__diamonds {
+  position: absolute;
+  top: 44.7222%;
+  left: 2.1354%;
+  display: grid;
+  gap: .7vw;
+}
+
+.zelda-explore__diamonds span {
+  display: grid;
+  place-items: center;
+  width: max(5px, .625vw);
+  height: max(5px, .625vw);
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.zelda-explore__diamonds span::after {
+  content: '';
+  width: 25%;
+  height: 25%;
+  background: currentColor;
+}
+
+@media (max-width: 767px) {
+  .zelda-hero { aspect-ratio: auto; height: 100svh; min-height: 560px; }
+  .zelda-hero__title { top: 40%; width: 76%; }
+  .zelda-explore { aspect-ratio: auto; min-height: 65svh; }
+  .zelda-explore__title { gap: 3vw; font-size: 7.5vw; }
+  .zelda-explore__divider { height: 30vw; }
+  .zelda-explore__divider img { width: 30vw; }
+  .zelda-explore__diamonds { gap: 9px; }
+  .zelda-hero__scroll-line { width: 120px; }
+}
