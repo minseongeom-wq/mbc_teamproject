@@ -1,6 +1,9 @@
 :root {
   /* Figma styles and wide-layout implementation tokens */
   --color-brand-red: #E60012;
+  /* Navigation node 1224:9044: registered Stroke style and Splatoon silhouette. */
+  --color-navigation-stroke: #D2D2CD;
+  --color-navigation-splatoon: #433EFA;
   --font-family-display-en: "Pexel Grotesk", sans-serif;
   --font-family-display-kr: "DeltaGlassKR", "Pretendard Variable", sans-serif;
   --font-weight-light: 300;
