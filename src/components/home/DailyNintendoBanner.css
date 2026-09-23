@@ -1,0 +1,223 @@
+.daily-nintendo-banner {
+  background-color: var(--color-action-primary);
+  height: calc(675px * var(--home-scale));
+  overflow: clip;
+  position: relative;
+  flex-shrink: 0;
+  width: calc(1920px * var(--home-scale));
+}
+
+.daily-nintendo-banner__slugun-text-2 {
+  position: absolute;
+  align-content: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: calc(22px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  width: calc(908px * var(--home-scale));
+  translate: -50% -50%;
+}
+
+.daily-nintendo-banner__slogan-text-3 {
+  align-content: stretch;
+  display: flex;
+  gap: calc(var(--space-5) * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.daily-nintendo-banner__layer-4 {
+  word-break: break-word;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-inverse);
+  letter-spacing: calc(1.632px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.daily-nintendo-banner__element-5 {
+  height: calc(75px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(89px * var(--home-scale));
+}
+
+.daily-nintendo-banner__halftone-generator-21-1-6 {
+  position: absolute;
+  height: calc(120px * var(--home-scale));
+  left: 50%;
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  width: calc(125px * var(--home-scale));
+  translate: -50% -50%;
+}
+
+.daily-nintendo-banner__layer-7 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-position: bottom;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.daily-nintendo-banner__layer-8 {
+  word-break: break-word;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-inverse);
+  letter-spacing: calc(1.632px * var(--home-scale));
+  white-space: pre;
+}
+
+.daily-nintendo-banner__slogan-text-9 {
+  align-content: stretch;
+  display: flex;
+  gap: calc(var(--space-5) * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.daily-nintendo-banner__layer-10 {
+  word-break: break-word;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-inverse);
+  letter-spacing: calc(1.632px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.daily-nintendo-banner__element-11 {
+  height: calc(75px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(89px * var(--home-scale));
+}
+
+.daily-nintendo-banner__halftone-generator-22-1-12 {
+  position: absolute;
+  height: calc(108px * var(--home-scale));
+  left: 50%;
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  width: calc(116px * var(--home-scale));
+  translate: -50% -50%;
+}
+
+.daily-nintendo-banner__layer-13 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.daily-nintendo-banner__layer-14 {
+  position: absolute;
+  height: 446.21%;
+  left: -159.04%;
+  max-width: none;
+  top: -173.11%;
+  width: 417.73%;
+}
+
+.daily-nintendo-banner__layer-15 {
+  word-break: break-word;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-inverse);
+  letter-spacing: calc(1.632px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.daily-nintendo-banner__layer-16 {
+  position: absolute;
+  display: flex;
+  height: calc(643.655px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(-248px * var(--home-scale));
+  top: calc(77px * var(--home-scale));
+  width: calc(628.599px * var(--home-scale));
+}
+
+.daily-nintendo-banner__layer-17 {
+  flex: none;
+  rotate: -16.06deg;
+}
+
+.daily-nintendo-banner__frame-1430103154-1-18 {
+  height: calc(525px * var(--home-scale));
+  position: relative;
+  width: calc(503px * var(--home-scale));
+}
+
+.daily-nintendo-banner__layer-19 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.daily-nintendo-banner__layer-20 {
+  position: absolute;
+  display: flex;
+  height: calc(398.29px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(1442px * var(--home-scale));
+  top: calc(205px * var(--home-scale));
+  width: calc(648.283px * var(--home-scale));
+}
+
+.daily-nintendo-banner__layer-21 {
+  scale: 1 -1;
+  flex: none;
+  rotate: 169.05deg;
+}
+
+.daily-nintendo-banner__banner-image-22 {
+  height: calc(288.734px * var(--home-scale));
+  position: relative;
+  width: calc(604.443px * var(--home-scale));
+}
+
+.daily-nintendo-banner__layer-23 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+

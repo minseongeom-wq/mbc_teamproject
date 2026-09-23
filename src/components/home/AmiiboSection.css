@@ -1,0 +1,513 @@
+.amiibo-section {
+  background-color: var(--color-action-primary);
+  height: calc(947px * var(--home-scale));
+  overflow: clip;
+  position: relative;
+  flex-shrink: 0;
+  width: calc(1920px * var(--home-scale));
+}
+
+.amiibo-section__layer-2 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: normal;
+  left: calc(780px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-h2) * var(--home-scale));
+  color: var(--color-text-inverse);
+  top: calc(372px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.amiibo-section__layer-3 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  left: calc(608px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-en) * var(--home-scale));
+  color: var(--color-text-inverse);
+  top: calc(279px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.amiibo-section__layer-4 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  left: calc(694px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-en) * var(--home-scale));
+  color: var(--color-text-inverse);
+  top: calc(434px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.amiibo-section__infinite-marquee-animation-amibo-5 {
+  position: absolute;
+  bottom: 0;
+  align-content: stretch;
+  display: flex;
+  gap: calc(93px * var(--home-scale));
+  align-items: center;
+  left: calc(-55px * var(--home-scale));
+}
+
+.amiibo-section__01-image-box-6 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__abaa-1-7 {
+  position: absolute;
+  left: calc(50% + calc(0.5px * var(--home-scale)));
+  width: calc(299px * var(--home-scale));
+  height: calc(299px * var(--home-scale));
+  top: calc(50% - calc(5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-8 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__02-image-box-9 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__abaf-1-10 {
+  position: absolute;
+  left: 50%;
+  width: calc(286px * var(--home-scale));
+  height: calc(286px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-11 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__03-image-box-12 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__abac-1-13 {
+  position: absolute;
+  left: 50%;
+  width: calc(294px * var(--home-scale));
+  height: calc(294px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-14 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__04-image-box-15 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__aeaj-1-16 {
+  position: absolute;
+  left: 50%;
+  width: calc(292px * var(--home-scale));
+  height: calc(292px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-17 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__05-image-box-18 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__aeak-1-19 {
+  position: absolute;
+  left: 50%;
+  width: calc(286px * var(--home-scale));
+  height: calc(286px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-20 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__06-image-box-21 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__akak-1-22 {
+  position: absolute;
+  left: 50%;
+  width: calc(286px * var(--home-scale));
+  height: calc(286px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-23 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__07-image-box-24 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__akan-1-25 {
+  position: absolute;
+  left: 50%;
+  width: calc(290px * var(--home-scale));
+  height: calc(290px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-26 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__08-image-box-27 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__ajab-1-28 {
+  position: absolute;
+  left: 50%;
+  width: calc(290px * var(--home-scale));
+  height: calc(290px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-29 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__09-image-box-30 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__aaad-1-31 {
+  position: absolute;
+  left: 50%;
+  width: calc(286px * var(--home-scale));
+  height: calc(286px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-32 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__10-image-box-33 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__aaak-1-34 {
+  position: absolute;
+  left: 50%;
+  width: calc(290px * var(--home-scale));
+  height: calc(290px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-35 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__11-image-box-36 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__aaaf-1-37 {
+  position: absolute;
+  left: 50%;
+  width: calc(288px * var(--home-scale));
+  height: calc(288px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-38 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__12-image-box-39 {
+  height: calc(269px * var(--home-scale));
+  position: relative;
+  flex-shrink: 0;
+  width: calc(134px * var(--home-scale));
+}
+
+.amiibo-section__alaa-1-40 {
+  position: absolute;
+  left: 50%;
+  width: calc(290px * var(--home-scale));
+  height: calc(290px * var(--home-scale));
+  top: calc(50% + calc(0.5px * var(--home-scale)));
+  translate: -50% -50%;
+}
+
+.amiibo-section__layer-41 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__layer-42 {
+  position: absolute;
+  height: calc(322px * var(--home-scale));
+  left: calc(-2px * var(--home-scale));
+  top: calc(264px * var(--home-scale));
+  width: calc(1922px * var(--home-scale));
+}
+
+.amiibo-section__layer-43 {
+  position: absolute;
+  inset: -0.62% 0;
+}
+
+.amiibo-section__layer-44 {
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__dot-45 {
+  position: absolute;
+  background-color: var(--color-text-inverse);
+  left: calc(1160px * var(--home-scale));
+  width: calc(8px * var(--home-scale));
+  height: calc(8px * var(--home-scale));
+  top: calc(362px * var(--home-scale));
+}
+
+.amiibo-section__layer-46 {
+  position: absolute;
+  display: flex;
+  height: calc(17.756px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(843px * var(--home-scale));
+  top: calc(268px * var(--home-scale));
+  width: calc(12.901px * var(--home-scale));
+}
+
+.amiibo-section__layer-47 {
+  flex: none;
+  rotate: 19.59deg;
+}
+
+.amiibo-section__layer-48 {
+  height: calc(16px * var(--home-scale));
+  position: relative;
+  width: calc(8px * var(--home-scale));
+}
+
+.amiibo-section__layer-49 {
+  position: absolute;
+  display: block;
+  inset: 0;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__layer-50 {
+  position: absolute;
+  display: flex;
+  height: calc(16.413px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(857px * var(--home-scale));
+  top: calc(281px * var(--home-scale));
+  width: calc(17.399px * var(--home-scale));
+}
+
+.amiibo-section__layer-51 {
+  flex: none;
+  rotate: 50deg;
+}
+
+.amiibo-section__layer-52 {
+  height: calc(16px * var(--home-scale));
+  position: relative;
+  width: calc(8px * var(--home-scale));
+}
+
+.amiibo-section__layer-53 {
+  position: absolute;
+  display: block;
+  inset: 0;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__layer-54 {
+  position: absolute;
+  display: flex;
+  height: calc(9.591px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(865.33px * var(--home-scale));
+  top: calc(301.41px * var(--home-scale));
+  width: calc(16.733px * var(--home-scale));
+}
+
+.amiibo-section__layer-55 {
+  flex: none;
+  rotate: 84.14deg;
+}
+
+.amiibo-section__layer-56 {
+  height: calc(16px * var(--home-scale));
+  position: relative;
+  width: calc(8px * var(--home-scale));
+}
+
+.amiibo-section__layer-57 {
+  position: absolute;
+  display: block;
+  inset: 0;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+.amiibo-section__dot-58 {
+  position: absolute;
+  background-color: var(--color-text-inverse);
+  left: calc(1205px * var(--home-scale));
+  width: calc(8px * var(--home-scale));
+  height: calc(8px * var(--home-scale));
+  top: calc(362px * var(--home-scale));
+}
+
+.amiibo-section__dot-59 {
+  position: absolute;
+  background-color: var(--color-text-inverse);
+  left: calc(1250px * var(--home-scale));
+  width: calc(8px * var(--home-scale));
+  height: calc(8px * var(--home-scale));
+  top: calc(362px * var(--home-scale));
+}
+

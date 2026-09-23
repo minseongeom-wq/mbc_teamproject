@@ -1,0 +1,13 @@
+.nintendo-header { display: flex; align-items: flex-start; gap: calc(28px * var(--home-scale)); width: calc(664px * var(--home-scale)); height: calc(var(--size-header-desktop) * var(--home-scale)); z-index: var(--z-header); font-size: calc(var(--font-size-300) * var(--home-scale)); font-weight: var(--font-weight-regular); color: var(--color-text-inverse); }
+.nintendo-header__primary { display: flex; flex: 0 0 calc(471px * var(--home-scale)); height: 100%; background: var(--color-action-primary); border-radius: calc(var(--radius-nav) * var(--home-scale)); }
+.nintendo-header__brand { display: flex; align-items: center; gap: calc(13px * var(--home-scale)); width: calc(367px * var(--home-scale)); border: 1px solid var(--color-text-inverse); border-radius: calc(var(--radius-nav) * var(--home-scale)); padding-left: calc(13px * var(--home-scale)); white-space: nowrap; letter-spacing: var(--letter-spacing-label); }
+.nintendo-header__logo { display: grid; place-items: center; flex: 0 0 calc(94px * var(--home-scale)); height: calc(38px * var(--home-scale)); background: var(--color-bg-primary); border-radius: calc(var(--radius-logo) * var(--home-scale)); }
+.nintendo-header__logo img { width: calc(72.696px * var(--home-scale)); height: calc(19px * var(--home-scale)); }
+.nintendo-header__menu-button { flex: 1; height: 100%; letter-spacing: var(--letter-spacing-label); border-radius: calc(var(--radius-nav) * var(--home-scale)); }
+.nintendo-header__account { display: flex; align-items: center; gap: calc(6px * var(--home-scale)); height: 100%; flex: 0 0 calc(165px * var(--home-scale)); padding-left: calc(15px * var(--home-scale)); background: var(--color-action-primary); border-radius: calc(var(--radius-nav) * var(--home-scale)); font-family: var(--font-family-display-en); white-space: nowrap; }
+.nintendo-header__account img { width: calc(19px * var(--home-scale)); height: calc(19px * var(--home-scale)); }
+.nintendo-header__navigation { position: absolute; top: calc(68px * var(--home-scale)); left: 0; width: 100%; display: grid; gap: var(--space-1); padding: var(--space-4); background: var(--color-bg-primary); color: var(--color-text-primary); border: 1px solid var(--color-border-default); border-radius: var(--radius-nav); box-shadow: var(--shadow-md); }
+.nintendo-header__navigation a { display: flex; align-items: center; min-height: var(--size-touch-min); font-size: var(--font-size-300); padding-inline: var(--space-3); }
+.nintendo-header__navigation a:hover { color: var(--color-action-primary); }
+.nintendo-header__menu-button:hover, .nintendo-header__account:hover { filter: brightness(.92); }
+

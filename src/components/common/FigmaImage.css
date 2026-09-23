@@ -1,0 +1,14 @@
+.figma-image {
+  position: relative;
+  width: calc(300px * var(--home-scale));
+  height: calc(300px * var(--home-scale));
+}
+
+.figma-image__layer-2 {
+  position: absolute;
+  display: block;
+  inset: 0;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}

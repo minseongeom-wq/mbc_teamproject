@@ -1,0 +1,3 @@
+.amiibo-figure { height: calc(269px * var(--home-scale)); width: calc(134px * var(--home-scale)); position: relative; flex-shrink: 0; }
+.amiibo-figure__image { position: absolute; inset: 0; max-width: none; object-fit: cover; width: 100%; height: 100%; }
+

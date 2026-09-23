@@ -1,0 +1,1198 @@
+.nintendo-picks {
+  height: calc(3985px * var(--home-scale));
+  overflow: clip;
+  position: relative;
+  flex-shrink: 0;
+  width: calc(1920px * var(--home-scale));
+}
+
+.nintendo-picks__layer-2 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-3 {
+  position: absolute;
+  background-color: var(--color-text-inverse);
+  inset: 0;
+}
+
+.nintendo-picks__layer-4 {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0.05;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__picks-visual-05-5 {
+  position: absolute;
+  height: calc(167px * var(--home-scale));
+  left: calc(84px * var(--home-scale));
+  top: calc(1856px * var(--home-scale));
+  width: calc(163px * var(--home-scale));
+}
+
+.nintendo-picks__1section-6 {
+  position: absolute;
+  height: calc(347px * var(--home-scale));
+  left: calc(614px * var(--home-scale));
+  top: calc(618px * var(--home-scale));
+  width: calc(1034px * var(--home-scale));
+}
+
+.nintendo-picks__picks-visual-01-7 {
+  position: absolute;
+  bottom: calc(23px * var(--home-scale));
+  height: calc(336px * var(--home-scale));
+  left: calc(50% - calc(411.5px * var(--home-scale)));
+  overflow: clip;
+  width: calc(211px * var(--home-scale));
+  translate: -50% 0px;
+}
+
+.nintendo-picks__layer-8 {
+  word-break: break-word;
+  position: absolute;
+  bottom: calc(306px * var(--home-scale));
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 0;
+  left: calc(50% - calc(121px * var(--home-scale)));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  width: calc(638px * var(--home-scale));
+  white-space: pre-wrap;
+  translate: 0px 100%;
+}
+
+.nintendo-picks__layer-9 {
+  line-height: var(--line-height-tight);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-10 {
+  line-height: var(--line-height-tight);
+}
+
+.nintendo-picks__layer-11 {
+  word-break: break-word;
+  position: absolute;
+  bottom: calc(505px * var(--home-scale));
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: calc(50% - calc(286px * var(--home-scale)));
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(450px * var(--home-scale));
+  white-space: nowrap;
+  translate: 0px 100%;
+}
+
+.nintendo-picks__layer-12 {
+  word-break: break-word;
+  position: absolute;
+  bottom: calc(174px * var(--home-scale));
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(50% - calc(123px * var(--home-scale)));
+  font-style: normal;
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  width: calc(580px * var(--home-scale));
+  white-space: pre-wrap;
+  translate: 0px 100%;
+}
+
+.nintendo-picks__layer-13 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-14 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__3section-15 {
+  position: absolute;
+  height: calc(467px * var(--home-scale));
+  left: calc(1108px * var(--home-scale));
+  top: calc(1193px * var(--home-scale));
+  width: calc(732px * var(--home-scale));
+}
+
+.nintendo-picks__layer-16 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 0;
+  left: calc(176px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(73px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-17 {
+  line-height: var(--line-height-tight);
+  margin-bottom: 0;
+  white-space: pre;
+}
+
+.nintendo-picks__layer-18 {
+  line-height: var(--line-height-tight);
+  white-space: pre;
+}
+
+.nintendo-picks__layer-19 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: 0;
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(230px * var(--home-scale));
+  top: 0;
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-20 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(175px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(205px * var(--home-scale));
+  width: calc(393px * var(--home-scale));
+  white-space: pre-wrap;
+}
+
+.nintendo-picks__layer-21 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-22 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__3efe1987-e1a6-42e6-acb3-56b887b62373-1-23 {
+  position: absolute;
+  height: calc(344px * var(--home-scale));
+  left: calc(496px * var(--home-scale));
+  top: calc(129px * var(--home-scale));
+  width: calc(231px * var(--home-scale));
+}
+
+.nintendo-picks__layer-24 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-25 {
+  position: absolute;
+  height: 105.23%;
+  left: -9.58%;
+  max-width: none;
+  top: -5.18%;
+  width: 117.62%;
+}
+
+.nintendo-picks__4section-26 {
+  position: absolute;
+  height: calc(662px * var(--home-scale));
+  left: calc(289px * var(--home-scale));
+  top: calc(1617px * var(--home-scale));
+  width: calc(1276px * var(--home-scale));
+}
+
+.nintendo-picks__layer-27 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 0;
+  left: calc(324px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(172px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-28 {
+  line-height: var(--line-height-tight);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-29 {
+  line-height: var(--line-height-tight);
+}
+
+.nintendo-picks__layer-30 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: 0;
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(490px * var(--home-scale));
+  top: 0;
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-31 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(324px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(300px * var(--home-scale));
+  width: calc(424px * var(--home-scale));
+  white-space: pre-wrap;
+}
+
+.nintendo-picks__layer-32 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-33 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-34 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-35 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__image-36 {
+  position: absolute;
+  height: calc(316px * var(--home-scale));
+  left: calc(762px * var(--home-scale));
+  top: calc(209px * var(--home-scale));
+  width: calc(510.021px * var(--home-scale));
+}
+
+.nintendo-picks__layer-37 {
+  position: absolute;
+  display: flex;
+  height: calc(386.157px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(-65.32px * var(--home-scale));
+  top: calc(-32.9px * var(--home-scale));
+  width: calc(373.94px * var(--home-scale));
+}
+
+.nintendo-picks__layer-38 {
+  flex: none;
+  rotate: -3.43deg;
+}
+
+.nintendo-picks__cover-image-39 {
+  height: calc(365.722px * var(--home-scale));
+  position: relative;
+  width: calc(352.703px * var(--home-scale));
+}
+
+.nintendo-picks__layer-40 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__layer-41 {
+  position: absolute;
+  display: flex;
+  height: calc(202.553px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(252.98px * var(--home-scale));
+  top: calc(91.49px * var(--home-scale));
+  width: calc(268.074px * var(--home-scale));
+}
+
+.nintendo-picks__layer-42 {
+  flex: none;
+  rotate: 9.42deg;
+}
+
+.nintendo-picks__image-43 {
+  height: calc(164.756px * var(--home-scale));
+  position: relative;
+  width: calc(244.393px * var(--home-scale));
+}
+
+.nintendo-picks__layer-44 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__layer-45 {
+  position: absolute;
+  display: flex;
+  height: calc(38px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(273px * var(--home-scale));
+  top: calc(32px * var(--home-scale));
+  width: calc(40px * var(--home-scale));
+}
+
+.nintendo-picks__layer-46 {
+  scale: 1 -1;
+  flex: none;
+  rotate: 180deg;
+}
+
+.nintendo-picks__halftone-1789348135044-2-47 {
+  height: calc(38px * var(--home-scale));
+  position: relative;
+  width: calc(40px * var(--home-scale));
+}
+
+.nintendo-picks__layer-48 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-49 {
+  position: absolute;
+  height: 1425%;
+  left: -566.61%;
+  max-width: none;
+  top: -605.28%;
+  width: 1369%;
+}
+
+.nintendo-picks__layer-50 {
+  position: absolute;
+  display: flex;
+  height: calc(74px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(286px * var(--home-scale));
+  top: calc(-46px * var(--home-scale));
+  width: calc(73px * var(--home-scale));
+}
+
+.nintendo-picks__layer-51 {
+  scale: 1 -1;
+  flex: none;
+  rotate: 180deg;
+}
+
+.nintendo-picks__halftone-1789348135044-1-52 {
+  height: calc(74px * var(--home-scale));
+  position: relative;
+  width: calc(73px * var(--home-scale));
+}
+
+.nintendo-picks__layer-53 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-54 {
+  position: absolute;
+  height: 924.32%;
+  left: -454.82%;
+  max-width: none;
+  top: -446.19%;
+  width: 937.67%;
+}
+
+.nintendo-picks__5section-55 {
+  position: absolute;
+  height: calc(345px * var(--home-scale));
+  left: calc(225px * var(--home-scale));
+  top: calc(2394px * var(--home-scale));
+  width: calc(689px * var(--home-scale));
+}
+
+.nintendo-picks__layer-56 {
+  word-break: break-word;
+  position: absolute;
+  bottom: calc(353px * var(--home-scale));
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 0;
+  left: calc(50% - calc(177.5px * var(--home-scale)));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  translate: 0px 100%;
+}
+
+.nintendo-picks__layer-57 {
+  line-height: var(--line-height-tight);
+  margin-bottom: 0;
+  white-space: pre;
+}
+
+.nintendo-picks__layer-58 {
+  line-height: var(--line-height-tight);
+  white-space: pre;
+}
+
+.nintendo-picks__layer-59 {
+  word-break: break-word;
+  position: absolute;
+  bottom: calc(426px * var(--home-scale));
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: calc(50% - calc(352.5px * var(--home-scale)));
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(230px * var(--home-scale));
+  white-space: nowrap;
+  translate: 0px 100%;
+}
+
+.nintendo-picks__layer-60 {
+  position: absolute;
+  height: calc(271px * var(--home-scale));
+  left: calc(-150px * var(--home-scale));
+  top: calc(206px * var(--home-scale));
+  width: calc(249px * var(--home-scale));
+}
+
+.nintendo-picks__layer-61 {
+  position: absolute;
+  height: calc(255px * var(--home-scale));
+  left: calc(21px * var(--home-scale));
+  top: calc(12px * var(--home-scale));
+  width: calc(224px * var(--home-scale));
+}
+
+.nintendo-picks__layer-62 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-63 {
+  position: absolute;
+  height: 106.34%;
+  left: -8.48%;
+  max-width: none;
+  top: -3.95%;
+  width: 111.16%;
+}
+
+.nintendo-picks__layer-64 {
+  word-break: break-word;
+  position: absolute;
+  bottom: calc(216px * var(--home-scale));
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(50% - calc(177.5px * var(--home-scale)));
+  font-style: normal;
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  width: calc(530px * var(--home-scale));
+  white-space: pre-wrap;
+  translate: 0px 100%;
+}
+
+.nintendo-picks__layer-65 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-66 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-67 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-68 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-69 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__6section-70 {
+  position: absolute;
+  height: calc(483px * var(--home-scale));
+  left: calc(952px * var(--home-scale));
+  top: calc(2597px * var(--home-scale));
+  width: calc(893px * var(--home-scale));
+}
+
+.nintendo-picks__layer-71 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 0;
+  left: calc(192px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(88px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-72 {
+  line-height: var(--line-height-tight);
+  margin-bottom: 0;
+  white-space: pre;
+}
+
+.nintendo-picks__layer-73 {
+  line-height: var(--line-height-tight);
+  white-space: pre;
+}
+
+.nintendo-picks__layer-74 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: 0;
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(260px * var(--home-scale));
+  top: 0;
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-75 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(192px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(219px * var(--home-scale));
+  width: calc(478px * var(--home-scale));
+  white-space: pre-wrap;
+}
+
+.nintendo-picks__layer-76 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-77 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-78 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-79 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-80 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__layer-81 {
+  position: absolute;
+  height: calc(164px * var(--home-scale));
+  left: calc(683.88px * var(--home-scale));
+  top: calc(307px * var(--home-scale));
+  width: calc(219.115px * var(--home-scale));
+}
+
+.nintendo-picks__layer-82 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  left: calc(184.17px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(26.885px * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(125.02px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__game-image-83 {
+  position: absolute;
+  height: calc(211px * var(--home-scale));
+  left: calc(-68.88px * var(--home-scale));
+  top: calc(76px * var(--home-scale));
+  width: calc(281px * var(--home-scale));
+}
+
+.nintendo-picks__layer-84 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__layer-85 {
+  position: absolute;
+  display: flex;
+  height: calc(41.417px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(14.12px * var(--home-scale));
+  top: calc(33px * var(--home-scale));
+  width: calc(38.875px * var(--home-scale));
+}
+
+.nintendo-picks__layer-86 {
+  flex: none;
+  rotate: -0.64deg;
+}
+
+.nintendo-picks__chatgpt-image-2026-9-14-10-19-37-2-87 {
+  height: calc(40.992px * var(--home-scale));
+  position: relative;
+  width: calc(38.422px * var(--home-scale));
+}
+
+.nintendo-picks__layer-88 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-89 {
+  position: absolute;
+  height: 370.66%;
+  left: -457.44%;
+  max-width: none;
+  top: -100.48%;
+  width: 595.47%;
+}
+
+.nintendo-picks__chatgpt-image-2026-9-14-10-19-37-2-90 {
+  position: absolute;
+  height: calc(23px * var(--home-scale));
+  left: calc(211.12px * var(--home-scale));
+  top: calc(111px * var(--home-scale));
+  width: calc(22px * var(--home-scale));
+}
+
+.nintendo-picks__layer-91 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-92 {
+  position: absolute;
+  height: 547.83%;
+  left: -704.55%;
+  max-width: none;
+  top: -304.35%;
+  width: 859.09%;
+}
+
+.nintendo-picks__chatgpt-image-2026-9-14-10-19-37-3-93 {
+  position: absolute;
+  height: calc(30px * var(--home-scale));
+  left: calc(180.12px * var(--home-scale));
+  top: calc(41px * var(--home-scale));
+  width: calc(28px * var(--home-scale));
+}
+
+.nintendo-picks__layer-94 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-95 {
+  position: absolute;
+  height: 547.83%;
+  left: -704.55%;
+  max-width: none;
+  top: -304.35%;
+  width: 859.09%;
+}
+
+.nintendo-picks__layer-96 {
+  position: absolute;
+  display: flex;
+  height: calc(131.17px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(96.07px * var(--home-scale));
+  top: calc(-66.71px * var(--home-scale));
+  width: calc(131.434px * var(--home-scale));
+}
+
+.nintendo-picks__layer-97 {
+  flex: none;
+  rotate: 40.74deg;
+}
+
+.nintendo-picks__chatgpt-image-2026-9-14-10-19-37-2-98 {
+  height: calc(91.843px * var(--home-scale));
+  position: relative;
+  width: calc(94.36px * var(--home-scale));
+}
+
+.nintendo-picks__layer-99 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-100 {
+  position: absolute;
+  height: 172.6%;
+  left: -8%;
+  max-width: none;
+  top: -41.1%;
+  width: 252%;
+}
+
+.nintendo-picks__layer-101 {
+  position: absolute;
+  display: flex;
+  height: calc(104.083px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(738.52px * var(--home-scale));
+  top: calc(163.65px * var(--home-scale));
+  width: calc(70.543px * var(--home-scale));
+}
+
+.nintendo-picks__layer-102 {
+  scale: 1 -1;
+  flex: none;
+  rotate: -170.67deg;
+}
+
+.nintendo-picks__chatgpt-image-2026-9-14-10-19-37-2-103 {
+  height: calc(96.333px * var(--home-scale));
+  position: relative;
+  width: calc(55.659px * var(--home-scale));
+}
+
+.nintendo-picks__layer-104 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-105 {
+  position: absolute;
+  height: 140%;
+  left: -155.77%;
+  max-width: none;
+  top: -20%;
+  width: 363.46%;
+}
+
+.nintendo-picks__7section-106 {
+  position: absolute;
+  height: calc(675px * var(--home-scale));
+  left: calc(125px * var(--home-scale));
+  top: calc(3123px * var(--home-scale));
+  width: calc(1391px * var(--home-scale));
+}
+
+.nintendo-picks__layer-107 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: 0;
+  left: calc(712px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(189px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-108 {
+  line-height: var(--line-height-tight);
+  margin-bottom: 0;
+  white-space: pre;
+}
+
+.nintendo-picks__layer-109 {
+  line-height: var(--line-height-tight);
+  white-space: pre;
+}
+
+.nintendo-picks__layer-110 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: calc(381px * var(--home-scale));
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(500px * var(--home-scale));
+  top: 0;
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-111 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(710px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(321px * var(--home-scale));
+  width: calc(681px * var(--home-scale));
+  white-space: pre-wrap;
+}
+
+.nintendo-picks__layer-112 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-113 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__layer-114 {
+  position: absolute;
+  height: calc(337.549px * var(--home-scale));
+  left: calc(-14px * var(--home-scale));
+  top: calc(185px * var(--home-scale));
+  width: calc(394.001px * var(--home-scale));
+}
+
+.nintendo-picks__layer-115 {
+  position: absolute;
+  height: calc(311px * var(--home-scale));
+  left: calc(-14px * var(--home-scale));
+  top: calc(37px * var(--home-scale));
+  width: calc(212px * var(--home-scale));
+}
+
+.nintendo-picks__layer-116 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__layer-117 {
+  position: absolute;
+  height: calc(267px * var(--home-scale));
+  left: calc(139px * var(--home-scale));
+  top: calc(68px * var(--home-scale));
+  width: calc(165px * var(--home-scale));
+}
+
+.nintendo-picks__layer-118 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__gemini-generated-image-yzel3xyzel3xyzel-1-119 {
+  position: absolute;
+  height: calc(198px * var(--home-scale));
+  left: calc(253px * var(--home-scale));
+  top: calc(141px * var(--home-scale));
+  width: calc(135px * var(--home-scale));
+}
+
+.nintendo-picks__layer-120 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__2section-121 {
+  word-break: break-word;
+  position: absolute;
+  height: calc(315px * var(--home-scale));
+  left: calc(233px * var(--home-scale));
+  font-style: normal;
+  top: calc(1085px * var(--home-scale));
+  width: calc(827px * var(--home-scale));
+}
+
+.nintendo-picks__layer-122 {
+  position: absolute;
+  font-family: var(--font-family-display-kr);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  left: calc(116px * var(--home-scale));
+  font-size: calc(var(--font-size-title-kr) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(41px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-123 {
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  left: 0;
+  color: var(--color-action-primary);
+  font-size: calc(120px * var(--home-scale));
+  top: 0;
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-124 {
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: 0;
+  left: calc(114px * var(--home-scale));
+  font-size: calc(var(--font-size-body) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(116px * var(--home-scale));
+  width: calc(701px * var(--home-scale));
+  white-space: pre-wrap;
+}
+
+.nintendo-picks__layer-125 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-126 {
+  line-height: var(--line-height-body);
+  margin-bottom: 0;
+}
+
+.nintendo-picks__layer-127 {
+  line-height: var(--line-height-body);
+}
+
+.nintendo-picks__picks-bottom-visual-03-128 {
+  position: absolute;
+  height: calc(202px * var(--home-scale));
+  left: calc(1379px * var(--home-scale));
+  top: calc(3532px * var(--home-scale));
+  width: calc(541px * var(--home-scale));
+}
+
+.nintendo-picks__layer-129 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-light);
+  line-height: normal;
+  left: calc(893px * var(--home-scale));
+  font-style: normal;
+  color: var(--color-action-primary);
+  font-size: calc(var(--font-size-title-h2) * var(--home-scale));
+  top: calc(300px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__layer-130 {
+  word-break: break-word;
+  position: absolute;
+  font-family: var(--font-family-display-en);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  left: calc(1054px * var(--home-scale));
+  font-style: normal;
+  font-size: calc(var(--font-size-title-en) * var(--home-scale));
+  color: var(--color-text-primary);
+  top: calc(365px * var(--home-scale));
+  white-space: nowrap;
+}
+
+.nintendo-picks__cover-image-131 {
+  position: absolute;
+  height: calc(398px * var(--home-scale));
+  left: calc(573px * var(--home-scale));
+  top: calc(606px * var(--home-scale));
+  width: calc(247px * var(--home-scale));
+}
+
+.nintendo-picks__layer-132 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-133 {
+  position: absolute;
+  height: 100.35%;
+  left: -0.04%;
+  max-width: none;
+  top: -0.35%;
+  width: 100.07%;
+}
+
+.nintendo-picks__layer-134 {
+  position: absolute;
+  display: flex;
+  height: calc(296.735px * var(--home-scale));
+  align-items: center;
+  justify-content: center;
+  left: calc(429.69px * var(--home-scale));
+  top: calc(724.13px * var(--home-scale));
+  width: calc(171.613px * var(--home-scale));
+}
+
+.nintendo-picks__layer-135 {
+  flex: none;
+  rotate: -2.11deg;
+}
+
+.nintendo-picks__badge-image-136 {
+  height: calc(291px * var(--home-scale));
+  position: relative;
+  width: calc(161px * var(--home-scale));
+}
+
+.nintendo-picks__layer-137 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nintendo-picks__layer-138 {
+  position: absolute;
+  height: 105.5%;
+  left: -5.05%;
+  max-width: none;
+  top: -2.41%;
+  width: 118.17%;
+}
+
+.nintendo-picks__card-image-139 {
+  position: absolute;
+  height: calc(302.755px * var(--home-scale));
+  left: calc(673px * var(--home-scale));
+  top: calc(1312px * var(--home-scale));
+  width: calc(313.44px * var(--home-scale));
+}
+
+.nintendo-picks__image-140 {
+  position: absolute;
+  left: calc(30px * var(--home-scale));
+  width: calc(253px * var(--home-scale));
+  height: calc(253px * var(--home-scale));
+  top: calc(4px * var(--home-scale));
+}
+
+.nintendo-picks__image-141 {
+  position: absolute;
+  left: calc(2px * var(--home-scale));
+  width: calc(269px * var(--home-scale));
+  height: calc(269px * var(--home-scale));
+  top: calc(-7px * var(--home-scale));
+}
+
+.nintendo-picks__layer-142 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nintendo-picks__pngwing-com-1-143 {
+  position: absolute;
+  height: calc(104.755px * var(--home-scale));
+  left: calc(7px * var(--home-scale));
+  top: calc(-3px * var(--home-scale));
+  width: calc(313.44px * var(--home-scale));
+}
+
+.nintendo-picks__layer-144 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
