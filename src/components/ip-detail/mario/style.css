@@ -1,0 +1,135 @@
+.mario-content { width: 100%; overflow: clip; container-type: inline-size; background: var(--color-white); }
+.mario-content section[id], .mario-content article[id] { scroll-margin-top: 90px; }
+.mario-content__hero { position: relative; height: 132cqw; min-height: 630px; overflow: hidden; background: #36b8f4; }
+.mario-content__sky { position: absolute; width: 100%; height: 128%; bottom: 0; object-fit: cover; }
+.mario-content__logo { position: absolute; top: 10%; left: 16.8%; width: 66.4%; height: 21.3%; object-fit: contain; }
+.mario-content__cloud { position: absolute; object-fit: contain; pointer-events: none; }
+.mario-content__cloud--left { width: 75%; height: 43%; top: -9%; left: -33%; }
+.mario-content__cloud--right { width: 75%; height: 43%; top: 9%; right: -41%; }
+.mario-content__cloud--middle { width: 29%; height: 28%; top: 25%; left: -10%; }
+.mario-content__friends { position: absolute; width: 61%; height: 31%; object-fit: contain; left: 19.5%; bottom: 6%; }
+.mario-content__cloud-floor { position: absolute; width: 110%; max-width: none; height: 23%; object-fit: fill; left: -5%; bottom: -6%; }
+.mario-content__scroll { position: absolute; bottom: 1%; left: 50%; transform: translateX(-50%); font-family: var(--font-family-display-en); font-size: clamp(12px, 1cqw, 18px); text-align: center; min-height: 44px; }
+.mario-content__scroll span { display: block; font-size: 24px; }
+.mario-content__characters { padding: 65px 20px 40px; position: relative; }
+.mario-content__section-meta { display: flex; justify-content: space-between; align-items: start; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 24px; }
+.mario-content__section-meta p { text-align: right; }
+.mario-content__characters h2 { text-align: center; font-family: var(--font-family-display-en); font-weight: 900; font-size: clamp(24px, 2.4cqw, 46px); }
+.mario-content__character-list { display: flex; justify-content: center; gap: clamp(6px, 1cqw, 21px); margin: 24px auto 0; }
+.mario-content__character-button { width: clamp(44px, 6.5cqw, 124px); aspect-ratio: 1; border: 3px solid var(--card-color); border-radius: 20%; transition: transform var(--duration-fast); overflow: hidden; }
+.mario-content__character-button img { width: 100%; height: 100%; object-fit: cover; }
+.mario-content__character-button[aria-pressed='true'] { outline: 3px solid var(--card-color); outline-offset: 4px; transform: translateY(-5px); }
+.mario-content__character-button:hover { transform: translateY(-5px); }
+.mario-content__character-stage { position: relative; height: 450px; max-width: 1440px; margin: auto; }
+.mario-content__character-circle { position: absolute; width: 300px; height: 300px; left: 50%; top: 0; transform: translateX(-50%); }
+.mario-content__character-name { position: absolute; top: 160px; left: 50%; transform: translateX(-50%); color: var(--character-color); font-family: var(--font-family-display-en); font-size: clamp(62px, 9cqw, 175px); font-weight: 900; letter-spacing: .06em; }
+.mario-content__portrait { position: absolute; width: 180px; height: 200px; left: 50%; top: 32px; transform: translateX(-50%); overflow: hidden; border-radius: 20px; }
+.mario-content__portrait img { width: 100%; height: 100%; object-fit: contain; }
+.mario-content__portrait--mario { width: 135px; height: 276px; top: 14px; border-radius: 0; }
+.mario-content__portrait--mario img { max-width: none; position: absolute; width: 281.15%; height: 149.14%; left: -91.08%; top: -24.45%; }
+.mario-content__character-prev, .mario-content__character-next { position: absolute; top: 110px; font-size: 48px; width: 48px; height: 60px; line-height: 1; z-index: 2; }
+.mario-content__character-prev { left: calc(50% - 130px); }
+.mario-content__character-next { right: calc(50% - 130px); }
+.mario-content__character-info { position: absolute; top: 305px; left: 50%; transform: translateX(-50%); width: min(100%, 320px); padding: 20px; background: var(--color-white); border: 1px dashed var(--character-color); border-radius: 15px; }
+.mario-content__character-info h3 { color: var(--character-color); font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.mario-content__character-info small { font-size: 13px; }
+.mario-content__character-info p { font-size: 14px; line-height: 1.4; }
+.mario-content__character-info p + p { margin-top: 8px; }
+.mario-content__banner { width: 100%; height: auto; aspect-ratio: 1920 / 357; object-fit: cover; }
+.mario-content__heading { text-align: center; padding: 75px 16px 45px; position: relative; z-index: 1; }
+.mario-content__badge { display: inline-block; padding: 3px 17px; color: var(--color-white); background: var(--color-brand-red); border-block: 3px solid var(--color-white); outline: 2px solid var(--color-brand-red); font-family: var(--font-family-display-en); font-size: clamp(14px, 1.5cqw, 28px); font-weight: 700; }
+.mario-content__heading p { font-family: var(--font-family-display-kr); color: var(--color-brand-red); font-size: clamp(16px, 2.68cqw, 51px); margin-top: 25px; }
+.mario-content__heading h2 { font-family: var(--font-family-display-kr); font-weight: 900; font-size: clamp(28px, 4.8cqw, 92px); line-height: 1.3; margin-top: 12px; word-break: keep-all; }
+.mario-content__worlds { position: relative; padding-bottom: 65px; }
+.mario-content__world { position: relative; isolation: isolate; padding: 120px 24px 35px; overflow: hidden; }
+.mario-content__world::before { content: ''; position: absolute; z-index: -1; inset: -20px; background: linear-gradient(#ffffff75, #ffffff80), var(--world-scene) center / cover; filter: blur(6px); }
+.mario-content__world-scene { width: 100%; height: auto; aspect-ratio: 783 / 427; object-fit: cover; border-radius: 14px; }
+.mario-content__world-art { position: absolute; top: 0; left: 10%; width: 140px; height: 160px; object-fit: contain; z-index: 1; }
+.mario-content__world-info { position: relative; width: min(90%, 340px); margin: -25px 0 0 auto; padding: 20px; background: #fffffff0; }
+.mario-content__world-info span { font-family: var(--font-family-display-en); font-size: 12px; }
+.mario-content__world-info h3 { font-family: var(--font-family-display-en); font-size: 21px; margin: 5px 0 10px; }
+.mario-content__world-info p { font-size: 16px; line-height: 1.4; }
+.mario-content__world-info a { display: flex; justify-content: end; align-items: center; min-height: 44px; font-size: 28px; }
+.mario-content__next-stage { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: min(70%, 646px); min-height: 56px; margin: 40px auto 0; padding: 15px 30px; border-radius: 60px; color: var(--color-white); background: var(--color-brand-red); font-family: var(--font-family-display-en); font-size: clamp(18px, 2.4cqw, 46px); }
+.mario-content__next-stage span:first-child { color: #ffe529; }
+.mario-content__banner--yellow { aspect-ratio: 1920 / 460; }
+.mario-content__power { background: linear-gradient(#ffffff66,#ffffff66), var(--power-texture) center / cover; }
+.mario-content__power-stage { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 18px; padding: 0 24px 65px; }
+.mario-content__power-mario { grid-column: 1 / -1; width: 65%; height: 360px; object-fit: contain; margin: auto; }
+.mario-content__power-item { position: relative; min-height: 150px; border-radius: 18px; background: var(--color-brand-red); color: var(--color-white); padding: 16px; }
+.mario-content__power-item h3 { position: relative; z-index: 1; font-family: var(--font-family-display-en); font-size: clamp(12px, 1.1cqw, 21px); max-width: 65%; }
+.mario-content__power-item img { width: 125px; height: 125px; object-fit: contain; position: absolute; right: -10px; bottom: -12px; }
+.mario-content__power-decor { display: none; }
+.mario-content__store { padding: 60px 24px; background-color: #f5f0e4; background-image: conic-gradient(#ebe4d580 25%, transparent 0 50%, #ebe4d580 0 75%, transparent 0); background-size: 90px 90px; }
+.mario-content__store-copy { text-align: center; }
+.mario-content__switch-logo { width: 85px; height: 80px; object-fit: contain; margin: 0 auto 24px; }
+.mario-content__store-copy h2 { font-family: var(--font-family-display-kr); font-weight: 700; font-size: clamp(24px, 1.9cqw, 36px); line-height: 1.4; }
+.mario-content__store-copy h2::after { content: ''; display: block; width: 65px; height: 5px; background: var(--color-brand-red); margin: 18px auto; border-radius: 3px; }
+.mario-content__store-copy p { font-size: clamp(16px, 1.05cqw, 20px); line-height: 1.4; margin-bottom: 20px; }
+.mario-content__store-copy small { display: block; font-size: 12px; line-height: 1.4; }
+.mario-content__store-link { display: inline-flex; align-items: center; min-height: 44px; gap: 10px; margin-top: 15px; font-size: 14px; font-weight: 700; }
+.mario-content__store-link span { color: var(--color-brand-red); font-size: 23px; }
+.mario-content__store-media { position: relative; width: 85%; aspect-ratio: 770 / 560; margin: 50px auto 0; }
+.mario-content__tv { position: absolute; width: 118%; max-width: none; height: 127%; left: -9%; top: -20%; object-fit: fill; }
+.mario-content__gameplay { position: absolute; width: 99%; height: 77%; left: .5%; top: 1%; object-fit: cover; }
+.mario-content__store-mario { position: absolute; width: 36%; height: 75%; left: -24%; top: 22%; object-fit: contain; transform: scaleX(-1); }
+.mario-content__console { position: absolute; width: 43%; height: 34%; right: -1%; bottom: 0; object-fit: contain; }
+
+@media (max-width: 767px) {
+  .mario-content__logo { top: 16%; }
+}
+
+@media (min-width: 768px) {
+  .mario-content__characters { padding: 10cqw 11cqw 5cqw; }
+  .mario-content__section-meta { font-size: clamp(14px, 1.25cqw, 24px); margin-bottom: -1cqw; }
+  .mario-content__character-list { margin-top: 2cqw; }
+  .mario-content__character-stage { height: 36cqw; min-height: 390px; }
+  .mario-content__character-circle { width: 37.5cqw; height: 37.5cqw; top: -3cqw; }
+  .mario-content__character-name { top: 14cqw; }
+  .mario-content__portrait { top: 3cqw; width: 19cqw; height: 19cqw; }
+  .mario-content__portrait--mario { top: 1.5cqw; width: 12.45cqw; height: 25.47cqw; }
+  .mario-content__character-prev, .mario-content__character-next { top: 10cqw; }
+  .mario-content__character-prev { left: calc(50% - 13cqw); }
+  .mario-content__character-next { right: calc(50% - 13cqw); }
+  .mario-content__character-info { top: 4cqw; left: 72%; transform: none; width: 25%; padding: clamp(12px, 1.2cqw, 24px); }
+  .mario-content__character-info h3 { font-size: clamp(16px, 1.25cqw, 24px); }
+  .mario-content__character-info p { font-size: clamp(12px, .95cqw, 18px); }
+  .mario-content__heading { padding: 14cqw 20px 5cqw; }
+  .mario-content__world { height: 36cqw; padding: 0; overflow: visible; }
+  .mario-content__world::before { inset: 0; }
+  .mario-content__world-art { top: -3cqw; left: 6%; width: 27%; height: 31cqw; }
+  .mario-content__world-scene { position: absolute; top: 4cqw; left: 43%; width: 41%; height: 23cqw; }
+  .mario-content__world-info { position: absolute; top: 20cqw; left: 29%; width: 20%; min-width: 220px; margin: 0; padding: 1.5cqw; }
+  .mario-content__world-info h3 { font-size: clamp(16px, 1.2cqw, 23px); }
+  .mario-content__world-info p { font-size: clamp(13px, .94cqw, 18px); }
+  .mario-content__world:nth-child(even) .mario-content__world-scene { left: 16%; width: 36%; }
+  .mario-content__world:nth-child(even) .mario-content__world-art { left: 59%; width: 25%; }
+  .mario-content__world:nth-child(even) .mario-content__world-info { left: 49%; }
+  .mario-content__world--sea .mario-content__world-scene { left: 57%; width: 30%; height: 18cqw; }
+  .mario-content__world--sea .mario-content__world-info { left: 66%; top: 20cqw; }
+  .mario-content__next-stage { min-height: 5.5cqw; margin-top: 2cqw; }
+  .mario-content__worlds { padding-bottom: 16cqw; }
+  .mario-content__banner--yellow { margin-top: -2cqw; position: relative; z-index: 1; }
+  .mario-content__power .mario-content__heading { padding-top: 11cqw; }
+  .mario-content__power-stage { display: block; height: 62cqw; padding: 0; }
+  .mario-content__power-mario { position: absolute; width: 32%; height: 45cqw; left: 35%; top: 4cqw; }
+  .mario-content__power-item { position: absolute; min-height: 0; padding: 1.2cqw; }
+  .mario-content__power-item img { width: 14cqw; height: 14cqw; }
+  .mario-content__power-item--drill { top: 12cqw; left: 18%; width: 17%; height: 12cqw; }
+  .mario-content__power-item--elephant { top: 30cqw; left: 18%; width: 12%; height: 16cqw; }
+  .mario-content__power-item--elephant h3 { position: absolute; bottom: 1cqw; }
+  .mario-content__power-item--elephant img { bottom: 5cqw; }
+  .mario-content__power-item--bell { top: 30cqw; right: 10%; width: 19%; height: 7cqw; }
+  .mario-content__power-item--bell h3 { margin-left: 40%; max-width: none; }
+  .mario-content__power-item--bell img { right: 60%; bottom: -3cqw; }
+  .mario-content__power-item--flower { top: 9cqw; right: 6%; width: 18%; height: 7cqw; }
+  .mario-content__power-item--flower img { width: 12cqw; height: 12cqw; }
+  .mario-content__power-decor { display: block; position: absolute; width: 13%; height: 13cqw; object-fit: contain; }
+  .mario-content__power-decor--left { left: 2%; top: 20cqw; }
+  .mario-content__power-decor--bottom { left: 6%; bottom: 5cqw; }
+  .mario-content__power-decor--right { right: 14%; bottom: 5cqw; }
+  .mario-content__store { min-height: 56cqw; display: flex; align-items: center; justify-content: space-between; padding: 9cqw 12%; gap: 10%; }
+  .mario-content__store-copy { width: 36%; }
+  .mario-content__switch-logo { width: 6.9cqw; height: 6.4cqw; }
+  .mario-content__store-media { width: 53%; margin: 0; }
+}
