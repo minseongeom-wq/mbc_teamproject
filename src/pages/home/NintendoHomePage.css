@@ -1,3 +1,0 @@
-.nintendo-home { --home-scale: 1; width: 100%; overflow: clip; }
-.nintendo-home__main { display: flex; flex-direction: column; align-items: stretch; }
-.nintendo-home__main > section, .nintendo-home > footer { width: 100%; isolation: isolate; }

@@ -1,0 +1,10 @@
+﻿body { margin: 0; background: #fff; }
+.site-shell { color: #151515; background: #fff; font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+.site-shell *, .site-shell *::before, .site-shell *::after { box-sizing: border-box; }
+.site-shell > main { min-height: 60vh; padding-left: max(24px, calc((100% - 1120px) / 2)); padding-right: max(24px, calc((100% - 1120px) / 2)); }
+.site-shell a:focus-visible { outline: 2px solid #2563eb; outline-offset: 4px; }
+.site-shell nav[aria-label="스토어 단계 이동"] { border-top: 1px solid #ededed; padding: 24px 0 32px; font-size: 14px; color: #525252; }
+.site-shell nav[aria-label="스토어 단계 이동"] ol { display: flex; flex-wrap: wrap; gap: 8px 32px; padding-left: 20px; }
+.site-shell nav[aria-label="스토어 단계 이동"] a { display: inline-block; color: #525252; text-underline-offset: 4px; padding: 12px 0; }
+.site-shell nav[aria-label="스토어 단계 이동"] a[aria-current="page"] { color: #151515; font-weight: 700; }
+@media (max-width: 767px) { .site-shell > main { padding-left: 20px; padding-right: 20px; } }
