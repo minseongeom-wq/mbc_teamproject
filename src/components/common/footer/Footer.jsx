@@ -21,14 +21,14 @@ export default function Footer({ variant = 'default' }) {
     return () => observer.disconnect();
   }, []);
   const zelda = variant === 'zelda';
-  const arrow = `/images/common/${zelda ? 'ff059.svg' : 'd06d6.svg'}`;
+  const arrow = `${import.meta.env.BASE_URL}images/common/${zelda ? 'ff059.svg' : 'd06d6.svg'}`;
   function backToTop() {
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.querySelector('.navigation__logo')?.focus({ preventScroll: true });
   }
   return <footer className={`common-footer common-footer--${variant}`}>
     <div className="common-footer__inner">
-      <button type="button" className="common-footer__top" onClick={backToTop}><img src={`/images/common/${zelda ? '6f9ac.svg' : 'd839f.svg'}`} alt="" />Back to top</button>
+      <button type="button" className="common-footer__top" onClick={backToTop}><img src={`${import.meta.env.BASE_URL}images/common/${zelda ? '6f9ac.svg' : 'd839f.svg'}`} alt="" />Back to top</button>
       <div className="common-footer__links">
         <nav className="common-footer__support" aria-label="푸터 메뉴">
           <Link to={routePaths.support}>온라인 고객 상담<img src={arrow} alt="" /></Link>
@@ -36,7 +36,7 @@ export default function Footer({ variant = 'default' }) {
           <a href="https://www.nintendo.com/kr/common/privacy.html" target="_blank" rel="noreferrer">개인정보 처리방침<img src={arrow} alt="" /></a>
         </nav>
         <nav className="common-footer__social" aria-label="공식 SNS">
-          {socials.map(([label, href, icon, name]) => <a key={name} href={href} target="_blank" rel="noreferrer">{label}<span className={`common-footer__social-icon common-footer__social-icon--${name}`}><img src={`/images/common/${icon}`} alt="" /></span></a>)}
+          {socials.map(([label, href, icon, name]) => <a key={name} href={href} target="_blank" rel="noreferrer">{label}<span className={`common-footer__social-icon common-footer__social-icon--${name}`}><img src={`${import.meta.env.BASE_URL}images/common/${icon}`} alt="" /></span></a>)}
         </nav>
       </div>
       <div className="common-footer__contact-row">
@@ -47,7 +47,7 @@ export default function Footer({ variant = 'default' }) {
         <a href="https://www.nintendo.com/kr/" target="_blank" rel="noreferrer">한국닌텐도주식회사<br />Nintendo of Korea</a>
         <div><p>ⓒ 2006 Nintendo of Korea Co., Ltd. All Rights Reserved.</p><p>비공식 리뉴얼 프로젝트 · 실제 상품 판매 및 결제 서비스가 아닙니다.</p></div>
       </div>
-      <div className="common-footer__wordmark" ref={wordmark}><img src={`/images/common/${zelda ? '283f0.svg' : 'e4eaa.svg'}`} style={{ zoom: scale }} alt="Nintendo" /></div>
+      <div className="common-footer__wordmark" ref={wordmark}><img src={`${import.meta.env.BASE_URL}images/common/${zelda ? '283f0.svg' : 'e4eaa.svg'}`} style={{ zoom: scale }} alt="Nintendo" /></div>
     </div>
   </footer>;
 }

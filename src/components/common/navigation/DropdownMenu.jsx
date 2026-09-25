@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { routePaths } from '../../../routes/routePaths.js';
 
-const asset = name => `/images/common/${name}`;
+const asset = name => `${import.meta.env.BASE_URL}images/common/${name}`;
 function CharacterIcon({ slug }) {
   return <span className={`dropdown__icon dropdown__icon--${slug}`} aria-hidden="true">
     <span className="dropdown__silhouette">
