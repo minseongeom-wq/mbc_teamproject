@@ -1,8 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
+import { generatePath, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.jsx';
 import { routePaths } from './routes/routePaths.js';
 import HomePage from './pages/home/HomePage.jsx';
-import IPDetailPage from './pages/ip-detail/IPDetailPage.jsx';
+import MarioPage from './pages/mario/MarioPage.jsx';
+import ZeldaPage from './pages/zelda/ZeldaPage.jsx';
+import SplatoonPage from './pages/splatoon/SplatoonPage.jsx';
 import StorePage from './pages/store/StorePage.jsx';
 import ProductListPage from './pages/product-list/ProductListPage.jsx';
 import ProductDetailPage from './pages/product-detail/ProductDetailPage.jsx';
@@ -21,7 +23,9 @@ export default function App() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path={routePaths.home} element={<HomePage />} />
-        <Route path={routePaths.ipDetail} element={<IPDetailPage />} />
+        <Route path={generatePath(routePaths.ipDetail, { slug: 'mario' })} element={<MarioPage />} />
+        <Route path={generatePath(routePaths.ipDetail, { slug: 'zelda' })} element={<ZeldaPage />} />
+        <Route path={generatePath(routePaths.ipDetail, { slug: 'splatoon' })} element={<SplatoonPage />} />
         <Route path={routePaths.store} element={<StorePage />} />
         <Route path={routePaths.productList} element={<ProductListPage />} />
         <Route path={routePaths.productDetail} element={<ProductDetailPage />} />
