@@ -1,0 +1,28 @@
+.zelda-store { position: relative; left: 50%; width: 100vw; margin-left: -50vw; aspect-ratio: 16 / 9; overflow: hidden; container-type: inline-size; background: #4cc3a8; color: #fff; }
+.zelda-store__canvas { position: relative; width: 1920px; height: 1080px; transform-origin: top left; transform: scale(calc(100cqw / 1920px)); font-family: 'Zelda Pretendard', sans-serif; }
+.zelda-store p, .zelda-store h2 { margin: 0; }
+.zelda-store__logo { position: absolute; left: 488px; top: 279px; width: 122px; height: 122px; }
+.zelda-store__logo img { position: absolute; left: 50%; top: 0; transform: translateX(-50%); max-width: none; }
+.zelda-store__logo img:last-child { left: calc(50% + .04px); }
+.zelda-store h2 { position: absolute; left: 553px; top: 446px; transform: translateX(-50%); font: 500 36px/1.3 'DNF Forged Blade', serif; letter-spacing: .54px; text-align: center; white-space: nowrap; }
+.zelda-store__description { position: absolute; left: 550px; top: 566px; transform: translateX(-50%); font-size: 24px; font-weight: 300; line-height: 1.5; text-align: center; white-space: nowrap; }
+.zelda-store__details { position: absolute; left: 427px; top: 704px; width: 248px; height: 103px; font-size: 16px; font-weight: 700; line-height: 1.35; text-align: center; }
+.zelda-store__details > p { position: absolute; left: 121.5px; transform: translateX(-50%); white-space: nowrap; }
+.zelda-store__details > p:nth-child(2) { top: 23px; left: 121px; }
+.zelda-store__link { position: absolute; left: 0; top: 67px; width: 248px; height: 36px; color: inherit; text-decoration: none; }
+.zelda-store__link-text { position: absolute; left: 138px; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.zelda-store__link-icon { position: absolute; left: 37px; top: 2px; width: 18px; height: 18px; border-radius: 18px; background: #fff; }
+.zelda-store__link-icon img { position: absolute; left: 6.793px; top: 5.293px; }
+.zelda-store__link:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.zelda-store__art { position: absolute; left: 956px; top: 193px; width: 694px; height: 694px; }
+.zelda-store__diamond { position: absolute; left: 347.5px; top: 347.365px; width: 476.586px; height: 476.586px; transform: translate(-50%, -50%) rotate(45deg); overflow: hidden; background: rgb(255 255 255 / .5); }
+.zelda-store__diamond img { position: absolute; left: calc(50% + .455px); top: calc(50% - .455px); transform: translate(-50%, -50%) rotate(-45deg); max-width: none; }
+.zelda-store__line { position: absolute; max-width: none; transform: translate(-50%, -50%) rotate(45deg); }
+.zelda-store__line--1 { left: 159px; top: 535.28px; width: 483.661px; height: 1px; }
+.zelda-store__line--2 { left: 535.28px; top: 159px; width: 472.347px; height: 1px; }
+.zelda-store__line--3 { left: 159px; top: 159px; width: 463.862px; height: 1px; transform: translate(-50%, -50%) rotate(135deg); }
+.zelda-store__line--4 { left: 535.28px; top: 535.28px; width: 489.318px; height: 1px; transform: translate(-50%, -50%) rotate(135deg); }
+.zelda-store__console { position: absolute; left: 1378px; top: 658px; max-width: none; }
+.zelda-store__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
+.zelda-store__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
+.zelda-store__diamonds > span::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12.243px; height: 12.243px; border: 1px solid currentColor; transform: translate(-50%, -50%) rotate(45deg); }

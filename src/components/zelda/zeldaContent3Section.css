@@ -9,7 +9,7 @@
 .zelda-combat__heading h2 { top: 66px; left: calc(50% + .5px); font: 400 60px 'Triforce', serif; color: #fff; }
 .zelda-combat__description { position: absolute; left: 280px; top: 596px; width: 456px; display: flex; flex-direction: column; gap: 28px; mix-blend-mode: plus-lighter; color: rgb(255 255 255 / .5); }
 .zelda-combat__description h3 { font: 400 56px/1 'Heir of Light', serif; }
-.zelda-combat__description p { font-size: 24px; font-weight: 300; line-height: 1.5; overflow-wrap: break-word; }
+.zelda-combat__description p { font: var(--zelda-body-font); letter-spacing: var(--zelda-body-letter-spacing); overflow-wrap: break-word; }
 .zelda-combat__arrows { display: flex; gap: 23px; }
 .zelda-combat__arrows span { position: relative; width: 69px; height: 47px; border: 2px solid rgb(255 255 255 / .3); overflow: hidden; }
 .zelda-combat__arrows img { position: absolute; left: 22px; top: 11px; }
