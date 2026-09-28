@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'DNF Forged Blade';
+  src: url('/fonts/DNFForgedBlade-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.zelda-content {
+  --zelda-gold: #c7952f;
+  color: #fff;
+  background: var(--zelda-gold);
+}
+
+.zelda-hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+}
+
+.zelda-hero__background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: calc(100% + 1px);
+  object-fit: cover;
+}
+
+.zelda-hero__title {
+  position: absolute;
+  top: 38.7037%;
+  left: calc(50% + .5px);
+  width: 631px;
+  height: 250px;
+  margin: 0;
+  transform: translateX(-50%);
+  mix-blend-mode: plus-lighter;
+}
+
+.zelda-hero__title:focus-visible { outline: none; }
+
+.zelda-hero__title img {
+  display: block;
+}
+
+.zelda-hero__scroll {
+  position: absolute;
+  top: 83.7037%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 31px;
+  transform: translateX(-50%);
+  color: inherit;
+  font-family: 'DNF Forged Blade', Georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.zelda-hero__scroll-line {
+  position: absolute;
+  top: 90.2778%;
+  left: 50%;
+  width: 1px;
+  height: 240px;
+  background: currentColor;
+}
+
+@media (max-width: 767px) {
+  .zelda-hero { aspect-ratio: auto; height: 100svh; min-height: 560px; }
+  .zelda-hero__title { top: 40%; width: min(76vw, 631px); height: auto; }
+  .zelda-hero__scroll-line { height: 120px; }
+}

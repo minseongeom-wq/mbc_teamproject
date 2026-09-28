@@ -1,0 +1,76 @@
+.zelda-gameplay {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  aspect-ratio: 16 / 9;
+  container-type: inline-size;
+  overflow: hidden;
+  background: #8c8c8c;
+  color: #ededed;
+}
+
+.zelda-gameplay__canvas {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 1920px));
+  font-family: 'Zelda Pretendard', sans-serif;
+}
+
+.zelda-gameplay__canvas p,
+.zelda-gameplay__canvas h2,
+.zelda-gameplay__canvas h3 { margin: 0; }
+
+.zelda-gameplay__background-base,
+.zelda-gameplay__background { position: absolute; top: 0; height: 1080px; object-fit: cover; }
+.zelda-gameplay__background-base { left: 0; width: 1920px; transform: scaleX(-1); }
+.zelda-gameplay__background { left: 1px; width: 1919px; }
+
+.zelda-gameplay__heading { position: absolute; left: 782px; top: 106px; width: 356px; height: 152px; opacity: .5; mix-blend-mode: plus-lighter; text-align: center; }
+.zelda-gameplay__heading p,
+.zelda-gameplay__heading h2 { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.zelda-gameplay__heading p { top: 7px; left: calc(50% + .5px); font: 500 24px 'DNF Forged Blade', serif; }
+.zelda-gameplay__heading h2 { top: 66px; font: 400 60px 'Triforce', serif; color: #fff; }
+
+.zelda-gameplay__activities { position: absolute; left: 496px; top: 314px; width: 883px; height: 667px; }
+.zelda-gameplay__activity { position: absolute; opacity: .7; mix-blend-mode: plus-lighter; font-size: 24px; line-height: 1.5; font-weight: 300; overflow-wrap: break-word; }
+.zelda-gameplay__activity h3 { font: 500 24px/1.5 'DNF Forged Blade', serif; color: rgb(255 255 255 / .5); }
+.zelda-gameplay__activity--explore { left: 531px; top: 58px; width: 352px; }
+.zelda-gameplay__activity--solve { left: 531px; top: 228px; width: 352px; }
+.zelda-gameplay__activity--cook { left: 9px; top: 397px; width: 384px; }
+.zelda-gameplay__activity--travel { left: 9px; top: 561px; width: 390px; }
+.zelda-gameplay__timeline { position: absolute; left: 454.56px; top: 0; mix-blend-mode: plus-lighter; }
+
+.zelda-gameplay__diamond { position: absolute; overflow: hidden; background: rgb(255 255 255 / .5); transform: translate(-50%, -50%) rotate(45deg); }
+.zelda-gameplay__diamond-image { position: absolute; max-width: none; object-fit: cover; transform: translate(-50%, -50%) rotate(-45deg); }
+.zelda-gameplay__diamond--korok { left: 748.32px; top: 493.62px; width: 194.628px; height: 194.628px; }
+.zelda-gameplay__diamond--korok img { left: calc(50% + 25.14px); top: calc(50% - 15.42px); width: 398px; height: 287px; }
+.zelda-gameplay__diamond--travel { left: 1181.19px; top: 840.12px; width: 154.856px; height: 154.856px; }
+.zelda-gameplay__diamond--travel img { left: calc(50% - .22px); top: calc(50% + .05px); width: 518px; height: 292px; }
+.zelda-gameplay__diamond--sword { left: 192.19px; top: 415.19px; width: 472.614px; height: 472.614px; }
+.zelda-gameplay__diamond--sword img { left: calc(50% - 21.48px); top: calc(50% - 21.21px); width: 1518px; height: 854px; }
+.zelda-gameplay__diamond--landscape { left: 1746.75px; top: 648.91px; width: 446.758px; height: 446.758px; }
+.zelda-gameplay__diamond--landscape img { left: calc(50% + .24px); top: calc(50% - .11px); width: 1134px; height: 638px; }
+.zelda-gameplay__diamond--solve { left: 402.47px; top: 583.91px; width: 223.446px; height: 223.446px; }
+.zelda-gameplay__diamond--solve img { left: calc(50% - .27px); top: calc(50% + .4px); width: 624px; height: 326px; }
+.zelda-gameplay__diamond--cook { left: 1558.19px; top: 841.19px; width: 273.21px; height: 273.21px; }
+.zelda-gameplay__diamond--solve,
+.zelda-gameplay__diamond--cook { z-index: 1; }
+.zelda-gameplay__diamond--cook .zelda-gameplay__diamond-image { left: calc(50% - .27px); top: 50%; width: 744px; height: 418px; }
+.zelda-gameplay__image-base { position: absolute; left: calc(50% + .39px); top: calc(50% + .39px); transform: translate(-50%, -50%) scale(1.857333); }
+.zelda-gameplay__left-frame { position: absolute; left: 186.1425px; top: 426.1425px; width: 495.375px; height: 495.374px; transform: translate(-50%, -50%) rotate(45deg); }
+.zelda-gameplay__left-frame img { position: absolute; left: -11.1135px; top: -21.014px; }
+.zelda-gameplay__right-frame { position: absolute; left: 1414.7865px; top: 317.7865px; }
+.zelda-gameplay__diamond-border { position: absolute; z-index: 2; border: 12px solid rgb(255 255 255 / .2); transform: translate(-50%, -50%) rotate(45deg); mix-blend-mode: plus-lighter; }
+.zelda-gameplay__diamond-border--solve { left: 402.47px; top: 583.91px; width: 223.446px; height: 223.446px; }
+.zelda-gameplay__diamond-border--cook { left: 1558.19px; top: 841.19px; width: 273.21px; height: 273.21px; }
+
+.zelda-gameplay__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
+.zelda-gameplay__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
+.zelda-gameplay__diamonds > span::before,
+.zelda-gameplay__diamonds > span::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+.zelda-gameplay__diamonds > span::before { width: 12.243px; height: 12.243px; border: 1px solid currentColor; }
+.zelda-gameplay__diamonds > span::after { width: 4.243px; height: 4.243px; background: currentColor; }
+.zelda-gameplay__note { position: absolute; left: 966.5px; top: 1027px; transform: translateX(-50%); font-size: 16px; font-weight: 700; line-height: 1.35; color: rgb(255 255 255 / .5); white-space: nowrap; }
