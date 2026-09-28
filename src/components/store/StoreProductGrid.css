@@ -1,0 +1,14 @@
+.store-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, 414px); column-gap: 25px; row-gap: 23.5px; height: 850px; margin-top: 106px; }
+.store-genre-card { position: relative; display: grid; place-items: center; overflow: hidden; border-radius: 15px; color: #fff !important; }
+.store-genre-card img { position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.store-genre-card::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / 80%); }
+.store-genre-card span { position: relative; z-index: 1; font-size: 55px; font-weight: 300; line-height: 1; }
+.genre-action img { left: .08%; width: 177.35%; object-fit: fill; }
+.genre-shooting img { left: -.04%; width: 177.35%; object-fit: fill; }
+.genre-sports img { left: -77.25%; width: 177.35%; object-fit: fill; }
+.genre-fighting img { left: -60.44%; width: 177.52%; object-fit: fill; }
+.genre-puzzle img { top: -8.7%; left: -54.19%; width: 208.39%; height: 117.39%; object-fit: fill; }
+.genre-racing img { top: -9.18%; left: -55.05%; width: 210.1%; height: 118.36%; object-fit: fill; }
+.genre-arcade img { left: -70.26%; width: 177.35%; object-fit: fill; }
+@media (max-width: 1100px) { .store-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; height: auto; } .store-genre-card { aspect-ratio: 421 / 414; } }
+@media (max-width: 767px) { .store-product-grid { gap: 10px; margin-top: 70px; } .store-genre-card span { font-size: clamp(20px, 6vw, 40px); } }
