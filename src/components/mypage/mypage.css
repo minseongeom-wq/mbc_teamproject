@@ -1,1 +1,582 @@
-/* mypage 컴포넌트 작업용 스타일. 사용하는 JSX에서 import합니다. */
+/* Desktop layout: Figma 2473:23073. Tokens stay local to this page. */
+.site-shell:has(.mypage-dashboard),
+.mypage-dashboard {
+  --mypage-red: var(--color-nintendo-red, #e60012);
+  --mypage-bg: var(--color-core-white2, #ededed);
+  --mypage-white: var(--color-white, #fff);
+  --mypage-gray: var(--color-core-gray, #8c8c8c);
+  --mypage-stroke: var(--color-core-stroke, #d2d2cd);
+  --mypage-ink: var(--color-core-black, #151515);
+  --mypage-focus: var(--color-focus, #2563eb);
+  --mypage-avatar-bg: #3dff53;
+  --mypage-secondary: #6d6d6e;
+  --mypage-avatar-border: #525255;
+  --mypage-menu-shadow-color: #0002;
+  --mypage-intro-shadow-color: #5e5e5e12;
+  --mypage-backdrop: #0008;
+  --mypage-body-line-height: var(--line-height-body, 1.4);
+}
+
+.site-shell:has(.mypage-dashboard) {
+  background: var(--mypage-bg);
+}
+
+.site-shell:has(.mypage-dashboard) > .common-header {
+  background: var(--mypage-red);
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.site-shell > main:has(.mypage-dashboard) {
+  padding: 0;
+}
+
+.mypage-dashboard {
+  font-family: 'Common Pretendard', Pretendard, sans-serif;
+  line-height: 1.3;
+  background: var(--mypage-bg);
+  width: 100%;
+}
+
+.mypage-dashboard h1, .mypage-dashboard h2, .mypage-dashboard h3, .mypage-dashboard p {
+  margin: 0;
+}
+
+.mypage-dashboard button, .mypage-dashboard select, .mypage-dashboard input, .mypage-dashboard textarea {
+  font: inherit;
+}
+
+.mypage-dashboard button {
+  cursor: pointer;
+}
+
+.mypage-dashboard button:focus-visible, .mypage-dashboard select:focus-visible, .mypage-dashboard ul:focus-visible {
+  outline: 2px solid var(--mypage-focus);
+  outline-offset: 4px;
+}
+
+.mypage-dashboard ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mypage-dashboard h2 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 19px;
+}
+
+.mypage-dashboard__profile {
+  background: var(--mypage-red);
+  color: var(--mypage-white);
+  height: 372px;
+  padding: 45px 4.166667% 43px;
+}
+
+.mypage-dashboard__identity {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.mypage-dashboard__avatar {
+  width: 199px;
+  height: 199px;
+  flex-shrink: 0;
+  border: 1px solid var(--mypage-white);
+  border-radius: 50%;
+  background: var(--mypage-avatar-bg);
+  overflow: hidden;
+  position: relative;
+}
+
+.mypage-dashboard__avatar img {
+  position: absolute;
+  width: 191px;
+  height: 276.47px;
+  left: -1px;
+  top: 9.77px;
+}
+
+.mypage-dashboard__profile-info {
+  height: 199px;
+  padding-top: 68px;
+}
+
+.mypage-dashboard__name {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 34px;
+}
+
+.mypage-dashboard__profile h1 {
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -.8px;
+}
+
+.mypage-dashboard__name button {
+  display: flex;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.mypage-dashboard__stats {
+  display: flex;
+  gap: 65px;
+}
+
+.mypage-dashboard__stats button {
+  color: var(--mypage-white);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.mypage-dashboard__stats strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.mypage-dashboard__stats span {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.mypage-dashboard__stats img, .mypage-dashboard__edit img {
+  transform: rotate(45deg);
+}
+
+.mypage-dashboard__profile-actions {
+  display: flex;
+  gap: 19px;
+  margin-top: 39px;
+  margin-left: 5px;
+}
+
+.mypage-dashboard__status, .mypage-dashboard__settings > button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: var(--mypage-white);
+  color: var(--mypage-ink);
+  width: 194px;
+  height: 46px;
+  border: 0;
+  border-radius: 15px;
+  padding: 0 14px;
+}
+
+.mypage-dashboard__status select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0 38px;
+  cursor: pointer;
+  border-radius: inherit;
+  color: var(--mypage-ink);
+}
+
+.mypage-dashboard__down {
+  position: absolute;
+  right: 16px;
+  transform: rotate(135deg);
+  pointer-events: none;
+}
+
+.mypage-dashboard__settings {
+  position: relative;
+}
+
+.mypage-dashboard__settings-menu {
+  position: absolute;
+  z-index: 6;
+  top: 52px;
+  width: 194px;
+  padding: 8px;
+  background: var(--mypage-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px var(--mypage-menu-shadow-color);
+}
+
+.mypage-dashboard__settings-menu button {
+  display: block;
+  background: var(--mypage-white);
+  border: 0;
+  padding: 12px 8px;
+  width: 100%;
+  text-align: left;
+}
+
+.mypage-dashboard__content {
+  width: 100%;
+  margin: 0;
+  padding: 52px 4.166667% 0;
+  display: grid;
+  grid-template-columns: minmax(0, 785fr) minmax(0, 822fr);
+  column-gap: 8.75%;
+}
+
+.mypage-dashboard__intro {
+  height: 168px;
+  padding: 13px 16px 12px;
+  background: var(--mypage-white);
+  box-shadow: -2px 14px 20px var(--mypage-intro-shadow-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mypage-dashboard__intro p {
+  font-size: 18px;
+  color: var(--mypage-gray);
+  white-space: pre-wrap;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+
+.mypage-dashboard__edit {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--mypage-red);
+  font-size: 15px !important;
+  align-self: flex-start;
+}
+
+.mypage-dashboard__activity {
+  margin-top: 119px;
+}
+
+.mypage-dashboard__activity h2 {
+  margin-bottom: 25px;
+}
+
+.mypage-dashboard__activity ul {
+  display: grid;
+  gap: 14px;
+}
+
+.mypage-dashboard__activity li {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.40625vw, 27px);
+  padding: 5px;
+  height: 83px;
+  background: var(--mypage-white);
+  border-block: 1px solid var(--mypage-stroke);
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: -.3px;
+}
+
+.mypage-dashboard__game-image {
+  width: 186px;
+  height: 72px;
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mypage-dashboard__game-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mypage-dashboard__game-image--f015e img {
+  position: absolute;
+  width: 99.57%;
+  height: 156.09%;
+  left: .43%;
+  top: -1.15%;
+}
+
+.mypage-dashboard__game-image--a965f img {
+  position: absolute;
+  height: 156.77%;
+  left: .21%;
+  top: -56.84%;
+}
+
+.mypage-dashboard__activity li > p {
+  margin-left: auto;
+  text-align: right;
+  color: var(--mypage-secondary);
+  align-self: flex-end;
+  padding-bottom: 1px;
+  flex-shrink: 0;
+}
+
+.mypage-dashboard__more {
+  display: block;
+  border: 0;
+  background: transparent;
+  color: var(--mypage-red);
+  padding: 7px 0;
+  margin-left: auto;
+  font-size: 10px !important;
+}
+
+.mypage-dashboard__orders ul {
+  display: grid;
+  gap: 15px;
+  padding-right: 2px;
+}
+
+.mypage-dashboard__orders li {
+  height: auto;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) minmax(60px, .32fr);
+  align-items: center;
+  gap: clamp(12px, 1.927vw, 37px);
+  padding: 9px clamp(12px, 1.563vw, 30px);
+  background: var(--mypage-white);
+  border-radius: 5px;
+  font-size: 10px;
+  min-height: 55px;
+}
+
+.mypage-dashboard__order-image {
+  width: 38px;
+  height: 37px;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mypage-dashboard__order-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mypage-dashboard__order-image--zoom img {
+  position: absolute;
+  width: 115.79%;
+  height: 118.8%;
+  left: -7.89%;
+  top: -9.4%;
+}
+
+.mypage-dashboard__orders li p {
+  color: var(--mypage-gray);
+  font-weight: 500;
+  letter-spacing: .2px;
+  margin-bottom: 4px;
+}
+
+.mypage-dashboard__orders time {
+  letter-spacing: .5px;
+}
+
+.mypage-dashboard__social {
+  display: grid;
+  grid-template-columns: minmax(0, 446fr) minmax(0, 317fr);
+  gap: 7.05%;
+  margin-top: 29px;
+}
+
+.mypage-dashboard__reviews ul {
+  display: grid;
+  gap: 15px;
+  padding-right: 13px;
+}
+
+.mypage-dashboard__reviews li {
+  min-height: 71px;
+  display: grid;
+  grid-template-columns: 106px minmax(0, 1fr);
+  gap: clamp(10px, 1.875vw, 36px);
+  padding: 6px 10px 3px;
+  background: var(--mypage-white);
+  border-block: 1px solid var(--mypage-stroke);
+}
+
+.mypage-dashboard__reviews .mypage-dashboard__game-image {
+  width: 106px;
+  height: 41px;
+}
+
+.mypage-dashboard__rating {
+  display: block;
+  margin: 2px auto 0;
+}
+
+.mypage-dashboard__reviews h3 {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.mypage-dashboard__reviews p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mypage-gray);
+  letter-spacing: -.28px;
+  white-space: pre-line;
+}
+
+.mypage-dashboard__friends ul {
+  height: 329px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.mypage-dashboard__friends li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 3px;
+  margin-bottom: 6px;
+  border-block: 1px solid var(--mypage-stroke);
+  background: var(--mypage-white);
+  height: 49px;
+  color: var(--mypage-gray);
+}
+
+.mypage-dashboard__friends li > img {
+  width: 41px;
+  height: 41px;
+  object-fit: cover;
+  border: 1px solid var(--mypage-avatar-border);
+  border-radius: 5px;
+}
+
+.mypage-dashboard__friends li > div {
+  min-width: 0;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: -.24px;
+}
+
+.mypage-dashboard__friends li > span {
+  border: 2px solid var(--mypage-gray);
+  border-radius: 50%;
+  font-size: 20px;
+  width: 33px;
+  height: 33px;
+  display: grid;
+  place-items: center;
+  margin-right: 3px;
+}
+
+.mypage-dashboard__friends .mypage-dashboard__friends-list--expanded {
+  height: auto;
+}
+
+.mypage-dashboard__dialog {
+  width: 880px;
+  max-height: 85vh;
+  border: 0;
+  border-radius: 15px;
+  padding: 28px;
+  color: var(--mypage-ink);
+  background: var(--mypage-bg);
+}
+
+.mypage-dashboard__dialog::backdrop {
+  background: var(--mypage-backdrop);
+}
+
+.mypage-dashboard__dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.mypage-dashboard__dialog-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.mypage-dashboard__dialog-header > button {
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+}
+
+.mypage-dashboard__dialog label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.mypage-dashboard__dialog input, .mypage-dashboard__dialog textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--mypage-stroke);
+  border-radius: 5px;
+}
+
+.mypage-dashboard__dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.mypage-dashboard__dialog-actions button {
+  border: 0;
+  padding: 10px 24px;
+  border-radius: 8px;
+  background: var(--mypage-white);
+}
+
+.mypage-dashboard__dialog-actions button[type='submit'] {
+  background: var(--mypage-red);
+  color: var(--mypage-white);
+}
+
+.mypage-dashboard__dialog .mypage-dashboard__activity {
+  margin-top: 0;
+}
+
+.mypage-dashboard__dialog section > h2 {
+  display: none;
+}
+
+.mypage-dashboard__content > div, .mypage-dashboard__social > section {
+  min-width: 0;
+}
+
+.mypage-dashboard__activity .mypage-dashboard__game-image {
+  width: 24%;
+}
+
+.mypage-dashboard__activity li > span {
+  min-width: 0;
+}
+
+.mypage-dashboard__reviews h3, .mypage-dashboard__reviews p, .mypage-dashboard__friends p {
+  overflow-wrap: anywhere;
+}
+
+/* Body copy follows Design-token.md; headings, captions and prices keep Figma leading. */
+.mypage-dashboard__intro p,
+.mypage-dashboard__reviews p,
+.mypage-dashboard__activity li > p,
+.mypage-dashboard__dialog > p,
+.mypage-dashboard__dialog textarea {
+  line-height: var(--mypage-body-line-height);
+}
