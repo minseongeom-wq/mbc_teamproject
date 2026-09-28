@@ -1,4 +1,4 @@
-.common-footer { --footer-bg: #ededed; --footer-accent: #e60012; --footer-text: #151515; --footer-muted: #8c8c8c; background: var(--footer-bg); color: var(--footer-text); font-family: 'Common Pretendard', 'Pretendard Variable', Pretendard, system-ui, sans-serif; margin-top: 40px; }
+.common-footer { --footer-bg: #ededed; --footer-accent: #e60012; --footer-text: #151515; --footer-muted: #8c8c8c; background: var(--footer-bg); color: var(--footer-text); font-family: 'Common Pretendard', 'Pretendard Variable', Pretendard, system-ui, sans-serif; }
 .common-footer--zelda { --footer-bg: #c7952f; --footer-accent: #ededed; --footer-text: #ededed; --footer-muted: #ededed; }
 .common-footer__inner { padding: 32px 20px 24px; max-width: 1920px; margin: auto; }
 .common-footer a { color: inherit; text-underline-offset: 4px; }
