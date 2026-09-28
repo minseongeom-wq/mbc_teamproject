@@ -1,0 +1,41 @@
+@font-face { font-family: 'The Wild Breath of Zelda'; src: url('/fonts/TheWildBreathofZelda.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+
+.zelda-villages { position: relative; left: 50%; width: 100vw; margin-left: -50vw; aspect-ratio: 16 / 9; overflow: hidden; container-type: inline-size; background: #8c8c8c; color: #ededed; }
+.zelda-villages__canvas { position: relative; width: 1920px; height: 1080px; transform-origin: top left; transform: scale(calc(100cqw / 1920px)); font-family: 'Zelda Pretendard', sans-serif; }
+.zelda-villages p, .zelda-villages h2, .zelda-villages h3 { margin: 0; }
+.zelda-villages__background { position: absolute; left: 1px; top: 0; width: 1919px; height: 1080px; max-width: none; object-fit: cover; }
+.zelda-villages__background--zora, .zelda-villages__background--gerudo { left: -1px; width: 1919.531px; }
+.zelda-villages [hidden] { display: none; }
+.zelda-villages button.zelda-villages__diamond { border: 0; padding: 0; border-radius: 0; cursor: pointer; }
+.zelda-villages button.zelda-villages__diamond:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
+.zelda-villages__heading { position: absolute; left: 793px; top: 106px; width: 356px; height: 152px; opacity: .5; mix-blend-mode: plus-lighter; text-align: center; }
+.zelda-villages__heading p, .zelda-villages__heading h2 { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.zelda-villages__heading p { top: 7px; font: 500 24px 'DNF Forged Blade', serif; }
+.zelda-villages__heading h2 { top: 66px; font: 400 60px 'Triforce', serif; color: #fff; }
+.zelda-villages__diamond, .zelda-villages__border { position: absolute; width: var(--village-size); height: var(--village-size); left: var(--village-x); top: var(--village-y); transform: translate(-50%, -50%) rotate(45deg); }
+.zelda-villages__diamond { overflow: hidden; background: rgb(255 255 255 / .5); }
+.zelda-villages__border { border: 12px solid rgb(255 255 255 / .2); mix-blend-mode: plus-lighter; pointer-events: none; }
+.zelda-villages__image { position: absolute; max-width: none; object-fit: cover; transform: translate(-50%, -50%) rotate(-45deg); }
+.zelda-villages__image-base { position: absolute; transform-origin: top left; max-width: none; }
+.zelda-villages__highlight { mix-blend-mode: plus-lighter; }
+.zelda-villages__village--kakariko { --village-size: 223.446px; --village-x: 426px; --village-y: 480px; }
+.zelda-villages__village--kakariko .zelda-villages__image { left: calc(50% - 15.91px); top: calc(50% - 10.96px); width: 361px; height: 510px; }
+.zelda-villages__village--kakariko .zelda-villages__image-base { left: -113px; top: -112.43px; transform: scale(1.492); }
+.zelda-villages__village--zora { --village-size: 261.983px; --village-x: 964.25px; --village-y: 756.25px; }
+.zelda-villages__village--zora .zelda-villages__image { left: 225.0365px; top: 97.4065px; width: 1105px; height: 622px; }
+.zelda-villages__village--zora .zelda-villages__image-base { left: -131.17px; top: -130.46px; transform: scale(1.741843); }
+.zelda-villages__village--gerudo { --village-size: 267.993px; --village-x: 1475px; --village-y: 571.5px; }
+.zelda-villages__village--gerudo .zelda-villages__image { left: calc(50% + .71px); top: 50%; width: 829px; height: 466px; }
+.zelda-villages__village--gerudo .zelda-villages__image-base { left: -134.35px; top: -133.64px; transform: scale(1.784277); }
+.zelda-villages__label { position: absolute; width: 189px; text-align: center; color: rgb(255 255 255 / .5); mix-blend-mode: plus-lighter; }
+.zelda-villages__label h3 { font: 400 30px/1 'The Wild Breath of Zelda', serif; }
+.zelda-villages__label p { font: 500 24px 'DNF Forged Blade', serif; }
+.zelda-villages__village--kakariko .zelda-villages__label { left: 331px; top: 683px; }
+.zelda-villages__village--zora .zelda-villages__label { left: 870px; top: 469px; }
+.zelda-villages__village--gerudo .zelda-villages__label { left: 1380px; top: 809px; }
+.zelda-villages__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
+.zelda-villages__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
+.zelda-villages__diamonds > span::before, .zelda-villages__diamonds > span::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+.zelda-villages__diamonds > span::before { width: 12.243px; height: 12.243px; border: 1px solid currentColor; }
+.zelda-villages__diamonds > span::after { width: 4.243px; height: 4.243px; background: currentColor; }
+.zelda-villages__note { position: absolute; left: 966.5px; top: 1027px; transform: translateX(-50%); font-size: 16px; font-weight: 700; line-height: 1.35; color: rgb(255 255 255 / .5); white-space: nowrap; }

@@ -27,6 +27,20 @@
 .zelda-gameplay__background { position: absolute; top: 0; height: 1080px; object-fit: cover; }
 .zelda-gameplay__background-base { left: 0; width: 1920px; transform: scaleX(-1); }
 .zelda-gameplay__background { left: 1px; width: 1919px; }
+.zelda-gameplay__background--solve,
+.zelda-gameplay__background--cook,
+.zelda-gameplay__background--landscape { left: 0; width: 1920px; }
+.zelda-gameplay__background--landscape { transform: scaleX(-1); }
+.zelda-gameplay [hidden] { display: none; }
+.zelda-gameplay:not([data-view="content2"]) .zelda-gameplay__activity--cook,
+.zelda-gameplay:not([data-view="content2"]) .zelda-gameplay__activity--travel { left: 0; }
+.zelda-gameplay button.zelda-gameplay__diamond { border: 0; padding: 0; cursor: pointer; }
+.zelda-gameplay button.zelda-gameplay__diamond:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
+.zelda-gameplay__hover-image { opacity: .5; mix-blend-mode: plus-lighter; }
+.zelda-gameplay__diamond img,
+.zelda-gameplay__left-frame,
+.zelda-gameplay__right-frame,
+.zelda-gameplay__diamond-border { pointer-events: none; }
 
 .zelda-gameplay__heading { position: absolute; left: 782px; top: 106px; width: 356px; height: 152px; opacity: .5; mix-blend-mode: plus-lighter; text-align: center; }
 .zelda-gameplay__heading p,
