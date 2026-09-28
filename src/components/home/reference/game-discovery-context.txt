@@ -1,0 +1,148 @@
+const assetPathPrefix = "/images/banners/home";
+const imgConsoleImage = `${assetPathPrefix}/3200e.png`;
+const imgIcon = `${assetPathPrefix}/eefb3.png`;
+const imgIcon1 = `${assetPathPrefix}/ab137.png`;
+const imgIcon2 = `${assetPathPrefix}/1d81c.png`;
+const imgIcon3 = `${assetPathPrefix}/ac1d0.png`;
+const imgIcon4 = `${assetPathPrefix}/e4a61.png`;
+const imgIcon5 = `${assetPathPrefix}/5ebab.png`;
+const imgIcon6 = `${assetPathPrefix}/9fa86.png`;
+const imgIcon7 = `${assetPathPrefix}/67e7b.png`;
+const imgIcon8 = `${assetPathPrefix}/dd368.png`;
+const imgIcon9 = `${assetPathPrefix}/a47e9.png`;
+const imgConsoleImage1 = `${assetPathPrefix}/9a2aa.png`;
+const imgBackgroundImage = `${assetPathPrefix}/0e144.svg`;
+const imgGameImage = `${assetPathPrefix}/ede00.svg`;
+const imgGameImage1 = `${assetPathPrefix}/1e273.svg`;
+const imgGameImage2 = `${assetPathPrefix}/c0ed6.svg`;
+const imgGameImage3 = `${assetPathPrefix}/22377.svg`;
+const imgGameImage4 = `${assetPathPrefix}/ce1b3.svg`;
+const imgElement = `${assetPathPrefix}/55185.svg`;
+
+export default function Component02GameDiscovery() {
+  return (
+    <div className="bg-[#151515] relative size-full" data-node-id="1148:6518" data-name="02_Game-Discovery">
+      <div className="-translate-y-1/2 absolute h-[600.413px] left-[226px] top-[calc(50%-71.79px)] w-[1477px]" data-node-id="1148:6519" data-name="Game-Discovery-Console">
+        <div className="absolute h-[600.413px] left-[1248.96px] top-0 w-[228.041px]" data-node-id="1148:6520" data-name="Console image">
+          <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgConsoleImage} />
+        </div>
+        <div className="absolute bg-white h-[575.999px] left-[228.11px] top-[15.26px] w-[1020.778px]" data-node-id="1148:6521" data-name="Game background">
+          <div className="absolute h-[575.999px] left-0 top-0 w-[1020.778px]" data-node-id="1148:6522" data-name="Background image">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBackgroundImage} />
+          </div>
+        </div>
+        <div className="absolute bg-[var(--white,white)] h-[518.781px] left-[251.76px] overflow-clip rounded-[35.48px] top-[43.49px] w-[970.426px]" data-node-id="1148:6523" data-name="Game-Carousel-Viewport">
+          <div className="[word-break:break-word] absolute content-stretch flex gap-[26.702px] items-center leading-[1.3] left-[34.06px] not-italic text-[#151515] top-[23.03px] whitespace-nowrap" data-node-id="1148:6524" data-name="Game-Playmode-Nav">
+            <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[41.673px] tracking-[-0.8335px]" data-node-id="1148:6525">
+              11:27
+            </p>
+            <p className="font-['Pretendard:Light'] relative shrink-0 text-[22.439px] tracking-[-0.4488px]" data-node-id="1148:6526">
+              Play Solo
+            </p>
+            <p className="font-['Pretendard:Light'] relative shrink-0 text-[22.439px] tracking-[-0.4488px]" data-node-id="1148:6527">
+              Play Together
+            </p>
+          </div>
+          <div className="absolute content-stretch flex gap-[31.279px] items-end justify-center left-[-282.28px] top-[109.86px]" data-node-id="1148:6529" data-name="Game-Carousel">
+            <div className="relative shrink-0 size-[237.266px]" data-node-id="1148:6530" data-name="Game-Card-01">
+              <div className="absolute left-0 size-[237.266px] top-0" data-node-id="1148:6531" data-name="Game image">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGameImage} />
+              </div>
+              <div className="absolute bg-[rgba(105,105,105,0.5)] border-[1.977px] border-black border-solid left-[13.84px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6532" data-name="Icon" />
+              <div className="absolute bg-[rgba(105,105,105,0.5)] border-[1.977px] border-black border-solid left-[42.51px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6533" data-name="Icon" />
+              <div className="absolute bg-[rgba(105,105,105,0.5)] border-[1.977px] border-black border-solid left-[71.18px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6534" data-name="Icon" />
+              <div className="absolute bg-[rgba(105,105,105,0.5)] border-[1.977px] border-black border-solid left-[99.85px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6535" data-name="Icon" />
+              <p className="[word-break:break-word] absolute font-['Pretendard:Regular'] leading-[34.601px] left-[16.8px] not-italic text-[35.59px] text-black top-[189.81px] tracking-[4.4487px] whitespace-nowrap" data-node-id="1148:6536">
+                TEC
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[237.266px]" data-node-id="1148:6537" data-name="Game-Card-02">
+              <div className="absolute left-0 size-[237.266px] top-0" data-node-id="1148:6538" data-name="Game image">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGameImage1} />
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[42.51px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6539" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[39.544px] size-full" src={imgIcon} />
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[13.84px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6540" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[39.544px] size-full" src={imgIcon1} />
+              </div>
+            </div>
+            <div className="relative shrink-0 size-[338.733px]" data-node-id="1148:6541" data-name="Game-Card-Active">
+              <div className="absolute left-0 size-[338.733px] top-0" data-node-id="1148:6542" data-name="Game image">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGameImage2} />
+              </div>
+              <div className="absolute border-2 border-[#e60012] border-solid left-[19.76px] rounded-[56.456px] size-[56.456px] top-[21.17px]" data-node-id="1148:6543" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[56.456px] size-full" src={imgIcon2} />
+              </div>
+              <div className="absolute border-2 border-[#e60012] border-solid left-[60.69px] rounded-[56.456px] size-[56.456px] top-[21.17px]" data-node-id="1148:6544" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[56.456px] size-full" src={imgIcon3} />
+              </div>
+              <div className="absolute border-2 border-[#e60012] border-solid left-[101.62px] rounded-[56.456px] size-[56.456px] top-[21.17px]" data-node-id="1148:6545" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[56.456px] size-full" src={imgIcon4} />
+              </div>
+              <div className="absolute border-2 border-[#e60012] border-solid left-[142.55px] rounded-[56.456px] size-[56.456px] top-[21.17px]" data-node-id="1148:6546" data-name="Icon">
+                <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[56.456px]">
+                  <img alt="" className="absolute left-[-33.69%] max-w-none size-[167.88%] top-[-61.22%]" src={imgIcon5} />
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 size-[237.266px]" data-node-id="1148:6547" data-name="Game-Card-04">
+              <div className="absolute left-0 size-[237.266px] top-0" data-node-id="1148:6548" data-name="Game image">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGameImage3} />
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[42.51px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6549" data-name="Icon">
+                <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[39.544px]">
+                  <img alt="" className="absolute h-[173.13%] left-[-1.47%] max-w-none top-[1.3%] w-full" src={imgIcon6} />
+                </div>
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[13.84px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6550" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[39.544px] size-full" src={imgIcon7} />
+              </div>
+            </div>
+            <div className="relative shrink-0 size-[237.266px]" data-node-id="1148:6551" data-name="Game-Card-05">
+              <div className="absolute left-0 size-[237.266px] top-0" data-node-id="1148:6552" data-name="Game image">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGameImage4} />
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[13.84px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6553" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[39.544px] size-full" src={imgIcon8} />
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[42.51px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6554" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[39.544px] size-full" src={imgIcon9} />
+              </div>
+              <div className="absolute border-[#e60012] border-[1.5px] border-solid left-[71.18px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6555" data-name="Icon">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[39.544px] size-full" src={imgIcon9} />
+              </div>
+              <div className="absolute bg-[rgba(105,105,105,0.5)] border-[1.977px] border-black border-solid left-[99.85px] rounded-[39.544px] size-[39.544px] top-[14.83px]" data-node-id="1148:6556" data-name="Icon" />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bg-white border-[#e60012] border-[0.801px] border-solid content-stretch flex flex-col items-start left-[876.74px] overflow-clip px-[36.865px] py-[9.617px] rounded-[12.021px] top-[98.57px] w-[424.748px]" data-node-id="1148:6557" data-name="Game-Selected-Info">
+          <div className="content-stretch flex flex-col gap-[4.808px] items-start py-[8.014px] relative shrink-0 w-full" data-node-id="1148:6559" data-name="Game-Title-Block">
+            <p className="[word-break:break-word] font-['DeltaGlassKR:regular'] leading-none not-italic relative shrink-0 text-[#e60012] text-[48.085px] whitespace-nowrap" data-node-id="1148:6560">
+              젤다의 전설
+            </p>
+            <div className="content-stretch flex gap-[9.617px] items-center justify-center relative shrink-0" data-node-id="1148:6561" data-name="Game-Description">
+              <div className="relative shrink-0 size-[12.823px]" data-node-id="1148:6562" data-name="element">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgElement} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[1.5] not-italic relative shrink-0 text-[#e60012] text-[12.823px] whitespace-nowrap" data-node-id="1148:6565">
+                끝없이 펼쳐지는 세계, 전설이 되는 모험
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="absolute h-[600.413px] left-0 top-0 w-[228.041px]" data-node-id="1148:6566" data-name="Console image">
+          <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgConsoleImage1} />
+        </div>
+      </div>
+      <div className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard:Regular'] leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[821px] whitespace-nowrap" data-node-id="1148:6567">
+        <p className="leading-[1.3] mb-0 whitespace-pre">
+          어떤 게임을 즐겨볼까요?
+          <br aria-hidden />
+          {` 혼자 떠나는 짜릿한 모험부터 가족, 친구와 함께하는 즐거운 플레이까지.`}
+        </p>
+        <p className="leading-[1.3] whitespace-pre">지금 마음에 드는 게임을 찾아 나만의 플레이를 시작해 보세요!</p>
+      </div>
+    </div>
+  );
+}

@@ -1,15 +1,34 @@
-import { generatePath } from 'react-router-dom';
-import PlaceholderPage from '../../components/common/PlaceholderPage.jsx';
-import { routePaths } from '../../routes/routePaths.js';
+import { useLayoutEffect, useRef, useState } from 'react';
+import HeroSection from '../../components/home/HeroSection.jsx';
+import GameDiscoverySection from '../../components/home/GameDiscoverySection.jsx';
+import WhatsNewSection from '../../components/home/WhatsNewSection.jsx';
+import AmiiboSection from '../../components/home/AmiiboSection.jsx';
+import NintendoPicksSection from '../../components/home/NintendoPicksSection.jsx';
+import DailyNintendoSection from '../../components/home/DailyNintendoSection.jsx';
+import DailyNintendoBanner from '../../components/home/DailyNintendoBanner.jsx';
+import '../../components/home/home.css';
+import '../../components/home/home-design.css';
 
 export default function HomePage() {
+  const container = useRef(null);
+  const [width, setWidth] = useState(() => Math.min(window.innerWidth, 1920));
+  useLayoutEffect(() => {
+    const observer = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width));
+    observer.observe(container.current);
+    return () => observer.disconnect();
+  }, []);
+  const mobile = width < 1024;
   return (
-    <PlaceholderPage
-      english="HOME"
-      title="메인"
-      description="닌텐도의 다양한 세계를 만나 보세요. 관심 있는 페이지부터 자유롭게 둘러볼 수 있습니다."
-      cards={[["캐릭터와 세계관","Mario, Zelda, Splatoon의 소개 공간을 준비하고 있습니다."],["게임 둘러보기","게임과 상품을 탐색할 수 있는 스토어를 준비하고 있습니다."],["함께하는 이야기","닌텐도를 좋아하는 사람들의 이야기를 담을 예정입니다."]]}
-      links={[["IP 둘러보기", generatePath(routePaths.ipDetail, { slug: 'mario' })], ["스토어로 이동", routePaths.store]]}
-    />
+    <div className="home-page" ref={container}>
+      <div className="home-page__canvas" style={{ '--home-scale': width / (mobile ? 360 : 1920), '--home-width': mobile ? '360px' : '1920px' }}>
+        <HeroSection mobile={mobile} />
+        <GameDiscoverySection key={mobile ? 'mobile' : 'desktop'} mobile={mobile} />
+        <WhatsNewSection mobile={mobile} />
+        <AmiiboSection mobile={mobile} />
+        <NintendoPicksSection mobile={mobile} />
+        <DailyNintendoSection mobile={mobile} />
+        <DailyNintendoBanner mobile={mobile} />
+      </div>
+    </div>
   );
 }
