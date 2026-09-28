@@ -23,8 +23,6 @@
 
 .site-shell:has(.mypage-dashboard) > .common-header {
   background: var(--mypage-red);
-  position: relative;
-  z-index: 5;
   width: 100%;
 }
 

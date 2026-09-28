@@ -25,27 +25,29 @@ export default function Navigation({ variant = 'red' }) {
       document.removeEventListener('pointerdown', dismiss);
     };
   }, [open]);
-  const logo = { red: '59d10.svg', white: '5c836.svg', zelda: '7282b.svg' }[variant];
+  const activeVariant = open ? 'white' : variant;
+  const logo = { red: '59d10.svg', white: '5c836.svg', zelda: '7282b.svg' }[activeVariant];
   return (
-    <header ref={header} className={`common-header common-header--${variant}${open ? ' common-header--open' : ''}`}>
+    <>
+    {open && <div className="navigation-backdrop" aria-hidden="true" />}
+    <header ref={header} className={`common-header common-header--${activeVariant}${open ? ' common-header--open' : ''}`}>
       <div className="navigation">
         <div className="navigation__primary">
           <div className="navigation__identity">
             <Link className="navigation__logo" to={routePaths.home} aria-label="Nintendo Korea 홈">
               <img className="navigation__logo-desktop" src={`${import.meta.env.BASE_URL}images/common/${logo}`} alt="" />
-              <img className="navigation__logo-open" src={`${import.meta.env.BASE_URL}images/common/5c836.svg`} alt="" />
             </Link>
             <span className="navigation__tagline">Nintendo and co. NintendoKorea</span>
           </div>
           <button type="button" ref={trigger} className="navigation__toggle" aria-expanded={open} aria-controls="main-menu" onClick={() => setOpen(!open)}>MENU</button>
         </div>
         <Link to={routePaths.mypage} className="navigation__account" aria-label="MY NINTENDO">
-          <img className="navigation__sparkle" src={`${import.meta.env.BASE_URL}images/common/${variant === 'white' ? '16767.svg' : 'd2eda.svg'}`} alt="" />
-          <img className="navigation__sparkle-open" src={`${import.meta.env.BASE_URL}images/common/d2341.svg`} alt="" />
+          <img className="navigation__sparkle" src={`${import.meta.env.BASE_URL}images/common/${activeVariant === 'white' ? '16767.svg' : 'd2eda.svg'}`} alt="" />
           <span>MY NINTENDO</span>
         </Link>
       </div>
       {open && <DropdownMenu onNavigate={() => setOpen(false)} />}
     </header>
+    </>
   );
 }

@@ -4,12 +4,6 @@
 .site-shell:has(.mario-page) > main {
     padding: 0;
 }
-.site-shell:has(.mario-page) > .common-header {
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 20;
-    padding-top: 8px;
-}
 .site-shell:has(.mario-page) > .common-footer {
     margin-top: 0;
 }

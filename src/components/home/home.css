@@ -1,7 +1,5 @@
 /* Home-only layout integration; shared component internals stay unchanged. */
 .site-shell:has(.home-page) { position: relative; }
-.site-shell:has(.home-page) > .common-header { position: absolute; inset: 0 0 auto; z-index: var(--z-header, 200); }
-.site-shell:has(.home-page) > .common-header--open { position: relative; }
 .site-shell > main:has(.home-page) { padding-inline: 0; }
 .site-shell:has(.home-page) > .common-footer { margin-top: 0; }
 .home-page { width: 100%; max-width: 1920px; margin-inline: auto; overflow: clip; font-family: 'Common Pretendard', sans-serif; }
