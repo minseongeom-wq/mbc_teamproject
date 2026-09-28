@@ -1,83 +1,135 @@
-import publicAsset from '../../utils/publicAsset';
-import NintendoHeader from '../layout/NintendoHeader';
-import './HeroSection.css';
+import { homeAsset } from './homeAssets.js';
 
-export default function HeroSection() {
-  return (<section className="hero-section" data-node-id="1148:6400" id="hero-section">
-<h2 className="sr-only">40년간 이어진 모험</h2>
-        <p className="hero-section__layer-2" data-node-id="1148:6401">
-          <span className="hero-section__layer-3">40</span>
-          <span className="hero-section__layer-4">th</span>
-        </p>
-        <div className="hero-section__hero-visual-02-5" data-node-id="1148:6402">
-          <div className="hero-section__halftone-generator-7-6-6" data-node-id="1148:6407">
-            <div className="hero-section__layer-7">
-              <img alt="" className="hero-section__layer-8" src={publicAsset('/images/banners/5f26d.png')} decoding="async" />
+export default function HeroSection({ mobile = false }) {
+  if (mobile) return (
+      <section aria-label="마리오 40주년" className="home-hero-mobile" data-node-id="2156:6615">
+        <div className="home-hero-mobile__layer" data-node-id="2156:6620">
+          <p className="home-hero-mobile__text">SUPER MAARIO</p>
+          <p className="home-hero-mobile__text-2">BROS.</p>
+        </div>
+        <div className="home-hero-mobile__layer-2" data-node-id="2156:6621">
+          <p className="home-hero-mobile__text-3">{`40 YEARS OF `}</p>
+          <p className="home-hero-mobile__text-4">ADVENTURE</p>
+        </div>
+        <div className="home-hero-mobile__layer-3" data-node-id="2156:7622">
+          <div className="home-hero-mobile__layer-4">
+            <div className="home-hero-mobile__halftone-generator-6-1" data-name="halftone-generator (6) 1">
+              <div className="home-hero-mobile__layer-5">
+                <img alt="" className="home-hero-mobile__image" src={homeAsset('e574c.png')} />
+              </div>
             </div>
           </div>
         </div>
-        <div className="hero-section__layer-9" data-node-id="1148:6408">
-          <p className="hero-section__layer-10">SUPER MAARIO</p>
-          <p className="hero-section__layer-11">BROS.</p>
+        <div className="home-hero-mobile__layer-6" data-node-id="2156:7623">
+          <div className="home-hero-mobile__layer-7">
+            <div className="home-hero-mobile__halftone-generator-15-2" data-name="halftone-generator (15) 2">
+              <div className="home-hero-mobile__layer-8">
+                <img alt="" className="home-hero-mobile__image-2" src={homeAsset('ded11.png')} />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="hero-section__hero-visual-04-12" data-node-id="1148:6409" />
-        <div className="hero-section__hero-visual-06-13" data-node-id="1148:6410">
-          <div className="hero-section__layer-14" data-node-id="1148:6413">
-            <div className="hero-section__layer-15">
-              <div className="hero-section__halftone-generator-8-2-16">
-                <div className="hero-section__layer-17">
-                  <img alt="" className="hero-section__layer-18" src={publicAsset('/images/banners/209e0.png')} decoding="async" />
+        <div className="home-hero-mobile__layer-9" data-node-id="2156:6622">
+          <p className="home-hero-mobile__text-5">40년간</p>
+          <p className="home-hero-mobile__text-6">이어진 모험</p>
+        </div>
+        <div className="home-hero-mobile__layer-10" data-node-id="2156:7619">
+          <div className="home-hero-mobile__layer-11">
+            <div className="home-hero-mobile__halftone-generator-19-1" data-name="halftone-generator (19) 1">
+              <div className="home-hero-mobile__layer-12">
+                <img alt="" className="home-hero-mobile__image-3" src={homeAsset('52328.png')} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 className="home-hero-mobile__text-7" data-node-id="2156:6619">
+          40th
+        </h1>
+        <div className="home-hero-mobile__layer-13" data-node-id="2156:7621">
+          <div className="home-hero-mobile__layer-14">
+            <div className="home-hero-mobile__halftone-generator-7-7" data-name="halftone-generator (7) 7">
+              <div className="home-hero-mobile__layer-15">
+                <img alt="" className="home-hero-mobile__image-4" src={homeAsset('5f26d.png')} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  );
+  return (
+      <section aria-label="마리오 40주년" className="home-hero" data-node-id="1148:6400" data-name="01_Hero">
+        <h1 className="home-hero__text" data-node-id="1148:6401">
+          <span className="home-hero__layer">40</span>
+          <span className="home-hero__layer-2">th</span>
+        </h1>
+        <div className="home-hero__hero-visual-02" data-node-id="1148:6402" data-name="Hero-Visual-02">
+          <div className="home-hero__halftone-generator-7-6" data-node-id="1148:6407" data-name="halftone-generator (7) 6">
+            <div className="home-hero__layer-3">
+              <img alt="" className="home-hero__image" src={homeAsset('5f26d.png')} />
+            </div>
+          </div>
+        </div>
+        <div className="home-hero__layer-4" data-node-id="1148:6408">
+          <p className="home-hero__text-2">SUPER MAARIO</p>
+          <p className="home-hero__text-3">BROS.</p>
+        </div>
+        <div className="home-hero__hero-visual-04" data-node-id="1148:6409" data-name="Hero-Visual-04" />
+        <div className="home-hero__hero-visual-06" data-node-id="1148:6410" data-name="Hero-Visual-06">
+          <div className="home-hero__layer-5" data-node-id="1148:6413">
+            <div className="home-hero__layer-6">
+              <div className="home-hero__halftone-generator-8-2" data-name="halftone-generator (8) 2">
+                <div className="home-hero__layer-7">
+                  <img alt="" className="home-hero__image-2" src={homeAsset('209e0.png')} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="hero-section__layer-19" data-node-id="1148:6414">
-          <p className="hero-section__layer-20">40 YEARS OF ADVENTURE</p>
-          <p className="hero-section__layer-21">40년간 이어진 모험</p>
+        <div className="home-hero__layer-8" data-node-id="1148:6414">
+          <p className="home-hero__text-4">40 YEARS OF ADVENTURE</p>
+          <p className="home-hero__text-5">40년간 이어진 모험</p>
         </div>
-        <div className="hero-section__hero-visual-03-22" data-node-id="1148:6415">
-          <div className="hero-section__halftone-generator-6-1-23" data-node-id="1148:6420">
-            <div className="hero-section__layer-24">
-              <img alt="" className="hero-section__layer-25" src={publicAsset('/images/banners/e574c.png')} decoding="async" />
+        <div className="home-hero__hero-visual-03" data-node-id="1148:6415" data-name="Hero-Visual-03">
+          <div className="home-hero__halftone-generator-6-1" data-node-id="1148:6420" data-name="halftone-generator (6) 1">
+            <div className="home-hero__layer-9">
+              <img alt="" className="home-hero__image-3" src={homeAsset('e574c.png')} />
             </div>
           </div>
         </div>
-        <div className="hero-section__hero-visual-01-26" data-node-id="1148:6421">
-          <div className="hero-section__layer-27" data-node-id="1148:6425">
-            <div className="hero-section__layer-28">
-              <div className="hero-section__halftone-generator-8-3-29">
-                <div className="hero-section__layer-30">
-                  <img alt="" className="hero-section__layer-31" src={publicAsset('/images/banners/976c8.png')} decoding="async" />
+        <div className="home-hero__hero-visual-01" data-node-id="1148:6421" data-name="Hero-Visual-01">
+          <div className="home-hero__layer-10" data-node-id="1148:6425">
+            <div className="home-hero__layer-11">
+              <div className="home-hero__halftone-generator-8-3" data-name="halftone-generator (8) 3">
+                <div className="home-hero__layer-12">
+                  <img alt="" className="home-hero__image-4" src={homeAsset('976c8.png')} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="hero-section__hero-visual-05-32" data-node-id="1148:6501">
-          <div className="hero-section__halftone-generator-15-2-33" data-node-id="1148:6504">
-            <div className="hero-section__layer-34">
-              <img alt="" className="hero-section__layer-35" src={publicAsset('/images/banners/ded11.png')} decoding="async" />
+        <div className="home-hero__hero-visual-05" data-node-id="1148:6501" data-name="Hero-Visual-05">
+          <div className="home-hero__halftone-generator-15-2" data-node-id="1148:6504" data-name="halftone-generator (15) 2">
+            <div className="home-hero__layer-13">
+              <img alt="" className="home-hero__image-5" src={homeAsset('ded11.png')} />
             </div>
           </div>
         </div>
-        <NintendoHeader className="hero-section__layer-36" />
-        <div className="hero-section__layer-37" data-node-id="1148:8131">
-          <div className="hero-section__layer-38">
-            <div className="hero-section__halftone-generator-19-1-39">
-              <div className="hero-section__layer-40">
-                <img alt="" className="hero-section__layer-41" src={publicAsset('/images/banners/52328.png')} decoding="async" />
+        <div className="home-hero__layer-14" data-node-id="1148:8131">
+          <div className="home-hero__layer-15">
+            <div className="home-hero__halftone-generator-19-1" data-name="halftone-generator (19) 1">
+              <div className="home-hero__layer-16">
+                <img alt="" className="home-hero__image-6" src={homeAsset('52328.png')} />
               </div>
             </div>
           </div>
         </div>
-        <div className="hero-section__layer-42" data-node-id="1148:6517">
-          <div className="hero-section__layer-43">
-            <div className="hero-section__layer-44">
-              <img alt="" className="hero-section__layer-45" src={publicAsset('/images/banners/18397.svg')} decoding="async" />
+        <div className="home-hero__layer-17" data-node-id="1148:6517">
+          <div className="home-hero__layer-18">
+            <div className="home-hero__layer-19">
+              <img alt="" className="home-hero__image-7" src={homeAsset('18397.svg')} />
             </div>
           </div>
         </div>
-      </section>);
+      </section>
+  );
 }
-

@@ -1,49 +1,75 @@
-import publicAsset from '../../utils/publicAsset';
-import './DailyNintendoBanner.css';
+import { homeAsset } from './homeAssets.js';
 
-export default function DailyNintendoBanner() {
-  return (<section className="daily-nintendo-banner" data-node-id="1148:6782" id="daily-nintendo-banner">
-<h2 className="sr-only">Putting Smiles on the Faces of Everyone Nintendo Touches</h2>
-        <div className="daily-nintendo-banner__slugun-text-2" data-node-id="1148:6785">
-          <div className="daily-nintendo-banner__slogan-text-3" data-node-id="1148:6786">
-            <p className="daily-nintendo-banner__layer-4" data-node-id="1148:6787">{`Putting Smiles `}</p>
-            <div className="daily-nintendo-banner__element-5" data-node-id="1148:6788">
-              <div className="daily-nintendo-banner__halftone-generator-21-1-6" data-node-id="1148:6790">
-                <img alt="" className="daily-nintendo-banner__layer-7" src={publicAsset('/images/banners/66341.png')} decoding="async" loading="lazy" />
+export default function DailyNintendoBanner({ mobile = false }) {
+  if (mobile) return (
+      <section aria-label="Putting Smiles on the Faces of Everyone" className="home-banner-mobile" data-node-id="2156:6712">
+        <div className="home-banner-mobile__layer" data-node-id="2156:6713" />
+        <div className="home-banner-mobile__layer-2" data-node-id="2156:6714" />
+        <p className="home-banner-mobile__text" data-node-id="2156:6715">
+          Faces of Everyone
+        </p>
+        <p className="home-banner-mobile__text-2" data-node-id="2156:6716">
+          Putting Smiles on the
+        </p>
+        <p className="home-banner-mobile__text-3" data-node-id="2156:6717">{`Nintendo Touches `}</p>
+        <div className="home-banner-mobile__layer-3" data-node-id="2156:6718">
+          <div className="home-banner-mobile__layer-4">
+            <div className="home-banner-mobile__image-872" data-name="image 872">
+              <img alt="" className="home-banner-mobile__image" src={homeAsset('664b4.png')} />
+            </div>
+          </div>
+        </div>
+        <div className="home-banner-mobile__layer-5" data-node-id="2156:6719">
+          <div className="home-banner-mobile__layer-6">
+            <div className="home-banner-mobile__frame-1430103154-1" data-name="Frame 1430103154 1">
+              <img alt="" className="home-banner-mobile__image-2" src={homeAsset('04258.png')} />
+            </div>
+          </div>
+        </div>
+      </section>
+  );
+  return (
+      <section aria-label="Putting Smiles on the Faces of Everyone" className="home-banner" data-node-id="1148:6782" data-name="07_Daily-Nintendo-Banner">
+        <div className="home-banner__slugun-text" data-node-id="1148:6785" data-name="Slugun-text">
+          <div className="home-banner__slogan-text" data-node-id="1148:6786" data-name="Slogan text">
+            <p className="home-banner__text" data-node-id="1148:6787">{`Putting Smiles `}</p>
+            <div className="home-banner__element" data-node-id="1148:6788" data-name="element">
+              <div className="home-banner__halftone-generator-21-1" data-node-id="1148:6790" data-name="halftone-generator (21) 1">
+                <img alt="" className="home-banner__image" src={homeAsset('66341.png')} />
               </div>
             </div>
-            <p className="daily-nintendo-banner__layer-8" data-node-id="1148:6791">{`on the Faces  `}</p>
+            <p className="home-banner__text-2" data-node-id="1148:6791">{`on the Faces  `}</p>
           </div>
-          <div className="daily-nintendo-banner__slogan-text-9" data-node-id="1148:6792">
-            <p className="daily-nintendo-banner__layer-10" data-node-id="1148:6793">
+          <div className="home-banner__slogan-text-2" data-node-id="1148:6792" data-name="Slogan text">
+            <p className="home-banner__text-3" data-node-id="1148:6793">
               of Everyone
             </p>
-            <div className="daily-nintendo-banner__element-11" data-node-id="1148:6794">
-              <div className="daily-nintendo-banner__halftone-generator-22-1-12" data-node-id="1148:6796">
-                <div className="daily-nintendo-banner__layer-13">
-                  <img alt="" className="daily-nintendo-banner__layer-14" src={publicAsset('/images/banners/a8314.png')} decoding="async" loading="lazy" />
+            <div className="home-banner__element-2" data-node-id="1148:6794" data-name="element">
+              <div className="home-banner__halftone-generator-22-1" data-node-id="1148:6796" data-name="halftone-generator (22) 1">
+                <div className="home-banner__layer">
+                  <img alt="" className="home-banner__image-2" src={homeAsset('a8314.png')} />
                 </div>
               </div>
             </div>
-            <p className="daily-nintendo-banner__layer-15" data-node-id="1148:6797">
+            <p className="home-banner__text-4" data-node-id="1148:6797">
               Nintendo Touches
             </p>
           </div>
         </div>
-        <div className="daily-nintendo-banner__layer-16" data-node-id="1148:6798">
-          <div className="daily-nintendo-banner__layer-17">
-            <div className="daily-nintendo-banner__frame-1430103154-1-18">
-              <img alt="" className="daily-nintendo-banner__layer-19" src={publicAsset('/images/banners/04258.png')} decoding="async" loading="lazy" />
+        <div className="home-banner__layer-2" data-node-id="1148:6798">
+          <div className="home-banner__layer-3">
+            <div className="home-banner__frame-1430103154-1" data-name="Frame 1430103154 1">
+              <img alt="" className="home-banner__image-3" src={homeAsset('04258.png')} />
             </div>
           </div>
         </div>
-        <div className="daily-nintendo-banner__layer-20" data-node-id="1148:6799">
-          <div className="daily-nintendo-banner__layer-21">
-            <div className="daily-nintendo-banner__banner-image-22">
-              <img alt="" className="daily-nintendo-banner__layer-23" src={publicAsset('/images/banners/664b4.png')} decoding="async" loading="lazy" />
+        <div className="home-banner__layer-4" data-node-id="1148:6799">
+          <div className="home-banner__layer-5">
+            <div className="home-banner__banner-image" data-name="Banner image">
+              <img alt="" className="home-banner__image-4" src={homeAsset('664b4.png')} />
             </div>
           </div>
         </div>
-      </section>);
+      </section>
+  );
 }
-

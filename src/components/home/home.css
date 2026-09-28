@@ -1,0 +1,46 @@
+/* Home-only layout integration; shared component internals stay unchanged. */
+.site-shell:has(.home-page) { position: relative; }
+.site-shell:has(.home-page) > .common-header { position: absolute; inset: 0 0 auto; z-index: var(--z-header, 200); }
+.site-shell:has(.home-page) > .common-header--open { position: relative; }
+.site-shell > main:has(.home-page) { padding-inline: 0; }
+.site-shell:has(.home-page) > .common-footer { margin-top: 0; }
+.home-page { width: 100%; max-width: 1920px; margin-inline: auto; overflow: clip; font-family: 'Common Pretendard', sans-serif; }
+.home-page__canvas { width: var(--home-width); zoom: var(--home-scale); }
+.home-page__canvas > section { width: 100%; }
+.home-page :where(*, *::before, *::after) { box-sizing: border-box; border-width: 0; border-style: solid; }
+.home-page :where(p, h1, h2, h3) { margin: 0; }
+.home-page img { display: block; }
+.home-page :where(button) { font: inherit; color: inherit; padding: 0; cursor: pointer; background: transparent; }
+.home-page a { color: inherit; text-decoration: none; }
+.home-page button:focus-visible, .home-page a:focus-visible, .home-page [tabindex]:focus-visible { outline: 3px solid var(--color-focus, #2563eb); outline-offset: 5px; }
+.home-page__sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.home-game-carousel { height: 338.733px; }
+.home-page .home-game-carousel__card { position: relative; display: block; flex: none; border: 0; text-align: left; }
+.home-game-carousel__art { display: block; pointer-events: none; }
+.home-page .home-discovery__game-playmode-nav button { min-height: 44px; }
+.home-mobile-carousel { touch-action: pan-y; }
+.home-page .home-mobile-carousel__card { position: absolute; border: 0; text-align: left; }
+.home-mobile-carousel__art { display: block; transform-origin: top left; pointer-events: none; }
+.home-page .home-discovery-mobile__text, .home-page .home-discovery-mobile__text-2 { top: 0; height: 54px; width: 170px; }
+.home-page .home-discovery-mobile__layer-2[data-mode='together'] { background: transparent; }
+.home-page .home-discovery-mobile__layer-2[data-mode='together'] button { color: var(--color-text-primary, #151515); }
+.home-page .home-discovery-mobile__text[aria-pressed='true'] { background: var(--color-action-primary, #e60012); color: var(--color-white, #fff); border-radius: 15px; }
+.home-page .home-discovery-mobile__text-3 { left: 50%; translate: -50% 0; }
+.home-amiibo-track { display: flex; flex: none; align-items: center; gap: inherit; }
+.home-page .home-amiibo__infinite-marquee-animation-amibo, .home-page .home-amiibo-mobile__infinite-marquee-animation-amibo { animation: home-amiibo-scroll 45s linear infinite; }
+.home-page .home-amiibo__infinite-marquee-animation-amibo { --amiibo-gap: 93px; }
+.home-page .home-amiibo-mobile__infinite-marquee-animation-amibo { --amiibo-gap: 17.03px; }
+.home-page section:hover > [data-name='infinite marquee animation-Amibo'] { animation-play-state: paused; }
+@keyframes home-amiibo-scroll { to { transform: translateX(calc(-50% - var(--amiibo-gap) / 2)); } }
+/* The mobile Figma places news cards on one horizontal track. */
+.home-news-mobile { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.home-news-mobile::-webkit-scrollbar { display: none; }
+.home-daily-mobile__pikmin-screen { width: 100%; height: 100%; object-fit: cover; }
+.home-page .home-daily-mobile__image-5, .home-page .home-daily-mobile__image-6 { position: relative; inset: auto; width: 181px; height: 343px; }
+.home-page .home-daily-mobile__image-5 { rotate: -27.49deg; }
+.home-page .home-daily-mobile__image-6 { rotate: 27.49deg; }
+/* Figma uses explicit line breaks in this text layer (1215:8622). */
+.home-page .home-news__text-19, .home-page .home-news__text-20 { white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  .home-page *, .home-page *::before, .home-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
