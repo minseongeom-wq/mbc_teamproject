@@ -332,7 +332,7 @@
   color: var(--mypage-red);
   padding: 7px 0;
   margin-left: auto;
-  font-size: 10px !important;
+  font-size: 15px !important;
 }
 
 .mypage-dashboard__orders ul {
@@ -350,7 +350,7 @@
   padding: 9px clamp(12px, 1.563vw, 30px);
   background: var(--mypage-white);
   border-radius: 5px;
-  font-size: 10px;
+  font-size: 15px;
   min-height: 55px;
 }
 
