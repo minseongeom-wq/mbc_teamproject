@@ -191,7 +191,7 @@ const characterSelection = [
     key: "kinopio",
     display: "KINOPIO",
     korean: "키노피오",
-    english: "Toad",
+    english: "Kinopio",
     color: "#18419a",
     art: "/images/mario/character-art-kinopio.png",
     tagline: "버섯 왕국의 작은 친구, 키노피오",
@@ -201,7 +201,7 @@ const characterSelection = [
     key: "koopa",
     display: "KOOPA",
     korean: "쿠파",
-    english: "Bowser",
+    english: "Koopa",
     color: "#f8bf10",
     art: "/images/mario/character-art-koopa.png",
     tagline: "마리오의 강력한 라이벌, 쿠파",
@@ -261,6 +261,7 @@ export default function Mario() {
   const [charactersEntered, setCharactersEntered] = useState(false);
   const [bannerEntered, setBannerEntered] = useState(false);
   const [world01Entered, setWorld01Entered] = useState(false);
+  const [heroCharacterPhase, setHeroCharacterPhase] = useState("pending");
   const [hoveredPower, setHoveredPower] = useState(null);
   const navigate = useNavigate();
   const activeCharacterData = characterSelection[activeCharacter];
@@ -294,6 +295,24 @@ export default function Mario() {
       hero.style.removeProperty("--hero-character-scale");
       hero.style.removeProperty("--hero-cloud-offset");
     };
+  }, []);
+  useEffect(() => {
+    const hero = pageRef.current?.querySelector("#mario-hero");
+    if (!hero) return undefined;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setHeroCharacterPhase("done");
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setHeroCharacterPhase("entering");
+        observer.disconnect();
+      },
+      { threshold: 0.08 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
   useEffect(() => {
     const page = pageRef.current;
@@ -423,8 +442,14 @@ useEffect(() => {
     const con1Top =
       con1.getBoundingClientRect().top + window.scrollY;
 
+    const wheelTargetY = window.scrollY + event.deltaY * 1.05;
+    const isEnteringCon1 =
+      event.deltaY > 0 &&
+      window.scrollY < con1Top &&
+      wheelTargetY >= con1Top - 20;
+
     // 인트로 / 히어로 영역에서는 기존 스크롤 로직 사용
-    if (window.scrollY < con1Top - 20) return;
+    if (window.scrollY < con1Top - 20 && !isEnteringCon1) return;
 
     // 버튼, 링크 등 조작 중에는 기본 동작 유지
     if (
@@ -433,6 +458,20 @@ useEffect(() => {
       )
     ) {
       return;
+    }
+
+    // Hand upward scrolling back to the hero before the CON1 lower bound clamps it.
+    if (event.deltaY < 0 && targetY + event.deltaY * 1.05 < con1Top) {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      targetY = window.scrollY;
+      currentY = window.scrollY;
+      return;
+    }
+
+    if (isEnteringCon1) {
+      targetY = window.scrollY;
+      currentY = window.scrollY;
     }
 
     event.preventDefault();
@@ -693,7 +732,7 @@ useEffect(() => {
           </section>
           <section
             id="mario-hero"
-            className="mario-scene mario-hero"
+            className={`mario-scene mario-hero mario-hero-character-${heroCharacterPhase}`}
             aria-label="hero"
           >
             <div
@@ -793,6 +832,11 @@ useEffect(() => {
                   alt="마리오와 버섯 왕국의 친구들"
                   className="mario-layer-46"
                   src={imgFrame801}
+                  onAnimationEnd={(event) => {
+                    if (event.animationName === "mario-hero-character-pop-in") {
+                      setHeroCharacterPhase("done");
+                    }
+                  }}
                 />
               </div>
             </div>

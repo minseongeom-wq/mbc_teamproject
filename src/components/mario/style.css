@@ -84,6 +84,61 @@
         transform: translateY(0);
     }
 }
+/* ========================================
+   INTRO - Clouds Rise Up
+======================================== */
+
+#mario-intro .mario-layer-3,
+#mario-intro .mario-layer-5,
+#mario-intro .mario-layer-7,
+#mario-intro .mario-layer-10,
+#mario-intro .mario-layer-12,
+#mario-intro .mario-layer-13,
+#mario-intro .mario-layer-16 {
+    opacity: 0;
+    animation: mario-cloud-rise 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 구름마다 살짝 시차 */
+#mario-intro .mario-layer-3 {
+    animation-delay: 0.08s;
+}
+
+#mario-intro .mario-layer-5 {
+    animation-delay: 0.14s;
+}
+
+#mario-intro .mario-layer-7 {
+    animation-delay: 0.2s;
+}
+
+#mario-intro .mario-layer-10 {
+    animation-delay: 0.26s;
+}
+
+#mario-intro .mario-layer-12 {
+    animation-delay: 0.32s;
+}
+
+#mario-intro .mario-layer-13 {
+    animation-delay: 0.38s;
+}
+
+#mario-intro .mario-layer-16 {
+    animation-delay: 0.44s;
+}
+
+@keyframes mario-cloud-rise {
+    from {
+        opacity: 0;
+        transform: translateY(220px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* One continuous Figma image avoids independent crop rounding at the section seam. */
 .mario-opening {
     position: relative;
@@ -353,8 +408,9 @@
     position: absolute;
     height: 68px;
     left: 861px;
-    top: 961px;
+    top: 825px;
     width: 198px;
+    z-index: 30;
 }
 .mario-page .mario-layer-21 {
     word-break: break-word;
@@ -365,6 +421,11 @@
     font-style: normal;
     color: #0e0e0e;
     font-size: 18px;
+    text-shadow:
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff;
     text-align: center;
     top: 0;
     white-space: nowrap;
@@ -694,10 +755,36 @@
         scale(var(--hero-character-scale, 1.05));
     transform-origin: center;
 }
+.mario-hero-character-pending .mario-layer-46 {
+    opacity: 0.2;
+    transform: translateY(40px) scale(0.5);
+    transform-origin: center bottom;
+}
+.mario-hero-character-entering .mario-layer-46 {
+    animation: mario-hero-character-pop-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+    transform-origin: center bottom;
+    will-change: transform, opacity;
+}
+@keyframes mario-hero-character-pop-in {
+    0% {
+        opacity: 0.2;
+        transform: translateY(40px) scale(0.5);
+    }
+    68% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.07);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 .mario-hero > .mario-layer-18 {
     transform: translateY(var(--hero-cloud-offset, 0px));
 }
 @media (prefers-reduced-motion: reduce) {
+    .mario-hero-character-pending .mario-layer-46,
+    .mario-hero-character-entering .mario-layer-46,
     .mario-hero .mario-layer-45,
     .mario-hero > .mario-layer-18 {
         transform: none;
@@ -717,8 +804,7 @@
         .mario-layer-59,
         .mario-layer-60
     ) {
-    transition: transform 0.22s ease;
-    transform-origin: center center;
+    overflow: hidden;
 }
 
 .mario-characters
@@ -729,8 +815,21 @@
         .mario-layer-58,
         .mario-layer-59,
         .mario-layer-60
-    ):hover {
-    transform: translateY(-5px) scale(1.08) !important;
+    ) .mario-layer-55 {
+    transition: transform 0.22s ease-out;
+    transform-origin: center;
+}
+
+.mario-characters
+    > :is(
+        .mario-layer-54,
+        .mario-layer-56,
+        .mario-layer-57,
+        .mario-layer-58,
+        .mario-layer-59,
+        .mario-layer-60
+    ):hover .mario-layer-55 {
+    transform: scale(1.1);
 }
 /* Selected Character - Layer */
 .mario-characters .mario-layer-61 {
@@ -748,7 +847,7 @@
 }
 /* Selected Character - Entrance */
 .mario-selected-character {
-    animation: mario-character-enter 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: mario-character-enter 0.62s cubic-bezier(0.22, 1, 0.36, 1);
     transform-origin: center bottom;
     will-change: transform, opacity;
 }
@@ -756,34 +855,12 @@
 @keyframes mario-character-enter {
     0% {
         opacity: 0;
-        transform: scale(0.92);
+        transform: translateY(-18px) scale(0.97);
     }
 
-    65% {
+    68% {
         opacity: 1;
-        transform: scale(1.04);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Character Name - Entrance */
-.mario-layer-51 {
-    animation: mario-character-name-enter 0.45s ease-out;
-    transform-origin: center center;
-}
-
-@keyframes mario-character-name-enter {
-    0% {
-        opacity: 0;
-        transform: translateY(8px) scale(0.96);
-    }
-
-    60% {
-        opacity: 1;
-        transform: translateY(-2px) scale(1.02);
+        transform: translateY(1px) scale(1.015);
     }
 
     100% {
@@ -791,21 +868,71 @@
         transform: translateY(0) scale(1);
     }
 }
+/* Character Name - Entrance */
+.mario-characters .mario-layer-51 {
+    animation: mario-character-name-enter 0.4s ease-out 0.15s both;
+    will-change: transform, opacity;
+}
+
+@keyframes mario-character-name-enter {
+    0% {
+        opacity: 0;
+        transform: translateY(45px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* Character Info - Entrance */
 .mario-layer-70 {
-    animation: mario-character-info-enter 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: none;
+}
+
+.mario-characters .mario-layer-70 > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
+    opacity: 0;
+    animation: mario-character-info-enter 0.36s ease-out forwards;
     will-change: transform, opacity;
+}
+
+.mario-characters .mario-layer-70 > .mario-layer-71 {
+    animation-delay: 0.3s;
+}
+
+.mario-characters .mario-layer-70 > .mario-layer-73 {
+    animation-delay: 0.38s;
+}
+
+.mario-characters .mario-layer-70 > .mario-layer-75 {
+    animation-delay: 0.46s;
+}
+
+.mario-characters .mario-layer-70 > .mario-layer-79 {
+    animation-delay: 0.38s;
 }
 
 @keyframes mario-character-info-enter {
     0% {
         opacity: 0;
-        transform: translateX(16px);
+        transform: translateY(4px);
     }
 
     100% {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mario-characters .mario-layer-55,
+    .mario-characters .mario-selected-character,
+    .mario-characters .mario-layer-51,
+    .mario-characters .mario-layer-70 > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }
 /* Character Navigation Arrows - Hover & Click */
@@ -4112,4 +4239,26 @@
     color: white;
     border-radius: 12px;
     padding: 12px 20px;
+}
+
+/* Scroll Down 강조 */
+.mario-page .mario-layer-20 {
+    z-index: 30;
+    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.18));
+}
+
+/* SCROLL DOWN 텍스트 */
+.mario-page .mario-layer-21 {
+    font-size: 20px;
+    text-shadow:
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff,
+        0px 3px 0 rgba(0, 0, 0, 0.18);
+}
+/* 원래 V 화살표에 흰 외곽선 */
+#mario-page .mario-layer-26 {
+    filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff)
+        drop-shadow(0 -1px 0 #fff);
 }
