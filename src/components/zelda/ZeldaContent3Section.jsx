@@ -40,7 +40,7 @@ export default function ZeldaContent3Section() {
   return (
     <section className="zelda-combat" data-view={selected === 0 ? 'content3' : `content3_${selected + 1}`} aria-labelledby="zelda-combat-title">
       <div className="zelda-combat__canvas">
-        {weapons.map(([id], index) => <img key={id} className={`zelda-combat__background zelda-combat__background--${id}`} src={asset(index === 0 ? 'background.png' : `${id}-background.png`)} alt="" hidden={selected !== index} />)}
+        <img key={weapons[selected][0]} className={`zelda-combat__background zelda-combat__background--${weapons[selected][0]}`} src={asset(`${weapons[selected][0]}-background.gif`)} alt="" />
         <div className="zelda-combat__shade" />
         <div className="zelda-combat__heading">
           <p>모험을 위한 기술</p>
