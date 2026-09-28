@@ -1,6 +1,31 @@
+import { useState } from 'react';
+import HomeNewsModal from './HomeNewsModal.jsx';
+import { homeNewsData } from './homeNewsData.js';
 import { homeAsset } from './homeAssets.js';
 
 export default function WhatsNewSection({ mobile = false }) {
+  const [selectedNews, setSelectedNews] = useState(null);
+  return <>
+    <NewsCards mobile={mobile} onSelect={setSelectedNews} />
+    {selectedNews && <HomeNewsModal item={selectedNews} onClose={() => setSelectedNews(null)} />}
+  </>;
+}
+
+function NewsCards({ mobile, onSelect }) {
+  const cardProps = key => ({
+    role: 'button',
+    tabIndex: 0,
+    'aria-haspopup': 'dialog',
+    'aria-label': `${homeNewsData[key].title.join(' ')} ?? ?? ??`,
+    'data-news-id': key,
+    onClick: () => onSelect(homeNewsData[key]),
+    onKeyDown: event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onSelect(homeNewsData[key]);
+      }
+    },
+  });
   if (mobile) return (
       <section aria-label="새로운 소식" className="home-news-mobile" data-node-id="2156:7527">
         <p className="home-news-mobile__text" data-node-id="2156:7528">{`WHAT'S NEW?`}</p>
@@ -31,7 +56,7 @@ export default function WhatsNewSection({ mobile = false }) {
               <img alt="" className="home-news-mobile__image-4" src={homeAsset('f645a.png')} />
             </div>
           </div>
-          <div className="home-news-mobile__mobile-card" data-node-id="2156:7571" data-name="Mobile Card">
+          <div {...cardProps('marioKart')} className="home-news-mobile__mobile-card" data-node-id="2156:7571" data-name="Mobile Card">
             <div className="home-news-mobile__textcard" data-node-id="I2156:7571;1696:3127" data-name="TextCard">
               <div className="home-news-mobile__layer-6" data-node-id="I2156:7571;1799:10450">
                 <div className="home-news-mobile__layer-7" data-node-id="I2156:7571;1696:3128">
@@ -53,7 +78,7 @@ export default function WhatsNewSection({ mobile = false }) {
               </div>
             </div>
           </div>
-          <div className="home-news-mobile__mobile-card-2" data-node-id="2156:7572" data-name="Mobile Card">
+          <div {...cardProps('splatoon')} className="home-news-mobile__mobile-card-2" data-node-id="2156:7572" data-name="Mobile Card">
             <div className="home-news-mobile__textcard-2" data-node-id="I2156:7572;1696:3127" data-name="TextCard">
               <div className="home-news-mobile__layer-11" data-node-id="I2156:7572;1799:10450">
                 <div className="home-news-mobile__layer-12" data-node-id="I2156:7572;1696:3128">
@@ -76,7 +101,7 @@ export default function WhatsNewSection({ mobile = false }) {
               </div>
             </div>
           </div>
-          <div className="home-news-mobile__mobile-card-3" data-node-id="2156:7573" data-name="Mobile Card">
+          <div {...cardProps('pikmin')} className="home-news-mobile__mobile-card-3" data-node-id="2156:7573" data-name="Mobile Card">
             <div className="home-news-mobile__textcard-3" data-node-id="I2156:7573;1696:3127" data-name="TextCard">
               <div className="home-news-mobile__layer-15" data-node-id="I2156:7573;1799:10450">
                 <div className="home-news-mobile__layer-16" data-node-id="I2156:7573;1696:3128">
@@ -101,7 +126,7 @@ export default function WhatsNewSection({ mobile = false }) {
               </div>
             </div>
           </div>
-          <div className="home-news-mobile__mobile-card-4" data-node-id="2156:7574" data-name="Mobile Card">
+          <div {...cardProps('zelda')} className="home-news-mobile__mobile-card-4" data-node-id="2156:7574" data-name="Mobile Card">
             <div className="home-news-mobile__textcard-4" data-node-id="I2156:7574;1696:3127" data-name="TextCard">
               <div className="home-news-mobile__layer-22" data-node-id="I2156:7574;1799:10450">
                 <div className="home-news-mobile__layer-23" data-node-id="I2156:7574;1696:3128">
@@ -210,7 +235,7 @@ export default function WhatsNewSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-news__news-text-card-03" data-node-id="1215:8600" data-name="News-Text-Card-03">
+        <div {...cardProps('pikmin')} className="home-news__news-text-card-03" data-node-id="1215:8600" data-name="News-Text-Card-03">
           <div className="home-news__bi-arrow-up-right" data-node-id="1215:8601" data-name="bi:arrow-up-right">
             <img alt="" className="home-news__image-13" src={homeAsset('8cfbb.svg')} />
           </div>
@@ -224,7 +249,7 @@ export default function WhatsNewSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-news__news-text-card-04" data-node-id="1215:8607" data-name="News-Text-Card-04">
+        <div {...cardProps('zelda')} className="home-news__news-text-card-04" data-node-id="1215:8607" data-name="News-Text-Card-04">
           <div className="home-news__text-box-2" data-node-id="1215:8608" data-name="text-box">
             <p className="home-news__text-12" data-node-id="1215:8609">
               광대한 하이랄에서 펼쳐지는 『젤다의 전설』의 모험!
@@ -239,7 +264,7 @@ export default function WhatsNewSection({ mobile = false }) {
             <img alt="" className="home-news__image-14" src={homeAsset('8cfbb.svg')} />
           </div>
         </div>
-        <div className="home-news__news-text-card-02" data-node-id="1215:8613" data-name="News-Text-Card-02">
+        <div {...cardProps('marioKart')} className="home-news__news-text-card-02" data-node-id="1215:8613" data-name="News-Text-Card-02">
           <div className="home-news__text-box-3" data-node-id="1215:8614" data-name="text-box">
             <p className="home-news__text-14" data-node-id="1215:8615">{`“마리오 카트 8 디럭스” 무료 업데이트 `}</p>
             <div className="home-news__layer-21" data-node-id="1215:8616">
@@ -252,7 +277,7 @@ export default function WhatsNewSection({ mobile = false }) {
             <img alt="" className="home-news__image-15" src={homeAsset('8cfbb.svg')} />
           </div>
         </div>
-        <div className="home-news__news-text-card-01" data-node-id="1215:8619" data-name="News-Text-Card-01">
+        <div {...cardProps('splatoon')} className="home-news__news-text-card-01" data-node-id="1215:8619" data-name="News-Text-Card-01">
           <div className="home-news__text-box-4" data-node-id="1215:8620" data-name="text-box">
             <p className="home-news__text-18" data-node-id="1215:8621">
               잉크로 물드는 컬러풀한 배틀, 『스플래툰 3』!
