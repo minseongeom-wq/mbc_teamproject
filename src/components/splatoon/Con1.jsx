@@ -5,8 +5,17 @@ import './con1.css';
 const clips = [
   { key: 'pink', title: '분홍 잉크 플레이 장면', frame: 'ef008.png', image: 'gameplay-1.png', video: 'con1-gameplay-1.mp4' },
   { key: 'victory', title: '승리 결과 화면', frame: 'b8873.png', image: 'gameplay-2.png', video: 'con1-gameplay-2.mp4' },
-  { key: 'yellow', title: '노랑 잉크 플레이 장면', frame: 'e003f.png', image: 'gameplay-3.png' },
+  { key: 'yellow', title: '노랑 잉크 플레이 장면', frame: 'e003f.png', image: 'gameplay-3.png', video: 'con1-gameplay-3.mp4' },
 ];
+
+function restartVideo(event) {
+  event.currentTarget.currentTime = 0;
+  void event.currentTarget.play();
+}
+
+function startVideo(event) {
+  void event.currentTarget.play();
+}
 
 // Supply the original clips as { pink, victory, yellow } video URLs.
 export default function Con1({ videos = {} }) {
@@ -33,7 +42,7 @@ export default function Con1({ videos = {} }) {
           </div>
           {clips.map(({ key, title, frame, image, video }) => (
             <div key={key} className={`splatoon-con1__clip splatoon-con1__clip--${key}`}>
-              {videos[key] || video ? <video className="splatoon-con1__video" src={videos[key] || asset(video)} poster={asset(image)} aria-label={title} autoPlay muted loop playsInline preload="metadata" /> : <div className="splatoon-con1__video splatoon-con1__still"><img src={asset(image)} alt={title} /></div>}
+              {videos[key] || video ? <video className="splatoon-con1__video" src={videos[key] || asset(video)} poster={asset(image)} aria-label={title} autoPlay muted loop playsInline preload={key === 'yellow' ? 'auto' : 'metadata'} onCanPlay={key === 'yellow' ? startVideo : undefined} onEnded={key === 'yellow' ? restartVideo : undefined} /> : <div className="splatoon-con1__video splatoon-con1__still"><img src={asset(image)} alt={title} /></div>}
               <div className="splatoon-con1__ink" aria-hidden="true"><img src={asset(frame)} alt="" /></div>
             </div>
           ))}

@@ -32,7 +32,11 @@ export default function Con4() {
             <Picture file="9890f.png" x={0} y={0} w={1474} h={502.689} crop={{ width: '100%', height: '146.61%', left: 0, top: '-21.49%' }} />
             <p className="splatoon-con4__caution">발 밑 조심</p>
             <p className="splatoon-con4__brand">SPLATOON3</p>
-            <h2 id="splatoon-con4-title" className="splatoon-con4__title">이번역은 <span>카오폴리스 타운</span>입니다</h2>
+            <div className="splatoon-con4__ticker">
+              <div className="splatoon-con4__ticker-track">
+                <h2 id="splatoon-con4-title" className="splatoon-con4__title">이번역은 <span>카오폴리스 타운</span>입니다</h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -5,13 +5,13 @@
 .splatoon-intro { position: relative; width: 100%; aspect-ratio: 1920 / 1081; overflow: hidden; background: #181a19; }
 .splatoon-intro__stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1081px; transform-origin: top left; pointer-events: none; }
 .splatoon-intro__background { position: absolute; inset: 0; width: 1920px; height: 1081px; object-fit: cover; }
-.splatoon-intro__artwork { position: absolute; left: 211px; top: -130px; width: 1549.503px; height: 1038.841px; }
+.splatoon-intro__artwork { position: absolute; left: 36px; top: -186px; width: 1549.503px; height: 1038.841px; transform: scale(1.2055476); transform-origin: top left; }
 .splatoon-intro__layer { position: absolute; display: flex; align-items: center; justify-content: center; }
 .splatoon-intro__layer-content { flex: none; }
 .splatoon-intro__picture { position: relative; overflow: hidden; }
 .splatoon-intro__picture img { position: absolute; display: block; max-width: none; }
 .splatoon-intro__word { margin: 0; font-family: 'SplatoonK', system-ui, sans-serif; font-weight: 400; line-height: 1.4; white-space: nowrap; }
-.splatoon-intro__word--color { font-size: 70px; color: #bbeab7; }
+.splatoon-intro__word--color { font-size: 64px; color: #bbeab7; }
 .splatoon-intro__word--strategy { font-size: 48px; letter-spacing: -1.92px; color: #b3a1fa; }
 .splatoon-intro__word--shoot { font-size: 96px; color: #9dcc2c; }
 .splatoon-intro__word--squid { font-size: 70px; color: #fdea27; }

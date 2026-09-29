@@ -43,7 +43,7 @@ export default function SplatoonIntro() {
           <Picture name="b276c.png" x={1093.06} y={707.99} width={364.028} height={268.44} />
           <Picture name="34417.png" x={161.1} y={231.87} width={472.417} height={391.51} boxWidth={493.134} boxHeight={416.776} rotate={-3.14} />
           <Picture name="b669d.png" x={779.33} y={0} width={618.186} height={459.549} boxWidth={770.172} boxHeight={741.313} rotate={37.61} crop={{ width: '138.09%', height: '104.49%', left: '-20.14%', top: 0 }} />
-          <Layer x={630} y={820.16} width={178.325} height={221.783} rotate={62.71}><p className="splatoon-intro__word splatoon-intro__word--color">Color</p></Layer>
+          <Layer x={630} y={800} width={178.325} height={221.783} rotate={62.71}><p className="splatoon-intro__word splatoon-intro__word--color">Color</p></Layer>
           <Layer x={1103} y={952.62} width={221.547} height={68.828} rotate={0.47}><p className="splatoon-intro__word splatoon-intro__word--strategy">strategy</p></Layer>
           <Layer x={807.64} y={414.44} width={302.099} height={136.488} rotate={0.47}><p className="splatoon-intro__word splatoon-intro__word--shoot">Shoot</p></Layer>
           <Layer x={33.26} y={440} width={98} height={204} rotate={90}><p className="splatoon-intro__word splatoon-intro__word--squid">Squid</p></Layer>
