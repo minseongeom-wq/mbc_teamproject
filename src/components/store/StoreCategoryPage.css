@@ -1,0 +1,93 @@
+.store-subpage { min-height: var(--store-subpage-height); background: #fff; }
+.store-subpage .store-hero--compact { height: 435px; }
+.store-subpage .store-hero--compact .store-hero__red { height: 435px; }
+.store-subpage .store-hero--compact .store-hero__logo { top: 169px; }
+.store-subpage .store-hero--compact .store-hero__categories { left: 80px; top: 383px; display: block; width: 597px; height: 31px; }
+.store-subpage .store-hero--compact .store-hero__categories a { position: absolute; top: 0; display: block; color: #fff; text-align: center; }
+.store-subpage .store-hero--compact .store-hero__categories a:nth-of-type(1) { left: 0; width: 83px; }
+.store-subpage .store-hero--compact .store-hero__categories a:nth-of-type(2) { left: 113px; width: 110px; }
+.store-subpage .store-hero--compact .store-hero__categories a:nth-of-type(3) { left: 253px; width: 89px; }
+.store-subpage .store-hero--compact .store-hero__categories a:nth-of-type(4) { left: 372px; width: 42px; }
+.store-subpage .store-hero--compact .store-hero__categories a:nth-of-type(5) { left: 444px; width: 153px; }
+.store-subpage .store-hero--compact .store-hero__categories a + a::before { display: none; }
+.store-hero__category-divider { position: absolute; left: -29.5px; top: 16px; display: block; width: 29px; height: 1px; transform: rotate(90deg); }
+.store-subpage .store-hero--compact .store-hero__category-underline { top: 29.5px; }
+.store-subpage .store-hero--compact .store-hero__search { right: 80px; top: 386px; }
+.store-subpage__intro { height: 164px; padding: 43px 80px 0; background: #fff; box-shadow: 0 17px 15.45px rgb(39 39 39 / 12%); position: relative; z-index: 1; }
+.store-subpage__intro h2 { font-size: 30px; font-weight: 600; line-height: 1.3; }
+.store-subpage__intro p { margin-top: 16px; font-size: 15px; font-weight: 500; line-height: 1.3; }
+.store-subpage__body { min-height: calc(var(--store-subpage-height) - 599px); background: #fff; }
+.store-subpage__rails { display: flex; flex-direction: column; gap: 89px; padding: 51px 80px 0; }
+.store-subpage__rails > div { min-width: 0; }
+.store-subpage .store-rail { height: 386px; margin: 0; }
+.store-subpage .store-rail__products { gap: 28px; }
+.store-subpage .store-product-card__image { height: 276px; }
+.store-subpage .store-rail--sale-cards .store-product-card__image { height: 276px; aspect-ratio: auto; }
+.store-subpage--digital .store-rail--sale-cards .store-rail__products { gap: 21px; }
+.store-subpage .store-rail--highlight-prices .store-product-card__price { color: #e60012; }
+.store-subpage__empty { font-size: 20px; }
+.store-subpage--online .store-subpage__rails { padding-top: 0; }
+.store-online-plans { height: 1609px; position: relative; }
+.store-online-plans > h2 { position: absolute; top: 51px; left: 80px; color: #e60012; font-size: 28px; font-weight: 300; line-height: 1.3; letter-spacing: -.56px; }
+.store-online-plans__panel { position: absolute; top: 109px; left: 80px; right: 82px; height: 1400px; border: 1px solid #c9c9c9; border-radius: 24px; padding: 47px 85px 0; font-family: Inter, 'Common Pretendard', sans-serif; }
+.store-online-plans__panel h3 { font-size: 40px; font-weight: 700; line-height: 1.2; }
+.store-online-plans__panel > p:not(.store-online-plans__note) { margin-top: 6px; color: #6b6f76; font-size: 19px; }
+.store-online-plans__table-wrap { height: 1116px; margin-top: 42px; border: 1px solid #dadde2; border-radius: 20px; overflow: hidden; }
+.store-online-plans__table { width: 100%; height: 100%; border-collapse: collapse; table-layout: fixed; }
+.store-online-plans__item-col { width: 31.5%; }
+.store-online-plans__basic-col { width: 36.3%; }
+.store-online-plans__table thead { height: 112px; }
+.store-online-plans__table thead th { background: #e60012; color: #fff; font-size: 27px; font-weight: 700; text-align: center; }
+.store-online-plans__table thead th:first-child { background: #f5f6f8; color: #34373c; font-size: 21px; }
+.store-online-plans__table thead th:last-child { background: #c90010; font-size: 25px; }
+.store-online-plans__table tbody tr { height: 130px; }
+.store-online-plans__table tbody tr:nth-child(3) { height: 176px; }
+.store-online-plans__table tbody tr:nth-child(5) { height: 142px; }
+.store-online-plans__table tbody tr:last-child { height: 153px; }
+.store-online-plans__table tbody tr:nth-child(even) { background: #fbfbfc; }
+.store-online-plans__table tbody th, .store-online-plans__table tbody td { border-top: 1px solid #e1e3e7; border-right: 1px solid #e1e3e7; }
+.store-online-plans__table tbody th { padding: 0 33px; text-align: left; }
+.store-online-plans__table tbody th strong { display: block; color: #1e2024; font-size: 23px; }
+.store-online-plans__table tbody th span { display: block; margin-top: 7px; color: #747880; font-size: 16px; font-weight: 400; }
+.store-online-plans__table tbody td { text-align: center; color: #a6a9ad; font-size: 26px; }
+.store-online-plans__check { display: inline-block; width: 54px; height: 54px; vertical-align: middle; }
+.store-online-plans__table tbody td small { display: block; margin-top: 13px; color: #5c6168; font-size: 15px; }
+.store-online-plans__note { position: absolute; top: 1310px; left: 85px; color: #858990; font-size: 15px; }
+.store-online-plans__link { position: absolute; top: 1303px; right: 86px; display: grid; place-items: center; width: 400px; height: 64px; border-radius: 32px; background: #e60012; color: #fff !important; font-size: 20px; font-weight: 700; }
+@media (max-width: 1200px) { .store-subpage__rails { padding-inline: 40px; } .store-subpage .store-rail__products { gap: 16px; } .store-online-plans__panel { left: 40px; right: 40px; padding-inline: 30px; } .store-online-plans__panel h3 { font-size: 30px; } }
+@media (max-width: 767px) {
+  .store-subpage { min-height: 0; }
+  .store-subpage .store-hero--compact, .store-subpage .store-hero--compact .store-hero__red { height: 360px; }
+  .store-subpage .store-hero--compact .store-hero__logo { top: 166px; }
+  .store-subpage .store-hero--compact .store-hero__categories { left: 16px; right: 16px; top: 292px; display: flex; width: auto; height: 32px; gap: 12px; overflow-x: auto; }
+  .store-subpage .store-hero--compact .store-hero__categories a { position: relative; left: auto; flex: none; width: auto; padding-right: 12px; font-size: 14px; }
+  .store-subpage .store-hero--compact .store-hero__categories a + a::before { display: none; }
+  .store-subpage .store-hero--compact .store-hero__categories a:nth-of-type(n) { left: auto; width: auto; }
+  .store-subpage .store-hero--compact .store-hero__category-divider { left: -12px; top: 8px; width: 14px; transform: rotate(90deg) scaleX(.5); }
+  .store-subpage .store-hero--compact .store-hero__category-underline { top: 23px; max-width: calc(100% - 12px); }
+  .store-subpage .store-hero--compact .store-hero__search { right: 16px; top: 326px; }
+  .store-subpage__intro { height: auto; min-height: 166px; padding: 24px 16px; }
+  .store-subpage__intro h2 { font-size: 22px; }
+  .store-subpage__intro p { max-width: 270px; font-size: 12px; }
+  .store-subpage__body { min-height: 0; padding-bottom: 120px; }
+  .store-subpage__rails { gap: 70px; padding: 50px 16px 0; }
+  .store-subpage .store-rail { height: auto; }
+  .store-subpage .store-rail__products { gap: 12px; }
+  .store-subpage .store-product-card__image { height: auto; aspect-ratio: 269 / 276; }
+  .store-online-plans { height: auto; padding: 50px 16px 0; }
+  .store-online-plans > h2, .store-online-plans__panel { position: static; }
+  .store-online-plans > h2 { margin-bottom: 20px; font-size: 22px; }
+  .store-online-plans__panel { height: auto; padding: 20px; }
+  .store-online-plans__panel h3 { font-size: 23px; }
+  .store-online-plans__panel > p:not(.store-online-plans__note) { font-size: 13px; }
+  .store-online-plans__table-wrap { overflow-x: auto; height: auto; margin-top: 25px; }
+  .store-online-plans__table { min-width: 700px; height: 700px; }
+  .store-online-plans__table thead th { font-size: 16px; }
+  .store-online-plans__table thead th:last-child { font-size: 15px; }
+  .store-online-plans__table tbody th strong { font-size: 15px; }
+  .store-online-plans__table tbody th span { font-size: 12px; }
+  .store-online-plans__note, .store-online-plans__link { position: static; }
+  .store-online-plans__note { margin-top: 20px; font-size: 12px; }
+  .store-online-plans__link { width: 100%; height: 48px; margin-top: 20px; font-size: 15px; }
+  .store-subpage--online .store-subpage__rails { padding-top: 70px; }
+}

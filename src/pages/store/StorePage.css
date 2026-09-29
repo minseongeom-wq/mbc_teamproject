@@ -1,6 +1,4 @@
-.site-shell:has(.store-page) { position: relative; }
-.site-shell:has(.store-page) > .common-header { position: absolute; inset: 0 0 auto; z-index: 200; }
-.site-shell:has(.store-page) > .common-header--open { z-index: 300; }
+body .site-shell:has(.store-page) { padding-top: 0; }
 .site-shell > main:has(.store-page) { padding-inline: 0; }
 .site-shell > main:has(.store-page) > nav { display: none; }
 .site-shell:has(.store-page) > .common-footer { margin-top: 0; }

@@ -12,10 +12,10 @@ export default function StoreProductRail({ title, products, className = '', badg
       <h2>{title}</h2>
       <div className="store-rail__products">
         {visible.map((product) => (
-          <Link className="store-product-card" key={product.name} to={productHref} aria-label={`${product.name}, ${product.price}`}>
+          <Link className="store-product-card" key={`${product.name}-${product.image}`} to={productHref} aria-label={`${product.name}, ${product.price}`}>
             <span className={`store-product-card__image ${product.crop || ''}`}>
               <img src={storeImage(product.image)} alt="" loading="lazy" />
-              {badge && <span className="store-product-card__badge"><img src={storeImage('5b27b.png')} alt="Nintendo Switch 2" /></span>}
+              {(badge || product.badge) && <span className="store-product-card__badge"><img src={storeImage('5b27b.png')} alt="Nintendo Switch 2" /></span>}
             </span>
             <span className="store-product-card__name">{product.name}</span>
             <span className="store-product-card__price">{product.price}</span>

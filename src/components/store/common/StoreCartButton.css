@@ -1,0 +1,8 @@
+.store-cart-button { position: fixed; z-index: 1000; top: min(708px, calc(100vh - 174px)); right: max(24px, calc((100vw - 1920px) / 2 + 81px)); width: 150px; height: 150px; padding: 0; border: 0; border-radius: 50%; background: #e60012; cursor: pointer; }
+.store-cart-button__circle { display: block; width: 100%; height: 100%; }
+.store-cart-button__icon { position: absolute; top: 40px; left: 40px; width: 70.633px; height: 68px; }
+.store-cart-button:focus-visible { outline: 3px solid #151515; outline-offset: 4px; }
+@media (max-width: 767px) {
+  .store-cart-button { top: auto; right: 16px; bottom: 24px; width: 80px; height: 80px; }
+  .store-cart-button__icon { top: 21px; left: 21px; width: 38px; height: 37px; }
+}
