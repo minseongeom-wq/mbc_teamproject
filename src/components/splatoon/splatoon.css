@@ -1,0 +1,52 @@
+.site-shell--splatoon { position: relative; }
+.site-shell--splatoon > main { padding: 0; min-height: 0; }
+.site-shell--splatoon > .common-footer { margin-top: 0; }
+.site-shell--splatoon > .common-header { position: absolute; inset: 0 0 auto; z-index: 200; padding-top: 20px; }
+.splatoon-intro { position: relative; width: 100%; aspect-ratio: 1920 / 1081; overflow: hidden; background: #181a19; }
+.splatoon-intro__stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1081px; transform-origin: top left; pointer-events: none; }
+.splatoon-intro__background { position: absolute; inset: 0; width: 1920px; height: 1081px; object-fit: cover; }
+.splatoon-intro__artwork { position: absolute; left: 211px; top: -130px; width: 1549.503px; height: 1038.841px; }
+.splatoon-intro__layer { position: absolute; display: flex; align-items: center; justify-content: center; }
+.splatoon-intro__layer-content { flex: none; }
+.splatoon-intro__picture { position: relative; overflow: hidden; }
+.splatoon-intro__picture img { position: absolute; display: block; max-width: none; }
+.splatoon-intro__word { margin: 0; font-family: 'SplatoonK', system-ui, sans-serif; font-weight: 400; line-height: 1.4; white-space: nowrap; }
+.splatoon-intro__word--color { font-size: 70px; color: #bbeab7; }
+.splatoon-intro__word--strategy { font-size: 48px; letter-spacing: -1.92px; color: #b3a1fa; }
+.splatoon-intro__word--shoot { font-size: 96px; color: #9dcc2c; }
+.splatoon-intro__word--squid { font-size: 70px; color: #fdea27; }
+.splatoon-intro__word--smash { font-size: 96px; color: #f297ca; }
+.splatoon-intro__title { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 767px) {
+  .splatoon-intro { box-sizing: content-box; padding-top: 80px; }
+  .splatoon-intro__stage { top: 80px; }
+  .site-shell--splatoon > .common-header { padding-top: 15px; }
+}
+@font-face {
+  font-family: 'SplatoonK';
+  src: url('./assets/SplatoonKVer.2.0.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* A single ink-texture plane runs behind the complete Splatoon page. */
+.splatoon-page {
+  position: relative;
+  isolation: isolate;
+  background: #181a19 url('./assets/6c6fd.png') center / cover fixed;
+}
+.splatoon-page > section { background-color: transparent; }
+.splatoon-page :is(
+  .splatoon-intro__background,
+  .splatoon-con1__background,
+  .splatoon-con2__background,
+  .splatoon-section1__background,
+  .splatoon-con3__background,
+  .splatoon-con4__background,
+  .splatoon-con5__background,
+  .splatoon-section2__background
+) {
+  opacity: 0;
+}
+

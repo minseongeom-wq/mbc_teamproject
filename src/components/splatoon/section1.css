@@ -1,0 +1,24 @@
+﻿.splatoon-section1 { position: relative; container-type: inline-size; width: 100%; aspect-ratio: 1920 / 415; overflow: hidden; background: #181a19; }
+.splatoon-section1__background { position: absolute; left: -110.93%; top: -304.45%; width: 282.88%; height: 659.15%; max-width: none; }
+.splatoon-section1__viewport { position: absolute; inset: 0; overflow: hidden; transform: skewY(-2.7deg); }
+.splatoon-section1__track { display: flex; width: 400%; height: 100%; animation: splatoon-section1-right 48s linear infinite; will-change: transform; }
+.splatoon-section1__tile { position: relative; flex: 0 0 25%; height: 100%; font-family: 'SplatoonK', system-ui, sans-serif; color: #000; }
+/* Alternate identical edge samples so the original print joins without fading,
+   extra borders or replacement artwork. Text remains forward-facing. */
+.splatoon-section1__artwork { position: absolute; inset: 0; overflow: hidden; }
+.splatoon-section1__tile:nth-child(even) .splatoon-section1__artwork { transform: scaleX(-1); }
+.splatoon-section1__tape { position: absolute; left: -23.229167%; top: -9.39759%; width: 163.90625%; height: 119.036145%; }
+.splatoon-section1__tape img { position: absolute; left: 0; top: -51.32%; width: 100%; height: 212.32%; max-width: none; transform: skewY(2.7deg); }
+.splatoon-section1__sticker { position: absolute; zoom: calc(100cqw / 1920px); left: 668.9px; top: 151px; transform: rotate(-10.36deg); }
+.splatoon-section1__sticker img { display: block; }
+.splatoon-section1__squid, .splatoon-section1__fashion, .splatoon-section1__caption { position: absolute; display: grid; place-items: center; white-space: nowrap; font-weight: 400; line-height: 1.4; }
+.splatoon-section1__squid { left: 35.052083%; top: 35.831325%; width: 13.032396%; height: 37.061446%; font-size: 3.645833cqw; transform: rotate(-14.67deg); }
+.splatoon-section1__fashion { left: 50.625%; top: 30.120482%; width: 19.127135%; height: 37.149398%; font-size: 5.208333cqw; transform: rotate(2.26deg); }
+.splatoon-section1__caption { left: 43.229167%; top: 65.783133%; width: 6.829115%; height: 11.257349%; font-family: 'Common Pretendard', Pretendard, sans-serif; font-size: 1.5625cqw; font-weight: 600; line-height: 1.3; opacity: .5; color: #5b6700; transform: rotate(-3.46deg); }
+@keyframes splatoon-section1-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .splatoon-section1__track { animation: none; transform: translateX(-50%); } }
+/* Keep the lettering in the original artwork's clear area on return tiles. */
+.splatoon-section1__tile:nth-child(even) .splatoon-section1__sticker { left: 568.9px; }
+.splatoon-section1__tile:nth-child(even) .splatoon-section1__squid,
+.splatoon-section1__tile:nth-child(even) .splatoon-section1__fashion,
+.splatoon-section1__tile:nth-child(even) .splatoon-section1__caption { translate: -5.208333cqw 0; }

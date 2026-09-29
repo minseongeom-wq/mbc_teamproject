@@ -1,0 +1,52 @@
+﻿.splatoon-con3 { position: relative; width: 100%; aspect-ratio: 1920 / 1336; overflow: hidden; background: #181a19; color: #fff; font-family: 'SplatoonK', system-ui, sans-serif; }
+.splatoon-con3__stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1336px; transform-origin: top left; }
+.splatoon-con3__background { position: absolute; inset: 0; width: 1920px; height: 1336px; object-fit: cover; }
+.splatoon-con3__inner { position: absolute; left: 19px; top: 129.9985px; width: 1882px; height: 1075.303px; }
+.splatoon-con3__art { position: absolute; overflow: hidden; pointer-events: none; }
+.splatoon-con3__art img { position: absolute; display: block; max-width: none; }
+.splatoon-con3__panel-fill { position: absolute; inset: 0; pointer-events: none; }
+.splatoon-con3__panel-fill--hair { clip-path: polygon(28px 424px, 1853px 357px, 1853px 718px, 28px 901px); }
+.splatoon-con3__panel-fill--bottoms { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--bottoms::before { content: ''; position: absolute; left: 898px; top: 334px; right: 19px; bottom: 177px; background: #fc2167; }
+.splatoon-con3__panel-fill--headgear { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--headgear::before { content: ''; position: absolute; left: 882px; top: 342px; right: 19px; bottom: 177px; background: #6c3779; }
+.splatoon-con3__panel-fill--eyebrows { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--tops { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--shoes { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__title { position: absolute; left: 698px; top: 911px; margin: 0; font-size: 96px; font-weight: 400; line-height: 1.4; white-space: nowrap; }
+.splatoon-con3__title--bottoms { left: 580px; top: 926px; }
+.splatoon-con3__title--headgear { left: 560px; top: 926px; }
+.splatoon-con3__title--eyebrows { left: 547px; top: 926px; }
+.splatoon-con3__title--tops { left: 691px; top: 926px; }
+.splatoon-con3__title--shoes { left: 668px; top: 926px; }
+.splatoon-con3 button { position: absolute; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.splatoon-con3 button:disabled { opacity: 1; cursor: default; }
+.splatoon-con3 button:focus-visible { outline: 5px solid #fff; outline-offset: 8px; }
+.splatoon-con3__previous { left: 18px; top: 183px; width: 290px; height: 279px; }
+.splatoon-con3__next { left: 1479.57px; top: 662px; width: 391px; height: 279px; }
+.splatoon-con3__previous--bottoms { left: 28px; top: 168px; width: 284px; }
+.splatoon-con3__next--bottoms { left: 1489.57px; top: 647px; width: 386px; }
+.splatoon-con3__previous--headgear { left: 28px; top: 168px; width: 284px; }
+.splatoon-con3__next--headgear { left: 1487px; top: 647px; width: 386px; }
+.splatoon-con3__previous--eyebrows { left: 28px; top: 168px; width: 284px; }
+.splatoon-con3__next--eyebrows { left: 1487px; top: 647px; width: 386px; }
+.splatoon-con3__previous--tops { left: 28px; top: 168px; width: 284px; }
+.splatoon-con3__next--tops { left: 1487px; top: 647px; width: 386px; }
+.splatoon-con3__previous--shoes { left: 28px; top: 168px; width: 284px; }
+.splatoon-con3__next--shoes { left: 1487px; top: 647px; width: 386px; }
+.splatoon-con3 button span { position: absolute; display: grid; place-items: center; font-family: 'SplatoonK', system-ui, sans-serif; font-size: 32px; font-weight: 400; line-height: 1.4; letter-spacing: 0; white-space: nowrap; }
+.splatoon-con3 button span b { display: block; font: inherit; font-weight: 400; }
+.splatoon-con3__previous span { left: 180px; top: 71px; width: 45px; height: 151px; }
+.splatoon-con3__previous span b { transform: rotate(-90deg); }
+.splatoon-con3__previous--bottoms span { left: 174px; top: 81px; }
+.splatoon-con3__previous--headgear span { left: 174px; top: 81px; }
+.splatoon-con3__previous--eyebrows span { left: 174px; top: 81px; }
+.splatoon-con3__previous--tops span { left: 174px; top: 81px; }
+.splatoon-con3__previous--shoes span { left: 174px; top: 81px; }
+.splatoon-con3__next span { left: 65px; top: 111px; width: 45px; height: 90px; color: #000; }
+.splatoon-con3__next span b { transform: rotate(90deg); }
+.splatoon-con3__next--bottoms span { left: 65px; }
+.splatoon-con3__next--headgear span { left: 65px; }
+.splatoon-con3__next--eyebrows span { left: 65px; }
+.splatoon-con3__next--tops span { left: 65px; }
+.splatoon-con3__next--shoes span { left: 65px; }

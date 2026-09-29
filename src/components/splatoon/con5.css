@@ -1,0 +1,15 @@
+﻿.splatoon-con5 { position: relative; width: 100%; aspect-ratio: 1920 / 1081; overflow: hidden; background: #181a19; color: #fff; font-family: 'SplatoonK', system-ui, sans-serif; }
+.splatoon-con5__stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1081px; transform-origin: top left; }
+.splatoon-con5__background { position: absolute; inset: 0; width: 1920px; height: 1081px; overflow: hidden; pointer-events: none; }
+.splatoon-con5__background img { position: absolute; left: 0; top: -29.29%; width: 100%; height: 171.17%; max-width: none; }
+.splatoon-con5__inner { position: absolute; left: 38px; top: 33px; width: 1844.563px; height: 1014.999px; }
+.splatoon-con5__art { position: absolute; overflow: hidden; pointer-events: none; }
+.splatoon-con5__art img { position: absolute; display: block; max-width: none; }
+.splatoon-con5__title { position: absolute; left: 384px; top: 0; display: grid; place-items: center; width: 997.074px; height: 209.675px; margin: 0; font-size: 128px; font-weight: 400; line-height: 1.4; white-space: nowrap; transform: rotate(-1.78deg); -webkit-text-stroke: 30px #000; paint-order: stroke fill; }
+.splatoon-con5__card { position: absolute; display: block; transform: rotate(-3deg); }
+.splatoon-con5__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.splatoon-con5__card:focus-visible { outline: 5px solid #ddfc06; outline-offset: 8px; }
+@media (prefers-reduced-motion: no-preference) {
+  a.splatoon-con5__card { transition: transform 160ms ease; }
+  a.splatoon-con5__card:hover { transform: rotate(-3deg) translateY(-5px); }
+}
