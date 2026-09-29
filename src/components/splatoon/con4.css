@@ -1,0 +1,18 @@
+﻿.splatoon-con4 { position: relative; width: 100%; aspect-ratio: 1920 / 2016; overflow: hidden; background: #181a19; color: #fff; font-family: 'SplatoonK', system-ui, sans-serif; }
+.splatoon-con4__stage { position: absolute; top: 0; left: 0; width: 1920px; height: 2016px; transform-origin: top left; }
+.splatoon-con4__background { position: absolute; inset: 0; overflow: hidden; }
+.splatoon-con4__background img { position: absolute; left: 0; top: -1.4%; width: 100%; height: 101.41%; }
+.splatoon-con4__inner { position: absolute; left: 209.998px; top: 248.0005px; width: 1499.284px; height: 1520.999px; }
+.splatoon-con4__picture { position: absolute; overflow: hidden; }
+.splatoon-con4__picture img { position: absolute; display: block; max-width: none; }
+.splatoon-con4__description { margin: 0; color: #454e00; font-size: 36px; line-height: 1.4; }
+.splatoon-con4__description span { position: absolute; white-space: nowrap; }
+.splatoon-con4__description span:nth-child(1) { left: 146px; top: 1013px; transform: rotate(1.76deg); }
+.splatoon-con4__description span:nth-child(2) { left: 145.52px; top: 1059.74px; }
+.splatoon-con4__description span:nth-child(3) { left: 141px; top: 1109px; transform: rotate(-1.34deg); }
+.splatoon-con4__station { position: absolute; left: 12.642px; top: 39.739px; width: 1474px; height: 504.689px; transform: rotate(-3.12deg); }
+.splatoon-con4__station p, .splatoon-con4__title { position: absolute; margin: 0; font-weight: 400; line-height: 1.4; white-space: nowrap; }
+.splatoon-con4__caution { left: 948.67px; top: 365.7px; font-size: 48px; letter-spacing: -.04em; color: #fb149f; transform: rotate(1.68deg); }
+.splatoon-con4__brand { left: 1003px; top: 51.5px; font-size: 40px; letter-spacing: -.04em; color: #20f9f9; transform: rotate(1.93deg); }
+.splatoon-con4__title { left: 311.01px; top: 206.7px; font-size: 70px; transform: rotate(1.68deg); }
+.splatoon-con4__title span { color: #ddfc06; }

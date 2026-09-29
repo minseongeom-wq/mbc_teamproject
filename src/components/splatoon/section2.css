@@ -1,0 +1,18 @@
+﻿.splatoon-section2 { position: relative; width: 100%; aspect-ratio: 1920 / 1081; overflow: hidden; background: #181a19; color: #fff; font-family: 'SplatoonK', system-ui, sans-serif; }
+.splatoon-section2__stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1081px; transform-origin: top left; }
+.splatoon-section2__background { position: absolute; inset: 0; width: 1920px; height: 1081px; object-fit: cover; }
+.splatoon-section2__inner { position: absolute; left: 228.004px; top: 181.004px; width: 1461.212px; height: 718.072px; }
+.splatoon-section2__game { position: absolute; left: 566px; top: 105.996px; }
+.splatoon-section2__tape { position: absolute; overflow: hidden; pointer-events: none; }
+.splatoon-section2__tape img { position: absolute; top: -243.8%; height: 598.35%; max-width: none; }
+.splatoon-section2__logo { position: absolute; left: 169.39px; top: 96px; }
+.splatoon-section2__title { position: absolute; left: 7px; top: 247px; width: 466.599px; margin: 0; text-align: center; font-size: 36px; font-weight: 400; line-height: 50px; letter-spacing: .54px; }
+.splatoon-section2__accent { position: absolute; left: 207.82px; top: 360px; width: 64.956px; height: 6px; border-radius: 3px; background: #e60012; }
+.splatoon-section2__description { position: absolute; left: 7px; top: 379px; width: 459.021px; margin: 0; text-align: center; font-size: 20px; line-height: 1.4; letter-spacing: -.3px; }
+.splatoon-section2__note { position: absolute; margin: 0; text-align: center; font-size: 14px; line-height: 1.4; letter-spacing: .28px; white-space: nowrap; }
+.splatoon-section2__note--purchase { left: 112px; top: 506px; width: 256px; }
+.splatoon-section2__note--details { left: 39px; top: 528px; width: 391px; }
+.splatoon-section2__link { position: absolute; left: 156.73px; top: 568px; display: flex; align-items: center; gap: 7px; min-height: 44px; color: #fff; font-size: 14px; line-height: 1.4; letter-spacing: .28px; text-decoration: none; white-space: nowrap; }
+.splatoon-section2__link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.splatoon-section2__arrow { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #e70012; }
+.splatoon-section2__arrow img { display: block; }

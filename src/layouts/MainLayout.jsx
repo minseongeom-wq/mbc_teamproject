@@ -17,12 +17,13 @@ export default function MainLayout() {
   const isStorePage = pathname === routePaths.store || pathname.startsWith(`${routePaths.store}/`);
 
   const isZelda = /^\/ip\/zelda\/?$/i.test(pathname);
+  const isSplatoon = /^\/ip\/splatoon\/?$/i.test(pathname);
   const whitePaths = [routePaths.store, routePaths.productList, routePaths.mypage];
   const isWhite = whitePaths.includes(pathname) || (pathname.startsWith('/store/products/'));
   const variant = isZelda ? 'zelda' : isWhite ? 'white' : 'red';
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell${isSplatoon ? ' site-shell--splatoon' : ''}`}>
       <Navigation key={pathname} variant={variant} />
       <main id="main-content">
         <Outlet />

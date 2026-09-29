@@ -1,18 +1,16 @@
-import PlaceholderPage from '../../components/common/PlaceholderPage.jsx';
-import { routePaths } from '../../routes/routePaths.js';
+﻿import SplatoonIntro from '../../components/splatoon/SplatoonIntro.jsx';
+import Con1 from '../../components/splatoon/Con1.jsx';
+import Con2 from '../../components/splatoon/Con2.jsx';
+import Section1 from '../../components/splatoon/Section1.jsx';
+
+import Con3 from '../../components/splatoon/Con3.jsx';
+
+import Con4 from '../../components/splatoon/Con4.jsx';
+
+import Con5 from '../../components/splatoon/Con5.jsx';
+
+import Section2 from '../../components/splatoon/Section2.jsx';
 
 export default function SplatoonPage() {
-  return (
-    <PlaceholderPage
-      english="SPLATOON WORLD"
-      title="IP 상세 — Splatoon"
-      description="Splatoon의 캐릭터와 세계를 소개할 공간입니다. 상세 콘텐츠를 준비하고 있습니다."
-      cards={[
-        ['캐릭터 소개', 'Splatoon의 등장인물과 이야기를 소개할 예정입니다.'],
-        ['세계관 탐색', '게임 속 다양한 장소와 배경을 소개할 예정입니다.'],
-        ['관련 게임', '함께 살펴볼 게임과 상품 정보를 준비하고 있습니다.'],
-      ]}
-      links={[[ '스토어 둘러보기', routePaths.store ], [ '메인으로', routePaths.home ]]}
-    />
-  );
+  return <div className="splatoon-page"><SplatoonIntro /><Con1 /><Con2 /><Section1 /><Con3 /><Con4 /><Con5 /><Section2 /></div>;
 }
