@@ -4,8 +4,12 @@
 .store-hero__logo img { display: block; position: absolute; max-width: none; }
 .store-hero__logo img:first-child { left: 0; top: 0; }
 .store-hero__logo img:last-child { left: 507.154px; top: 22.916px; }
-.store-hero__categories { position: absolute; left: 80px; top: 383px; display: flex; align-items: center; gap: 15px; height: 31px; }
+.store-hero__categories { position: absolute; left: 80px; top: 384px; display: flex; align-items: center; gap: 15px; height: 31px; }
 .store-page .store-hero__categories a { color: #fff; font-size: 24px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.store-hero__category-label { position: relative; display: inline-block; }
+.store-hero__category-underline { position: absolute; left: 0; top: 32px; display: block; opacity: 0; pointer-events: none; }
+.store-hero__categories a:hover .store-hero__category-underline,
+.store-hero__categories a:focus-visible .store-hero__category-underline { opacity: 1; }
 .store-hero__categories a + a { display: flex; align-items: center; gap: 15px; }
 .store-hero__categories a + a::before { content: ''; display: block; height: 29px; border-left: 1px solid #fff; }
 .store-hero__search { position: absolute; top: 386px; right: 80px; width: 155px; height: 25px; background: url('/images/store/f49b4.svg') left top / 157px 25px no-repeat; }
@@ -16,10 +20,6 @@
 .store-hero__cta-copy { align-self: flex-start; padding-top: 43px; }
 .store-hero__cta h2 { font-size: 30px; font-weight: 600; line-height: 1.3; }
 .store-hero__cta p { margin-top: 16px; font-size: 15px; font-weight: 500; line-height: 1.3; }
-.store-hero__cta-link { position: absolute; top: 57px; right: 99px; display: grid; place-items: center; min-width: 119px; height: 51px; border: 1px solid #151515; border-radius: 30px; font-size: 15px; font-weight: 500; }
-.store-hero__cart { position: absolute; z-index: 2; top: 92px; right: 81px; display: block; width: 150px; height: 150px; }
-.store-hero__cart img:first-child { display: block; width: 150px; height: 150px; }
-.store-hero__cart img:last-child { position: absolute; top: 40px; left: 40px; width: 70.633px; height: 68px; }
 @media (max-width: 767px) {
   .store-hero { height: auto; }
   .store-hero__red { height: 360px; }
@@ -33,5 +33,4 @@
   .store-hero__cta h2 { font-size: 22px; }
   .store-hero__cta p { max-width: 250px; font-size: 12px; }
   .store-hero__cta-link { top: 100px; right: 16px; min-width: 75px; height: 37px; }
-  .store-hero__cart { top: 139px; right: 16px; transform: scale(.55); transform-origin: top right; }
 }

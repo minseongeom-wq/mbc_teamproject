@@ -6,6 +6,7 @@ import MarioPage from './components/mario/mario.jsx';
 import ZeldaPage from './pages/zelda/ZeldaPage.jsx';
 import SplatoonPage from './pages/splatoon/SplatoonPage.jsx';
 import StorePage from './pages/store/StorePage.jsx';
+import StoreCartLayout from './components/store/common/StoreCartLayout.jsx';
 import ProductListPage from './pages/product-list/ProductListPage.jsx';
 import ProductDetailPage from './pages/product-detail/ProductDetailPage.jsx';
 import OrderReviewPage from './pages/order-review/OrderReviewPage.jsx';
@@ -27,11 +28,13 @@ export default function App() {
         <Route path={generatePath(routePaths.ipDetail, { slug: 'mario' })} element={<MarioPage />} />
         <Route path={generatePath(routePaths.ipDetail, { slug: 'zelda' })} element={<ZeldaPage />} />
         <Route path={generatePath(routePaths.ipDetail, { slug: 'splatoon' })} element={<SplatoonPage />} />
-        <Route path={routePaths.store} element={<StorePage />} />
-        <Route path={routePaths.productList} element={<ProductListPage />} />
-        <Route path={routePaths.productDetail} element={<ProductDetailPage />} />
-        <Route path={routePaths.orderReview} element={<OrderReviewPage />} />
-        <Route path={routePaths.checkout} element={<CheckoutPage />} />
+        <Route element={<StoreCartLayout />}>
+          <Route path={routePaths.store} element={<StorePage />} />
+          <Route path={routePaths.productList} element={<ProductListPage />} />
+          <Route path={routePaths.productDetail} element={<ProductDetailPage />} />
+          <Route path={routePaths.orderReview} element={<OrderReviewPage />} />
+          <Route path={routePaths.checkout} element={<CheckoutPage />} />
+        </Route>
         <Route path={routePaths.hardware} element={<SwitchPage />} />
         <Route path={routePaths.history} element={<HistoryPage />} />
         <Route path={routePaths.community} element={<CommunityPage />} />
