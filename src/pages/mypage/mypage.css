@@ -1,0 +1,154 @@
+.mypage {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-top: 188px;
+  color: #151515;
+  background: #fff;
+  font-family: 'Common Pretendard', 'Pretendard Variable', Pretendard, sans-serif;
+}
+
+.mypage *,
+.mypage *::before,
+.mypage *::after { box-sizing: border-box; }
+
+.mypage__canvas {
+  position: relative;
+  width: min(1600px, calc(100% - 48px));
+  height: 2375px;
+  margin: 0 auto;
+}
+
+.mypage p,
+.mypage h1,
+.mypage h2,
+.mypage dl,
+.mypage dd { margin: 0; }
+
+.mypage__heading { position: absolute; inset: 0 0 auto; height: 131px; }
+.mypage__eyebrow { position: absolute; top: 0; left: 0; font-size: 14px; line-height: 1.3; letter-spacing: -.28px; }
+.mypage__heading h1 { position: absolute; top: 27px; left: 38px; font-size: 60px; font-weight: 400; line-height: 1.3; letter-spacing: -1.2px; }
+.mypage__pixels { position: absolute; left: 0; top: 44px; width: 22px; height: 53px; }
+.mypage__pixels i { position: absolute; display: block; width: 11px; height: 11px; background: #e60012; }
+.mypage__pixels i:nth-child(1) { left: 0; top: 0; }
+.mypage__pixels i:nth-child(2) { left: 11px; top: 11px; }
+.mypage__pixels i:nth-child(3) { left: 11px; top: 22px; }
+.mypage__pixels i:nth-child(4) { left: 0; top: 33px; }
+
+.mypage__rule { position: absolute; right: 0; left: 0; height: 1px; background: #d2d2cd; }
+.mypage__rule--heading { top: 130px; }
+.mypage__account { position: absolute; top: 177px; left: 0; width: 100%; height: 96px; }
+.mypage__avatar { position: absolute; top: 0; left: 0; width: 96px; height: 96px; border-radius: 7px; background: #e60012; object-fit: cover; }
+.mypage__identity { position: absolute; top: 3px; left: 121px; }
+.mypage__greeting { font-size: 21px; font-weight: 400; line-height: 1.3; letter-spacing: -.42px; }
+.mypage__username { margin-top: 11px !important; font-size: 14px; line-height: 1.3; letter-spacing: -.28px; }
+.mypage__account-actions { position: absolute; top: 33px; right: 0; display: flex; gap: 52px; align-items: center; }
+.mypage__account-actions button { position: relative; flex: 0 0 auto; width: 69px; padding: 0; border: 0; border-radius: 0; color: #e60012; background: transparent; font: inherit; font-size: 16px; line-height: 1.3; letter-spacing: -.32px; text-align: left; cursor: pointer; }
+.mypage__account-actions button:nth-child(2) { width: 53px; }
+.mypage__account-actions button span { position: relative; left: -1px; white-space: nowrap; }
+.mypage__account-actions button::after { position: absolute; top: 22px; right: 0; left: 0; height: 1px; background: #e60012; content: ''; }
+.mypage__account-actions button:focus-visible,
+.mypage__more:focus-visible,
+.mypage__view-all:focus-visible { outline: 2px solid #e60012; outline-offset: 4px; }
+
+.mypage__stats { position: absolute; top: 315px; left: 0; display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; height: 134px; border-top: 1px solid #d2d2cd; border-bottom: 1px solid #d2d2cd; }
+.mypage__stat { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 9px; text-align: center; }
+.mypage__stat + .mypage__stat { border-left: 1px solid #d2d2cd; }
+.mypage__stat dt { font-size: 21px; line-height: 1.3; letter-spacing: -.42px; }
+.mypage__stat dd { font-size: 32px; line-height: 1.3; letter-spacing: -.64px; }
+
+.mypage__activity { position: absolute; right: 0; left: 0; }
+.mypage__activity h2 { position: absolute; left: 0; color: #151515; font-size: 28px; font-weight: 400; line-height: 1.3; letter-spacing: -.56px; }
+.mypage__activity--games { top: 551px; height: 454px; }
+.mypage__activity--games h2,
+.mypage__activity--orders h2 { top: 0; }
+.mypage__activity--games > .mypage__rule:not(.mypage__rule--bottom),
+.mypage__activity--orders > .mypage__rule:not(.mypage__rule--bottom) { top: 53px; }
+.mypage__activity--games .mypage__rule--bottom { top: 454px; }
+.mypage__activity--orders { top: 1100px; height: 451px; }
+.mypage__activity--orders .mypage__rule--bottom { top: 451px; }
+.mypage__empty { position: absolute; left: 50%; width: min(520px, 100%); transform: translateX(-50%); text-align: center; }
+.mypage__empty--games { top: 197px; }
+.mypage__empty--orders { top: 199px; }
+.mypage__dot { position: absolute; top: -45px; left: 50%; width: 26px; height: 10px; transform: translateX(-50%); background: #e60012; }
+.mypage__empty-title { font-size: 24px; font-weight: 400; line-height: 1.3; letter-spacing: 1.2px; white-space: nowrap; }
+.mypage__empty-caption { margin-top: 12px !important; font-size: 16px; line-height: 1.3; letter-spacing: .8px; }
+.mypage__more { position: absolute; top: 106px; left: 50%; display: flex; justify-content: center; align-items: center; width: 142px; height: 48px; transform: translateX(-50%); border: 2px solid #e60012; border-radius: 15px; color: #e60012; background: #fff; font-size: 16px; line-height: 1.3; letter-spacing: .8px; text-decoration: none; }
+.mypage__empty--orders .mypage__more { top: 107px; }
+
+.mypage__activity--reviews { top: 1660px; height: 139px; }
+.mypage__activity--reviews h2,
+.mypage__activity--inquiries h2 { top: 0; }
+.mypage__view-all { position: absolute; top: 4px; right: 0; color: #e60012; font-size: 16px; line-height: 1.3; letter-spacing: -.32px; text-decoration: underline; text-underline-offset: 2px; }
+.mypage__review-row { position: absolute; top: 89px; left: 0; display: flex; justify-content: space-between; width: 100%; font-size: 16px; line-height: 1.3; letter-spacing: -.32px; }
+.mypage__review-row p { font-weight: 300; }
+.mypage__review-row span { font-size: 14px; font-weight: 300; letter-spacing: -.28px; }
+.mypage__activity--reviews .mypage__rule--bottom { top: 138px; }
+
+.mypage__activity--inquiries { top: 1905px; height: 290px; }
+.mypage__inquiry-list { position: absolute; top: 79px; right: 0; left: 0; }
+.mypage__inquiry { position: relative; height: 50px; border-bottom: 1px solid #d2d2cd; font-size: 16px; font-weight: 300; line-height: 1.3; letter-spacing: -.32px; }
+.mypage__inquiry:first-child { height: 59px; }
+.mypage__inquiry:nth-child(2) { margin-top: 24px; }
+.mypage__inquiry:nth-child(3) { height: 52px; margin-top: 26px; }
+.mypage__inquiry p { position: absolute; top: 2px; left: 0; }
+.mypage__inquiry:first-child p { top: 9px; }
+.mypage__status { position: absolute; top: 0; right: 0; display: flex; justify-content: center; align-items: center; width: 63px; height: 26px; border-radius: 7px; font-size: 14px; font-weight: 400; letter-spacing: -.28px; white-space: nowrap; }
+.mypage__status--complete { color: #fff; background: #e60012; }
+.mypage__status--pending { color: #8c8c8c; background: #ededed; }
+.mypage__activity--inquiries .mypage__rule--bottom { display: none; }
+
+@media (max-width: 767px) {
+  .mypage { padding-top: 72px; }
+  .mypage__canvas { display: flex; flex-direction: column; gap: 0; width: calc(100% - 40px); height: auto; min-height: 0; padding-bottom: 72px; }
+  .mypage__heading,
+  .mypage__account,
+  .mypage__stats,
+  .mypage__activity { position: relative; inset: auto; }
+  .mypage__heading { flex: 0 0 112px; height: 112px; }
+  .mypage__eyebrow { font-size: 12px; }
+  .mypage__heading h1 { top: 24px; left: 30px; font-size: 42px; }
+  .mypage__pixels { top: 35px; transform: scale(.8); transform-origin: top left; }
+  .mypage__rule--heading { top: 105px; }
+  .mypage__account { flex: 0 0 112px; height: 112px; }
+  .mypage__avatar { top: 8px; width: 72px; height: 72px; }
+  .mypage__identity { top: 8px; left: 88px; }
+  .mypage__greeting { font-size: 16px; }
+  .mypage__username { margin-top: 8px !important; }
+  .mypage__account-actions { top: 78px; right: 0; gap: 24px; }
+  .mypage__account-actions button { font-size: 14px; }
+  .mypage__stats { flex: 0 0 auto; grid-template-columns: repeat(2, minmax(0, 1fr)); height: auto; }
+  .mypage__stat { min-height: 88px; gap: 4px; }
+  .mypage__stat:nth-child(odd) + .mypage__stat { border-left: 1px solid #d2d2cd; }
+  .mypage__stat:nth-child(n+3) { border-top: 1px solid #d2d2cd; }
+  .mypage__stat:last-child { grid-column: 1 / -1; border-left: 0; }
+  .mypage__stat dt { font-size: 16px; }
+  .mypage__stat dd { font-size: 24px; }
+  .mypage__activity { display: flex; flex-direction: column; align-items: stretch; gap: 0; height: auto; padding-top: 42px; }
+  .mypage__activity h2 { position: relative; top: auto; left: auto; font-size: 22px; }
+  .mypage__activity > .mypage__rule:not(.mypage__rule--bottom) { position: relative; top: auto; margin-top: 14px; }
+  .mypage__activity--games { padding-bottom: 38px; }
+  .mypage__activity--orders { padding-bottom: 38px; }
+  .mypage__empty { position: relative; top: auto; left: auto; width: 100%; margin-top: 88px; transform: none; }
+  .mypage__empty-title { font-size: 17px; letter-spacing: .2px; white-space: normal; }
+  .mypage__empty-caption { font-size: 14px; letter-spacing: .2px; }
+  .mypage__dot { top: -34px; }
+  .mypage__more,
+  .mypage__empty--orders .mypage__more { position: relative; top: auto; left: 50%; margin-top: 24px; transform: translateX(-50%); }
+  .mypage__activity .mypage__rule--bottom { position: absolute; top: auto; bottom: 0; }
+  .mypage__activity--reviews { padding-bottom: 0; }
+  .mypage__activity--reviews h2,
+  .mypage__activity--inquiries h2 { padding-right: 72px; }
+  .mypage__view-all { top: 43px; font-size: 14px; }
+  .mypage__review-row { position: relative; top: auto; left: auto; gap: 12px; align-items: center; margin-top: 28px; padding: 16px 0; border-bottom: 1px solid #d2d2cd; font-size: 14px; }
+  .mypage__review-row span { flex: 0 0 auto; font-size: 12px; }
+  .mypage__activity--inquiries { padding-bottom: 0; }
+  .mypage__inquiry-list { position: relative; top: auto; right: auto; left: auto; margin-top: 12px; }
+  .mypage__inquiry,
+  .mypage__inquiry:first-child,
+  .mypage__inquiry:nth-child(2),
+  .mypage__inquiry:nth-child(3) { position: relative; min-height: 70px; height: auto; margin-top: 0; padding: 28px 76px 14px 0; font-size: 14px; }
+  .mypage__inquiry p,
+  .mypage__inquiry:first-child p { position: static; transform: none; }
+  .mypage__status { top: 8px; width: 63px; height: 24px; font-size: 12px; }
+  .mypage__activity--inquiries .mypage__rule--bottom { display: block; position: relative; margin-top: 0; }
+}
