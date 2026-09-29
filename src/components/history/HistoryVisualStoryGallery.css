@@ -1,0 +1,172 @@
+.history-visual-story {
+    position: relative;
+
+    width: 100%;
+    height: 1300px;
+
+    overflow: hidden;
+
+    background: #e60012;
+    color: #fff;
+}
+/* =========================
+   TITLE
+   ========================= */
+
+.history-visual-story__title {
+    position: absolute;
+
+    top: 189px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin: 0;
+
+    font-family: 'Pexel Grotesk', sans-serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.35;
+
+    white-space: nowrap;
+}
+
+/* =========================
+   SMALL LABELS
+   ========================= */
+
+.history-visual-story__label {
+    position: absolute;
+
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 15px;
+    line-height: 1.3;
+
+    white-space: nowrap;
+
+    transform: translateX(-50%);
+}
+
+.history-visual-story__label--01 {
+    top: 316px;
+    left: 6.85%;
+
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+}
+
+.history-visual-story__label--02 {
+    top: 265px;
+    left: 24.77%;
+
+    font-family: 'Pexel Grotesk', sans-serif;
+}
+
+.history-visual-story__label--03 {
+    top: 265px;
+    left: 75.13%;
+
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+}
+
+.history-visual-story__label--04 {
+    top: 316px;
+    left: 92.9%;
+
+    font-family: 'Pexel Grotesk', sans-serif;
+    font-size: 16px;
+}
+
+/* =========================
+   CARD COMMON
+   ========================= */
+
+.history-card {
+    position: absolute;
+
+    width: 511px;
+    height: 500px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    border: 4px solid #fff;
+    background: #fff;
+
+    color: #151515;
+}
+
+.history-card__image {
+    position: absolute;
+
+    top: -4px;
+    left: -4px;
+
+    width: 511px;
+    height: 398px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+/* CARD BOTTOM */
+
+.history-card__bottom {
+    position: absolute;
+
+    top: 404px;
+    left: 6px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.history-card__bottom h3 {
+    margin: 0;
+
+    color: #e60012;
+
+    font-family: 'DeltaGlassKR', sans-serif;
+    font-size: 68px;
+    font-weight: 400;
+    line-height: 0.9;
+
+    white-space: nowrap;
+}
+
+.history-card__bottom p {
+    width: 211px;
+
+    margin: 0;
+
+    color: #151515;
+
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.history-card--create {
+    top: 452px;
+    left: 107px;
+    transform: rotate(0.89deg);
+}
+
+.history-card--play {
+    top: 341px;
+    left: 704px;
+    transform: rotate(0.17deg);
+}
+
+.history-card--share {
+    top: 397px;
+    left: 1298px;
+    transform: rotate(-0.74deg);
+}

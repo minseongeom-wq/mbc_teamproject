@@ -2,7 +2,7 @@ import { generatePath, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.jsx';
 import { routePaths } from './routes/routePaths.js';
 import HomePage from './pages/home/HomePage.jsx';
-import MarioPage from './pages/mario/MarioPage.jsx';
+import MarioPage from './components/mario/mario.jsx';
 import ZeldaPage from './pages/zelda/ZeldaPage.jsx';
 import SplatoonPage from './pages/splatoon/SplatoonPage.jsx';
 import StorePage from './pages/store/StorePage.jsx';
@@ -23,6 +23,7 @@ export default function App() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path={routePaths.home} element={<HomePage />} />
+        <Route path="/mario" element={<MarioPage />} />
         <Route path={generatePath(routePaths.ipDetail, { slug: 'mario' })} element={<MarioPage />} />
         <Route path={generatePath(routePaths.ipDetail, { slug: 'zelda' })} element={<ZeldaPage />} />
         <Route path={generatePath(routePaths.ipDetail, { slug: 'splatoon' })} element={<SplatoonPage />} />

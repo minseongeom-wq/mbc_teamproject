@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'Heir of Light';
+  src: url('/fonts/HeirofLightOTFRegular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.zelda-video {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--zelda-gold);
+  color: #fff;
+}
+
+.zelda-video__title {
+  position: absolute;
+  top: 34.722222%;
+  left: 18.90625%;
+  display: flex;
+  align-items: center;
+  gap: 1.5625cqw;
+  height: 17.1875cqw;
+  margin: 0;
+  font-family: 'Heir of Light', serif;
+  font-size: 6.25cqw;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.zelda-video__divider {
+  position: relative;
+  flex: 0 0 0;
+  height: 17.1875cqw;
+}
+
+.zelda-video__title > span:first-child {
+  flex: 0 0 29.479167cqw;
+}
+
+.zelda-video__title > span:last-child {
+  flex: 0 0 26.927083cqw;
+}
+
+.zelda-video__divider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  max-width: none;
+  transform-origin: top left;
+  transform: rotate(90deg) scale(calc(100cqw / 1920px));
+}
+
+.zelda-video__diamonds {
+  position: absolute;
+  top: 44.722222%;
+  left: 2.135417%;
+  display: flex;
+  flex-direction: column;
+  gap: .416667cqw;
+}
+
+.zelda-video__diamonds > span {
+  position: relative;
+  width: .901756cqw;
+  height: .901756cqw;
+}
+
+.zelda-video__diamonds > span::before,
+.zelda-video__diamonds > span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.zelda-video__diamonds > span::before {
+  width: .637645cqw;
+  height: .637645cqw;
+  border: .052083cqw solid currentColor;
+}
+
+.zelda-video__diamonds > span::after {
+  width: .220971cqw;
+  height: .220971cqw;
+  background: currentColor;
+}
