@@ -1,7 +1,7 @@
 ﻿body { margin: 0; background: #fff; }
 .site-shell { color: #151515; background: #fff; font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
 .site-shell *, .site-shell *::before, .site-shell *::after { box-sizing: border-box; }
-.site-shell:not(:has(.home-page, .mario-page)) { padding-top: 75px; }
+.site-shell:has(.placeholder-page) { padding-top: 75px; }
 .site-shell > main { min-height: 60vh; padding-left: max(24px, calc((100% - 1120px) / 2)); padding-right: max(24px, calc((100% - 1120px) / 2)); }
 .site-shell a:focus-visible { outline: 2px solid #2563eb; outline-offset: 4px; }
 .site-shell nav[aria-label="스토어 단계 이동"] { border-top: 1px solid #ededed; padding: 24px 0 32px; font-size: 14px; color: #525252; }

@@ -1,7 +1,6 @@
 .site-shell--splatoon { position: relative; }
 .site-shell--splatoon > main { padding: 0; min-height: 0; }
 .site-shell--splatoon > .common-footer { margin-top: 0; }
-.site-shell--splatoon > .common-header { position: absolute; inset: 0 0 auto; z-index: 200; padding-top: 20px; }
 .splatoon-intro { position: relative; width: 100%; aspect-ratio: 1920 / 1081; overflow: hidden; background: #181a19; }
 .splatoon-intro__stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1081px; transform-origin: top left; pointer-events: none; }
 .splatoon-intro__background { position: absolute; inset: 0; width: 1920px; height: 1081px; object-fit: cover; }
@@ -20,7 +19,6 @@
 @media (max-width: 767px) {
   .splatoon-intro { box-sizing: content-box; padding-top: 80px; }
   .splatoon-intro__stage { top: 80px; }
-  .site-shell--splatoon > .common-header { padding-top: 15px; }
 }
 @font-face {
   font-family: 'SplatoonK';
