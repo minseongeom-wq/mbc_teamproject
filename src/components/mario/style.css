@@ -20,6 +20,12 @@
     zoom: var(--mario-scale);
     margin-inline: auto;
 }
+.mario-mobile-intro {
+    display: none;
+}
+.mario-mobile-hero {
+    display: none;
+}
 .mario-page p {
     margin: 0;
 }
@@ -4255,4 +4261,200 @@
 #mario-page .mario-layer-26 {
     filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff)
         drop-shadow(0 -1px 0 #fff);
+}
+
+/* Figma 2890:5072, 360 × 787 mobile Intro. */
+@media (max-width: 767px) {
+    .site-shell:has(.mario-page) > .common-header {
+        padding: 53px 9px 0;
+    }
+
+    .site-shell:has(.mario-page) .navigation__toggle {
+        text-align: right;
+        padding-right: 18px;
+    }
+
+    .mario-page .mario-mobile-intro {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 787px;
+        overflow: hidden;
+        background: linear-gradient(270deg, #4bc4fd 0%, #4cc5fe 23.388%, #45bffd 48.504%, #41bbfc 68.772%, #35b5fc 100%);
+    }
+
+    .mario-page .mario-stage .mario-intro {
+        display: none;
+    }
+
+    .mario-page .mario-mobile-intro__cloud {
+        position: absolute;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .mario-page .mario-mobile-intro__cloud img {
+        position: absolute;
+        display: block;
+        max-width: none;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--top-left {
+        top: 0;
+        left: 0;
+        width: 146px;
+        height: 379px;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--top-left img {
+        top: -1.88%;
+        left: -252.74%;
+        width: 352.74%;
+        height: 101.91%;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--top-right {
+        top: 99px;
+        right: 0;
+        width: 76px;
+        height: 169px;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--top-right img {
+        top: 0;
+        left: -0.16%;
+        width: 177.96%;
+        height: 100%;
+    }
+
+    .mario-page .mario-mobile-intro__logo {
+        position: absolute;
+        top: 330px;
+        left: 50%;
+        width: min(291px, calc(100% - 68px));
+        height: auto;
+        aspect-ratio: 291 / 124;
+        object-fit: fill;
+        transform: translateX(-50%);
+    }
+
+    .mario-page .mario-mobile-intro__cloud--bottom-right {
+        top: 459px;
+        right: 0;
+        width: 138px;
+        height: 247px;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--bottom-right img {
+        top: -0.07%;
+        left: 0.3%;
+        width: 143.49%;
+        height: 100.17%;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--bottom-left {
+        top: 583px;
+        left: 0;
+        width: 95px;
+        height: 169px;
+    }
+
+    .mario-page .mario-mobile-intro__cloud--bottom-left img {
+        top: 0;
+        left: -42.24%;
+        width: 142.37%;
+        height: 100%;
+    }
+}
+
+/* Figma 2890:5079, 360 × 787 mobile Hero. */
+@media (max-width: 767px) {
+    .mario-page .mario-mobile-hero {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 787px;
+        overflow: hidden;
+    }
+
+    .mario-page .mario-stage .mario-hero {
+        display: none;
+    }
+
+    .mario-page .mario-mobile-hero__background {
+        position: absolute;
+        top: -45.87%;
+        left: -43.33%;
+        width: 186.67%;
+        height: 145.91%;
+        max-width: none;
+        pointer-events: none;
+    }
+
+    .mario-page .mario-mobile-hero__decoration {
+        position: absolute;
+        top: 394.54px;
+        left: 98.95px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 31.312px;
+        height: 33.315px;
+        pointer-events: none;
+    }
+
+    .mario-page .mario-mobile-hero__decoration img {
+        width: 23.713px;
+        height: 26.984px;
+        transform: rotate(-19.34deg);
+    }
+
+    .mario-page .mario-mobile-hero__cloud {
+        position: absolute;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .mario-page .mario-mobile-hero__cloud img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        max-width: none;
+        width: 98px;
+        height: 122px;
+    }
+
+    .mario-page .mario-mobile-hero__cloud--left {
+        top: 279px;
+        left: -20px;
+        width: 98px;
+        height: 122px;
+    }
+
+    .mario-page .mario-mobile-hero__cloud--right {
+        top: 134px;
+        right: 0;
+        width: 49px;
+        height: 122px;
+    }
+
+    .mario-page .mario-mobile-hero__cloud--right img {
+        top: -0.19%;
+        height: 100.37%;
+    }
+
+    .mario-page .mario-mobile-hero__characters {
+        position: absolute;
+        top: calc(50% + 126px);
+        left: 50%;
+        width: min(360px, 100%);
+        height: auto;
+        aspect-ratio: 360 / 237;
+        max-width: none;
+        object-fit: fill;
+        box-shadow: -2px 5px 10px rgba(0, 0, 0, 0.25);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
 }

@@ -268,10 +268,18 @@ export default function Mario() {
   useEffect(() => {
     const page = pageRef.current;
     const intro = page.querySelector("#mario-intro");
-    const hero = page.querySelector("#mario-hero");
+    const mobileIntro = page.querySelector(".mario-mobile-intro");
+    const hero = page.querySelector(
+      matchMedia("(max-width: 767px)").matches
+        ? ".mario-mobile-hero"
+        : "#mario-hero",
+    );
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const updateDepth = () => {
-      const introTop = intro.getBoundingClientRect().top;
+      const visibleIntro = matchMedia("(max-width: 767px)").matches
+        ? mobileIntro
+        : intro;
+      const introTop = visibleIntro.getBoundingClientRect().top;
       const heroTop = hero.getBoundingClientRect().top;
       const distance = heroTop - introTop;
       const progress = distance > 0
@@ -286,10 +294,12 @@ export default function Mario() {
     const observer = new ResizeObserver(updateDepth);
     observer.observe(intro);
     window.addEventListener("scroll", updateDepth, { passive: true });
+    window.addEventListener("resize", updateDepth);
     reducedMotion.addEventListener("change", updateDepth);
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", updateDepth);
+      window.removeEventListener("resize", updateDepth);
       reducedMotion.removeEventListener("change", updateDepth);
       hero.style.removeProperty("--hero-character-offset");
       hero.style.removeProperty("--hero-character-scale");
@@ -297,7 +307,11 @@ export default function Mario() {
     };
   }, []);
   useEffect(() => {
-    const hero = pageRef.current?.querySelector("#mario-hero");
+    const hero = pageRef.current?.querySelector(
+      matchMedia("(max-width: 767px)").matches
+        ? ".mario-mobile-hero"
+        : "#mario-hero",
+    );
     if (!hero) return undefined;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setHeroCharacterPhase("done");
@@ -317,7 +331,12 @@ export default function Mario() {
   useEffect(() => {
     const page = pageRef.current;
     const intro = page.querySelector("#mario-intro");
-    const hero = page.querySelector("#mario-hero");
+    const mobileIntro = page.querySelector(".mario-mobile-intro");
+    const hero = page.querySelector(
+      matchMedia("(max-width: 767px)").matches
+        ? ".mario-mobile-hero"
+        : "#mario-hero",
+    );
     let frame = null;
 
     const cancelScroll = () => {
@@ -339,7 +358,10 @@ export default function Mario() {
     return;
   }
 
-  const introBounds = intro.getBoundingClientRect();
+  const visibleIntro = matchMedia("(max-width: 767px)").matches
+    ? mobileIntro
+    : intro;
+  const introBounds = visibleIntro.getBoundingClientRect();
   const heroBounds = hero.getBoundingClientRect();
 
   let targetY = null;
@@ -659,6 +681,42 @@ useEffect(() => {
   return (
     <div className="mario-page" ref={pageRef}>
       <h1 className="mario-sr-only">슈퍼 마리오의 세계</h1>
+      <section className="mario-mobile-intro" aria-label="intro">
+        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--top-left" aria-hidden="true">
+          <img src={img16} alt="" />
+        </div>
+        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--top-right" aria-hidden="true">
+          <img src={img21} alt="" />
+        </div>
+        <img
+          className="mario-mobile-intro__logo"
+          src={img8D20F950367F4636823F1De375876E331}
+          alt="SUPER NINTENDO WORLD"
+        />
+        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--bottom-right" aria-hidden="true">
+          <img src={img21} alt="" />
+        </div>
+        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--bottom-left" aria-hidden="true">
+          <img src={img21} alt="" />
+        </div>
+      </section>
+      <section className="mario-mobile-hero" aria-label="hero">
+        <img className="mario-mobile-hero__background" src={imgHero} alt="" />
+        <div className="mario-mobile-hero__decoration" aria-hidden="true">
+          <img src={imgEllipse32} alt="" />
+        </div>
+        <div className="mario-mobile-hero__cloud mario-mobile-hero__cloud--left" aria-hidden="true">
+          <img src={img21} alt="" />
+        </div>
+        <div className="mario-mobile-hero__cloud mario-mobile-hero__cloud--right" aria-hidden="true">
+          <img src={img21} alt="" />
+        </div>
+        <img
+          className="mario-mobile-hero__characters"
+          src={imgFrame801}
+          alt="마리오와 버섯 왕국의 친구들"
+        />
+      </section>
       <div className="mario-stage">
         <div className="mario-opening">
           <div className="mario-opening-sky" aria-hidden="true">
