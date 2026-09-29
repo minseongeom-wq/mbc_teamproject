@@ -78,3 +78,8 @@
   .zelda-hero__title { top: 40%; width: min(76vw, 631px); height: auto; }
   .zelda-hero__scroll-line { height: 120px; }
 }
+/* Zelda/Body: user-requested weight 100, 20px, 150%, 0 spacing. */
+.zelda-content {
+  --zelda-body-font: 100 20px/1.5 'Zelda Pretendard', sans-serif;
+  --zelda-body-letter-spacing: 0;
+}

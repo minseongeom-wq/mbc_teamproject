@@ -2,6 +2,10 @@ import ZeldaHeroSection from './ZeldaHeroSection';
 import ZeldaVideoSection from './ZeldaVideoSection';
 import ZeldaCharacterSection from './ZeldaCharacterSection';
 import ZeldaContent2Section from './ZeldaContent2Section';
+import ZeldaContent3Section from './ZeldaContent3Section';
+import ZeldaContent4Section from './ZeldaContent4Section';
+import ZeldaAboutSection from './ZeldaAboutSection';
+import ZeldaStoreSection from './ZeldaStoreSection';
 import './style.css';
 
 export default function ZeldaContent() {
@@ -11,6 +15,10 @@ export default function ZeldaContent() {
       <ZeldaVideoSection />
       <ZeldaCharacterSection />
       <ZeldaContent2Section />
+      <ZeldaContent3Section />
+      <ZeldaContent4Section />
+      <ZeldaAboutSection />
+      <ZeldaStoreSection />
     </div>
   );
 }

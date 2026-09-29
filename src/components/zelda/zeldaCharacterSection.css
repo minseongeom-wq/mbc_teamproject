@@ -83,7 +83,7 @@
 
 .zelda-character__intro h3 { font: 400 56px/1 'Heir of Light', serif; color: rgb(255 255 255 / .5); }
 .zelda-character__intro p,
-.zelda-character__description { font-size: 24px; font-weight: 300; line-height: 1.5; white-space: pre-line; }
+.zelda-character__description { font: var(--zelda-body-font); letter-spacing: var(--zelda-body-letter-spacing); white-space: pre-line; }
 .zelda-character__intro p { overflow-wrap: break-word; }
 .zelda-character__description { white-space: pre; }
 .zelda-character--beedle .zelda-character__intro { width: 545px; }

@@ -1,0 +1,14 @@
+.zelda-about { position: relative; left: 50%; width: 100vw; margin-left: -50vw; aspect-ratio: 16 / 9; overflow: hidden; container-type: inline-size; background: #dadada; }
+.zelda-about__canvas { position: relative; width: 1920px; height: 1080px; transform-origin: top left; transform: scale(calc(100cqw / 1920px)); }
+.zelda-about p, .zelda-about h2 { margin: 0; }
+.zelda-about__background { position: absolute; left: 0; top: 0; width: 1920px; height: 1081px; max-width: none; object-fit: cover; }
+.zelda-about__text { position: absolute; left: 743px; top: 314px; width: 435px; height: 351px; text-align: center; color: rgb(255 255 255 / .5); mix-blend-mode: plus-lighter; white-space: nowrap; }
+.zelda-about__text h2 { position: absolute; left: 50%; top: 0; transform: translateX(-50%); font: 400 120px/1.15 'Triforce', serif; }
+.zelda-about__text p { position: absolute; left: 210.5px; top: 320px; transform: translateX(-50%); font: 500 24px 'DNF Forged Blade', serif; }
+.zelda-about__more { position: absolute; left: 850px; top: 705px; width: 208px; height: 62px; border: 6px solid rgb(255 255 255 / .3); border-radius: 0; padding: 0; background: transparent; opacity: 1; color: rgb(255 255 255 / .5); mix-blend-mode: plus-lighter; overflow: hidden; }
+.zelda-about__more span { position: absolute; left: calc(50% + .5px); top: calc(50% - 15px); transform: translateX(-50%); font: 500 24px 'DNF Forged Blade', serif; white-space: nowrap; }
+.zelda-about__more { text-decoration: none; }
+.zelda-about__more:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.zelda-about__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
+.zelda-about__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
+.zelda-about__diamonds > span::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12.243px; height: 12.243px; border: 1px solid currentColor; transform: translate(-50%, -50%) rotate(45deg); }
