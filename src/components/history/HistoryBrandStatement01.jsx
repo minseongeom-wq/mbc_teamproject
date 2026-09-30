@@ -3,25 +3,23 @@ import "./HistoryBrandStatement01.css";
 function HistoryBrandStatement01() {
   return (
     <section className="history-brand-01">
-      {/* 03 섹션에서 이어지는 빨간 블록 */}
-      <div className="history-brand-01__red history-brand-01__red--left" />
-      <div className="history-brand-01__red history-brand-01__red--right" />
-
       {/* 중앙 타이틀 */}
       <h2 className="history-brand-01__title">
-        ORIGINALITY
+        <span className="history-service-motion__title-text">ORIGINALITY</span>
       </h2>
 
       {/* 중앙 이미지 */}
       <div className="history-brand-01__visual">
-        <img
-          src="/images/history/originality.png"
-          alt=""
-        />
+        <div className="history-service-motion__image">
+          <img
+            src="/images/history/originality.png"
+            alt=""
+          />
+        </div>
       </div>
 
       {/* 왼쪽 설명 */}
-      <div className="history-brand-01__copy history-brand-01__copy--left">
+      <div className="history-brand-01__copy history-brand-01__copy--left history-service-motion__copy">
         <strong>01.</strong>
 
         <p>
@@ -36,7 +34,7 @@ function HistoryBrandStatement01() {
       </div>
 
       {/* 오른쪽 설명 */}
-      <div className="history-brand-01__copy history-brand-01__copy--right">
+      <div className="history-brand-01__copy history-brand-01__copy--right history-service-motion__copy">
         <strong>독창성</strong>
 
         <p>

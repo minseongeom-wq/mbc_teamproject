@@ -47,7 +47,7 @@ export default function IntroTransition({ symbolSrc, smallTitle, mainVisualSelec
       intro
         .fromTo(symbol, { autoAlpha: 0, scale: 0.8 }, { autoAlpha: 1, scale: 1, duration: 0.65, ease: 'power3.out' }, 0.2)
         .fromTo(small, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out' }, 0.42)
-        .to(line, { scaleX: 0.5, duration: 0.72, ease: 'power3.inOut' }, 0.98)
+        .to(line, { scaleX: () => Math.min(1, 1920 / root.clientWidth), duration: 0.72, ease: 'power3.inOut' }, 0.98)
         .to([symbol, small], { autoAlpha: 0, duration: 0.24, ease: 'power2.in' }, 1.6)
         .to(line, { scaleX: 1, scaleY: 1, duration: 1.05, ease: 'power4.inOut' }, 1.83)
         .to(redContent, { autoAlpha: 1, duration: 0.22 }, 2.53);

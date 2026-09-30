@@ -24,15 +24,17 @@ function HistoryVisualStoryGallery() {
       </p>
 
       {/* CREATE */}
-      <article className="history-card history-card--create">
+      <article className="history-card history-card--create" tabIndex={0}>
         <img
           className="history-card__image"
           src="/images/history/history-create.png"
           alt=""
         />
+        <span className="history-card__hover-title" aria-hidden="true">CREATE</span>
 
         <div className="history-card__bottom">
           <h3>CREATE</h3>
+          <span className="history-card__hover-name" aria-hidden="true">CREATE</span>
 
           <p>
             익숙한 방식에 머무르지 않고
@@ -45,15 +47,17 @@ function HistoryVisualStoryGallery() {
       </article>
 
       {/* PLAY */}
-      <article className="history-card history-card--play">
+      <article className="history-card history-card--play" tabIndex={0}>
         <img
           className="history-card__image"
           src="/images/history/history-play.png"
           alt=""
         />
+        <span className="history-card__hover-title" aria-hidden="true">PLAY</span>
 
         <div className="history-card__bottom">
           <h3>PLAY</h3>
+          <span className="history-card__hover-name" aria-hidden="true">PLAY</span>
 
           <p>
             닌텐도는 어디서든 시대마다
@@ -66,15 +70,17 @@ function HistoryVisualStoryGallery() {
       </article>
 
       {/* SHARE */}
-      <article className="history-card history-card--share">
+      <article className="history-card history-card--share" tabIndex={0}>
         <img
           className="history-card__image"
           src="/images/history/history-share.png"
           alt=""
         />
+        <span className="history-card__hover-title" aria-hidden="true">SHARE</span>
 
         <div className="history-card__bottom">
           <h3>SHARE</h3>
+          <span className="history-card__hover-name" aria-hidden="true">SHARE</span>
 
           <p>
             혼자서 시작한 놀이가

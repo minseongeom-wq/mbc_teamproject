@@ -21,6 +21,21 @@ test('History intro gives way to the full-height Philosophy section and cleans u
   await expect(page.locator('.pin-spacer')).toHaveCount(0);
 });
 
+test('the thin intro line expands to at most 1920px before filling the screen', async ({ browser }) => {
+  for (const width of [1920, 2560]) {
+    const page = await browser.newPage({ viewport: { width, height: 900 } });
+    await page.goto('/about/history', { waitUntil: 'domcontentloaded' });
+    const line = page.locator('.intro-transition__line');
+    await page.waitForFunction(() => {
+      const matrix = new DOMMatrix(getComputedStyle(document.querySelector('.intro-transition__line')).transform);
+      return matrix.a > Math.min(1, 1920 / window.innerWidth) - 0.005 && matrix.d < 0.003;
+    }, undefined, { timeout: 6000 });
+    const lineWidth = await line.evaluate(element => element.getBoundingClientRect().width);
+    expect(Math.abs(lineWidth - 1920)).toBeLessThan(40);
+    await page.close();
+  }
+});
+
 test('the next section waits until the full-height Story hero has finished its pinned scroll', async ({ browser }) => {
   const page = await browser.newPage({ viewport: { width: 1920, height: 900 } });
   await page.goto('/about/history', { waitUntil: 'domcontentloaded' });

@@ -1,7 +1,40 @@
 .history-service-stack {
+  --history-originality-sticky-offset: clamp(-400px, calc(100dvh - 1230px), 0px);
+
   position: relative;
   width: 100%;
   isolation: isolate;
+}
+
+/* The stepped red edge follows the previous section in normal document flow. */
+.history-service-stack__entry-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 232px;
+  pointer-events: none;
+}
+
+.history-service-stack__entry-edge::before,
+.history-service-stack__entry-edge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  background: #e60012;
+}
+
+.history-service-stack__entry-edge::before {
+  left: 0;
+  width: 50%;
+  height: 232px;
+}
+
+.history-service-stack__entry-edge::after {
+  left: 50%;
+  width: 50.4%;
+  height: 169px;
 }
 
 .history-service-stack__panel {
@@ -14,9 +47,20 @@
   box-shadow: 0 -18px 30px rgb(21 21 21 / 6%);
 }
 
-/* Preserve the original 1230px panel and show its full image on short screens. */
+/* Wait until the 1230px panel fills the viewport before it becomes sticky. */
 .history-service-stack__panel--originality {
-  top: min(0px, calc(100dvh - 980px));
+  top: var(--history-originality-sticky-offset);
+}
+
+.history-service-motion__title-text {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}
+
+.history-service-motion__image {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
 }
 
 .history-service-stack + .history-visual-story {
@@ -38,5 +82,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .history-service-stack { --history-originality-sticky-offset: 0px; }
   .history-service-stack__panel { position: relative; top: auto; }
 }
