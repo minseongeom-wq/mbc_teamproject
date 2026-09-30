@@ -2,9 +2,44 @@
   position: relative;
   width: 100%;
   height: 1080px;
+  overflow: visible;
+  z-index: 11;
+  background: transparent;
+  color: #151515;
+}
+
+.history-awards__surface {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.history-awards__content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: #fff;
-  color: #151515;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.history-awards__dissolve-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .history-awards__dissolve-mask { display: none; }
+  .history-awards__content { opacity: 1; visibility: visible; }
 }
 
 .history-awards__grid {

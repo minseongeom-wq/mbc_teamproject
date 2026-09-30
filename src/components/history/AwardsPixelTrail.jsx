@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { getAwardsGridMetrics } from './historyAwardsGrid';
 
-// The Figma grid has 40px squares separated by a 1px gutter.
-const CELL_STEP = 41;
-const PIXEL_SIZE = 40;
 const LIFETIME = 650;
 const MAX_PIXELS = 24;
 const SHADES = [21, 65, 115, 170, 218];
@@ -50,18 +48,17 @@ function AwardsPixelTrail() {
       const bounds = section.getBoundingClientRect();
       const localX = (event.clientX - bounds.left) * section.clientWidth / bounds.width;
       const localY = (event.clientY - bounds.top) * section.clientHeight / bounds.height;
-      const scaleX = grid.clientWidth / (grid.naturalWidth || 1920);
-      const scaleY = grid.clientHeight / (grid.naturalHeight || 1080);
-      const column = Math.floor((localX - grid.offsetLeft) / (CELL_STEP * scaleX));
-      const row = Math.floor((localY - grid.offsetTop) / (CELL_STEP * scaleY));
-      const x = grid.offsetLeft + column * CELL_STEP * scaleX;
-      const y = grid.offsetTop + row * CELL_STEP * scaleY;
+      const { originX, originY, stepX, stepY, pixelWidth, pixelHeight } = getAwardsGridMetrics(grid);
+      const column = Math.floor((localX - originX) / stepX);
+      const row = Math.floor((localY - originY) / stepY);
+      const x = originX + column * stepX;
+      const y = originY + row * stepY;
       const cell = `${column}:${row}`;
       if (cell === lastCell || localX < 0 || localY < 0 || localX >= section.clientWidth || localY >= section.clientHeight) return;
 
       lastCell = cell;
       pixels = pixels.filter((pixel) => pixel.cell !== cell);
-      pixels.push({ cell, x, y, width: PIXEL_SIZE * scaleX, height: PIXEL_SIZE * scaleY, created: performance.now() });
+      pixels.push({ cell, x, y, width: pixelWidth, height: pixelHeight, created: performance.now() });
       if (pixels.length > MAX_PIXELS) pixels.shift();
       if (!frame) frame = requestAnimationFrame(draw);
     };
