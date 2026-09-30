@@ -141,6 +141,12 @@
 .home-discovery__icon-2 { position: absolute; background-color: rgba(105,105,105,0.5); border-width: 1.977px; border-color: var(--color-black, #000); border-style: solid; left: 42.51px; border-radius: 39.544px; width: 39.544px; height: 39.544px; top: 14.83px; }
 .home-discovery__icon-3 { position: absolute; background-color: rgba(105,105,105,0.5); border-width: 1.977px; border-color: var(--color-black, #000); border-style: solid; left: 71.18px; border-radius: 39.544px; width: 39.544px; height: 39.544px; top: 14.83px; }
 .home-discovery__icon-4 { position: absolute; background-color: rgba(105,105,105,0.5); border-width: 1.977px; border-color: var(--color-black, #000); border-style: solid; left: 99.85px; border-radius: 39.544px; width: 39.544px; height: 39.544px; top: 14.83px; }
+.home-discovery__game-card-01 .home-discovery__game-image { overflow: hidden; }
+.home-discovery__game-card-01 .home-discovery__image-3 { object-fit: cover; object-position: center; }
+.home-discovery__animal-logo { position: absolute; left: 12%; top: 10%; width: 95%; height: auto; pointer-events: none; }
+.home-discovery__game-card-01 :is(.home-discovery__icon, .home-discovery__icon-2, .home-discovery__icon-3, .home-discovery__icon-4) { overflow: hidden; background: #fff; border-color: var(--color-action-primary, #e60012); }
+.home-discovery__game-card-01 :is(.home-discovery__icon, .home-discovery__icon-2, .home-discovery__icon-3, .home-discovery__icon-4) img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.home-discovery__game-card-01 .home-discovery__icon-4 img { object-position: center top; }
 .home-discovery__text-4 { word-break: break-word; position: absolute; font-family: 'Common Pretendard', sans-serif; font-weight: 400; line-height: 34.601px; left: 16.8px; font-style: normal; font-size: 35.59px; color: var(--color-black, #000); top: 189.81px; letter-spacing: 4.4487px; white-space: nowrap; }
 .home-discovery__game-card-02 { position: relative; flex-shrink: 0; width: 237.266px; height: 237.266px; }
 .home-discovery__game-image-2 { position: absolute; left: 0; width: 237.266px; height: 237.266px; top: 0; }
