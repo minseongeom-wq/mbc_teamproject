@@ -20,10 +20,23 @@ function startVideo(event) {
 // Supply the original clips as { pink, victory, yellow } video URLs.
 export default function Con1({ videos = {} }) {
   const container = useRef(null);
+  const title = useRef(null);
   const [scale, setScale] = useState(1);
+  const [isTitleRevealed, setIsTitleRevealed] = useState(false);
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => setScale(entry.contentRect.width / 1920));
     observer.observe(container.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const target = title.current;
+    if (!target) return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setIsTitleRevealed(true);
+      observer.disconnect();
+    }, { threshold: 0.2 });
+    observer.observe(target);
     return () => observer.disconnect();
   }, []);
   return (
@@ -31,13 +44,15 @@ export default function Con1({ videos = {} }) {
       <div className="splatoon-con1__stage" style={{ transform: `scale(${scale})` }}>
         <div className="splatoon-con1__background" aria-hidden="true"><img src={asset('222a5.png')} alt="" /></div>
         <div className="splatoon-con1__inner">
-          <h2 id="splatoon-con1-title" className="splatoon-con1__title">쏘고, 물들이고, 점령해라!<br />나의 색깔로 세상을 물들이세요!</h2>
+          <h2 ref={title} id="splatoon-con1-title" className={`splatoon-con1__title splatoon-title-splat${isTitleRevealed ? ' is-revealed' : ''}`}>쏘고, 물들이고, 점령해라!<br />나의 색깔로 세상을 물들이세요!</h2>
           <div className="splatoon-con1__graffiti" aria-hidden="true"><img src={asset('d0f08.png')} alt="" /></div>
           <div className="splatoon-con1__bear" aria-hidden="true">
             <div className="splatoon-con1__bear-paper" />
-            <div className="splatoon-con1__bear-mask" style={{ maskImage: `url(${asset('321cd.png')})` }} />
-            <img className="splatoon-con1__eye splatoon-con1__eye--left" src={asset('f33cc.svg')} alt="" />
-            <img className="splatoon-con1__eye splatoon-con1__eye--right" src={asset('f33cc.svg')} alt="" />
+            <div className="splatoon-con1__bear-creature">
+              <div className="splatoon-con1__bear-mask" style={{ maskImage: `url(${asset('321cd.png')})` }} />
+              <img className="splatoon-con1__eye splatoon-con1__eye--left" src={asset('f33cc.svg')} alt="" />
+              <img className="splatoon-con1__eye splatoon-con1__eye--right" src={asset('f33cc.svg')} alt="" />
+            </div>
             <img className="splatoon-con1__bear-frame" src={asset('0a9e4.png')} alt="" />
           </div>
           {clips.map(({ key, title, frame, image, video }) => (

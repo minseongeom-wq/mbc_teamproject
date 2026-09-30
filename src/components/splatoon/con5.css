@@ -5,11 +5,62 @@
 .splatoon-con5__inner { position: absolute; left: 38px; top: 33px; width: 1844.563px; height: 1014.999px; }
 .splatoon-con5__art { position: absolute; overflow: hidden; pointer-events: none; }
 .splatoon-con5__art img { position: absolute; display: block; max-width: none; }
-.splatoon-con5__title { position: absolute; left: 384px; top: 0; display: grid; place-items: center; width: 997.074px; height: 209.675px; margin: 0; font-size: 128px; font-weight: 400; line-height: 1.4; white-space: nowrap; transform: rotate(-1.78deg); -webkit-text-stroke: 30px #000; paint-order: stroke fill; }
-.splatoon-con5__card { position: absolute; display: block; transform: rotate(-3deg); }
+.splatoon-con5__speech, .splatoon-con5__speech-mark { position: absolute; inset: 0; opacity: 0; pointer-events: none; will-change: opacity, filter, transform; }
+.splatoon-con5__speech-mark { transform-origin: var(--speech-mark-origin-x) var(--speech-mark-origin-y); }
+.splatoon-con5.is-revealed .splatoon-con5__speech--left { animation: splatoon-con5-speech-left .24s .14s cubic-bezier(.12, .82, .2, 1) both; }
+.splatoon-con5.is-revealed .splatoon-con5__speech--right { animation: splatoon-con5-speech-right .28s .34s cubic-bezier(.12, .82, .2, 1) both; }
+.splatoon-con5.is-revealed .splatoon-con5__speech-mark--left { animation: splatoon-con5-mark-appear .01s var(--speech-mark-delay) both, splatoon-con5-mark-sharp-loop .62s var(--speech-mark-delay) linear infinite; }
+.splatoon-con5.is-revealed .splatoon-con5__speech-mark--right { animation: splatoon-con5-mark-appear .01s var(--speech-mark-delay) both, splatoon-con5-mark-round-loop 3s var(--speech-mark-delay) ease-in-out infinite; }
+.splatoon-con5__title { --splatoon-title-rest-transform: rotate(-1.78deg); position: absolute; left: 384px; top: 0; display: grid; place-items: center; width: 997.074px; height: 209.675px; margin: 0; font-size: 128px; font-weight: 400; line-height: 1.4; white-space: nowrap; -webkit-text-stroke: 30px #000; paint-order: stroke fill; }
+.splatoon-con5__card { position: absolute; display: block; transform: rotate(-3deg); transform-origin: center; }
 .splatoon-con5__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.splatoon-con5__card:hover { z-index: 1; transform: rotate(-3deg) scale(1.1); }
 .splatoon-con5__card:focus-visible { outline: 5px solid #ddfc06; outline-offset: 8px; }
 @media (prefers-reduced-motion: no-preference) {
-  a.splatoon-con5__card { transition: transform 160ms ease; }
-  a.splatoon-con5__card:hover { transform: rotate(-3deg) translateY(-5px); }
+  .splatoon-con5__card { transition: transform 180ms ease-out; }
+}
+
+@keyframes splatoon-con5-speech-left {
+  0% { opacity: 0; filter: blur(13px); transform: translate(38px, 52px) scale(.68); }
+  58% { opacity: .92; filter: blur(2px); transform: translate(-4px, -6px) scale(1.035); }
+  100% { opacity: 1; filter: blur(0); transform: translate(0, 0) scale(1); }
+}
+
+@keyframes splatoon-con5-speech-right {
+  0% { opacity: 0; filter: blur(13px); transform: translate(-36px, 52px) scale(.72); }
+  62% { opacity: .94; filter: blur(2px); transform: translate(3px, -5px) scale(1.025); }
+  100% { opacity: 1; filter: blur(0); transform: translate(0, 0) scale(1); }
+}
+
+@keyframes splatoon-con5-mark-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes splatoon-con5-mark-sharp-loop {
+  0%, 100% { transform: translate(0, 0); }
+  12% { transform: translate(-2px, -1.4px); }
+  25% { transform: translate(1.6px, .9px); }
+  39% { transform: translate(-1.4px, 2px); }
+  51% { transform: translate(2px, -1.7px); }
+  67% { transform: translate(-1.8px, .8px); }
+  82% { transform: translate(1.3px, -2px); }
+  91% { transform: translate(-.8px, .6px); }
+}
+
+@keyframes splatoon-con5-mark-round-loop {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  12% { transform: translate(-2px, -1.4px) rotate(-4deg); }
+  25% { transform: translate(1.6px, .9px) rotate(3.2deg); }
+  39% { transform: translate(-1.4px, 2px) rotate(-2.8deg); }
+  51% { transform: translate(2px, -1.7px) rotate(4deg); }
+  67% { transform: translate(-1.8px, .8px) rotate(-3.6deg); }
+  82% { transform: translate(1.3px, -2px) rotate(2.4deg); }
+  91% { transform: translate(-.8px, .6px) rotate(-1.6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splatoon-con5__speech, .splatoon-con5__speech-mark,
+  .splatoon-con5.is-revealed .splatoon-con5__speech,
+  .splatoon-con5.is-revealed .splatoon-con5__speech-mark { opacity: 1; filter: none; animation: none; transform: none; }
 }

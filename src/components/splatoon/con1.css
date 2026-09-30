@@ -8,8 +8,9 @@
 .splatoon-con1__graffiti img { width: 311.346px; height: 311.346px; object-fit: cover; transform: rotate(-24.55deg); }
 .splatoon-con1__bear { position: absolute; left: 1493px; top: 230px; width: 226.287px; height: 339.43px; pointer-events: none; }
 .splatoon-con1__bear-paper { position: absolute; left: 26.22px; top: 77.33px; width: 188.416px; height: 200.105px; background: #fff; }
+.splatoon-con1__bear-creature { position: absolute; inset: 0; transform-origin: 50% 88%; animation: splatoon-con1-bear-breathe 3.8s ease-in-out infinite; will-change: transform; }
 .splatoon-con1__bear-mask { position: absolute; left: 24.19px; top: 61.78px; width: 190.754px; height: 254.806px; background: #000; mask-position: 1.934px 8.283px; mask-size: 172.189px 209.002px; mask-repeat: no-repeat; }
-.splatoon-con1__eye { position: absolute; top: 112.81px; }
+.splatoon-con1__eye { position: absolute; top: 112.81px; transform-origin: center; animation: splatoon-con1-eye-blink 5.4s linear infinite; will-change: transform; }
 .splatoon-con1__eye--left { left: 85.5px; }
 .splatoon-con1__eye--right { left: 128.25px; }
 .splatoon-con1__bear-frame { position: absolute; inset: 0; width: 226.287px; height: 339.43px; object-fit: cover; }
@@ -32,3 +33,17 @@
 .splatoon-con1__clip--pink .splatoon-con1__ink img { width: 100%; height: 111.5%; left: 0; top: -3.29%; }
 .splatoon-con1__clip--victory .splatoon-con1__ink img { width: 100%; height: 116.27%; left: 0; top: -6.53%; }
 .splatoon-con1__clip--yellow .splatoon-con1__ink img { width: 103.79%; height: 120%; left: -1.79%; top: -10.28%; }
+
+@keyframes splatoon-con1-bear-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-1.8px) scale(1.012, 1.022); }
+}
+
+@keyframes splatoon-con1-eye-blink {
+  0%, 41%, 44%, 72%, 75%, 100% { transform: scaleY(1); }
+  42.5%, 73.5% { transform: scaleY(.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splatoon-con1__bear-creature, .splatoon-con1__eye { animation: none; }
+}

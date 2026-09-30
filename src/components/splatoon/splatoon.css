@@ -37,6 +37,26 @@
   background: #181a19 url('./assets/6c6fd.png') center / cover fixed;
 }
 .splatoon-page > section { background-color: transparent; }
+.splatoon-title-splat {
+  opacity: 0;
+  transform: var(--splatoon-title-rest-transform, translateZ(0));
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+.splatoon-title-splat.is-revealed { animation: splatoon-title-paint-splat .5s .08s both; }
+
+@keyframes splatoon-title-paint-splat {
+  0% { opacity: 0; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(.035); }
+  6% { opacity: 1; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(.22); }
+  44% { opacity: 1; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(1.18); }
+  64% { transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(.93); }
+  82% { transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(1.035); }
+  100% { opacity: 1; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splatoon-title-splat, .splatoon-title-splat.is-revealed { opacity: 1; animation: none; transform: var(--splatoon-title-rest-transform, translateZ(0)); }
+}
 .splatoon-page :is(
   .splatoon-intro__background,
   .splatoon-con1__background,
