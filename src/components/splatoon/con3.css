@@ -4,16 +4,28 @@
 .splatoon-con3__inner { position: absolute; left: 19px; top: 129.9985px; width: 1882px; height: 1075.303px; }
 .splatoon-con3__art { position: absolute; overflow: hidden; pointer-events: none; }
 .splatoon-con3__art img { position: absolute; display: block; max-width: none; }
-.splatoon-con3__panel-fill { position: absolute; inset: 0; pointer-events: none; }
-.splatoon-con3__panel-fill--hair { clip-path: polygon(28px 424px, 1853px 357px, 1853px 718px, 28px 901px); }
-.splatoon-con3__panel-fill--bottoms { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
-.splatoon-con3__panel-fill--bottoms::before { content: ''; position: absolute; left: 898px; top: 334px; right: 19px; bottom: 177px; background: #fc2167; }
-.splatoon-con3__panel-fill--headgear { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
-.splatoon-con3__panel-fill--headgear::before { content: ''; position: absolute; left: 882px; top: 342px; right: 19px; bottom: 177px; background: #6c3779; }
-.splatoon-con3__panel-fill--eyebrows { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
-.splatoon-con3__panel-fill--tops { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
-.splatoon-con3__panel-fill--shoes { clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
-.splatoon-con3__title { position: absolute; left: 698px; top: 911px; margin: 0; font-size: 96px; font-weight: 400; line-height: 1.4; white-space: nowrap; }
+.splatoon-con3__panel-fill--tops .splatoon-con3__art--paint { z-index: 1; }
+.splatoon-con3__panel-fill--tops .splatoon-con3__art--mark { z-index: 2; }
+.splatoon-con3__panel-fill--tops .splatoon-con3__art--mark-dark img { filter: drop-shadow(0 0 1.5px rgba(255, 255, 255, .95)); }
+.splatoon-con3__panel-fill { position: absolute; inset: 0; background: linear-gradient(to right, var(--panel-left) 0 50%, var(--panel-right) 50% 100%); pointer-events: none; }
+.splatoon-con3__paint-burst { position: absolute; inset: 0; opacity: 0; }
+.splatoon-con3__paint-burst .splatoon-con3__art { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%); will-change: clip-path; }
+.splatoon-con3.is-entered .splatoon-con3__paint-burst { opacity: 1; }
+.splatoon-con3.is-entered .splatoon-con3__paint-burst .splatoon-con3__art { animation: splatoon-con3-paint-expand .3s linear var(--paint-delay, 0s) both; }
+.splatoon-con3__signature { opacity: 0; will-change: clip-path, opacity; }
+.splatoon-con3.is-entered .splatoon-con3__signature--left { animation: splatoon-con3-sign-left .47s .32s cubic-bezier(.28, .05, .5, 1) both; }
+.splatoon-con3.is-entered .splatoon-con3__signature--right { animation: splatoon-con3-sign-right .59s .46s cubic-bezier(.28, .05, .5, 1) both; }
+.splatoon-con3__character-reveal { position: absolute; inset: 0; opacity: 0; will-change: transform, opacity, filter; }
+.splatoon-con3.is-entered .splatoon-con3__character-reveal { animation: splatoon-con3-character-enter .58s var(--character-delay) cubic-bezier(.18, .72, .2, 1) both; }
+.splatoon-con3__panel-fill--hair { --panel-left: #19f4d9; --panel-right: #626ff6; clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--bottoms { --panel-left: #fcff2a; --panel-right: #fc2167; clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--headgear { --panel-left: #deb371; --panel-right: #6c3779; clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--eyebrows { --panel-left: #d6e245; --panel-right: #df929c; clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--tops { --panel-left: #fff; --panel-right: #000; clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__panel-fill--shoes { --panel-left: #eb4038; --panel-right: #757455; clip-path: polygon(38px 409px, 1863px 342px, 1863px 702px, 38px 886px); }
+.splatoon-con3__title { position: absolute; left: 698px; top: 911px; margin: 0; opacity: 0; font-size: 96px; font-weight: 400; line-height: 1.4; white-space: nowrap; transform-origin: center; will-change: transform, opacity; }
+.splatoon-con3.is-entered .splatoon-con3__title { animation: splatoon-con3-paint-splat .5s .08s both; }
+.splatoon-con3__title--hair { left: 703px; top: 926px; line-height: 1; }
 .splatoon-con3__title--bottoms { left: 580px; top: 926px; }
 .splatoon-con3__title--headgear { left: 560px; top: 926px; }
 .splatoon-con3__title--eyebrows { left: 547px; top: 926px; }
@@ -24,8 +36,10 @@
 .splatoon-con3 button:focus-visible { outline: 5px solid #fff; outline-offset: 8px; }
 .splatoon-con3__previous { left: 18px; top: 183px; width: 290px; height: 279px; }
 .splatoon-con3__next { left: 1479.57px; top: 662px; width: 391px; height: 279px; }
+.splatoon-con3__previous--hair { left: 28px; top: 168px; width: 284px; }
+.splatoon-con3__next--hair { left: 1487px; top: 647px; width: 386px; }
 .splatoon-con3__previous--bottoms { left: 28px; top: 168px; width: 284px; }
-.splatoon-con3__next--bottoms { left: 1489.57px; top: 647px; width: 386px; }
+.splatoon-con3__next--bottoms { left: 1487px; top: 647px; width: 386px; }
 .splatoon-con3__previous--headgear { left: 28px; top: 168px; width: 284px; }
 .splatoon-con3__next--headgear { left: 1487px; top: 647px; width: 386px; }
 .splatoon-con3__previous--eyebrows { left: 28px; top: 168px; width: 284px; }
@@ -38,15 +52,79 @@
 .splatoon-con3 button span b { display: block; font: inherit; font-weight: 400; }
 .splatoon-con3__previous span { left: 180px; top: 71px; width: 45px; height: 151px; }
 .splatoon-con3__previous span b { transform: rotate(-90deg); }
-.splatoon-con3__previous--bottoms span { left: 174px; top: 81px; }
-.splatoon-con3__previous--headgear span { left: 174px; top: 81px; }
-.splatoon-con3__previous--eyebrows span { left: 174px; top: 81px; }
-.splatoon-con3__previous--tops span { left: 174px; top: 81px; }
-.splatoon-con3__previous--shoes span { left: 174px; top: 81px; }
+.splatoon-con3__previous--hair span { left: 153.5px; top: 143.36px; width: 162px; height: 45px; line-height: 1; transform: rotate(-90deg); }
+.splatoon-con3__previous--hair span b { transform: none; }
+.splatoon-con3 :is(.splatoon-con3__previous, .splatoon-con3__next) span, .splatoon-con3__nav-squid img { transform-origin: center; transition: transform 180ms ease-out; will-change: transform; }
+.splatoon-con3 .splatoon-con3__previous:hover span { transform: rotate(-90deg) scale(1.1); }
+.splatoon-con3 .splatoon-con3__next:hover span { transform: rotate(90deg) scale(1.1); }
+.splatoon-con3__nav-squid { --squid-motion-time: 5.1s; --squid-motion-delay: -.7s; }
+.splatoon-con3__nav-squid--brown { --squid-motion-time: 5.3s; --squid-motion-delay: -.35s; }
+.splatoon-con3__nav-squid--yellow { --squid-motion-time: 4.7s; --squid-motion-delay: -1.1s; }
+.splatoon-con3 button:hover .splatoon-con3__nav-squid img { animation: splatoon-con3-squid-alive var(--squid-motion-time) ease-in-out var(--squid-motion-delay) infinite; }
+.splatoon-con3__previous:is(.splatoon-con3__previous--bottoms, .splatoon-con3__previous--headgear, .splatoon-con3__previous--eyebrows, .splatoon-con3__previous--tops, .splatoon-con3__previous--shoes) span { left: 153.5px; top: 143.36px; width: 162px; height: 45px; line-height: 1.4; transform: rotate(-90deg); }
+.splatoon-con3__previous:is(.splatoon-con3__previous--bottoms, .splatoon-con3__previous--headgear, .splatoon-con3__previous--eyebrows, .splatoon-con3__previous--tops, .splatoon-con3__previous--shoes) span b { transform: none; }
 .splatoon-con3__next span { left: 65px; top: 111px; width: 45px; height: 90px; color: #000; }
 .splatoon-con3__next span b { transform: rotate(90deg); }
-.splatoon-con3__next--bottoms span { left: 65px; }
-.splatoon-con3__next--headgear span { left: 65px; }
-.splatoon-con3__next--eyebrows span { left: 65px; }
-.splatoon-con3__next--tops span { left: 65px; }
-.splatoon-con3__next--shoes span { left: 65px; }
+.splatoon-con3__next--hair span { left: 86px; top: 144.71px; width: 97px; height: 45px; line-height: 1; transform: rotate(90deg); }
+.splatoon-con3__next--hair span b { transform: none; }
+.splatoon-con3__next:is(.splatoon-con3__next--bottoms, .splatoon-con3__next--headgear, .splatoon-con3__next--eyebrows, .splatoon-con3__next--tops, .splatoon-con3__next--shoes) span { left: 86px; top: 144.71px; width: 97px; height: 45px; line-height: 1.4; transform: rotate(90deg); }
+.splatoon-con3__next:is(.splatoon-con3__next--bottoms, .splatoon-con3__next--headgear, .splatoon-con3__next--eyebrows, .splatoon-con3__next--tops, .splatoon-con3__next--shoes) span b { transform: none; }
+
+@keyframes splatoon-con3-paint-splat {
+  0% { opacity: 0; transform: scale(.035); }
+  6% { opacity: 1; transform: scale(.22); }
+  44% { opacity: 1; transform: scale(1.18); }
+  64% { transform: scale(.93); }
+  82% { transform: scale(1.035); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes splatoon-con3-paint-expand {
+  0% { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%); }
+  22% { clip-path: polygon(39% 38%, 50% 17%, 68% 31%, 86% 39%, 92% 50%, 72% 68%, 50% 84%, 31% 72%, 19% 61%, 14% 50%); }
+  48% { clip-path: polygon(22% 19%, 50% 3%, 86% 13%, 100% 27%, 100% 50%, 88% 84%, 50% 96%, 13% 90%, 4% 77%, 1% 50%); }
+  72% { clip-path: polygon(7% 4%, 50% 0, 100% 2%, 100% 8%, 100% 50%, 98% 98%, 50% 100%, 2% 100%, 0 96%, 0 50%); }
+  100% { clip-path: polygon(0 0, 50% 0, 100% 0, 100% 25%, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 75%, 0 50%); }
+}
+
+@keyframes splatoon-con3-character-enter {
+  from { opacity: 0; filter: blur(12px) saturate(.65); transform: translateX(var(--character-offset)); }
+  to { opacity: 1; filter: blur(0) saturate(1); transform: translateX(0); }
+}
+
+@keyframes splatoon-con3-sign-left {
+  0% { opacity: 0; clip-path: polygon(0 0, 0 0, 0 24%, 0 48%, 0 73%, 0 100%, 0 100%); }
+  4% { opacity: 1; }
+  24% { clip-path: polygon(0 0, 27% 0, 22% 24%, 30% 48%, 24% 73%, 28% 100%, 0 100%); }
+  49% { clip-path: polygon(0 0, 53% 0, 48% 24%, 57% 48%, 51% 73%, 55% 100%, 0 100%); }
+  74% { clip-path: polygon(0 0, 79% 0, 74% 24%, 83% 48%, 77% 73%, 81% 100%, 0 100%); }
+  100% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 24%, 100% 48%, 100% 73%, 100% 100%, 0 100%); }
+}
+
+@keyframes splatoon-con3-sign-right {
+  0% { opacity: 0; clip-path: polygon(0 0, 0 0, 0 20%, 0 42%, 0 64%, 0 82%, 0 100%, 0 100%); }
+  4% { opacity: 1; }
+  20% { clip-path: polygon(0 0, 23% 0, 18% 20%, 26% 42%, 20% 64%, 25% 82%, 21% 100%, 0 100%); }
+  40% { clip-path: polygon(0 0, 44% 0, 39% 20%, 47% 42%, 41% 64%, 46% 82%, 42% 100%, 0 100%); }
+  61% { clip-path: polygon(0 0, 65% 0, 60% 20%, 69% 42%, 62% 64%, 67% 82%, 63% 100%, 0 100%); }
+  81% { clip-path: polygon(0 0, 86% 0, 82% 20%, 89% 42%, 84% 64%, 88% 82%, 85% 100%, 0 100%); }
+  100% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 20%, 100% 42%, 100% 64%, 100% 82%, 100% 100%, 0 100%); }
+}
+
+@keyframes splatoon-con3-squid-alive {
+  0%, 11% { transform: translate(0, 0) rotate(0) scale(1.1); }
+  16% { transform: translate(-2px, -5px) rotate(-2.4deg) scale(1.13, 1.08); }
+  21%, 35% { transform: translate(0, 0) rotate(.2deg) scale(1.1); }
+  40% { transform: translate(3px, -2px) rotate(1.9deg) scale(1.08, 1.13); }
+  47%, 63% { transform: translate(0, 1px) rotate(0) scale(1.1); }
+  68% { transform: translate(-1px, -3px) rotate(-1deg) scale(1.12, 1.09); }
+  73%, 86% { transform: translate(0, 0) rotate(0) scale(1.1); }
+  91% { transform: translate(2px, -4px) rotate(1.4deg) scale(1.09, 1.12); }
+  96%, 100% { transform: translate(0, 0) rotate(0) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splatoon-con3.is-entered :is(.splatoon-con3__paint-burst, .splatoon-con3__character-reveal, .splatoon-con3__title, .splatoon-con3__signature) { opacity: 1; animation: none; transform: none; clip-path: none; }
+  .splatoon-con3.is-entered .splatoon-con3__paint-burst .splatoon-con3__art { animation: none; clip-path: none; }
+  .splatoon-con3 button:hover .splatoon-con3__nav-squid img { animation: none; transform: scale(1.1); }
+}

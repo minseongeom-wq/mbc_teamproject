@@ -2,7 +2,7 @@
 .splatoon-section2__stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1081px; transform-origin: top left; }
 .splatoon-section2__background { position: absolute; inset: 0; width: 1920px; height: 1081px; object-fit: cover; }
 .splatoon-section2__inner { position: absolute; left: 228.004px; top: 181.004px; width: 1461.212px; height: 718.072px; }
-.splatoon-section2__game { position: absolute; left: 566px; top: 105.996px; }
+.splatoon-section2__game { position: absolute; left: 566px; top: 105.996px; display: block; width: 808px; height: 559px; border: 0; background: #000; object-fit: cover; }
 .splatoon-section2__tape { position: absolute; overflow: hidden; pointer-events: none; }
 .splatoon-section2__tape img { position: absolute; top: -243.8%; height: 598.35%; max-width: none; }
 .splatoon-section2__logo { position: absolute; left: 169.39px; top: 96px; }

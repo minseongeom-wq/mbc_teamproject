@@ -24,7 +24,16 @@ export default function Section2() {
       <div className="splatoon-section2__stage" style={{ transform: `scale(${scale})` }}>
         <img className="splatoon-section2__background" src={asset('3a9de.png')} alt="" />
         <div className="splatoon-section2__inner">
-          <img className="splatoon-section2__game" src={asset('00a76.svg')} alt="스플래툰 3의 두 가지 플레이 장면" />
+          <video
+            className="splatoon-section2__game"
+            src={asset('section2-switch-comparison.mp4')}
+            aria-label="Nintendo Switch 1과 2 비교 영상"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
           {tapes.map(([x, y, w, h, angle, width, left]) => <div key={x} className="splatoon-section2__tape" style={{ left: x, top: y, width: w, height: h, transform: `rotate(${angle}deg)` }} aria-hidden="true"><img src={asset('e358f.png')} alt="" style={{ width, left }} /></div>)}
           <img className="splatoon-section2__logo" src={asset('10b72.svg')} alt="Nintendo Store" />
           <h2 id="splatoon-section2-title" className="splatoon-section2__title">Nintendo Store에서<br />새로운 게임을 만나보세요</h2>

@@ -4,13 +4,13 @@
 .splatoon-intro { position: relative; width: 100%; aspect-ratio: 1920 / 1081; overflow: hidden; background: #181a19; }
 .splatoon-intro__stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1081px; transform-origin: top left; pointer-events: none; }
 .splatoon-intro__background { position: absolute; inset: 0; width: 1920px; height: 1081px; object-fit: cover; }
-.splatoon-intro__artwork { position: absolute; left: 211px; top: -130px; width: 1549.503px; height: 1038.841px; }
+.splatoon-intro__artwork { position: absolute; left: 36px; top: -186px; width: 1549.503px; height: 1038.841px; transform: scale(1.2055476); transform-origin: top left; }
 .splatoon-intro__layer { position: absolute; display: flex; align-items: center; justify-content: center; }
 .splatoon-intro__layer-content { flex: none; }
 .splatoon-intro__picture { position: relative; overflow: hidden; }
 .splatoon-intro__picture img { position: absolute; display: block; max-width: none; }
 .splatoon-intro__word { margin: 0; font-family: 'SplatoonK', system-ui, sans-serif; font-weight: 400; line-height: 1.4; white-space: nowrap; }
-.splatoon-intro__word--color { font-size: 70px; color: #bbeab7; }
+.splatoon-intro__word--color { font-size: 64px; color: #bbeab7; }
 .splatoon-intro__word--strategy { font-size: 48px; letter-spacing: -1.92px; color: #b3a1fa; }
 .splatoon-intro__word--shoot { font-size: 96px; color: #9dcc2c; }
 .splatoon-intro__word--squid { font-size: 70px; color: #fdea27; }
@@ -35,6 +35,26 @@
   background: #181a19 url('./assets/6c6fd.png') center / cover fixed;
 }
 .splatoon-page > section { background-color: transparent; }
+.splatoon-title-splat {
+  opacity: 0;
+  transform: var(--splatoon-title-rest-transform, translateZ(0));
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+.splatoon-title-splat.is-revealed { animation: splatoon-title-paint-splat .5s .08s both; }
+
+@keyframes splatoon-title-paint-splat {
+  0% { opacity: 0; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(.035); }
+  6% { opacity: 1; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(.22); }
+  44% { opacity: 1; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(1.18); }
+  64% { transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(.93); }
+  82% { transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(1.035); }
+  100% { opacity: 1; transform: var(--splatoon-title-rest-transform, translateZ(0)) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splatoon-title-splat, .splatoon-title-splat.is-revealed { opacity: 1; animation: none; transform: var(--splatoon-title-rest-transform, translateZ(0)); }
+}
 .splatoon-page :is(
   .splatoon-intro__background,
   .splatoon-con1__background,

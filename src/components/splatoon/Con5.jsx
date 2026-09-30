@@ -26,14 +26,27 @@ const marks = [
 // Supply destinations by card key when the information links are decided.
 export default function Con5({ links = {} }) {
   const container = useRef(null);
+  const title = useRef(null);
   const [scale, setScale] = useState(1);
+  const [isTitleRevealed, setIsTitleRevealed] = useState(false);
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => setScale(entry.contentRect.width / 1920));
     observer.observe(container.current);
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    const target = title.current;
+    if (!target) return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setIsTitleRevealed(true);
+      observer.disconnect();
+    }, { threshold: 0.2 });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
   return (
-    <section id="con5" ref={container} className="splatoon-con5" aria-labelledby="splatoon-con5-title">
+    <section id="con5" ref={container} className={`splatoon-con5${isTitleRevealed ? ' is-revealed' : ''}`} aria-labelledby="splatoon-con5-title">
       <div className="splatoon-con5__stage" style={{ transform: `scale(${scale})` }}>
         <div className="splatoon-con5__background" aria-hidden="true">
           <img src={asset('222a5.png')} alt="" />
@@ -42,11 +55,27 @@ export default function Con5({ links = {} }) {
           <Art file="c6aeb.svg" x={233.131} y={74.307} w={1371.31} h={911.418} />
           <Art file="385e9.svg" x={214.75} y={66.318} w={1409.33} h={940.419} />
           <Art file="effc4.svg" x={252.171} y={92.801} w={1333.81} h={876.425} />
-          <Art file="aad19.png" x={3.1} y={318.1} w={223.481} h={223.481} angle={178.39} flip />
-          <Art file="02c24.png" x={1593.137} y={211.137} w={251.29} h={251.29} angle={0.06} />
-          {marks.map(([x, y, w, h, angle, width, height, left, top]) => <Art key={x} file="ae3c9.png" {...{ x, y, w, h, angle }} crop={{ width, height, left, top }} />)}
-          <h2 id="splatoon-con5-title" className="splatoon-con5__title">INFORMATIONS</h2>
-          <Art file="5bf9d.png" x={139} y={480} w={316} h={535} />
+          <div className="splatoon-con5__speech splatoon-con5__speech--left">
+            <Art file="aad19.png" x={3.1} y={318.1} w={223.481} h={223.481} angle={178.39} flip />
+          </div>
+          <div className="splatoon-con5__speech splatoon-con5__speech--right">
+            <Art file="02c24.png" x={1593.137} y={211.137} w={251.29} h={251.29} angle={0.06} />
+          </div>
+          {marks.map(([x, y, w, h, angle, width, height, left, top], index) => (
+            <div
+              key={x}
+              className={`splatoon-con5__speech-mark splatoon-con5__speech-mark--${index < 3 ? 'left' : 'right'}`}
+              style={{
+                '--speech-mark-delay': `${index < 3 ? 0.37 + index * 0.055 : 0.7 + (index - 3) * 0.13}s`,
+                '--speech-mark-origin-x': `${x + w / 2}px`,
+                '--speech-mark-origin-y': `${y + h / 2}px`,
+              }}
+            >
+              <Art file="ae3c9.png" {...{ x, y, w, h, angle }} crop={{ width, height, left, top }} />
+            </div>
+          ))}
+          <h2 ref={title} id="splatoon-con5-title" className="splatoon-con5__title">INFORMATIONS</h2>
+          <Art file="5bf9d.png" x={143.364} y={494.318} w={287.273} h={486.364} />
           <div className="splatoon-con5__cards" role="group" aria-label="스플래툰 더 많은 정보">
             {cards.map(([key, label, file, x, y, w, h]) => {
               const style = { left: x, top: y, width: w, height: h };
