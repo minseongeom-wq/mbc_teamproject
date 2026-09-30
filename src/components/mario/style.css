@@ -1030,44 +1030,55 @@
     animation: mario-con1-enter 0.42s ease-out 0.4s forwards;
 }
 /* Banner - Flower & Luigi Entrance */
-.mario-layer-86 .mario-layer-91,
-.mario-layer-86 .mario-layer-93,
-.mario-layer-86 .mario-layer-99 {
+.mario-page #mario-adventure .mario-banner-character-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    /* Keep the banner's wave boundary fixed while characters move inside it. */
+    -webkit-mask: url('/images/mario/group2.svg') 0 0 / 100% 100% no-repeat;
+    mask: url('/images/mario/group2.svg') 0 0 / 100% 100% no-repeat;
+}
+
+.mario-layer-86 .mario-layer-91 > .mario-layer-1,
+.mario-layer-86 .mario-layer-93 > .mario-layer-1,
+.mario-layer-86 .mario-layer-99 > .mario-layer-4 {
     opacity: 0;
-    transform: translateY(75px) scale(0.92);
+    transform: translateY(var(--mario-banner-hide-distance, 105px));
     transform-origin: center bottom;
+    will-change: transform;
 }
-.mario-layer-86.is-entered .mario-layer-91 {
-    animation: mario-banner-pop-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-}
-
-.mario-layer-86.is-entered .mario-layer-93 {
-    animation: mario-banner-pop-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+.mario-layer-86.is-entered .mario-layer-91 > .mario-layer-1 {
+    animation: mario-banner-pipe-cycle 6.8s ease-in-out 0.1s infinite;
 }
 
-.mario-layer-86.is-entered .mario-layer-99 {
-    animation: mario-banner-pop-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.16s forwards;
+.mario-layer-86.is-entered .mario-layer-93 > .mario-layer-1 {
+    --mario-banner-hide-distance: 95px;
+    animation: mario-banner-pipe-cycle 6.8s ease-in-out 0.35s infinite;
 }
 
-@keyframes mario-banner-pop-up {
-    0% {
-        opacity: 0;
-        transform: translateY(75px) scale(0.92);
-    }
+.mario-layer-86.is-entered .mario-layer-99 > .mario-layer-4 {
+    --mario-banner-hide-distance: 180px;
+    animation: mario-banner-pipe-cycle 6.8s ease-in-out 0.65s infinite;
+}
 
-    65% {
-        opacity: 1;
-        transform: translateY(-7px) scale(1.03);
-    }
-
-    82% {
-        opacity: 1;
-        transform: translateY(3px) scale(0.99);
-    }
-
+@keyframes mario-banner-pipe-cycle {
+    0%,
+    8%,
+    50%,
+    58%,
+    98%,
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(var(--mario-banner-hide-distance, 105px));
+    }
+
+    16%,
+    42%,
+    66%,
+    90% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -1806,6 +1817,7 @@
 }
 .mario-page .mario-layer-99 {
     position: absolute;
+    translate: 2px 0;
     aspect-ratio: 1152/2048;
     left: 87.14%;
     mask-mode: alpha;
@@ -2291,6 +2303,158 @@
     width: 51px;
     height: 51px;
 }
+/* CON2 idle motion: retain the positioned boxes and existing rotated children. */
+#mario-worlds .mario-world-sand-idle,
+#mario-worlds .mario-world-shell-idle {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+#mario-worlds .mario-world-shell-idle {
+    transform-origin: 1070px 2250px;
+}
+
+/* The original sprite supplies the stationary pipe; its copy supplies the plant. */
+#mario-worlds .mario-layer-139 > .mario-layer-1 > .mario-layer-140 {
+    clip-path: inset(51.1% 0 0);
+}
+
+#mario-worlds .mario-world-plant-clip {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 45.42651%);
+}
+
+#mario-worlds .mario-world-plant-idle {
+    clip-path: inset(0 0 48.9%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #mario-worlds .mario-layer-157 {
+        animation: mario-world-jump 2.8s ease-in-out -0.3s infinite;
+    }
+    #mario-worlds .mario-layer-154,
+    #mario-worlds .mario-layer-155 {
+        animation: mario-world-coin 3.3s ease-in-out -1.1s infinite;
+    }
+    #mario-worlds .mario-layer-155 { animation-duration: 3.6s; animation-delay: -2.2s; }
+    #mario-worlds .mario-world-plant-idle {
+        animation: mario-world-plant 4.4s ease-in-out -1.8s infinite;
+    }
+    #mario-worlds .mario-layer-142 {
+        animation: mario-world-moon 4.7s ease-in-out -0.8s infinite;
+    }
+    #mario-worlds .mario-world-sand-idle {
+        animation: mario-world-pair 4.9s ease-in-out -2.6s infinite;
+    }
+    #mario-worlds .mario-layer-174 {
+        animation: mario-world-shell-slide 3.3s linear infinite;
+    }
+    #mario-worlds .mario-layer-175 {
+        animation: mario-world-squid-rise 3.2s ease-in-out infinite;
+    }
+    #mario-worlds .mario-world-shell-idle {
+        animation: mario-world-shell-rock 4.2s ease-in-out -0.6s infinite;
+    }
+    #mario-worlds .mario-layer-178 {
+        animation: mario-world-float 3.9s ease-in-out -1.9s infinite;
+        --world-idle-rise: -3px;
+    }
+    #mario-worlds .mario-layer-184 {
+        animation: mario-world-koopa 4.1s linear infinite;
+    }
+    #mario-worlds .mario-layer-181 {
+        animation: mario-world-float 4.8s ease-in-out -1.3s infinite;
+        --world-idle-rise: 4px;
+    }
+    #mario-worlds .mario-layer-182 {
+        animation: mario-world-float 3.7s ease-in-out -2.7s infinite;
+        --world-idle-rise: -7px;
+    }
+}
+
+@keyframes mario-world-jump {
+    0%, 65%, 100% { transform: translateY(0); }
+    32% { transform: translateY(-12px); }
+}
+@keyframes mario-world-coin {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-4px) scale(1.02); }
+}
+@keyframes mario-world-plant {
+    0%, 20%, 100% { transform: translateY(0); }
+    55%, 70% { transform: translateY(14px); }
+}
+@keyframes mario-world-moon {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+@keyframes mario-world-pair {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+@keyframes mario-world-shell-slide {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+    10% { transform: translate(75px, -12px) rotate(112.5deg); }
+    20% { transform: translate(150px, 0) rotate(225deg); }
+    30% { transform: translate(225px, -12px) rotate(337.5deg); }
+    40% { transform: translate(300px, 0) rotate(450deg); }
+    50% { transform: translate(375px, -12px) rotate(562.5deg); }
+    60% { transform: translate(450px, 0) rotate(675deg); }
+    70% { transform: translate(525px, -12px) rotate(787.5deg); }
+    80% { transform: translate(600px, 0) rotate(900deg); opacity: 1; }
+    82% {
+        transform: translate(600px, 0) rotate(900deg);
+        opacity: 0;
+        animation-timing-function: steps(1, end);
+    }
+    83%, 88% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+}
+@keyframes mario-world-squid-rise {
+    0% { transform: translateY(0); opacity: 0; }
+    15% { opacity: 1; }
+    30% { transform: translateY(0); }
+    65% { opacity: 1; }
+    85%, 100% { transform: translateY(-80px); opacity: 0; }
+}
+@keyframes mario-world-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(var(--world-idle-rise)); }
+}
+@keyframes mario-world-shell-rock {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+@keyframes mario-world-koopa {
+    0% { transform: translate(0, 0); opacity: 1; }
+    5% { transform: translate(-32.5px, -8px); }
+    10% { transform: translate(-65px, 0); }
+    15% { transform: translate(-97.5px, -8px); }
+    20% { transform: translate(-130px, 0); }
+    25% { transform: translate(-162.5px, -8px); }
+    30% { transform: translate(-195px, 0); }
+    35% { transform: translate(-227.5px, -8px); }
+    40% { transform: translate(-260px, 0); }
+    45% { transform: translate(-292.5px, -8px); }
+    50% { transform: translate(-325px, 0); }
+    55% { transform: translate(-357.5px, -8px); }
+    60% { transform: translate(-390px, 0); }
+    65% { transform: translate(-422.5px, -8px); }
+    70% { transform: translate(-455px, 0); }
+    75% { transform: translate(-487.5px, -8px); }
+    80% { transform: translate(-520px, 0); opacity: 1; }
+    /* Right edge is now -30px: hide before snapping back inside CON2. */
+    82% {
+        transform: translate(-520px, 0);
+        opacity: 0;
+        animation-timing-function: steps(1, end);
+    }
+    83%, 88% { transform: translate(0, 0); opacity: 0; }
+    100% { transform: translate(0, 0); opacity: 1; }
+}
+
 .mario-page .mario-layer-154 {
     position: absolute;
     height: 232px;

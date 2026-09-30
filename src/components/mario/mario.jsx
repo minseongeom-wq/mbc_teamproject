@@ -143,7 +143,7 @@ const imgGroup77 = "/images/mario/group77.svg";
 const imgGroup2 = "/images/mario/group2.svg";
 const imgGroup3 = "/images/mario/group3.svg";
 const imgStarWithCircle1 = "/images/mario/star-with-circle1.svg";
-const imgVectorChevron = "/images/mario/vector-chevron.svg";
+// const imgVectorChevron = "/images/mario/vector-chevron.svg";
 const imgEllipse32 = "/images/mario/ellipse32.svg";
 
 const characterSelection = [
@@ -369,11 +369,12 @@ export default function Mario() {
         [{ translate: '0 0' }, { translate: '0 ' + exitDistance + 'px' }],
         { duration: reducedMotion.matches ? 0 : 2400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' },
       ));
-      Promise.all(exits.map((animation) => animation.finished)).then(() => {
-        if (disposed || phase !== 'exiting') return;
-        phase = 'hold';
-        holdTimer = window.setTimeout(scrollToHero, reducedMotion.matches ? 0 : 40);
-      }).catch(() => {}); // Resizing/unmounting cancels the exit and releases the lock.
+      holdTimer = window.setTimeout(() => {
+  if (disposed || phase !== 'exiting') return;
+
+  phase = 'hold';
+  scrollToHero();
+}, reducedMotion.matches ? 0 : 1950); // Resizing/unmounting cancels the exit and releases the lock.
     };
     const handleInput = (event, downward) => {
       if (!desktop.matches || event.defaultPrevented) return;
@@ -410,9 +411,9 @@ export default function Mario() {
       phase = 'idle';
     };
     // Preserve the existing entrance animations and wait for their actual completion.
-    const entrance = intro.getAnimations({ subtree: true }).filter((animation) =>
-      ['mario-cloud-rise', 'mario-intro-logo-fade-in'].includes(animation.animationName),
-    );
+    const entrance = intro.getAnimations({ subtree: true }).filter(
+  (animation) => animation.animationName === 'mario-intro-logo-fade-in',
+);
     Promise.allSettled(entrance.map((animation) => animation.finished)).then(() => {
       if (!disposed) ready = true;
     });
@@ -1398,6 +1399,7 @@ useEffect(() => {
               >
                 <img alt="" className="mario-layer-44" src={imgGroup3} />
               </div>
+              <div className="mario-banner-character-clip">
               <div className="mario-layer-89" data-node-id="2712:13134">
                 <div className="mario-layer-90">
                   <div
@@ -1424,6 +1426,7 @@ useEffect(() => {
                 <div className="mario-layer-1">
                   <img alt="" className="mario-layer-94" src={imgAsset1302} />
                 </div>
+              </div>
               </div>
               <div
                 className="mario-layer-95"
@@ -1455,6 +1458,7 @@ useEffect(() => {
                   <img alt="" className="mario-layer-96" src={imgPipe1301} />
                 </div>
               </div>
+              <div className="mario-banner-character-clip">
               <div
                 className="mario-layer-99"
                 data-node-id="2712:13139"
@@ -1462,6 +1466,7 @@ useEffect(() => {
                 data-name="Asset / 1298"
               >
                 <img alt="" className="mario-layer-4" src={imgAsset1298} />
+              </div>
               </div>
               <div
                 className="mario-layer-100"
@@ -1779,6 +1784,9 @@ useEffect(() => {
                 className="mario-layer-140"
                 src={imgCharacterArtGrassLand}
               />
+              <div className="mario-world-plant-clip">
+                <img alt="" className="mario-layer-140 mario-world-plant-idle" src={imgCharacterArtGrassLand} />
+              </div>
             </div>
           </div>
           <div
@@ -1920,6 +1928,7 @@ useEffect(() => {
               </div>
             </div>
           </div>
+          <div className="mario-world-sand-idle">
           <div
             className="mario-layer-160"
             data-node-id="2712:12912"
@@ -1946,6 +1955,8 @@ useEffect(() => {
               />
             </div>
           </div>
+          </div>
+          <div className="mario-world-shell-idle">
           <div
             className="mario-layer-164"
             data-node-id="2712:12914"
@@ -1997,6 +2008,7 @@ useEffect(() => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
           <div
             className="mario-layer-174"
