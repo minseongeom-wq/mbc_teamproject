@@ -13,6 +13,7 @@
 }
 
 .zelda-hero {
+  --scroll-hint-exit: 0;
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -44,6 +45,13 @@
 
 .zelda-hero__title img {
   display: block;
+}
+
+.zelda-hero__scroll,
+.zelda-hero__scroll-line {
+  opacity: calc(1 - var(--scroll-hint-exit));
+  filter: blur(calc(var(--scroll-hint-exit) * .5rem));
+  pointer-events: none;
 }
 
 .zelda-hero__scroll {
