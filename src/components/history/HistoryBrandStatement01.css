@@ -12,32 +12,6 @@
 
 
 /* =========================
-   이전 섹션에서 이어지는 RED
-   ========================= */
-
-.history-brand-01__red {
-  position: absolute;
-  background: #e60012;
-}
-
-.history-brand-01__red--left {
-  top: -421px;
-  left: 0;
-
-  width: 50%;
-  height: 653px;
-}
-
-.history-brand-01__red--right {
-  top: -379px;
-  left: 50%;
-
-  width: 50.4%;
-  height: 548px;
-}
-
-
-/* =========================
    TITLE
    ========================= */
 

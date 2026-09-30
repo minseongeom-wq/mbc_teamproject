@@ -1,0 +1,391 @@
+[
+  {
+    "file": "1889.glb",
+    "bytes": 495708,
+    "MiB": 0.473,
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "uniqueMeshTriangles": 44,
+    "nodeInstancedTriangles": 44,
+    "vertices": 56,
+    "imageCount": 2,
+    "textureSlots": 2,
+    "materials": 1,
+    "extensions": [],
+    "imageBytes": [
+      256383,
+      232247
+    ],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 256383,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 232247,
+        "mime": "image/png"
+      }
+    ],
+    "imageDimensions": {
+      "1024x1024": 2
+    },
+    "rgba8WithMipmapsMiB": 10.67
+  },
+  {
+    "file": "famicom.glb",
+    "bytes": 3746644,
+    "MiB": 3.573,
+    "meshCount": 31,
+    "primitiveCount": 31,
+    "uniqueMeshTriangles": 10948,
+    "nodeInstancedTriangles": 10948,
+    "vertices": 8648,
+    "imageCount": 3,
+    "textureSlots": 3,
+    "materials": 1,
+    "extensions": [],
+    "imageBytes": [
+      1218472,
+      1165747,
+      777142
+    ],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1218472,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1165747,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 777142,
+        "mime": "image/png"
+      }
+    ],
+    "imageDimensions": {
+      "1024x1024": 3
+    },
+    "rgba8WithMipmapsMiB": 16.0
+  },
+  {
+    "file": "gameboy.glb",
+    "bytes": 13234704,
+    "MiB": 12.622,
+    "meshCount": 26,
+    "primitiveCount": 26,
+    "uniqueMeshTriangles": 18182,
+    "nodeInstancedTriangles": 18182,
+    "vertices": 16319,
+    "imageCount": 13,
+    "textureSlots": 13,
+    "materials": 5,
+    "extensions": [
+      "KHR_materials_emissive_strength"
+    ],
+    "imageBytes": [
+      856518,
+      944180,
+      4249,
+      1173290,
+      1143324,
+      1019511,
+      1524994,
+      1168436,
+      685326,
+      907357,
+      1174616,
+      685326,
+      907357
+    ],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 856518,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 944180,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 4249,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1173290,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1143324,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1019511,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1524994,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1168436,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 685326,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 907357,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1174616,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 685326,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 907357,
+        "mime": "image/png"
+      }
+    ],
+    "imageDimensions": {
+      "1024x1024": 13
+    },
+    "rgba8WithMipmapsMiB": 69.33
+  },
+  {
+    "file": "nintendo-ds.glb",
+    "bytes": 1087380,
+    "MiB": 1.037,
+    "meshCount": 3,
+    "primitiveCount": 3,
+    "uniqueMeshTriangles": 1186,
+    "nodeInstancedTriangles": 1186,
+    "vertices": 1562,
+    "imageCount": 3,
+    "textureSlots": 3,
+    "materials": 2,
+    "extensions": [],
+    "imageBytes": [
+      457826,
+      33269,
+      500814
+    ],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 457826,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 33269,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 500814,
+        "mime": "image/png"
+      }
+    ],
+    "imageDimensions": {
+      "1024x1024": 3
+    },
+    "rgba8WithMipmapsMiB": 16.0
+  },
+  {
+    "file": "switch-2.glb",
+    "bytes": 14588604,
+    "MiB": 13.913,
+    "meshCount": 20,
+    "primitiveCount": 20,
+    "uniqueMeshTriangles": 251403,
+    "nodeInstancedTriangles": 251403,
+    "vertices": 361017,
+    "imageCount": 0,
+    "textureSlots": 0,
+    "materials": 12,
+    "extensions": [],
+    "imageBytes": [],
+    "images": [],
+    "imageDimensions": {},
+    "rgba8WithMipmapsMiB": 0.0
+  },
+  {
+    "file": "wii.glb",
+    "bytes": 6476840,
+    "MiB": 6.177,
+    "meshCount": 18,
+    "primitiveCount": 18,
+    "uniqueMeshTriangles": 76626,
+    "nodeInstancedTriangles": 76626,
+    "vertices": 41461,
+    "imageCount": 16,
+    "textureSlots": 16,
+    "materials": 5,
+    "extensions": [],
+    "imageBytes": [
+      31891,
+      383967,
+      258227,
+      11993,
+      406852,
+      2705,
+      390355,
+      2805,
+      343322,
+      562863,
+      6339,
+      600860,
+      512581,
+      2385,
+      222,
+      20353
+    ],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 31891,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 383967,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 258227,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 11993,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 406852,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 2705,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 390355,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 2805,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 343322,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 562863,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 6339,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 600860,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 512581,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 2385,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 222,
+        "mime": "image/png"
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "bytes": 20353,
+        "mime": "image/png"
+      }
+    ],
+    "imageDimensions": {
+      "1024x1024": 16
+    },
+    "rgba8WithMipmapsMiB": 85.33
+  }
+]

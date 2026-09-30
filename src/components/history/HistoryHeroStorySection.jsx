@@ -3,7 +3,7 @@ import "./HistoryHeroStorySection.css";
 function HistoryHeroStorySection() {
   return (
     <section className="history-hero-story">
-      <div className="history-hero-story__title">
+      <div className="history-hero-story__title" role="heading" aria-level="1">
         <p>A NINTENDO</p>
         <p>STORY</p>
       </div>

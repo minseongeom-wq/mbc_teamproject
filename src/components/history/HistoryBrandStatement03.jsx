@@ -4,17 +4,19 @@ function HistoryBrandStatement03() {
   return (
     <section className="history-brand-03">
       <h2 className="history-brand-03__title">
-        SINCERITY
+        <span className="history-service-motion__title-text">SINCERITY</span>
       </h2>
 
       <div className="history-brand-03__visual">
-        <img
-          src="/images/history/sincerity.png"
-          alt=""
-        />
+        <div className="history-service-motion__image">
+          <img
+            src="/images/history/sincerity.png"
+            alt=""
+          />
+        </div>
       </div>
 
-      <div className="history-brand-03__copy history-brand-03__copy--left">
+      <div className="history-brand-03__copy history-brand-03__copy--left history-service-motion__copy">
         <strong>03.</strong>
 
         <p>
@@ -28,7 +30,7 @@ function HistoryBrandStatement03() {
         </p>
       </div>
 
-      <div className="history-brand-03__copy history-brand-03__copy--right">
+      <div className="history-brand-03__copy history-brand-03__copy--right history-service-motion__copy">
         <strong>성실함</strong>
 
         <p>

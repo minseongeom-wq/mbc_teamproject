@@ -1,3 +1,8 @@
+.site-shell:has(.history-page) > .common-header {
+  position: relative;
+  z-index: 10;
+}
+
 .history-page {
   position: relative;
 
@@ -5,8 +10,9 @@
   max-width: none;
 
   margin-left: calc(50% - 50vw);
+  margin-top: -75px;
 
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .history-page > section {

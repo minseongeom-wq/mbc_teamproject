@@ -37,6 +37,7 @@
   width: 658px;
   height: 5px;
   display: block;
+  transform-origin: 50% 50%;
 }
 
 .history-details-intro__ray {

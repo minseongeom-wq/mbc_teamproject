@@ -1,9 +1,7 @@
-import HistoryIntroSection from '../../components/history/HistoryIntroSection';
+import IntroTransition from '../../components/interaction/IntroTransition';
 import HistoryHeroStorySection from '../../components/history/HistoryHeroStorySection';
 import HistoryStoryTransitionSection from '../../components/history/HistoryStoryTransitionSection';
-import HistoryBrandStatement01 from '../../components/history/HistoryBrandStatement01';
-import HistoryBrandStatement02 from '../../components/history/HistoryBrandStatement02';
-import HistoryBrandStatement03 from '../../components/history/HistoryBrandStatement03';
+import HistoryServiceStack from '../../components/history/HistoryServiceStack';
 import HistoryVisualStoryGallery from '../../components/history/HistoryVisualStoryGallery';
 import HistoryOverviewSection from '../../components/history/HistoryOverviewSection';
 import HistoryAwardsRecognitionSection from '../../components/history/HistoryAwardsRecognitionSection';
@@ -15,12 +13,15 @@ import "./HistoryPage.css";
 function HistoryPage() {
     return (
         <main className="history-page">
-            <HistoryIntroSection />
-            <HistoryHeroStorySection />
+            <IntroTransition
+                symbolSrc={`${import.meta.env.BASE_URL}images/history/Star.png`}
+                smallTitle="A NINTENDO STORY"
+                mainVisualSelector=".history-hero-story__title"
+            >
+                <HistoryHeroStorySection />
+            </IntroTransition>
             <HistoryStoryTransitionSection />
-            <HistoryBrandStatement01 />
-            <HistoryBrandStatement02 />
-            <HistoryBrandStatement03 />
+            <HistoryServiceStack />
             <HistoryVisualStoryGallery />
             <HistoryOverviewSection />
             <HistoryAwardsRecognitionSection />

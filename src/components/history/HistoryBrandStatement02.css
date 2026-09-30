@@ -15,7 +15,7 @@
 .history-brand-02__title {
   position: absolute;
 
-  top: 343px;
+  top: calc(488px + var(--history-originality-sticky-offset));
   left: 50%;
   transform: translateX(-50%);
 
@@ -36,7 +36,7 @@
 .history-brand-02__visual {
   position: absolute;
 
-  top: 468px;
+  top: calc(615px + var(--history-originality-sticky-offset));
   left: 50%;
   transform: translateX(-50%);
 
@@ -64,7 +64,7 @@
 
 .history-brand-02__copy {
   position: absolute;
-  top: 445px;
+  top: calc(606px + var(--history-originality-sticky-offset));
 
   font-family: "Pretendard", sans-serif;
 }

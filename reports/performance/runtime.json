@@ -1,0 +1,1754 @@
+{
+  "measuredAt": "2026-09-30T13:57:53.965Z",
+  "browser": "154.0.4258.37",
+  "environment": {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 1,
+    "webgl": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 SUPER (0x00002783) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "canvasPixels": [
+      1920,
+      1080
+    ],
+    "antialias": true,
+    "hardwareConcurrency": 12
+  },
+  "initial": {
+    "renderersCreated": 1,
+    "renders": [
+      {
+        "phase": "initial",
+        "at": 276.20000000018626,
+        "ms": 50.59999999962747,
+        "calls": 7,
+        "triangles": 6304,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 544.5999999996275,
+        "ms": 5.1000000005587935,
+        "calls": 7,
+        "triangles": 6304,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 551.0999999996275,
+        "ms": 4.6000000005587935,
+        "calls": 7,
+        "triangles": 6304,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 564.0999999996275,
+        "ms": 45.30000000074506,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 623,
+        "ms": 5.2999999998137355,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 628.5,
+        "ms": 0.2999999998137355,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 628.7999999998137,
+        "ms": 0.2999999998137355,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 629.0999999996275,
+        "ms": 0.20000000018626451,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 629.4000000003725,
+        "ms": 0.19999999925494194,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 629.5999999996275,
+        "ms": 0.40000000037252903,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 630.2999999998137,
+        "ms": 0.2999999998137355,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 630.7000000001863,
+        "ms": 0.2999999998137355,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 631.2000000001863,
+        "ms": 0.2999999998137355,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 632,
+        "ms": 0.5,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 632.5,
+        "ms": 6.599999999627471,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 641.5999999996275,
+        "ms": 1,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 643.7000000001863,
+        "ms": 0.20000000018626451,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 644,
+        "ms": 0.09999999962747097,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 644.2000000001863,
+        "ms": 0.09999999962747097,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 644.4000000003725,
+        "ms": 0.09999999962747097,
+        "calls": 8,
+        "triangles": 6348,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 668.5,
+        "ms": 111.5,
+        "calls": 12,
+        "triangles": 7562,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 843.7999999998137,
+        "ms": 43,
+        "calls": 43,
+        "triangles": 18510,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 896.5,
+        "ms": 42.299999999813735,
+        "calls": 63,
+        "triangles": 269913,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25": 20,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 994.5,
+        "ms": 120.70000000018626,
+        "calls": 81,
+        "triangles": 346539,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25": 20,
+          "a4148418-7dbb-4c4f-b87a-368873501f7a": 18,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      },
+      {
+        "phase": "initial",
+        "at": 1131.9000000003725,
+        "ms": 97.59999999962747,
+        "calls": 107,
+        "triangles": 364721,
+        "offscreen": true,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "3ead9762-d30c-4d18-9924-3f19bb88c6a6": 26,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25": 20,
+          "a4148418-7dbb-4c4f-b87a-368873501f7a": 18,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 6
+        }
+      }
+    ],
+    "longTasks": [
+      {
+        "phase": "initial",
+        "start": 117,
+        "duration": 213
+      },
+      {
+        "phase": "initial",
+        "start": 666.7999999998137,
+        "duration": 113
+      },
+      {
+        "phase": "initial",
+        "start": 888.7999999998137,
+        "duration": 50
+      },
+      {
+        "phase": "initial",
+        "start": 993,
+        "duration": 122
+      },
+      {
+        "phase": "initial",
+        "start": 1130.2999999998137,
+        "duration": 99
+      }
+    ],
+    "resources": [
+      {
+        "url": "http://127.0.0.1:4174/models/1889.glb",
+        "transfer": 496008,
+        "duration": 12.299999999813735
+      },
+      {
+        "url": "http://127.0.0.1:4174/models/famicom.glb",
+        "transfer": 3746944,
+        "duration": 88.3999999994412
+      },
+      {
+        "url": "http://127.0.0.1:4174/models/gameboy.glb",
+        "transfer": 13235004,
+        "duration": 373.6000000005588
+      },
+      {
+        "url": "http://127.0.0.1:4174/models/nintendo-ds.glb",
+        "transfer": 1087680,
+        "duration": 16.90000000037253
+      },
+      {
+        "url": "http://127.0.0.1:4174/models/wii.glb",
+        "transfer": 6477140,
+        "duration": 209.5
+      },
+      {
+        "url": "http://127.0.0.1:4174/models/switch-2.glb",
+        "transfer": 14588904,
+        "duration": 511.8999999994412
+      }
+    ],
+    "commits": 3
+  },
+  "scene": {
+    "memory": {
+      "geometries": 103,
+      "textures": 41
+    },
+    "objects": [
+      {
+        "uuid": "ad657ea5-625b-49a4-ada5-c5e7ce78c081",
+        "name": "",
+        "type": "AmbientLight",
+        "triangles": 0,
+        "meshes": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "visible": true,
+        "model": false,
+        "textures": []
+      },
+      {
+        "uuid": "2cf91dc2-8784-4657-b146-4b0fdc5a08f3",
+        "name": "",
+        "type": "DirectionalLight",
+        "triangles": 0,
+        "meshes": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "visible": true,
+        "model": false,
+        "textures": []
+      },
+      {
+        "uuid": "09bb84c7-613e-4761-99c0-2150e2bcdf1d",
+        "name": "",
+        "type": "Mesh",
+        "triangles": 6016,
+        "meshes": 1,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "visible": true,
+        "model": false,
+        "textures": []
+      },
+      {
+        "uuid": "1b3bba20-3984-45b5-84ed-26025ebf0628",
+        "name": "",
+        "type": "Group",
+        "triangles": 864,
+        "meshes": 18,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "visible": true,
+        "model": false,
+        "textures": [
+          {
+            "width": 791,
+            "height": 255,
+            "source": "76a8e5d3-d692-4006-87fe-fa05ee146ba0",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "1c786127-5f0e-4a4e-973d-633565f33497",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "eaab802e-d36d-463b-a7a5-e32758eddac5",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 789,
+            "height": 255,
+            "source": "ca23e66f-a84c-487f-bb47-3d2b2463a357",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "7f6a762e-bdc7-4045-86ac-cc56e10fdcb0",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "5bf6dfa5-0f21-41c7-8dd0-046f535cce3f",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 791,
+            "height": 255,
+            "source": "8a01c3b3-b6a2-473c-8069-393b74ddc525",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "222d11b9-b80d-4781-a05e-6259381bb1b2",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "bf658774-6f12-4b0e-ba75-2e79bc039821",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 850,
+            "height": 255,
+            "source": "5c3b7321-0aef-458d-8398-691a8e4d2b12",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "0d63149a-c2a8-44b6-bb74-0fa1bd1c0a4d",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "1ab55d20-52e5-4ca5-a713-70314c4ca841",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 844,
+            "height": 255,
+            "source": "42dd2afe-8c4e-4d03-9197-57649cf850a2",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "cf289e0e-b12c-4ebb-abf0-37c4400c0b22",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "c66fef43-4707-4739-9984-37d17850b773",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 825,
+            "height": 255,
+            "source": "20094a96-8013-4b9d-8877-7b391a86c65e",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "4f2d2baa-d66b-408d-8c5b-719b7c1253f9",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 735,
+            "height": 480,
+            "source": "06d38695-089b-4e07-83e5-f5fe58a8b072",
+            "mipmaps": true,
+            "format": 1023
+          }
+        ]
+      },
+      {
+        "uuid": "12b17a83-af81-4a76-b63b-bd888ecd414a",
+        "name": "",
+        "type": "Group",
+        "triangles": 44,
+        "meshes": 1,
+        "scale": [
+          1.3018867574035002,
+          1.3018867574035002,
+          1.3018867574035002
+        ],
+        "visible": true,
+        "model": true,
+        "textures": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "9f8c11b5-139f-4773-b7bd-656e5f0fca74",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "75526744-9b1d-4bb6-91dd-cc2b64c52adf",
+            "mipmaps": true,
+            "format": 1023
+          }
+        ]
+      },
+      {
+        "uuid": "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12",
+        "name": "",
+        "type": "Group",
+        "triangles": 1186,
+        "meshes": 3,
+        "scale": [
+          0.0007123555726885434,
+          0.0007123555726885434,
+          0.0007123555726885434
+        ],
+        "visible": true,
+        "model": true,
+        "textures": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "e43a54a6-ca80-43fc-8a22-85e4511240ca",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "626ee7bc-1861-46e6-a6c0-12f6a08bfa93",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "81aa8d17-d0aa-480f-874e-97b830573250",
+            "mipmaps": true,
+            "format": 1023
+          }
+        ]
+      },
+      {
+        "uuid": "8279502d-78b3-4592-938a-30a6f587cb5d",
+        "name": "",
+        "type": "Group",
+        "triangles": 10948,
+        "meshes": 31,
+        "scale": [
+          0.011760954215133172,
+          0.011760954215133172,
+          0.011760954215133172
+        ],
+        "visible": true,
+        "model": true,
+        "textures": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "d61a68b9-f5fb-4db0-80bc-726a97ed27b5",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "0a018b8c-68d5-4e31-912b-431e7d6082b9",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "3e6aa13f-2acb-42ab-89df-a70c4b2053d3",
+            "mipmaps": true,
+            "format": 1023
+          }
+        ]
+      },
+      {
+        "uuid": "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25",
+        "name": "",
+        "type": "Group",
+        "triangles": 251403,
+        "meshes": 20,
+        "scale": [
+          0.08644943543479482,
+          0.08644943543479482,
+          0.08644943543479482
+        ],
+        "visible": true,
+        "model": true,
+        "textures": []
+      },
+      {
+        "uuid": "a4148418-7dbb-4c4f-b87a-368873501f7a",
+        "name": "",
+        "type": "Group",
+        "triangles": 76626,
+        "meshes": 18,
+        "scale": [
+          0.33866583181936866,
+          0.33866583181936866,
+          0.33866583181936866
+        ],
+        "visible": true,
+        "model": true,
+        "textures": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "5a71a6b3-da10-4583-bc88-c729fea57810",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "6e275e70-5cb3-4dfe-9888-c8d52b6d0188",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "ce43d67d-2f32-4fb0-8220-f249267b4fb1",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "9fc0fa3e-6fc8-4b18-bab6-4568be9e53a7",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "0490e5ec-43e1-4fe2-bf69-47f9d7655474",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "ad91f152-fa05-4fd3-9bcb-2d59ff579183",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "6bf074bc-3bd7-4bc0-bef9-ca3a3b90c2d3",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "fc55a048-533d-4bd1-9378-b58f9d43ec77",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "305865ad-9962-4f4c-930e-f99b47e487e2",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "7b6746ff-4d0f-4146-8f63-8408cf6fff09",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "e3e13477-bb7f-4364-88d8-3ec34663c880",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "de476a48-18d8-4bbe-bb09-f4865d0a5cb9",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "df42b054-f422-4b60-a51c-569c04e083c9",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "ed7ab489-953e-4838-89df-cf67ed6e9172",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "f95779d3-5aee-4761-9d29-d9923f5be75f",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "06f91f02-d7c2-4da1-a48e-92192d3a4f6c",
+            "mipmaps": true,
+            "format": 1023
+          }
+        ]
+      },
+      {
+        "uuid": "3ead9762-d30c-4d18-9924-3f19bb88c6a6",
+        "name": "",
+        "type": "Group",
+        "triangles": 18182,
+        "meshes": 26,
+        "scale": [
+          0.4586889747832158,
+          0.4586889747832158,
+          0.4586889747832158
+        ],
+        "visible": true,
+        "model": true,
+        "textures": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "b7066df2-36ca-445c-bcb8-2a451379ffc4",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "bef24b19-0587-49f2-be4c-e478a12ebf02",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "0b75939a-0ce7-4840-8774-aa9f0c73aea5",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "d12dee44-a317-431d-a159-b6c024e1fbd1",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "cc65cfd8-0147-4c28-b8c7-493813e6ca8e",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "ac740538-35af-4eff-91e4-f47132aef3d2",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "2e0358a8-2d12-4697-8370-5d89feecdbe8",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "e8c216b3-f6ab-4811-a661-8fe49735d5cd",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "c0e6c714-9a4f-446e-a744-cbbcdd5cfb1f",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "30ddba51-9e28-4c71-8d5b-4fc4681d6b84",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "5010c65e-7ee5-42ea-84ff-9c6366813fb8",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "b7a163dd-180e-439b-ba7d-449a5751eb0e",
+            "mipmaps": true,
+            "format": 1023
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "source": "019d73e1-3808-4a8d-8482-322b67c819f9",
+            "mipmaps": true,
+            "format": 1023
+          }
+        ]
+      }
+    ]
+  },
+  "positions": {
+    "overview": 8085,
+    "awards": 20829,
+    "vh": 1080
+  },
+  "samples": [
+    {
+      "name": "offscreen-idle-before",
+      "ms": 1800.1999999999998,
+      "frames": 108,
+      "rafFps": 59.99333407399178,
+      "frameP95": 16.900000000000546,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 0,
+      "renderMs": [],
+      "drawCalls": [],
+      "triangles": [],
+      "canvasClears": {},
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "wd",
+          "calls": 7,
+          "pending": 0,
+          "source": "    at td (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:211297)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "story-scroll",
+      "ms": 1800.1999999999998,
+      "frames": 108,
+      "rafFps": 59.99333407399178,
+      "frameP95": 16.899999999999636,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 0,
+      "renderMs": [],
+      "drawCalls": [],
+      "triangles": [],
+      "canvasClears": {},
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "orbit-early",
+      "ms": 1800,
+      "frames": 108,
+      "rafFps": 60,
+      "frameP95": 16.700000000000728,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 107,
+      "renderMs": [
+        0.7999999998137355,
+        0.7999999998137355,
+        0.6999999992549419,
+        1,
+        0.900000000372529,
+        0.6999999992549419,
+        1,
+        0.7000000001862645,
+        0.7999999998137355,
+        0.7000000001862645,
+        0.7999999998137355,
+        1,
+        3.3999999994412065,
+        0.7000000001862645,
+        0.7000000001862645,
+        0.6999999992549419,
+        0.7999999998137355,
+        2.5,
+        0.900000000372529,
+        1.7000000001862645,
+        1.2999999998137355,
+        1.400000000372529,
+        1.2000000001862645,
+        0.7999999998137355,
+        1,
+        1.5,
+        2.7000000001862645,
+        1,
+        0.8000000007450581,
+        0.6999999992549419,
+        1.099999999627471,
+        1,
+        0.8999999994412065,
+        1.099999999627471,
+        1,
+        1,
+        0.8999999994412065,
+        0.7999999998137355,
+        0.7999999998137355,
+        0.7999999998137355,
+        0.8000000007450581,
+        1,
+        1.699999999254942,
+        1.2999999998137355,
+        1.1000000005587935,
+        1.599999999627471,
+        1.2999999998137355,
+        1.5,
+        1.3999999994412065,
+        1.1000000005587935,
+        1.199999999254942,
+        1.6000000005587935,
+        1.400000000372529,
+        1,
+        1.7999999998137355,
+        1.7000000001862645,
+        1.2000000001862645,
+        1.5,
+        1.2999999998137355,
+        1.3999999994412065,
+        0.900000000372529,
+        1.099999999627471,
+        1.2000000001862645,
+        1.2999999998137355,
+        1.5,
+        1.199999999254942,
+        1.400000000372529,
+        1.2000000001862645,
+        1.5,
+        1.099999999627471,
+        1.2000000001862645,
+        1.3999999994412065,
+        1.5,
+        1.099999999627471,
+        1.1000000005587935,
+        1.6000000005587935,
+        1.5,
+        1.400000000372529,
+        1.400000000372529,
+        1.3999999994412065,
+        1.3999999994412065,
+        4.5,
+        1.3999999994412065,
+        1.699999999254942,
+        2.2000000001862645,
+        1.800000000745058,
+        1.5,
+        1.1000000005587935,
+        1.2999999998137355,
+        1,
+        1.599999999627471,
+        1.3999999994412065,
+        3.5,
+        1.2000000001862645,
+        1.699999999254942,
+        1.2999999998137355,
+        1.2999999998137355,
+        1.6000000005587935,
+        1.099999999627471,
+        1.5,
+        1.2999999998137355,
+        1.3999999994412065,
+        1.2999999998137355,
+        1.2000000001862645,
+        1.5,
+        1.699999999254942,
+        1.400000000372529
+      ],
+      "drawCalls": [
+        107,
+        111
+      ],
+      "triangles": [
+        364721,
+        364913
+      ],
+      "lastRender": {
+        "phase": "orbit-early",
+        "at": 11997.299999999814,
+        "ms": 1.400000000372529,
+        "calls": 111,
+        "triangles": 364913,
+        "offscreen": false,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "3ead9762-d30c-4d18-9924-3f19bb88c6a6": 26,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25": 20,
+          "a4148418-7dbb-4c4f-b87a-368873501f7a": 18,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 10
+        }
+      },
+      "canvasClears": {},
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "orbit-middle",
+      "ms": 1800,
+      "frames": 108,
+      "rafFps": 60,
+      "frameP95": 16.80000000000109,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 107,
+      "renderMs": [
+        1.2999999998137355,
+        1.699999999254942,
+        1.2000000001862645,
+        1.2000000001862645,
+        1.599999999627471,
+        1.800000000745058,
+        1.2999999998137355,
+        1.5,
+        1.6000000005587935,
+        1.2000000001862645,
+        1.400000000372529,
+        6.5,
+        1.599999999627471,
+        1.5,
+        1.6000000005587935,
+        2,
+        1.2000000001862645,
+        2.2000000001862645,
+        1.099999999627471,
+        1.2999999998137355,
+        1.6000000005587935,
+        2.2999999998137355,
+        1.2999999998137355,
+        2.1000000005587935,
+        2.5,
+        2,
+        1.3999999994412065,
+        1.2999999998137355,
+        1.2999999998137355,
+        1.6000000005587935,
+        1.6000000005587935,
+        1.199999999254942,
+        1.7000000001862645,
+        2.3999999994412065,
+        1.2999999998137355,
+        2,
+        1.1000000005587935,
+        1.5,
+        2.1000000005587935,
+        1.400000000372529,
+        2,
+        1.2000000001862645,
+        1,
+        1.2000000001862645,
+        1.099999999627471,
+        5.2999999998137355,
+        1.199999999254942,
+        1.599999999627471,
+        1.5,
+        1.199999999254942,
+        1.300000000745058,
+        1.5,
+        1.099999999627471,
+        1.800000000745058,
+        0.900000000372529,
+        1.2999999998137355,
+        1.6000000005587935,
+        1.2999999998137355,
+        1.8999999994412065,
+        1.400000000372529,
+        1,
+        1.2999999998137355,
+        0.900000000372529,
+        1.599999999627471,
+        1.099999999627471,
+        1.400000000372529,
+        1.400000000372529,
+        1.300000000745058,
+        1,
+        1.3999999994412065,
+        1,
+        1.3999999994412065,
+        1.400000000372529,
+        1.199999999254942,
+        1.5,
+        1.2999999998137355,
+        1.3999999994412065,
+        2.2000000001862645,
+        1.2000000001862645,
+        1.5,
+        1.8999999994412065,
+        1.7999999998137355,
+        1.400000000372529,
+        1.6000000005587935,
+        1.7000000001862645,
+        0.900000000372529,
+        1,
+        1.2000000001862645,
+        1.699999999254942,
+        1.1000000005587935,
+        1.6000000005587935,
+        1.599999999627471,
+        1.6000000005587935,
+        1.7000000001862645,
+        1,
+        1.300000000745058,
+        1.5,
+        1.199999999254942,
+        1.7000000001862645,
+        1.099999999627471,
+        1.599999999627471,
+        1.300000000745058,
+        1.1000000005587935,
+        1.3999999994412065,
+        2,
+        1.2000000001862645,
+        1.5
+      ],
+      "drawCalls": [
+        113,
+        115
+      ],
+      "triangles": [
+        365009,
+        365105
+      ],
+      "lastRender": {
+        "phase": "orbit-middle",
+        "at": 15013.900000000373,
+        "ms": 1.5,
+        "calls": 113,
+        "triangles": 365009,
+        "offscreen": false,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "3ead9762-d30c-4d18-9924-3f19bb88c6a6": 26,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25": 20,
+          "a4148418-7dbb-4c4f-b87a-368873501f7a": 18,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 12
+        }
+      },
+      "canvasClears": {},
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "orbit-final",
+      "ms": 1800,
+      "frames": 108,
+      "rafFps": 60,
+      "frameP95": 16.900000000001455,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 107,
+      "renderMs": [
+        0.900000000372529,
+        1,
+        1.1000000005587935,
+        1,
+        0.900000000372529,
+        0.7999999998137355,
+        0.900000000372529,
+        1.2000000001862645,
+        0.8999999994412065,
+        1.1000000005587935,
+        4,
+        0.8999999994412065,
+        1,
+        1.2999999998137355,
+        0.8999999994412065,
+        0.8999999994412065,
+        1.2000000001862645,
+        1,
+        0.8000000007450581,
+        1.3999999994412065,
+        0.900000000372529,
+        1.400000000372529,
+        1,
+        0.8999999994412065,
+        1.1000000005587935,
+        1,
+        1.099999999627471,
+        1.099999999627471,
+        0.900000000372529,
+        0.7999999998137355,
+        1.099999999627471,
+        1.2000000001862645,
+        1.3999999994412065,
+        0.8999999994412065,
+        1.1000000005587935,
+        1,
+        0.8999999994412065,
+        1.099999999627471,
+        1.2000000001862645,
+        1,
+        1.2000000001862645,
+        1.1000000005587935,
+        1.300000000745058,
+        1,
+        1.2999999998137355,
+        1.1000000005587935,
+        0.7999999998137355,
+        0.8999999994412065,
+        0.8000000007450581,
+        0.7999999998137355,
+        0.7999999998137355,
+        0.900000000372529,
+        0.900000000372529,
+        0.7999999998137355,
+        0.7999999998137355,
+        0.900000000372529,
+        1,
+        0.7999999998137355,
+        0.900000000372529,
+        0.8999999994412065,
+        1.2999999998137355,
+        0.6999999992549419,
+        0.900000000372529,
+        1.2000000001862645,
+        0.900000000372529,
+        0.7999999998137355,
+        0.7999999998137355,
+        1.199999999254942,
+        1,
+        1,
+        3.5,
+        1.1000000005587935,
+        1,
+        1.099999999627471,
+        2.6000000005587935,
+        0.8000000007450581,
+        1.099999999627471,
+        0.7999999998137355,
+        0.8999999994412065,
+        1.5,
+        1,
+        1.099999999627471,
+        1.2000000001862645,
+        0.7999999998137355,
+        1,
+        1.5,
+        2.7999999998137355,
+        1.199999999254942,
+        3.2999999998137355,
+        0.7999999998137355,
+        1,
+        1.3999999994412065,
+        1.099999999627471,
+        1.2000000001862645,
+        1.1000000005587935,
+        0.7000000001862645,
+        1.5,
+        0.900000000372529,
+        1,
+        1.099999999627471,
+        1.2000000001862645,
+        0.900000000372529,
+        1,
+        1.2999999998137355,
+        1.900000000372529,
+        1.599999999627471,
+        1.2000000001862645
+      ],
+      "drawCalls": [
+        111,
+        113
+      ],
+      "triangles": [
+        364913,
+        365009
+      ],
+      "lastRender": {
+        "phase": "orbit-final",
+        "at": 18030.599999999627,
+        "ms": 1.2000000001862645,
+        "calls": 111,
+        "triangles": 364913,
+        "offscreen": false,
+        "groups": {
+          "09bb84c7-613e-4761-99c0-2150e2bcdf1d": 1,
+          "12b17a83-af81-4a76-b63b-bd888ecd414a": 1,
+          "d9d9cdcf-df7f-4bb0-aa9f-ead3d8efea12": 4,
+          "3ead9762-d30c-4d18-9924-3f19bb88c6a6": 26,
+          "8279502d-78b3-4592-938a-30a6f587cb5d": 31,
+          "d78433f4-2bfa-4a37-8ec3-bf37f27f5c25": 20,
+          "a4148418-7dbb-4c4f-b87a-368873501f7a": 18,
+          "1b3bba20-3984-45b5-84ed-26025ebf0628": 10
+        }
+      },
+      "canvasClears": {},
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "transition",
+      "ms": 1800.2000000000007,
+      "frames": 108,
+      "rafFps": 59.993334073991754,
+      "frameP95": 16.899999999997817,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 0,
+      "renderMs": [],
+      "drawCalls": [],
+      "triangles": [],
+      "canvasClears": {
+        "history-awards__pixel-boundary": 107
+      },
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "offscreen-idle-after",
+      "ms": 1800.0999999999985,
+      "frames": 108,
+      "rafFps": 59.99666685184162,
+      "frameP95": 16.900000000001455,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 0,
+      "renderMs": [],
+      "drawCalls": [],
+      "triangles": [],
+      "canvasClears": {
+        "history-awards__pixel-boundary": 0
+      },
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "wd",
+          "calls": 7,
+          "pending": 0,
+          "source": "    at td (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:211297)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "ms": 1800.2000000000007,
+      "frames": 108,
+      "rafFps": 59.993334073991754,
+      "frameP95": 16.900000000001455,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 0,
+      "renderMs": [],
+      "drawCalls": [],
+      "triangles": [],
+      "canvasClears": {
+        "history-awards__pixel-boundary": 0,
+        "history-awards__pixel-trail": 108
+      },
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "wd",
+          "calls": 7,
+          "pending": 0,
+          "source": "    at td (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:211297)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        },
+        {
+          "name": "u",
+          "calls": 108,
+          "pending": 1,
+          "source": "    at HTMLDivElement.d (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:4266:5819)\n    at measure (eval at evaluate (:311:30), <anonymous>:13:14)\n    at <anonymous>:13:108"
+        }
+      ]
+    },
+    {
+      "name": "cursor-settled",
+      "ms": 1800,
+      "frames": 108,
+      "rafFps": 60,
+      "frameP95": 16.900000000001455,
+      "over25ms": 0,
+      "reactCommits": 0,
+      "nodeDelta": 0,
+      "renders": 0,
+      "renderMs": [],
+      "drawCalls": [],
+      "triangles": [],
+      "canvasClears": {
+        "history-awards__pixel-boundary": 0,
+        "history-awards__pixel-trail": 0
+      },
+      "raf": [
+        {
+          "name": "u",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at u (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142245)\n    at Object.wake (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:142713)\n    at Xa (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:143130)"
+        },
+        {
+          "name": "e",
+          "calls": 109,
+          "pending": 1,
+          "source": "    at e (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:206627)\n    at e.enable (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:231432)\n    at e.register (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:230614)"
+        },
+        {
+          "name": "wd",
+          "calls": 7,
+          "pending": 0,
+          "source": "    at td (http://127.0.0.1:4174/assets/index-DYdJmfSS.js:11:211297)"
+        },
+        {
+          "name": "measure",
+          "calls": 109,
+          "pending": 0,
+          "source": "    at eval (eval at evaluate (:311:30), <anonymous>:17:7)\n    at new Promise (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:5:11)"
+        }
+      ]
+    }
+  ],
+  "longTasks": [
+    {
+      "phase": "initial",
+      "start": 117,
+      "duration": 213
+    },
+    {
+      "phase": "initial",
+      "start": 666.7999999998137,
+      "duration": 113
+    },
+    {
+      "phase": "initial",
+      "start": 888.7999999998137,
+      "duration": 50
+    },
+    {
+      "phase": "initial",
+      "start": 993,
+      "duration": 122
+    },
+    {
+      "phase": "initial",
+      "start": 1130.2999999998137,
+      "duration": 99
+    }
+  ]
+}

@@ -1,8 +1,67 @@
+import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './HistoryStoryTransitionSection.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 function HistoryStoryTransitionSection() {
+    const sectionRef = useRef(null);
+
+    useLayoutEffect(() => {
+        const section = sectionRef.current;
+        if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+        const textGroups = section.querySelectorAll('.history-story-transition__text');
+        const textContent = section.querySelectorAll('.history-story-transition__text > strong, .history-story-transition__text > p');
+        const background = section.querySelector('.history-story-transition__bg');
+        let returnToRest;
+        const ctx = gsap.context(() => {
+            returnToRest = gsap.delayedCall(0.12, () => {
+                gsap.to(textGroups, { y: 0, rotation: 0, duration: 0.65, ease: 'power3.out', overwrite: true });
+            }).pause();
+
+            const scrollMotion = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: () => section.offsetHeight > window.innerHeight ? 'bottom bottom' : 'top top',
+                    end: () => `+=${Math.round(window.innerHeight * 0.8)}`,
+                    scrub: 0.8,
+                    invalidateOnRefresh: true,
+                },
+            });
+            scrollMotion
+                .to(textContent, { y: -36, ease: 'none' }, 0)
+                .to(background, { scale: 1.025, ease: 'none' }, 0);
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                onUpdate: (self) => {
+                    const offset = gsap.utils.clamp(-10, 10, self.getVelocity() / 180);
+                    gsap.to(textGroups, {
+                        y: offset,
+                        rotation: offset * 0.035,
+                        duration: 0.3,
+                        ease: 'power2.out',
+                        overwrite: true,
+                    });
+                    returnToRest.restart(true);
+                },
+            });
+        }, section);
+
+        return () => {
+            returnToRest.kill();
+            gsap.killTweensOf(textGroups);
+            gsap.killTweensOf(textContent);
+            ctx.revert();
+        };
+    }, []);
+
     return (
-        <section className="history-story-transition">
+        <section className="history-story-transition" ref={sectionRef}>
             <img
                 className="history-story-transition__bg"
                 src="/images/history/story-transition.png"
