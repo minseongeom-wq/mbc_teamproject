@@ -16,6 +16,21 @@
   display: block;
 }
 
+.history-awards__pixel-trail {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.history-awards__heading,
+.history-awards__featured,
+.history-awards__list {
+  z-index: 2;
+}
+
 .history-awards__heading {
   position: absolute;
   left: 481px;

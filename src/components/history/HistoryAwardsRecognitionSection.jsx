@@ -1,4 +1,5 @@
 import './HistoryAwardsRecognitionSection.css';
+import AwardsPixelTrail from './AwardsPixelTrail';
 
 const awards = [
   ['The Game Awards', '(2023)'],
@@ -12,6 +13,7 @@ function HistoryAwardsRecognitionSection() {
   return (
     <section className="history-awards" aria-labelledby="history-awards-title">
       <img className="history-awards__grid" src="/images/history/history-awards-pixel-grid.png" alt="" aria-hidden="true" />
+      <AwardsPixelTrail />
 
       <h2 className="history-awards__heading" id="history-awards-title">
         <span>Awards</span>
