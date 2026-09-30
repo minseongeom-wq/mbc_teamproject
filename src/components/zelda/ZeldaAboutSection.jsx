@@ -12,9 +12,6 @@ export default function ZeldaAboutSection() {
           <p>하이랄을 더 깊이 만나보세요</p>
         </div>
         <Link className="zelda-about__more" to={routePaths.store} aria-label="스토어에서 더 보기"><span>more</span></Link>
-        <div className="zelda-about__diamonds" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => <span key={index} />)}
-        </div>
       </div>
     </section>
   );

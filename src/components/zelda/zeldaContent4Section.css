@@ -33,9 +33,4 @@
 .zelda-villages__village--kakariko .zelda-villages__label { left: 331px; top: 683px; }
 .zelda-villages__village--zora .zelda-villages__label { left: 870px; top: 469px; }
 .zelda-villages__village--gerudo .zelda-villages__label { left: 1380px; top: 809px; }
-.zelda-villages__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
-.zelda-villages__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
-.zelda-villages__diamonds > span::before, .zelda-villages__diamonds > span::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
-.zelda-villages__diamonds > span::before { width: 12.243px; height: 12.243px; border: 1px solid currentColor; }
-.zelda-villages__diamonds > span::after { width: 4.243px; height: 4.243px; background: currentColor; }
 .zelda-villages__note { position: absolute; left: 966.5px; top: 1027px; transform: translateX(-50%); font-size: 16px; font-weight: 700; line-height: 1.35; color: rgb(255 255 255 / .5); white-space: nowrap; }

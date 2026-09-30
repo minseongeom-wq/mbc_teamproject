@@ -23,6 +23,3 @@
 .zelda-store__line--3 { left: 159px; top: 159px; width: 463.862px; height: 1px; transform: translate(-50%, -50%) rotate(135deg); }
 .zelda-store__line--4 { left: 535.28px; top: 535.28px; width: 489.318px; height: 1px; transform: translate(-50%, -50%) rotate(135deg); }
 .zelda-store__console { position: absolute; left: 1378px; top: 658px; max-width: none; }
-.zelda-store__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
-.zelda-store__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
-.zelda-store__diamonds > span::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12.243px; height: 12.243px; border: 1px solid currentColor; transform: translate(-50%, -50%) rotate(45deg); }

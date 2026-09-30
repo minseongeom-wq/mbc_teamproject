@@ -9,6 +9,3 @@
 .zelda-about__more span { position: absolute; left: calc(50% + .5px); top: calc(50% - 15px); transform: translateX(-50%); font: 500 24px 'DNF Forged Blade', serif; white-space: nowrap; }
 .zelda-about__more { text-decoration: none; }
 .zelda-about__more:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
-.zelda-about__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
-.zelda-about__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
-.zelda-about__diamonds > span::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12.243px; height: 12.243px; border: 1px solid currentColor; transform: translate(-50%, -50%) rotate(45deg); }

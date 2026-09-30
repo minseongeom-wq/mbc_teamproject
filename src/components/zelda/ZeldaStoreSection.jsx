@@ -27,9 +27,6 @@ export default function ZeldaStoreSection() {
           {[1, 2, 3, 4].map(index => <img className={`zelda-store__line zelda-store__line--${index}`} src={asset(`line-${index}`)} key={index} alt="" />)}
         </div>
         <img className="zelda-store__console" src={asset('console')} alt="Nintendo Switch 2" />
-        <div className="zelda-store__diamonds" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => <span key={index} />)}
-        </div>
       </div>
     </section>
   );

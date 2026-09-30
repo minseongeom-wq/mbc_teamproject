@@ -6,91 +6,189 @@
   font-display: swap;
 }
 
-.zelda-video {
+.zelda-video__scroll-track {
   position: relative;
   left: 50%;
   width: 100vw;
+  height: 580vh;
   margin-left: -50vw;
-  aspect-ratio: 16 / 9;
+}
+
+.zelda-video {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  container-type: inline-size;
   background: var(--zelda-gold);
   color: #fff;
+  --line-progress: 0;
+  --text-progress: 0;
+  --line-exit: 0;
+  --text-spread: 0;
+  --diamond-progress: 0;
+  --border-first-progress: 0;
+  --border-second-progress: 0;
+  --zoom-progress: 0;
+  --title-exit: 0;
+  --word-gap: 1.5625cqw;
+}
+
+.zelda-video__scene {
+  position: relative;
+  width: min(100%, 177.7777778svh);
+  aspect-ratio: 16 / 9;
+  container-type: inline-size;
+  overflow: visible;
+}
+
+.zelda-video__center-line {
+  position: absolute;
+  top: 34.7222222%;
+  left: 49.9479167%;
+  width: 17.1875%;
+  height: auto;
+  object-fit: fill;
+  transform: rotate(90deg) scaleX(var(--line-progress));
+  transform-origin: top left;
+  clip-path: inset(0 0 0 calc(var(--line-exit) * 100%));
+  will-change: transform;
 }
 
 .zelda-video__title {
   position: absolute;
-  top: 34.722222%;
-  left: 18.90625%;
-  display: flex;
-  align-items: center;
-  gap: 1.5625cqw;
-  height: 17.1875cqw;
+  top: 34.7222222%;
+  left: 0;
+  width: 100%;
+  height: 30.5555556%;
   margin: 0;
   font-family: 'Heir of Light', serif;
-  font-size: 6.25cqw;
+  font-size: calc(6.25cqw + var(--zoom-progress) * 5.73828125cqw);
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0;
   white-space: nowrap;
+  visibility: visible;
+  opacity: calc(1 - var(--title-exit));
+  filter: blur(calc(var(--title-exit) * 1.25cqw));
 }
 
-.zelda-video__divider {
-  position: relative;
-  flex: 0 0 0;
-  height: 17.1875cqw;
-}
-
-.zelda-video__title > span:first-child {
-  flex: 0 0 29.479167cqw;
-}
-
-.zelda-video__title > span:last-child {
-  flex: 0 0 26.927083cqw;
-}
-
-.zelda-video__divider img {
+.zelda-video__word-window {
   position: absolute;
-  top: 0;
+  inset: 0;
+  -webkit-mask-image: var(--word-mask);
+  mask-image: var(--word-mask);
+}
+
+.zelda-video[data-text-revealed="true"] .zelda-video__word-window {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.zelda-video__word-window--explore {
+  --word-mask: linear-gradient(to right, #000 calc(50% - .6770833cqw), transparent calc(50% - .0520833cqw));
+}
+
+.zelda-video__word-window--hyrule {
+  --word-mask: linear-gradient(to right, transparent calc(50% - .0520833cqw), #000 calc(50% + .5729167cqw));
+}
+
+.zelda-video__word {
+  position: absolute;
+  top: calc(4.1145833cqw - var(--text-spread) * .7144427cqw - var(--zoom-progress) * 4.140623cqw);
+  height: calc(8.9583333cqw + var(--zoom-progress) * 8.28125cqw);
+  opacity: var(--text-progress);
+}
+
+.zelda-video__word--explore {
+  left: calc(18.90625% + (1 - var(--text-progress)) * (29.479167cqw + var(--word-gap))
+    - var(--text-spread) * 9.375cqw - var(--zoom-progress) * 37.2298686cqw);
+  width: calc(29.479167% + var(--zoom-progress) * 27.0833333cqw);
+  text-align: left;
+}
+
+.zelda-video__word--hyrule {
+  left: calc(51.5104167% + (var(--text-progress) - 1) * (26.927083cqw + var(--word-gap))
+    + var(--text-spread) * 9.5459493cqw + var(--zoom-progress) * 10.0944646cqw);
+  width: calc(26.927083% + var(--zoom-progress) * 24.6354167cqw);
+}
+
+.zelda-video__big-diamond {
+  --diamond-scale: calc((.92 + var(--diamond-progress) * .08) * (1 + var(--zoom-progress) * .918045));
+  position: absolute;
+  left: calc(50.0333913% - var(--zoom-progress) * .0260417cqw - var(--diamond-scale) * 10.8146413cqw);
+  top: calc(48.72988115% - var(--diamond-scale) * 19.22605165%);
+  width: calc(21.6292826% * var(--diamond-scale));
+  height: calc(38.4521033% * var(--diamond-scale));
+}
+
+.zelda-video__diamond-line {
+  position: absolute;
+  width: 52.7352%;
+  height: 52.7352%;
+  clip-path: inset(0 0 calc((1 - var(--border-progress)) * 100%) 0);
+}
+
+.zelda-video__diamond-line--1 {
   left: 0;
-  display: block;
-  max-width: none;
-  transform-origin: top left;
-  transform: rotate(90deg) scale(calc(100cqw / 1920px));
+  top: 47.5057%;
+  --border-progress: var(--border-first-progress);
 }
 
-.zelda-video__diamonds {
+.zelda-video__diamond-line--2 {
+  left: 47.5056%;
+  top: 0;
+  --border-progress: var(--border-first-progress);
+  clip-path: inset(calc((1 - var(--border-progress)) * 100%) 0 0 0);
+}
+
+.zelda-video__diamond-line--3 {
+  left: 0;
+  top: 0;
+  --border-progress: var(--border-second-progress);
+}
+
+.zelda-video__diamond-line--4 {
+  left: 47.5056%;
+  top: 47.5057%;
+  --border-progress: var(--border-second-progress);
+  clip-path: inset(calc((1 - var(--border-progress)) * 100%) 0 0 0);
+}
+
+.zelda-video__footage {
   position: absolute;
-  top: 44.722222%;
-  left: 2.135417%;
-  display: flex;
-  flex-direction: column;
-  gap: .416667cqw;
+  left: 2.5304%;
+  top: 2.4967%;
+  width: 95.1128%;
+  height: 95.1128%;
+  object-fit: cover;
+  opacity: var(--diamond-progress);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
-.zelda-video__diamonds > span {
-  position: relative;
-  width: .901756cqw;
-  height: .901756cqw;
-}
-
-.zelda-video__diamonds > span::before,
-.zelda-video__diamonds > span::after {
-  content: '';
+.zelda-video__description {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  top: 84.9074074%;
+  left: 50.0260417%;
+  width: 22.96875%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 1.25cqw;
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  opacity: calc(var(--diamond-progress) * (1 - var(--zoom-progress)));
+  filter: blur(calc((1 - var(--diamond-progress) + var(--zoom-progress)) * .4166667cqw));
+  will-change: opacity, filter;
 }
 
-.zelda-video__diamonds > span::before {
-  width: .637645cqw;
-  height: .637645cqw;
-  border: .052083cqw solid currentColor;
-}
-
-.zelda-video__diamonds > span::after {
-  width: .220971cqw;
-  height: .220971cqw;
-  background: currentColor;
+@media (max-width: 700px) {
+  .zelda-video__scroll-track {
+    height: 580svh;
+  }
 }
