@@ -113,14 +113,6 @@ export default function ZeldaVideoSection() {
           끝없이 펼쳐진 대지, 수많은 전설이 잠든 하이랄.<br />
           그곳에서 새로운 모험이 시작됩니다.
         </p>
-        <img
-          className="zelda-video__diamonds"
-          src={`${import.meta.env.BASE_URL}images/zelda/video-left-diamond-bar.svg`}
-          alt=""
-          data-node-id="1595:2593"
-          data-name="left_Diamind-bar"
-          aria-hidden="true"
-        />
         </div>
       </section>
     </div>

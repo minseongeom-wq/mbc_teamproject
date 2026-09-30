@@ -187,15 +187,6 @@
   will-change: opacity, filter;
 }
 
-.zelda-video__diamonds {
-  position: absolute;
-  top: 44.7222222%;
-  left: 2.1354167%;
-  display: block;
-  width: .9375cqw;
-  height: auto;
-}
-
 @media (max-width: 700px) {
   .zelda-video__scroll-track {
     height: 580svh;

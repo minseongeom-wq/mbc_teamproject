@@ -33,9 +33,6 @@ export default function ZeldaContent4Section() {
             </div>
           </div>
         ))}
-        <div className="zelda-villages__diamonds" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => <span key={index} />)}
-        </div>
         <p className="zelda-villages__note">더 많은 콘텐츠는 게임에서 만나보세요.</p>
       </div>
     </section>

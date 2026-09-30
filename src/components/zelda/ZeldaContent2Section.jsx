@@ -17,9 +17,7 @@ export default function ZeldaContent2Section() {
     <section className="zelda-gameplay" data-view={views[selectedImage]} aria-labelledby="zelda-gameplay-title">
       <div className="zelda-gameplay__canvas">
         <img className="zelda-gameplay__background-base" src={asset('sword.png')} alt="" loading="lazy" />
-        {Object.entries(backgrounds).map(([id, filename]) => (
-          <img key={id} className={`zelda-gameplay__background zelda-gameplay__background--${id}`} src={asset(filename)} alt="" hidden={selectedImage !== id} />
-        ))}
+        <img key={selectedImage} className={`zelda-gameplay__background zelda-gameplay__background--${selectedImage}`} src={asset(backgrounds[selectedImage])} alt="" />
         <div className="zelda-gameplay__heading">
           <p>나만의 모험</p>
           <h2 id="zelda-gameplay-title">GAMEPLAY</h2>
@@ -56,9 +54,6 @@ export default function ZeldaContent2Section() {
         <img className="zelda-gameplay__right-frame" src={asset('right-frame.svg')} alt="" />
         <div className="zelda-gameplay__diamond-border zelda-gameplay__diamond-border--solve" aria-hidden="true" />
         <div className="zelda-gameplay__diamond-border zelda-gameplay__diamond-border--cook" aria-hidden="true" />
-        <div className="zelda-gameplay__diamonds" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => <span key={index} />)}
-        </div>
         <p className="zelda-gameplay__note">더 많은 콘텐츠는 게임에서 만나보세요.</p>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './zeldaCharacterSection.css';
 
 const characters = [
@@ -36,28 +36,69 @@ const characters = [
 const asset = name => `${import.meta.env.BASE_URL}images/zelda/${name}.png`;
 
 export default function ZeldaCharacterSection() {
+  const trackRef = useRef(null);
   const [selectedId, setSelectedId] = useState('link');
   const selected = characters.find(character => character.id === selectedId);
 
+  useEffect(() => {
+    let frame = 0;
+    const updateCharacter = () => {
+      frame = 0;
+      const track = trackRef.current;
+      if (!track) return;
+      const { top } = track.getBoundingClientRect();
+      const index = Math.min(characters.length - 1, Math.max(0, Math.floor(-top / window.innerHeight + .001)));
+      const sceneHeight = track.firstElementChild.offsetHeight;
+      const fadeStart = (characters.length - 1) * sceneHeight;
+      const fadeEnd = track.offsetHeight - sceneHeight;
+      const fadeProgress = Math.min(1, Math.max(0, (-top - fadeStart) / Math.max(1, fadeEnd - fadeStart)));
+      track.style.setProperty('--character-image-opacity', String(1 - fadeProgress));
+      setSelectedId(current => current === characters[index].id ? current : characters[index].id);
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateCharacter);
+    };
+
+    updateCharacter();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const selectCharacter = id => {
+    const track = trackRef.current;
+    if (!track) return;
+    const index = characters.findIndex(character => character.id === id);
+    setSelectedId(id);
+    window.scrollTo({
+      top: window.scrollY + track.getBoundingClientRect().top + index * window.innerHeight,
+      behavior: 'instant',
+    });
+  };
+
   return (
-    <section className={`zelda-character zelda-character--${selected.id}`} aria-labelledby="zelda-character-title">
+    <section ref={trackRef} className={`zelda-character zelda-character--${selected.id}`} aria-labelledby="zelda-character-title">
+      <div className="zelda-character__stage" style={{ '--character-background': `url("${asset('character-background')}")` }}>
       <div className="zelda-character__canvas">
-        <img className="zelda-character__background" src={asset('character-background')} alt="" loading="lazy" />
         <div className="zelda-character__heading">
           <p>전설을 잇는 자들</p>
-          <h2 id="zelda-character-title">character</h2>
+          <h2 id="zelda-character-title">CHARACTER</h2>
         </div>
-        <div className="zelda-character__intro" aria-live="polite" aria-atomic="true">
+        <div key={`intro-${selected.id}`} className="zelda-character__intro" aria-live="polite" aria-atomic="true">
           <h3>{selected.title}</h3>
           <p>{selected.intro}</p>
         </div>
         <div className="zelda-character__portrait">
           <span className="zelda-character__light" aria-hidden="true" />
-          <div className="zelda-character__portrait-art">
+          <div key={`portrait-${selected.id}`} className="zelda-character__portrait-art">
             <img src={asset(`character-${selected.id}`)} alt={selected.name} />
           </div>
         </div>
-        <p className="zelda-character__description">{selected.description}</p>
+        <p key={`description-${selected.id}`} className="zelda-character__description">{selected.description}</p>
         <ul className="zelda-character__thumbnails" aria-label="등장 캐릭터">
           {characters.map(({ id, name }) => (
             <li key={id}>
@@ -66,20 +107,15 @@ export default function ZeldaCharacterSection() {
                 className={`zelda-character__thumbnail zelda-character__thumbnail--${id}`}
                 aria-label={`${name} 소개 보기`}
                 aria-pressed={selectedId === id}
-                onClick={() => setSelectedId(id)}
+                onClick={() => selectCharacter(id)}
               >
                 <div className="zelda-character__crop"><img src={asset(`character-${id}`)} alt="" loading="lazy" /></div>
               </button>
             </li>
           ))}
         </ul>
-        <div className="zelda-character__diamonds" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => <span key={index} />)}
-        </div>
-        <div className="zelda-character__diamonds zelda-character__diamonds--overlay" aria-hidden="true">
-          {Array.from({ length: 4 }, (_, index) => <span key={index} />)}
-        </div>
         <p className="zelda-character__note">더 많은 캐릭터를 게임에서 만나보세요.</p>
+      </div>
       </div>
     </section>
   );

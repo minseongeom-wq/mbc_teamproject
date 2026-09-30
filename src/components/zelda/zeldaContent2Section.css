@@ -81,10 +81,4 @@
 .zelda-gameplay__diamond-border--solve { left: 402.47px; top: 583.91px; width: 223.446px; height: 223.446px; }
 .zelda-gameplay__diamond-border--cook { left: 1558.19px; top: 841.19px; width: 273.21px; height: 273.21px; }
 
-.zelda-gameplay__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
-.zelda-gameplay__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
-.zelda-gameplay__diamonds > span::before,
-.zelda-gameplay__diamonds > span::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
-.zelda-gameplay__diamonds > span::before { width: 12.243px; height: 12.243px; border: 1px solid currentColor; }
-.zelda-gameplay__diamonds > span::after { width: 4.243px; height: 4.243px; background: currentColor; }
 .zelda-gameplay__note { position: absolute; left: 966.5px; top: 1027px; transform: translateX(-50%); font-size: 16px; font-weight: 700; line-height: 1.35; color: rgb(255 255 255 / .5); white-space: nowrap; }

@@ -46,7 +46,7 @@ export default function ZeldaContent3Section() {
           <p>모험을 위한 기술</p>
           <h2 id="zelda-combat-title">COMBAT</h2>
         </div>
-        <div className="zelda-combat__description">
+        <div key={weapons[selected][0]} className="zelda-combat__description">
           <h3>{descriptions[selected][0]}</h3>
           <p>{descriptions[selected][1].map((line, index) => <span key={line}>{index > 0 && <br />}{line}</span>)}</p>
           <div className="zelda-combat__arrows" aria-hidden="true">
@@ -56,7 +56,7 @@ export default function ZeldaContent3Section() {
         </div>
         <div ref={listRef} className="zelda-combat__list" tabIndex={0} role="region" aria-label="전투 기술 목록">
           {weapons.map(([id, title, label, extension], index) => (
-            <button type="button" className={`zelda-combat__card zelda-combat__card--${id}`} key={id} aria-pressed={selected === index} aria-label={`${title} ${label}`} onClick={() => setSelected(index)}>
+            <button type="button" className={`zelda-combat__card zelda-combat__card--${id}`} key={id} aria-pressed={selected === index} aria-label={`${title} ${label}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)}>
               <div className="zelda-combat__image-slot">
                 <img src={asset(`${id}.${extension}`)} alt="" loading="lazy" />
               </div>
@@ -64,9 +64,6 @@ export default function ZeldaContent3Section() {
               <p>{label}</p>
             </button>
           ))}
-        </div>
-        <div className="zelda-combat__diamonds" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => <span key={index} />)}
         </div>
         <p className="zelda-combat__note">더 많은 콘텐츠는 게임에서 만나보세요.</p>
       </div>

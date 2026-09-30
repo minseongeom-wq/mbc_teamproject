@@ -37,9 +37,4 @@
 .zelda-combat__card--robot img { left: 0; top: 0; width: 375px; height: 540px; transform-origin: top left; transform: matrix(1.00000006, 0, 0, .71649034, -6.000016, 70.547602); }
 .zelda-combat__card-title { position: absolute; left: 32px; top: 453px; font-size: 24px; font-weight: 300; line-height: 1.5; color: #fff; white-space: nowrap; }
 .zelda-combat__card p { position: absolute; left: 33px; top: 492px; font-size: 15px; font-weight: 500; line-height: 1.3; color: #dadada; white-space: nowrap; }
-.zelda-combat__diamonds { position: absolute; left: 41px; top: 483px; display: flex; flex-direction: column; gap: 8px; color: #fff; }
-.zelda-combat__diamonds > span { position: relative; width: 17.314px; height: 17.314px; }
-.zelda-combat__diamonds > span::before, .zelda-combat__diamonds > span::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
-.zelda-combat__diamonds > span::before { width: 12.243px; height: 12.243px; border: 1px solid currentColor; }
-.zelda-combat__diamonds > span::after { width: 4.243px; height: 4.243px; background: currentColor; }
 .zelda-combat__note { position: absolute; left: 966.5px; top: 1027px; transform: translateX(-50%); font-size: 16px; font-weight: 700; line-height: 1.35; color: rgb(255 255 255 / .5); white-space: nowrap; }

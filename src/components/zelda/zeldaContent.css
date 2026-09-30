@@ -12,6 +12,46 @@
   background: var(--zelda-gold);
 }
 
+.zelda-page__diamond-bar {
+  position: fixed;
+  z-index: 10;
+  left: 2.1354167vw;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(-50%);
+  color: #fff;
+  pointer-events: none;
+}
+
+.zelda-page__diamond-bar > span {
+  position: relative;
+  width: 17.314px;
+  height: 17.314px;
+}
+
+.zelda-page__diamond-bar > span::before,
+.zelda-page__diamond-bar > span::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.zelda-page__diamond-bar > span::before {
+  width: 12.243px;
+  height: 12.243px;
+  border: 1px solid currentColor;
+}
+
+.zelda-page__diamond-bar > .zelda-page__diamond--active::after {
+  width: 4.243px;
+  height: 4.243px;
+  background: currentColor;
+}
+
 .zelda-hero {
   --scroll-hint-exit: 0;
   position: relative;
@@ -90,4 +130,41 @@
 .zelda-content {
   --zelda-body-font: 100 20px/1.5 'Zelda Pretendard', sans-serif;
   --zelda-body-letter-spacing: 0;
+}
+
+.zelda-character__intro,
+.zelda-character__portrait-art,
+.zelda-character__description,
+.zelda-gameplay__background,
+.zelda-combat__background,
+.zelda-combat__description {
+  animation: zelda-interaction-reveal .45s ease-out both;
+}
+
+.zelda-character__intro,
+.zelda-character__portrait-art,
+.zelda-character__description {
+  --zelda-reveal-opacity: 0;
+  --zelda-reveal-blur: 10px;
+}
+
+.zelda-gameplay__background,
+.zelda-combat__background,
+.zelda-combat__description {
+  --zelda-reveal-opacity: .5;
+  --zelda-reveal-blur: 12px;
+}
+
+@keyframes zelda-interaction-reveal {
+  from { opacity: var(--zelda-reveal-opacity); filter: blur(var(--zelda-reveal-blur)); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zelda-character__intro,
+  .zelda-character__portrait-art,
+  .zelda-character__description,
+  .zelda-gameplay__background,
+  .zelda-combat__background,
+  .zelda-combat__description { animation: none; }
 }
