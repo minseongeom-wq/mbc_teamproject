@@ -9,15 +9,22 @@ const activities = [
   ['travel', 'TRAVEL', '달리고, 오르고, 활강하며 다양한 방법으로 하이랄 곳곳을 자유롭게 여행하세요.'],
 ];
 
-export default function ZeldaContent2Section() {
+export default function ZeldaContent2Section({ overlapPhase = 'character' }) {
   const [selectedImage, setSelectedImage] = useState('sword');
+  const [hasInteracted, setHasInteracted] = useState(false);
   const views = { sword: 'content2', solve: 'content2_2', cook: 'content2_3', landscape: 'content2_4' };
   const backgrounds = { sword: 'background.png', solve: 'solve-background.png', cook: 'cook-background.png', landscape: 'landscape.png' };
+  const selectImage = name => {
+    setSelectedImage(name);
+    setHasInteracted(true);
+  };
   return (
-    <section className="zelda-gameplay" data-view={views[selectedImage]} aria-labelledby="zelda-gameplay-title">
+    <section className={`zelda-gameplay${overlapPhase !== 'character' ? ' zelda-gameplay--overlap-active' : ''}${overlapPhase === 'complete' ? ' zelda-gameplay--overlap-complete' : ''}`} data-view={views[selectedImage]} data-interacted={hasInteracted} aria-labelledby="zelda-gameplay-title" style={{ '--gameplay-background': `url("${asset(backgrounds[selectedImage])}")` }}>
+      <div className="zelda-gameplay__stage" inert={overlapPhase !== 'complete'}>
       <div className="zelda-gameplay__canvas">
         <img className="zelda-gameplay__background-base" src={asset('sword.png')} alt="" loading="lazy" />
         <img key={selectedImage} className={`zelda-gameplay__background zelda-gameplay__background--${selectedImage}`} src={asset(backgrounds[selectedImage])} alt="" />
+        <div className="zelda-gameplay__foreground">
         <div className="zelda-gameplay__heading">
           <p>나만의 모험</p>
           <h2 id="zelda-gameplay-title">GAMEPLAY</h2>
@@ -40,9 +47,9 @@ export default function ZeldaContent2Section() {
               type: 'button',
               'aria-label': `${views[name]} 화면 보기`,
               'aria-pressed': selectedImage === name,
-              onMouseEnter: () => setSelectedImage(name),
-              onFocus: () => setSelectedImage(name),
-              onClick: () => setSelectedImage(name),
+              onMouseEnter: () => selectImage(name),
+              onFocus: () => selectImage(name),
+              onClick: () => selectImage(name),
             } : {})}>
             {name === 'cook' && <img className="zelda-gameplay__image-base" src={asset('image-base.svg')} alt="" />}
             <img className="zelda-gameplay__diamond-image" src={asset(`${name}.png`)} alt="" loading="lazy" />
@@ -55,6 +62,8 @@ export default function ZeldaContent2Section() {
         <div className="zelda-gameplay__diamond-border zelda-gameplay__diamond-border--solve" aria-hidden="true" />
         <div className="zelda-gameplay__diamond-border zelda-gameplay__diamond-border--cook" aria-hidden="true" />
         <p className="zelda-gameplay__note">더 많은 콘텐츠는 게임에서 만나보세요.</p>
+        </div>
+      </div>
       </div>
     </section>
   );

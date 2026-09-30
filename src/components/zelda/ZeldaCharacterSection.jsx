@@ -35,7 +35,7 @@ const characters = [
 ];
 const asset = name => `${import.meta.env.BASE_URL}images/zelda/${name}.png`;
 
-export default function ZeldaCharacterSection() {
+export default function ZeldaCharacterSection({ onTransitionPhase }) {
   const trackRef = useRef(null);
   const [selectedId, setSelectedId] = useState('link');
   const selected = characters.find(character => character.id === selectedId);
@@ -49,10 +49,32 @@ export default function ZeldaCharacterSection() {
       const { top } = track.getBoundingClientRect();
       const index = Math.min(characters.length - 1, Math.max(0, Math.floor(-top / window.innerHeight + .001)));
       const sceneHeight = track.firstElementChild.offsetHeight;
-      const fadeStart = (characters.length - 1) * sceneHeight;
-      const fadeEnd = track.offsetHeight - sceneHeight;
+      const fadeStart = characters.length * sceneHeight;
+      const fadeEnd = fadeStart + sceneHeight * .4;
       const fadeProgress = Math.min(1, Math.max(0, (-top - fadeStart) / Math.max(1, fadeEnd - fadeStart)));
+      const darkProgress = Math.min(1, Math.max(0, (fadeProgress - .5) * 2));
+      const overlapProgress = Math.min(1, Math.max(0, (-top - fadeEnd) / (sceneHeight * .5)));
+      const overlapFinish = Math.min(1, Math.max(0, (-top - fadeEnd - sceneHeight * .5) / (sceneHeight * .5)));
+      // Resolve the overlap over 50svh: quick frame exit, background, then images.
+      const resolveProgress = Math.min(1, Math.max(0, (-top - fadeEnd - sceneHeight) / (sceneHeight * .5)));
+      const characterExit = Math.min(1, resolveProgress / .4);
+      const backgroundReveal = Math.min(1, resolveProgress / .8);
+      const imageReveal = resolveProgress <= .8
+        ? Math.max(0, (resolveProgress - .4) / .8)
+        : .5 + (resolveProgress - .8) / .4;
       track.style.setProperty('--character-image-opacity', String(1 - fadeProgress));
+      track.dataset.overlapping = String(overlapProgress > 0);
+      track.style.setProperty('--character-background-dark-opacity', String(darkProgress));
+      track.parentElement.style.setProperty('--zelda-overlap-progress', String(overlapProgress));
+      track.parentElement.style.setProperty('--zelda-overlap-finish', String(overlapFinish));
+      track.parentElement.style.setProperty('--character-exit', String(characterExit));
+      track.parentElement.style.setProperty('--gameplay-background-reveal', String(backgroundReveal));
+      track.parentElement.style.setProperty('--gameplay-image-reveal', String(imageReveal));
+      track.parentElement.style.setProperty('--gameplay-reveal-blur', `${2.5 * (overlapProgress + overlapFinish) * (1 - backgroundReveal)}px`);
+      track.parentElement.style.setProperty('--zelda-overlap-blur', `${2.5 * (overlapProgress + overlapFinish)}px`);
+      track.parentElement.style.setProperty('--zelda-background-blur', `${10 * overlapProgress * (1 - backgroundReveal)}px`);
+      const phase = -top >= fadeEnd + sceneHeight * 1.5 ? 'complete' : -top >= fadeEnd ? 'blend' : 'character';
+      onTransitionPhase?.(phase);
       setSelectedId(current => current === characters[index].id ? current : characters[index].id);
     };
     const scheduleUpdate = () => {
@@ -67,7 +89,7 @@ export default function ZeldaCharacterSection() {
       window.removeEventListener('resize', scheduleUpdate);
       window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [onTransitionPhase]);
 
   const selectCharacter = id => {
     const track = trackRef.current;
@@ -82,8 +104,19 @@ export default function ZeldaCharacterSection() {
 
   return (
     <section ref={trackRef} className={`zelda-character zelda-character--${selected.id}`} aria-labelledby="zelda-character-title">
-      <div className="zelda-character__stage" style={{ '--character-background': `url("${asset('character-background')}")` }}>
+      <div className="zelda-character__stage" style={{
+        '--character-background': `url("${asset('character-background')}")`,
+        '--character-background-dark': `url("${asset('character-background-dark')}")`,
+        '--character-background-transition': `url("${asset('character-background-transition')}")`,
+        '--character-gameplay-background': `url("${asset('gameplay-background')}")`,
+      }}>
       <div className="zelda-character__canvas">
+        <div className="zelda-character__backgrounds" aria-hidden="true">
+        <div className="zelda-character__background-dark" aria-hidden="true" />
+        <div className="zelda-character__background-transition" aria-hidden="true" />
+        </div>
+        <div className="zelda-character__background-gameplay" aria-hidden="true" />
+        <div className="zelda-character__content">
         <div className="zelda-character__heading">
           <p>전설을 잇는 자들</p>
           <h2 id="zelda-character-title">CHARACTER</h2>
@@ -92,8 +125,8 @@ export default function ZeldaCharacterSection() {
           <h3>{selected.title}</h3>
           <p>{selected.intro}</p>
         </div>
+        <span className="zelda-character__light" aria-hidden="true" />
         <div className="zelda-character__portrait">
-          <span className="zelda-character__light" aria-hidden="true" />
           <div key={`portrait-${selected.id}`} className="zelda-character__portrait-art">
             <img src={asset(`character-${selected.id}`)} alt={selected.name} />
           </div>
@@ -115,6 +148,7 @@ export default function ZeldaCharacterSection() {
           ))}
         </ul>
         <p className="zelda-character__note">더 많은 캐릭터를 게임에서 만나보세요.</p>
+        </div>
       </div>
       </div>
     </section>

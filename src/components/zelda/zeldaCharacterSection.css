@@ -15,13 +15,15 @@
 }
 
 .zelda-character {
-  position: relative;
+  position: absolute;
   left: 50%;
+  top: 0;
   width: 100vw;
   margin-left: -50vw;
-  /* Six character views and a short scroll dwell on the final view. */
-  height: 630vh;
-  height: 630svh;
+  /* Keep the shared background pinned until the gameplay track ends.
+     Releasing it at the overlap boundary exposes a moving frame before React updates. */
+  height: 990vh;
+  height: 990svh;
   container-type: inline-size;
   background: #8c8c8c;
   color: #ededed;
@@ -35,7 +37,7 @@
   height: 100vh;
   height: 100svh;
   overflow: hidden;
-  background-image: var(--character-background);
+  background-color: #8c8c8c;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -51,7 +53,13 @@
   font-family: 'Zelda Pretendard', sans-serif;
 }
 
-.zelda-character__canvas::before {
+.zelda-character__backgrounds {
+  position: absolute;
+  inset: 0;
+  /* The incoming opaque image covers this background; never expose the gray base. */
+}
+
+.zelda-character__backgrounds::before {
   content: '';
   position: absolute;
   left: 50%;
@@ -61,6 +69,57 @@
   transform: translate(-50%, -50%);
   background: var(--character-background) center / cover no-repeat;
   pointer-events: none;
+}
+
+.zelda-character__background-dark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100cqw / var(--character-scale));
+  height: calc(100svh / var(--character-scale));
+  transform: translate(-50%, -50%);
+  background: var(--character-background-dark) center / cover no-repeat;
+  opacity: var(--character-background-dark-opacity, 0);
+  pointer-events: none;
+}
+
+.zelda-character__background-transition {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100cqw / var(--character-scale));
+  height: calc(100svh / var(--character-scale));
+  transform: translate(-50%, -50%);
+  background: var(--character-background-transition) center / cover no-repeat;
+  opacity: var(--zelda-overlap-progress, 0);
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.zelda-character__content {
+  position: absolute;
+  inset: 0;
+  /* Keep normal scenes pass-through so Plus Lighter reaches the forest background. */
+}
+
+.zelda-character[data-overlapping="true"] .zelda-character__content {
+  opacity: calc((1 - .5 * var(--zelda-overlap-progress, 0) + .5 * var(--zelda-overlap-finish, 0)) * (1 - var(--character-exit, 0)));
+  filter: blur(var(--zelda-overlap-blur, 0px));
+  will-change: opacity, filter;
+}
+
+.zelda-character__background-gameplay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100cqw / var(--character-scale));
+  height: calc(100svh / var(--character-scale));
+  transform: translate(-50%, -50%);
+  background: var(--character-gameplay-background) center / cover no-repeat;
+  opacity: calc(.25 * (var(--zelda-overlap-progress, 0) + var(--zelda-overlap-finish, 0)) + .5 * var(--gameplay-background-reveal, 0));
+  filter: blur(var(--zelda-background-blur, 0px));
+  pointer-events: none;
+  will-change: opacity, filter;
 }
 
 .zelda-character__canvas p,
@@ -73,7 +132,7 @@
   top: 106px;
   width: 356px;
   height: 152px;
-  opacity: .5;
+  opacity: calc(.5 + .5 * var(--zelda-overlap-finish, 0));
   mix-blend-mode: plus-lighter;
   text-align: center;
 }
@@ -101,17 +160,18 @@
   mix-blend-mode: plus-lighter;
 }
 
-.zelda-character__intro h3 { font: 400 56px/1 'Heir of Light', serif; color: rgb(255 255 255 / .5); }
+.zelda-character__intro h3 { font: 400 56px/1 'Heir of Light', serif; color: rgb(255 255 255 / calc(.5 + .5 * var(--zelda-overlap-finish, 0))); }
 .zelda-character__intro p,
 .zelda-character__description { font: var(--zelda-body-font); letter-spacing: var(--zelda-body-letter-spacing); white-space: pre-line; }
 .zelda-character__intro p { overflow-wrap: break-word; }
 .zelda-character__description { white-space: pre; }
 .zelda-character--beedle .zelda-character__intro { width: 545px; }
 .zelda-character--beedle .zelda-character__intro p,
-.zelda-character--beedle .zelda-character__description { color: rgb(237 237 237 / .5); }
+.zelda-character--beedle .zelda-character__description { color: rgb(237 237 237 / calc(.5 + .5 * var(--zelda-overlap-finish, 0))); }
 
-.zelda-character__portrait { position: absolute; left: 776px; top: 327px; width: 369px; height: 633px; }
-.zelda-character__light { position: absolute; inset: 0; border: 12px solid rgb(255 255 255 / .1); background: rgb(255 255 255 / .05); mix-blend-mode: plus-lighter; }
+.zelda-character__portrait,
+.zelda-character__light { position: absolute; left: 776px; top: 327px; width: 369px; height: 633px; }
+.zelda-character__light { border: 12px solid rgb(255 255 255 / calc(.1 + .9 * var(--zelda-overlap-progress, 0))); background: rgb(255 255 255 / calc(.05 + .05 * var(--zelda-overlap-progress, 0) + .1 * var(--zelda-overlap-finish, 0))); mix-blend-mode: plus-lighter; pointer-events: none; }
 .zelda-character__portrait-art { position: absolute; }
 .zelda-character__portrait-art img { position: absolute; width: 100%; height: 100%; max-width: none; object-fit: cover; opacity: var(--character-image-opacity, 1); }
 .zelda-character--link .zelda-character__portrait-art { left: calc(50% + .02px); top: calc(50% - 12.42px); width: 491.583px; height: 655.445px; transform: translate(-50%, -50%) rotate(-7.03deg); }
@@ -125,11 +185,11 @@
 .zelda-character__description { position: absolute; right: 225px; top: 852px; text-align: right; mix-blend-mode: plus-lighter; }
 
 .zelda-character__thumbnails { position: absolute; left: 1756px; top: 314px; display: flex; flex-direction: column; gap: 21px; width: 108px; margin: 0; padding: 0; list-style: none; }
-.zelda-character__thumbnail { position: relative; display: block; width: 108px; height: 88px; padding: 0; border: 6px solid rgb(255 255 255 / .3); background: transparent; overflow: hidden; cursor: pointer; }
-.zelda-character__thumbnail[aria-pressed="true"]:not(.zelda-character__thumbnail--link) { border-color: rgb(255 255 255 / .6); mix-blend-mode: plus-lighter; }
+.zelda-character__thumbnail { position: relative; display: block; width: 108px; height: 88px; padding: 0; border: 6px solid rgb(255 255 255 / calc(.3 + .7 * var(--zelda-overlap-progress, 0))); background: transparent; overflow: hidden; cursor: pointer; }
+.zelda-character__thumbnail[aria-pressed="true"]:not(.zelda-character__thumbnail--link) { border-color: rgb(255 255 255 / calc(.6 + .4 * var(--zelda-overlap-progress, 0))); mix-blend-mode: plus-lighter; }
 .zelda-character__thumbnail:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .zelda-character__crop { position: absolute; overflow: hidden; transform: translate(-50%, -50%); }
-.zelda-character__crop img { position: absolute; max-width: none; }
+.zelda-character__crop img { position: absolute; max-width: none; opacity: var(--character-image-opacity, 1); }
 .zelda-character__thumbnail--link .zelda-character__crop { left: calc(50% + .45px); top: calc(50% - 20.84px); width: 266.576px; height: 182.465px; transform: translate(-50%, -50%) rotate(-7.03deg); }
 .zelda-character__thumbnail--link img { left: 0; top: -6%; width: 100%; height: 206.8%; }
 .zelda-character__thumbnail--zelda .zelda-character__crop { left: calc(50% + .5px); top: calc(50% + 37px); width: 237px; height: 172px; }
@@ -147,11 +207,15 @@
 
 @media (max-width: 767px) {
   .zelda-character__canvas { left: 0; top: 0; width: 100%; height: 100%; transform: none; }
-  .zelda-character__canvas::before { inset: 0; width: 100%; height: 100%; transform: none; }
+  .zelda-character__backgrounds::before,
+  .zelda-character__background-dark,
+  .zelda-character__background-transition,
+  .zelda-character__background-gameplay { inset: 0; width: 100%; height: 100%; transform: none; }
   .zelda-character__heading { left: 0; top: 3%; width: 100%; height: 80px; }
   .zelda-character__heading p { top: 0; font-size: 18px; }
   .zelda-character__heading h2 { top: 26px; font-size: 38px; }
-  .zelda-character__portrait { left: 50%; top: 14%; transform: translateX(-50%) scale(calc(100cqw / 900px)); transform-origin: top center; }
+  .zelda-character__portrait,
+  .zelda-character__light { left: 50%; top: 14%; transform: translateX(-50%) scale(calc(100cqw / 900px)); transform-origin: top center; }
   .zelda-character__intro,
   .zelda-character--beedle .zelda-character__intro { left: 10%; top: 53%; width: 84%; gap: 8px; }
   .zelda-character__intro h3 { font-size: 32px; }

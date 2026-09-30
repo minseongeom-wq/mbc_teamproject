@@ -12,6 +12,12 @@
   background: var(--zelda-gold);
 }
 
+.zelda-character-gameplay {
+  position: relative;
+  height: 990vh;
+  height: 990svh;
+}
+
 .zelda-page__diamond-bar {
   position: fixed;
   z-index: 10;

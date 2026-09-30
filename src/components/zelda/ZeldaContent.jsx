@@ -13,6 +13,8 @@ import './style.css';
 export default function ZeldaContent() {
   const pageRef = useRef(null);
   const [activeDiamond, setActiveDiamond] = useState(0);
+  const [gameplayOverlapPhase, setGameplayOverlapPhase] = useState('character');
+  const gameplayOverlapComplete = gameplayOverlapPhase === 'complete';
 
   useEffect(() => {
     let frame = 0;
@@ -29,6 +31,12 @@ export default function ZeldaContent() {
     const updateDiamond = () => {
       frame = 0;
       const middle = window.innerHeight / 2;
+      const gameplay = pageRef.current?.querySelector('.zelda-gameplay');
+      const gameplayBounds = gameplay?.getBoundingClientRect();
+      if (gameplayOverlapComplete && gameplayBounds?.bottom > middle) {
+        setActiveDiamond(2);
+        return;
+      }
       const current = sections.find(([element]) => {
         if (!element) return false;
         const { top, bottom } = element.getBoundingClientRect();
@@ -48,15 +56,19 @@ export default function ZeldaContent() {
       window.removeEventListener('resize', scheduleUpdate);
       window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [gameplayOverlapComplete]);
+
+  const displayedDiamond = gameplayOverlapComplete && activeDiamond === 1 ? 2 : activeDiamond;
 
   return (
     <>
     <div className="zelda-content" ref={pageRef}>
       <ZeldaHeroSection />
       <ZeldaVideoSection />
-      <ZeldaCharacterSection />
-      <ZeldaContent2Section />
+      <div className="zelda-character-gameplay">
+        <ZeldaCharacterSection onTransitionPhase={setGameplayOverlapPhase} />
+        <ZeldaContent2Section overlapPhase={gameplayOverlapPhase} />
+      </div>
       <ZeldaContent3Section />
       <ZeldaContent4Section />
       <ZeldaAboutSection />
@@ -65,7 +77,7 @@ export default function ZeldaContent() {
     {createPortal(
       <div className="zelda-page__diamond-bar" aria-hidden="true">
         {Array.from({ length: 5 }, (_, index) => (
-          <span key={index} className={activeDiamond === index ? 'zelda-page__diamond--active' : undefined} />
+          <span key={index} className={displayedDiamond === index ? 'zelda-page__diamond--active' : undefined} />
         ))}
       </div>,
       document.body,
