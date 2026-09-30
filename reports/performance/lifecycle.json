@@ -1,0 +1,342 @@
+[
+  {
+    "phase": "initial-history",
+    "lenisActive": 1,
+    "lenisCreated": 2,
+    "lenisOptions": [
+      {
+        "autoRaf": false
+      }
+    ],
+    "tickerListeners": [
+      {
+        "name": "updateRoot",
+        "body": "function updateRoot(time) {\n\t\tif (_globalTimeline._ts) {\n\t\t\t_lazySafeRender(_globalTimeline, _parentToChildTotalTime(time, _globalTimeline));\n\t\t\t_last"
+      },
+      {
+        "name": "update",
+        "body": "(time) => lenis.raf(time * 1e3)"
+      }
+    ],
+    "triggers": [
+      {
+        "class": "intro-transition",
+        "start": -0.001,
+        "end": 1080,
+        "pin": true
+      },
+      {
+        "class": "history-story-transition",
+        "start": 2160,
+        "end": 3024,
+        "pin": false
+      },
+      {
+        "class": "history-story-transition",
+        "start": 1080,
+        "end": 3240,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 2160,
+        "end": 3390,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 3390,
+        "end": 4470,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 4475,
+        "end": 5555,
+        "pin": false
+      },
+      {
+        "class": "history-overview",
+        "start": 7005,
+        "end": 8085,
+        "pin": false
+      },
+      {
+        "class": "history-overview",
+        "start": 8085,
+        "end": 19749,
+        "pin": true
+      },
+      {
+        "class": "history-awards",
+        "start": 19749,
+        "end": 20829,
+        "pin": false
+      }
+    ],
+    "activeRenderers": 1,
+    "renderersCreated": 2,
+    "pendingRAF": [
+      {
+        "name": "_tick",
+        "pending": 1,
+        "source": "    at _tick (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:957:20)\n    at Object.wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:985:5)\n    at _wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:1019:35)"
+      },
+      {
+        "name": "_rafBugFix",
+        "pending": 1,
+        "source": "    at _rafBugFix (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:538:21)\n    at ScrollTrigger.enable (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1853:5)\n    at ScrollTrigger.register (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1806:56)"
+      }
+    ]
+  },
+  {
+    "phase": "home-0",
+    "lenisActive": 1,
+    "lenisCreated": 2,
+    "lenisOptions": [
+      {
+        "autoRaf": false
+      }
+    ],
+    "tickerListeners": [
+      {
+        "name": "updateRoot",
+        "body": "function updateRoot(time) {\n\t\tif (_globalTimeline._ts) {\n\t\t\t_lazySafeRender(_globalTimeline, _parentToChildTotalTime(time, _globalTimeline));\n\t\t\t_last"
+      },
+      {
+        "name": "update",
+        "body": "(time) => lenis.raf(time * 1e3)"
+      }
+    ],
+    "triggers": [],
+    "activeRenderers": 0,
+    "renderersCreated": 2,
+    "pendingRAF": [
+      {
+        "name": "_tick",
+        "pending": 1,
+        "source": "    at _tick (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:957:20)\n    at Object.wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:985:5)\n    at _wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:1019:35)"
+      },
+      {
+        "name": "_rafBugFix",
+        "pending": 1,
+        "source": "    at _rafBugFix (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:538:21)\n    at ScrollTrigger.enable (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1853:5)\n    at ScrollTrigger.register (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1806:56)"
+      }
+    ]
+  },
+  {
+    "phase": "history-0",
+    "lenisActive": 1,
+    "lenisCreated": 2,
+    "lenisOptions": [
+      {
+        "autoRaf": false
+      }
+    ],
+    "tickerListeners": [
+      {
+        "name": "updateRoot",
+        "body": "function updateRoot(time) {\n\t\tif (_globalTimeline._ts) {\n\t\t\t_lazySafeRender(_globalTimeline, _parentToChildTotalTime(time, _globalTimeline));\n\t\t\t_last"
+      },
+      {
+        "name": "update",
+        "body": "(time) => lenis.raf(time * 1e3)"
+      }
+    ],
+    "triggers": [
+      {
+        "class": "intro-transition",
+        "start": -0.001,
+        "end": 1080,
+        "pin": true
+      },
+      {
+        "class": "history-story-transition",
+        "start": 2160,
+        "end": 3024,
+        "pin": false
+      },
+      {
+        "class": "history-story-transition",
+        "start": 1080,
+        "end": 3240,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 2160,
+        "end": 3390,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 3390,
+        "end": 4470,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 4475,
+        "end": 5555,
+        "pin": false
+      },
+      {
+        "class": "history-overview",
+        "start": 7005,
+        "end": 8085,
+        "pin": false
+      },
+      {
+        "class": "history-overview",
+        "start": 8085,
+        "end": 19749,
+        "pin": true
+      },
+      {
+        "class": "history-awards",
+        "start": 19749,
+        "end": 20829,
+        "pin": false
+      }
+    ],
+    "activeRenderers": 1,
+    "renderersCreated": 4,
+    "pendingRAF": [
+      {
+        "name": "_tick",
+        "pending": 1,
+        "source": "    at _tick (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:957:20)\n    at Object.wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:985:5)\n    at _wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:1019:35)"
+      },
+      {
+        "name": "_rafBugFix",
+        "pending": 1,
+        "source": "    at _rafBugFix (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:538:21)\n    at ScrollTrigger.enable (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1853:5)\n    at ScrollTrigger.register (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1806:56)"
+      }
+    ]
+  },
+  {
+    "phase": "home-1",
+    "lenisActive": 1,
+    "lenisCreated": 2,
+    "lenisOptions": [
+      {
+        "autoRaf": false
+      }
+    ],
+    "tickerListeners": [
+      {
+        "name": "updateRoot",
+        "body": "function updateRoot(time) {\n\t\tif (_globalTimeline._ts) {\n\t\t\t_lazySafeRender(_globalTimeline, _parentToChildTotalTime(time, _globalTimeline));\n\t\t\t_last"
+      },
+      {
+        "name": "update",
+        "body": "(time) => lenis.raf(time * 1e3)"
+      }
+    ],
+    "triggers": [],
+    "activeRenderers": 0,
+    "renderersCreated": 4,
+    "pendingRAF": [
+      {
+        "name": "_tick",
+        "pending": 1,
+        "source": "    at _tick (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:957:20)\n    at Object.wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:985:5)\n    at _wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:1019:35)"
+      },
+      {
+        "name": "_rafBugFix",
+        "pending": 1,
+        "source": "    at _rafBugFix (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:538:21)\n    at ScrollTrigger.enable (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1853:5)\n    at ScrollTrigger.register (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1806:56)"
+      }
+    ]
+  },
+  {
+    "phase": "history-1",
+    "lenisActive": 1,
+    "lenisCreated": 2,
+    "lenisOptions": [
+      {
+        "autoRaf": false
+      }
+    ],
+    "tickerListeners": [
+      {
+        "name": "updateRoot",
+        "body": "function updateRoot(time) {\n\t\tif (_globalTimeline._ts) {\n\t\t\t_lazySafeRender(_globalTimeline, _parentToChildTotalTime(time, _globalTimeline));\n\t\t\t_last"
+      },
+      {
+        "name": "update",
+        "body": "(time) => lenis.raf(time * 1e3)"
+      }
+    ],
+    "triggers": [
+      {
+        "class": "intro-transition",
+        "start": -0.001,
+        "end": 1080,
+        "pin": true
+      },
+      {
+        "class": "history-story-transition",
+        "start": 2160,
+        "end": 3024,
+        "pin": false
+      },
+      {
+        "class": "history-story-transition",
+        "start": 1080,
+        "end": 3240,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 2160,
+        "end": 3390,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 3390,
+        "end": 4470,
+        "pin": false
+      },
+      {
+        "class": "history-service-stack",
+        "start": 4475,
+        "end": 5555,
+        "pin": false
+      },
+      {
+        "class": "history-overview",
+        "start": 7005,
+        "end": 8085,
+        "pin": false
+      },
+      {
+        "class": "history-overview",
+        "start": 8085,
+        "end": 19749,
+        "pin": true
+      },
+      {
+        "class": "history-awards",
+        "start": 19749,
+        "end": 20829,
+        "pin": false
+      }
+    ],
+    "activeRenderers": 1,
+    "renderersCreated": 6,
+    "pendingRAF": [
+      {
+        "name": "_tick",
+        "pending": 1,
+        "source": "    at _tick (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:957:20)\n    at Object.wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:985:5)\n    at _wake (http://127.0.0.1:4173/node_modules/.vite/deps/gsap.js?v=1cf2a86b:1019:35)"
+      },
+      {
+        "name": "_rafBugFix",
+        "pending": 1,
+        "source": "    at _rafBugFix (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:538:21)\n    at ScrollTrigger.enable (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1853:5)\n    at ScrollTrigger.register (http://127.0.0.1:4173/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=1cf2a86b:1806:56)"
+      }
+    ]
+  }
+]

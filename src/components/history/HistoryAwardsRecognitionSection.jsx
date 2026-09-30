@@ -1,6 +1,6 @@
 import './HistoryAwardsRecognitionSection.css';
 import AwardsPixelTrail from './AwardsPixelTrail';
-import AwardsPixelDissolve from './AwardsPixelDissolve';
+import AwardsPixelBoundary from './AwardsPixelBoundary';
 
 const awards = [
   ['The Game Awards', '(2023)'],
@@ -39,7 +39,7 @@ function HistoryAwardsRecognitionSection() {
         ))}
       </ul>
       </div>
-      <AwardsPixelDissolve />
+      <AwardsPixelBoundary />
       </div>
     </section>
   );

@@ -1,0 +1,77 @@
+{
+  "memory": {
+    "info": {
+      "geometries": 103,
+      "textures": 41
+    },
+    "sources": 55,
+    "uniqueGLTextures": 40,
+    "groups": [
+      {
+        "model": false,
+        "textures": 0,
+        "uploaded": 0,
+        "estimatedMiB": 0
+      },
+      {
+        "model": false,
+        "textures": 0,
+        "uploaded": 0,
+        "estimatedMiB": 0
+      },
+      {
+        "model": false,
+        "textures": 0,
+        "uploaded": 0,
+        "estimatedMiB": 0
+      },
+      {
+        "model": false,
+        "textures": 18,
+        "uploaded": 3,
+        "estimatedMiB": 4.6147918701171875
+      },
+      {
+        "model": true,
+        "textures": 2,
+        "uploaded": 2,
+        "estimatedMiB": 10.666666666666666
+      },
+      {
+        "model": true,
+        "textures": 3,
+        "uploaded": 3,
+        "estimatedMiB": 16
+      },
+      {
+        "model": true,
+        "textures": 0,
+        "uploaded": 0,
+        "estimatedMiB": 0
+      },
+      {
+        "model": true,
+        "textures": 3,
+        "uploaded": 3,
+        "estimatedMiB": 16
+      },
+      {
+        "model": true,
+        "textures": 16,
+        "uploaded": 16,
+        "estimatedMiB": 85.33333333333331
+      },
+      {
+        "model": true,
+        "textures": 13,
+        "uploaded": 13,
+        "estimatedMiB": 69.33333333333333
+      }
+    ]
+  },
+  "rapidExit": {
+    "renders": 52,
+    "offscreen": 52,
+    "lastAfterJumpMs": 892.9000000003725
+  }
+}
