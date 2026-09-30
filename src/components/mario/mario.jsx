@@ -263,8 +263,174 @@ export default function Mario() {
   const [world01Entered, setWorld01Entered] = useState(false);
   const [heroCharacterPhase, setHeroCharacterPhase] = useState("pending");
   const [hoveredPower, setHoveredPower] = useState(null);
+  const powerScrollRef = useRef(null);
+  const powerHoverEnabledRef = useRef(false);
+  const [scrollPower, setScrollPower] = useState(null);
+  const activePower = hoveredPower ?? scrollPower;
+  const hoverPower = (power) => {
+    if (powerHoverEnabledRef.current) setHoveredPower(power);
+  };
+  useEffect(() => {
+    const track = powerScrollRef.current;
+    const scene = track.querySelector('#mario-powerups');
+    const art = scene.querySelector('.mario-powerup-hero');
+    const artCenter = art.offsetTop + art.offsetHeight / 2;
+    const desktop = matchMedia('(min-width: 768px)');
+    const powers = ['drill', 'elephant', 'fire', 'bubble', 'cat'];
+    let frame = 0;
+    let scale = 1;
+    let pinTop = 0;
+    let lead = 0;
+    let step = 1;
+
+    const update = () => {
+      frame = 0;
+      if (!desktop.matches) {
+        powerHoverEnabledRef.current = true;
+        setScrollPower(null);
+        return;
+      }
+      const distance = pinTop * scale - track.getBoundingClientRect().top;
+      powerHoverEnabledRef.current = distance >= 0 && distance < lead + step * powers.length;
+      if (!powerHoverEnabledRef.current) setHoveredPower(null);
+      const index = Math.min(powers.length - 1, Math.floor((distance - lead) / step));
+      setScrollPower(index < 0 ? null : powers[index]);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const measure = () => {
+      if (desktop.matches) {
+        // Account for the existing zoom without changing the scene's coordinates.
+        scale = scene.getBoundingClientRect().width / scene.offsetWidth;
+        const viewport = window.innerHeight / scale;
+        pinTop = -Math.max(0, Math.min(artCenter - viewport / 2, scene.offsetHeight - viewport));
+        lead = window.innerHeight * 0.25;
+        step = window.innerHeight * 0.75;
+        track.style.setProperty('--powerup-pin-top', `${pinTop}px`);
+        track.style.setProperty('--powerup-track-height', `${scene.offsetHeight + (lead + step * powers.length) / scale}px`);
+      }
+      schedule();
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(scene);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', measure);
+    desktop.addEventListener('change', measure);
+    measure();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', measure);
+      desktop.removeEventListener('change', measure);
+    };
+  }, []);
   const navigate = useNavigate();
   const activeCharacterData = characterSelection[activeCharacter];
+  useEffect(() => {
+    const page = pageRef.current;
+    const intro = page.querySelector('#mario-intro');
+    const hero = page.querySelector('#mario-hero');
+    const desktop = matchMedia('(min-width: 768px)');
+    const clouds = [...intro.querySelectorAll(':scope > :is(.mario-layer-3, .mario-layer-5, .mario-layer-7, .mario-layer-8, .mario-layer-11, .mario-layer-13, .mario-layer-14)')];
+    let ready = false;
+    let disposed = false;
+    let phase = 'idle';
+    let lockedY = window.scrollY;
+    let frame = 0;
+    let holdTimer = 0;
+    let exits = [];
+    const isLocked = () => ['exiting', 'hold', 'scrolling'].includes(phase);
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+    const scrollToHero = () => {
+      phase = 'scrolling';
+      const startY = window.scrollY;
+      const targetY = hero.getBoundingClientRect().top + startY;
+      const startedAt = performance.now();
+      const duration = reducedMotion.matches ? 0 : 1100;
+      const animate = (now) => {
+        const progress = duration ? Math.min(1, (now - startedAt) / duration) : 1;
+        const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+        lockedY = startY + (targetY - startY) * eased;
+        window.scrollTo({ top: lockedY, behavior: 'instant' });
+        if (progress < 1) frame = requestAnimationFrame(animate);
+        else phase = 'done';
+      };
+      frame = requestAnimationFrame(animate);
+    };
+    const trigger = () => {
+      phase = 'exiting';
+      lockedY = window.scrollY;
+      const exitDistance = intro.offsetHeight - Math.min(...clouds.map((cloud) => cloud.offsetTop)) + 100;
+      // Animate only Intro cloud wrappers; their existing entrance transforms stay intact.
+      exits = clouds.map((cloud) => cloud.animate(
+        [{ translate: '0 0' }, { translate: '0 ' + exitDistance + 'px' }],
+        { duration: reducedMotion.matches ? 0 : 2400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' },
+      ));
+      Promise.all(exits.map((animation) => animation.finished)).then(() => {
+        if (disposed || phase !== 'exiting') return;
+        phase = 'hold';
+        holdTimer = window.setTimeout(scrollToHero, reducedMotion.matches ? 0 : 40);
+      }).catch(() => {}); // Resizing/unmounting cancels the exit and releases the lock.
+    };
+    const handleInput = (event, downward) => {
+      if (!desktop.matches || event.defaultPrevented) return;
+      if (isLocked()) {
+        event.preventDefault();
+        return;
+      }
+      if (phase !== 'idle' || !downward) return;
+      event.preventDefault();
+      if (ready) trigger();
+    };
+    const onWheel = (event) => {
+      if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      handleInput(event, event.deltaY > 0);
+    };
+    const onKey = (event) => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input, textarea, select, button, a, [contenteditable], dialog')) return;
+      if (!['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home', ' '].includes(event.key)) return;
+      handleInput(event, ['ArrowDown', 'PageDown', 'End'].includes(event.key) || (event.key === ' ' && !event.shiftKey));
+    };
+    const onTouchMove = (event) => {
+      if (desktop.matches && isLocked()) event.preventDefault();
+    };
+    const guardScroll = () => {
+      if (isLocked() && Math.abs(window.scrollY - lockedY) > 1) {
+        window.scrollTo({ top: lockedY, behavior: 'instant' });
+      }
+    };
+    const cancel = () => {
+      cancelAnimationFrame(frame);
+      clearTimeout(holdTimer);
+      exits.forEach((animation) => animation.cancel());
+      exits = [];
+      phase = 'idle';
+    };
+    // Preserve the existing entrance animations and wait for their actual completion.
+    const entrance = intro.getAnimations({ subtree: true }).filter((animation) =>
+      ['mario-cloud-rise', 'mario-intro-logo-fade-in'].includes(animation.animationName),
+    );
+    Promise.allSettled(entrance.map((animation) => animation.finished)).then(() => {
+      if (!disposed) ready = true;
+    });
+    window.addEventListener('wheel', onWheel, { passive: false, capture: true });
+    window.addEventListener('keydown', onKey, true);
+    window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
+    window.addEventListener('scroll', guardScroll, { passive: true });
+    window.addEventListener('resize', cancel);
+    return () => {
+      disposed = true;
+      cancel();
+      window.removeEventListener('wheel', onWheel, true);
+      window.removeEventListener('keydown', onKey, true);
+      window.removeEventListener('touchmove', onTouchMove, true);
+      window.removeEventListener('scroll', guardScroll);
+      window.removeEventListener('resize', cancel);
+    };
+  }, []);
   useEffect(() => {
     const page = pageRef.current;
     const intro = page.querySelector("#mario-intro");
@@ -344,6 +510,7 @@ export default function Mario() {
       frame = null;
     };
     const onWheel = (event) => {
+  if (matchMedia('(min-width: 768px)').matches) return;
   if (event.ctrlKey || event.defaultPrevented) return;
 
   if (frame !== null) {
@@ -722,6 +889,7 @@ useEffect(() => {
           <div className="mario-opening-sky" aria-hidden="true">
             <img src={imgHero} alt="" />
           </div>
+          <div className="mario-intro-scroll">
           <section
             id="mario-intro"
             className="mario-scene mario-intro"
@@ -788,6 +956,7 @@ useEffect(() => {
               </div>
             </div>
           </section>
+          </div>
           <section
             id="mario-hero"
             className={`mario-scene mario-hero mario-hero-character-${heroCharacterPhase}`}
@@ -813,19 +982,11 @@ useEffect(() => {
               <p className="mario-layer-21" data-node-id="2712:13162">
                 SCROLL DOWN
               </p>
-              <div className="mario-layer-22" data-node-id="2712:13163">
-                <div className="mario-layer-23">
-                  <div className="mario-layer-24" data-name="Vector / Chevron">
-                    <div className="mario-layer-25">
-                      <img
-                        alt=""
-                        className="mario-layer-26"
-                        src={imgVectorChevron}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img
+  src="/images/mario/scroll-down-arrow.png"
+  alt=""
+  className="mario-scroll-down-arrow"
+/>
             </button>
             <div
               className="mario-layer-27"
@@ -2599,6 +2760,7 @@ useEffect(() => {
             </div>
           </div>
         </section>
+        <div ref={powerScrollRef} className="mario-powerup-scroll">
         <section
           id="mario-powerups"
           className="mario-scene mario-powerups"
@@ -2686,18 +2848,19 @@ useEffect(() => {
           </div>
           <div
             className="mario-layer-281 mario-powerup-hero"
-            data-powerup={hoveredPower ?? "default"}
+            data-powerup={activePower ?? "default"}
             data-node-id="2712:12705"
             data-name="Character Art / Mario / Default"
           >
             <img
+              key={activePower ?? "default"}
               alt=""
               className={
-                hoveredPower ? "mario-powerup-hero-art" : "mario-layer-4"
+                activePower ? "mario-powerup-hero-art" : "mario-layer-4"
               }
               src={
-                hoveredPower
-                  ? powerUpHoverArt[hoveredPower]
+                activePower
+                  ? powerUpHoverArt[activePower]
                   : imgCharacterArtMarioDefault
               }
             />
@@ -2723,10 +2886,10 @@ useEffect(() => {
             </div>
           </div>
           <div
-            className={`mario-layer-285 mario-powerup-card ${hoveredPower === "drill" ? "is-active" : ""}`}
+            className={`mario-layer-285 mario-powerup-card ${activePower === "drill" ? "is-active" : ""}`}
             data-node-id="2712:12713"
             data-name="Item / Drill Mushroom"
-            onMouseEnter={() => setHoveredPower("drill")}
+            onMouseEnter={() => hoverPower("drill")}
             onMouseLeave={() => setHoveredPower(null)}
           >
             <div className="mario-layer-286" data-node-id="2712:12714">
@@ -2742,10 +2905,10 @@ useEffect(() => {
             </div>
           </div>
           <div
-            className={`mario-layer-292 mario-powerup-card ${hoveredPower === "elephant" ? "is-active" : ""}`}
+            className={`mario-layer-292 mario-powerup-card ${activePower === "elephant" ? "is-active" : ""}`}
             data-node-id="2712:12716"
             data-name="Item / Elephant Fruit"
-            onMouseEnter={() => setHoveredPower("elephant")}
+            onMouseEnter={() => hoverPower("elephant")}
             onMouseLeave={() => setHoveredPower(null)}
           >
             <div className="mario-layer-293" data-node-id="2712:12717">
@@ -2761,10 +2924,10 @@ useEffect(() => {
             </div>
           </div>
           <div
-            className={`mario-layer-296 mario-powerup-card ${hoveredPower === "cat" ? "is-active" : ""}`}
+            className={`mario-layer-296 mario-powerup-card ${activePower === "cat" ? "is-active" : ""}`}
             data-node-id="2712:12719"
             data-name="Item / Super Bell"
-            onMouseEnter={() => setHoveredPower("cat")}
+            onMouseEnter={() => hoverPower("cat")}
             onMouseLeave={() => setHoveredPower(null)}
           >
             <p className="mario-layer-297" data-node-id="2712:12720">
@@ -2794,10 +2957,10 @@ useEffect(() => {
             </div>
           </div>
           <div
-            className={`mario-layer-304 mario-powerup-card ${hoveredPower === "fire" ? "is-active" : ""}`}
+            className={`mario-layer-304 mario-powerup-card ${activePower === "fire" ? "is-active" : ""}`}
             data-node-id="2712:12724"
             data-name="Item / Fire Flower"
-            onMouseEnter={() => setHoveredPower("fire")}
+            onMouseEnter={() => hoverPower("fire")}
             onMouseLeave={() => setHoveredPower(null)}
           >
             <div className="mario-layer-305" data-node-id="2712:12725">
@@ -2806,10 +2969,10 @@ useEffect(() => {
             </div>
           </div>
           <div
-            className={`mario-layer-306 mario-powerup-card ${hoveredPower === "bubble" ? "is-active" : ""}`}
+            className={`mario-layer-306 mario-powerup-card ${activePower === "bubble" ? "is-active" : ""}`}
             data-node-id="2712:12726"
             data-name="Item / Bubble Flower"
-            onMouseEnter={() => setHoveredPower("bubble")}
+            onMouseEnter={() => hoverPower("bubble")}
             onMouseLeave={() => setHoveredPower(null)}
           >
             <div className="mario-layer-307" data-node-id="2712:12727">
@@ -2964,35 +3127,36 @@ useEffect(() => {
           <div
             aria-hidden
             className="mario-powerup-hover-target mario-powerup-hover-target--drill"
-            onMouseEnter={() => setHoveredPower("drill")}
+            onMouseEnter={() => hoverPower("drill")}
             onMouseLeave={() => setHoveredPower(null)}
           />
           <div
             aria-hidden
             className="mario-powerup-hover-target mario-powerup-hover-target--elephant"
-            onMouseEnter={() => setHoveredPower("elephant")}
+            onMouseEnter={() => hoverPower("elephant")}
             onMouseLeave={() => setHoveredPower(null)}
           />
           <div
             aria-hidden
             className="mario-powerup-hover-target mario-powerup-hover-target--cat"
-            onMouseEnter={() => setHoveredPower("cat")}
+            onMouseEnter={() => hoverPower("cat")}
             onMouseLeave={() => setHoveredPower(null)}
           />
           <div
             aria-hidden
             className="mario-powerup-hover-target mario-powerup-hover-target--fire-main"
-            onMouseEnter={() => setHoveredPower("fire")}
+            onMouseEnter={() => hoverPower("fire")}
             onMouseLeave={() => setHoveredPower(null)}
           />
           
           <div
             aria-hidden
             className="mario-powerup-hover-target mario-powerup-hover-target--bubble"
-            onMouseEnter={() => setHoveredPower("bubble")}
+            onMouseEnter={() => hoverPower("bubble")}
             onMouseLeave={() => setHoveredPower(null)}
           />
         </section>
+        </div>
         <section
           id="mario-games"
           className="mario-scene mario-games"

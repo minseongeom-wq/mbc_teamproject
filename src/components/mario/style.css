@@ -208,6 +208,9 @@
     height: 1520px;
     margin-top: 0px;
 }
+.mario-intro-scroll {
+    display: contents;
+}
 .mario-hero {
     height: 1015px;
     margin-top: 0px;
@@ -257,6 +260,36 @@
 .mario-powerups {
     height: 2029px;
     margin-top: -123px;
+}
+.mario-powerup-scroll {
+    display: contents;
+}
+@media (min-width: 768px) {
+    .mario-powerup-scroll {
+        display: block;
+        position: relative;
+        height: var(--powerup-track-height, 2029px);
+        margin-top: -123px;
+    }
+    .mario-powerup-scroll > .mario-powerups {
+        position: sticky;
+        top: var(--powerup-pin-top, 0px);
+        margin-top: 0;
+    }
+}
+.mario-page .mario-powerup-hero > img {
+    animation: mario-powerup-art-enter 430ms ease-out both;
+}
+@keyframes mario-powerup-art-enter {
+    0% { opacity: 0; transform: scale(0.80); }
+    40% { opacity: 1; transform: scale(1.22); }
+    70% { opacity: 1; transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .mario-page .mario-powerup-hero > img {
+        animation: none;
+    }
 }
 .mario-games {
     height: 1080px;
@@ -815,7 +848,8 @@
         .mario-layer-58,
         .mario-layer-59,
         .mario-layer-60
-    ) .mario-layer-55 {
+    )
+    .mario-layer-55 {
     transition: transform 0.22s ease-out;
     transform-origin: center;
 }
@@ -828,7 +862,8 @@
         .mario-layer-58,
         .mario-layer-59,
         .mario-layer-60
-    ):hover .mario-layer-55 {
+    ):hover
+    .mario-layer-55 {
     transform: scale(1.1);
 }
 /* Selected Character - Layer */
@@ -890,7 +925,9 @@
     animation: none;
 }
 
-.mario-characters .mario-layer-70 > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
+.mario-characters
+    .mario-layer-70
+    > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
     opacity: 0;
     animation: mario-character-info-enter 0.36s ease-out forwards;
     will-change: transform, opacity;
@@ -928,7 +965,9 @@
     .mario-characters .mario-layer-55,
     .mario-characters .mario-selected-character,
     .mario-characters .mario-layer-51,
-    .mario-characters .mario-layer-70 > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
+    .mario-characters
+        .mario-layer-70
+        > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
         animation: none;
         opacity: 1;
         transform: none;
@@ -2818,6 +2857,7 @@
     inset: 61.09% -2.19% 7.61% 94.69%;
     border-radius: 144px;
     box-shadow: 0px 9.6px 24px 0px rgba(0, 0, 0, 0.12);
+    transform: translateX(-60px);
 }
 .mario-page .mario-layer-225 {
     position: absolute;
@@ -3738,7 +3778,20 @@
 }
 .mario-page #mario-powerups > .mario-powerup-card {
     cursor: pointer;
-    transition: background-color 160ms ease;
+    transition:
+        background-color 160ms ease,
+        top 450ms ease,
+        left 450ms ease,
+        transform 450ms ease;
+}
+.mario-page #mario-powerups .mario-powerup-card > div,
+.mario-page #mario-powerups .mario-powerup-card img {
+    transition:
+        top 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        left 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        width 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        height 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .mario-page #mario-powerups > .mario-powerup-card.is-active {
     background: #151515;
@@ -4280,7 +4333,14 @@
         width: 100%;
         height: 787px;
         overflow: hidden;
-        background: linear-gradient(270deg, #4bc4fd 0%, #4cc5fe 23.388%, #45bffd 48.504%, #41bbfc 68.772%, #35b5fc 100%);
+        background: linear-gradient(
+            270deg,
+            #4bc4fd 0%,
+            #4cc5fe 23.388%,
+            #45bffd 48.504%,
+            #41bbfc 68.772%,
+            #35b5fc 100%
+        );
     }
 
     .mario-page .mario-stage .mario-intro {
@@ -4456,5 +4516,24 @@
         box-shadow: -2px 5px 10px rgba(0, 0, 0, 0.25);
         transform: translate(-50%, -50%);
         pointer-events: none;
+    }
+}
+
+.mario-page .mario-scroll-down-arrow {
+    display: block;
+    width: 52px;
+    height: auto;
+    margin: 30px auto 0;
+    object-fit: contain;
+    animation: mario-scroll-arrow 1.3s ease-in-out infinite;
+}
+
+@keyframes mario-scroll-arrow {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
     }
 }
