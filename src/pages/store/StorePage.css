@@ -8,7 +8,19 @@ body .site-shell:has(.store-page) { padding-top: 0; }
 .store-page button, .store-page input { font: inherit; }
 .store-page button { cursor: pointer; }
 .store-page a { color: inherit; text-decoration: none; }
-.store-page__content { width: min(1760px, calc(100% - 80px)); margin: 0 auto; }
+.store-page__content { position: relative; width: min(1760px, calc(100% - 80px)); height: 5679px; margin: 0 auto; }
+@media (min-width: 1101px) {
+  .store-page__content > section { position: absolute; width: 100%; margin: 0; }
+  .store-page__content > .store-category-grid { top: 128px; left: 78px; width: 1604.706px; height: 775px; }
+  .store-page__content > .store-rail--switch2 { top: 1067px; }
+  .store-page__content > .store-rail--switch { top: 1545px; }
+  .store-page__content > .store-rail--update { top: 2021px; }
+  .store-page__content > .store-rail--upgrade { top: 2497px; }
+  .store-page__content > .store-product-grid { top: 3130px; }
+  .store-page__content > .store-rail--sale { top: 4138px; }
+  .store-page__content > .store-feature-grid { top: 4728px; left: 60px; width: 1640px; }
+}
+@media (max-width: 1100px) { .store-page__content { height: auto; } }
 
 @media (max-width: 767px) {
   .store-page { min-height: 0; }

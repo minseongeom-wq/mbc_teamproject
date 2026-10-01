@@ -1,4 +1,4 @@
-.store-hero { position: relative; height: 600px; background: #e60012; }
+.store-hero { position: relative; height: 604px; background: #e60012; }
 .store-hero__red { position: relative; height: 436px; background: #e60012; }
 .store-hero__logo { position: absolute; left: 50%; top: 169px; width: 714px; height: 94px; transform: translateX(-50%); }
 .store-hero__logo img { display: block; position: absolute; max-width: none; }
@@ -16,10 +16,10 @@
 .store-hero__search input { position: absolute; left: 0; top: 0; width: 129px; height: 25px; padding: 0 4px; border: 0; outline: 0; color: #fff; background: transparent; font-size: 14px; }
 .store-hero__search input::-webkit-search-cancel-button { display: none; }
 .store-hero__search button { position: absolute; top: 0; right: 0; width: 26px; height: 25px; border: 0; background: transparent; }
-.store-hero__cta { position: relative; display: flex; align-items: center; height: 164px; padding: 0 80px; background: #fff; box-shadow: 0 17px 15.45px rgb(39 39 39 / 12%); }
-.store-hero__cta-copy { align-self: flex-start; padding-top: 43px; }
+.store-hero__cta { position: relative; display: flex; align-items: flex-start; box-sizing: border-box; height: 168px; padding: 0 80px; background: #fff; box-shadow: 0 17px 15.45px rgb(39 39 39 / 12%); }
+.store-hero__cta-copy { padding-top: 47px; }
 .store-hero__cta h2 { font-size: 30px; font-weight: 600; line-height: 1.3; }
-.store-hero__cta p { margin-top: 16px; font-size: 15px; font-weight: 500; line-height: 1.3; }
+.store-hero__cta p { margin-top: 8px; font-size: 17px; font-weight: 400; line-height: 1.3; }
 @media (max-width: 767px) {
   .store-hero { height: auto; }
   .store-hero__red { height: 360px; }
