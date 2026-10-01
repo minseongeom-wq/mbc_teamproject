@@ -3,7 +3,7 @@ export const storeCategoryPages = {
   digital: {
     title: "다운로드로 시작하는 새로운 즐거움!",
     description: "마음에 드는 게임부터 추가 콘텐츠까지, 다양한 디지털 상품을 만나보세요.",
-    height: 3287,
+    height: 3165,
     rails: [
       { title: "Nintendo Switch2 - 디지털 상품", products: [
         {"name":"Maestro 마에스트로","price":"₩39,800","image":"443ea.png"},

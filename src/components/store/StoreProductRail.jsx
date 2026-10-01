@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { productHref, storeImage } from './storeData.js';
 import './StoreProductRail.css';
 
-export default function StoreProductRail({ title, products, className = '', badge = false, sale = false }) {
+export default function StoreProductRail({ title, products, className = '', badge = false, sale = false, nextIcon = '4c4c3.svg' }) {
   const [offset, setOffset] = useState(0);
   const visible = products.map((_, index) => products[(index + offset) % products.length]);
 
@@ -23,7 +23,7 @@ export default function StoreProductRail({ title, products, className = '', badg
           </Link>
         ))}
         <button className="store-rail__next" type="button" aria-label={`${title} 다음 상품 보기`} onClick={() => setOffset((current) => (current + 1) % products.length)}>
-          <img src={storeImage('4c4c3.svg')} alt="" />
+          <img src={storeImage(nextIcon)} alt="" />
         </button>
       </div>
     </section>

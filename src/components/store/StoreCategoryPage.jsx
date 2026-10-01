@@ -80,7 +80,7 @@ export default function StoreCategoryPage() {
         <div className="store-subpage__rails">
           {rails.length ? rails.map((rail, index) => (
             <div id={pageKey === 'online' && index === 0 ? 'store-online-passes' : undefined} key={`${rail.title}-${index}`}>
-              <StoreProductRail title={rail.title} products={rail.products.map((product, productIndex) => ({ ...product, badge: badgeSlots[pageKey]?.[index]?.includes(productIndex) }))} className={((pageKey === 'feature' || pageKey === 'physical') && index === 1) ? 'store-rail--highlight-prices' : ''} sale={pageKey === 'digital' && index === 1} />
+            <StoreProductRail title={rail.title} products={rail.products.map((product, productIndex) => ({ ...product, badge: pageKey === 'digital' || badgeSlots[pageKey]?.[index]?.includes(productIndex) }))} className={((pageKey === 'feature' || pageKey === 'physical') && index === 1) ? 'store-rail--highlight-prices' : ''} sale={pageKey === 'digital' && index === 1} nextIcon={pageKey === 'digital' ? '1e22d.svg' : undefined} />
             </div>
           )) : <p className="store-subpage__empty">일치하는 상품이 없습니다.</p>}
         </div>
