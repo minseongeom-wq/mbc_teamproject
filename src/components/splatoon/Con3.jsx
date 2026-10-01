@@ -167,8 +167,8 @@ function TopsSlide({ onPrevious, onNext }) {
         <Art file="a657f.png" x={1616} y={308} w={255.778} h={289.663} angle={21.5} className="splatoon-con3__art--mark" />
         <Art file="5159b.png" x={44} y={459} w={236.516} h={269.445} angle={-9.4} className="splatoon-con3__art--mark splatoon-con3__art--mark-dark" crop={{ width: '122.17%', height: '108.21%', left: '-13.94%', top: '-4.44%' }} />
       </div>
-      <CharacterReveal side="left" delay={0.05} distance={280}><Art file="6ba6f.png" x={321} y={96} w={477.229} h={727.543} angle={-4.76} crop={{ width: '111.55%', height: '101.45%', left: '-6.75%', top: '-.92%' }} alt="새로운 상의를 입은 왼쪽 캐릭터" /></CharacterReveal>
-      <CharacterReveal side="right" delay={0.15} distance={260}><Art file="10c50.png" x={1004} y={-2} w={577.796} h={756.275} angle={-5.87} crop={{ width: '113.78%', height: '102.01%', left: '-11.72%', top: '-.02%' }} alt="새로운 상의를 입은 오른쪽 캐릭터" /></CharacterReveal>
+      <CharacterReveal side="left" delay={0.05} distance={280}><Art file="6ba6f.png" x={321} y={104} w={477.229} h={727.543} angle={-4.76} crop={{ width: '111.55%', height: '101.45%', left: '-6.75%', top: '-.92%' }} alt="새로운 상의를 입은 왼쪽 캐릭터" /></CharacterReveal>
+      <CharacterReveal side="right" delay={0.15} distance={260}><Art file="10c50.png" x={1004} y={2} w={577.796} h={756.275} angle={-5.87} crop={{ width: '113.78%', height: '102.01%', left: '-11.72%', top: '-.02%' }} alt="새로운 상의를 입은 오른쪽 캐릭터" /></CharacterReveal>
       <h2 id="splatoon-con3-title" className="splatoon-con3__title splatoon-con3__title--tops">NEW TOPS</h2>
       <button type="button" className="splatoon-con3__previous splatoon-con3__previous--tops" aria-label="이전 스타일: 아이브로우" onClick={onPrevious}>
         <Art file="03f94.svg" x={0} y={0} w={284} h={279} />
@@ -215,11 +215,14 @@ function ShoesSlide({ onPrevious, onNext }) {
   );
 }
 
-export default function Con3() {
+export default function Con3({ scrollController }) {
   const container = useRef(null);
+  const hasPinnedOnceRef = useRef(false);
+  const isIntroLockedRef = useRef(false);
   const [scale, setScale] = useState(1);
   const [slide, setSlide] = useState('hair');
   const [isEntered, setIsEntered] = useState(false);
+  const [isClickPromptVisible, setIsClickPromptVisible] = useState(false);
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => setScale(entry.contentRect.width / 1920));
     observer.observe(container.current);
@@ -236,17 +239,113 @@ export default function Con3() {
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    const page = container.current?.closest('.splatoon-page');
+    if (!page) return undefined;
+
+    const lockAtCon3 = (event) => {
+      const section = container.current;
+      if (!section || hasPinnedOnceRef.current) return;
+      if (
+        event.ctrlKey ||
+        event.defaultPrevented ||
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
+        event.deltaY === 0
+      ) {
+        return;
+      }
+
+      const normalizedDelta =
+        event.deltaMode === WheelEvent.DOM_DELTA_LINE
+          ? event.deltaY * 16
+          : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+            ? event.deltaY * window.innerHeight
+            : event.deltaY;
+      const title = section.querySelector('.splatoon-con3__title');
+      const inner = section.querySelector('.splatoon-con3__inner');
+      const sectionTop = window.scrollY + section.getBoundingClientRect().top;
+      const stageScale = section.getBoundingClientRect().width / 1920;
+      const titleBottom = title && inner
+        ? sectionTop + (inner.offsetTop + title.offsetTop + title.offsetHeight) * stageScale
+        : sectionTop + window.innerHeight - 20;
+      const pinY = titleBottom + 20 - window.innerHeight;
+      const currentTarget = scrollController.current?.getTargetY?.() ?? window.scrollY;
+      const projectedTarget = currentTarget + normalizedDelta * 1.05;
+      const isMovingDown = normalizedDelta > 0;
+      const crossesPin = isMovingDown
+        ? currentTarget <= pinY + 20 && projectedTarget >= pinY - 20
+        : currentTarget >= pinY - 20 && projectedTarget <= pinY + 20;
+
+      if (!crossesPin) return;
+
+      event.preventDefault();
+      hasPinnedOnceRef.current = true;
+      isIntroLockedRef.current = true;
+      setIsClickPromptVisible(true);
+
+      if (scrollController.current) {
+        scrollController.current.settleAt(pinY, (didSettle) => {
+          if (!didSettle) {
+            isIntroLockedRef.current = false;
+            hasPinnedOnceRef.current = false;
+            setIsClickPromptVisible(false);
+            return;
+          }
+        });
+      } else {
+        window.scrollTo({ left: window.scrollX, top: pinY, behavior: 'instant' });
+        setIsClickPromptVisible(true);
+      }
+    };
+
+    const holdPinnedWheel = (event) => {
+      if (!isIntroLockedRef.current) {
+        lockAtCon3(event);
+        return;
+      }
+      if (!event.ctrlKey) event.preventDefault();
+    };
+    const holdPinnedTouch = (event) => {
+      if (isIntroLockedRef.current) event.preventDefault();
+    };
+    const holdPinnedKey = (event) => {
+      if (!isIntroLockedRef.current) return;
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+        event.preventDefault();
+      }
+    };
+
+    page.addEventListener('wheel', holdPinnedWheel, { passive: false, capture: true });
+    page.addEventListener('touchmove', holdPinnedTouch, { passive: false, capture: true });
+    window.addEventListener('keydown', holdPinnedKey, { capture: true });
+    return () => {
+      page.removeEventListener('wheel', holdPinnedWheel, { capture: true });
+      page.removeEventListener('touchmove', holdPinnedTouch, { capture: true });
+      window.removeEventListener('keydown', holdPinnedKey, { capture: true });
+    };
+  }, [scrollController]);
+
+  const changeSlide = (nextSlide) => {
+    setSlide(nextSlide);
+    if (!isIntroLockedRef.current) return;
+    isIntroLockedRef.current = false;
+    setIsClickPromptVisible(false);
+  };
+
   return (
     <section id="con3" ref={container} className={`splatoon-con3${isEntered ? ' is-entered' : ''}`} aria-labelledby="splatoon-con3-title">
       <div className="splatoon-con3__stage" style={{ transform: `scale(${scale})` }}>
         <img className="splatoon-con3__background" src={asset('3a9de.png')} alt="" />
+        {isClickPromptVisible && (
+          <p className="splatoon-con3__click-prompt" aria-live="polite">Click the Button</p>
+        )}
         <div className="splatoon-con3__inner" aria-live="polite">
-          {slide === 'hair' && <HairSlide onPrevious={() => setSlide('shoes')} onNext={() => setSlide('bottoms')} />}
-          {slide === 'bottoms' && <BottomsSlide onPrevious={() => setSlide('hair')} onNext={() => setSlide('headgear')} />}
-          {slide === 'headgear' && <HeadgearSlide onPrevious={() => setSlide('bottoms')} onNext={() => setSlide('eyebrows')} />}
-          {slide === 'eyebrows' && <EyebrowsSlide onPrevious={() => setSlide('headgear')} onNext={() => setSlide('tops')} />}
-          {slide === 'tops' && <TopsSlide onPrevious={() => setSlide('eyebrows')} onNext={() => setSlide('shoes')} />}
-          {slide === 'shoes' && <ShoesSlide onPrevious={() => setSlide('tops')} onNext={() => setSlide('hair')} />}
+          {slide === 'hair' && <HairSlide onPrevious={() => changeSlide('shoes')} onNext={() => changeSlide('bottoms')} />}
+          {slide === 'bottoms' && <BottomsSlide onPrevious={() => changeSlide('hair')} onNext={() => changeSlide('headgear')} />}
+          {slide === 'headgear' && <HeadgearSlide onPrevious={() => changeSlide('bottoms')} onNext={() => changeSlide('eyebrows')} />}
+          {slide === 'eyebrows' && <EyebrowsSlide onPrevious={() => changeSlide('headgear')} onNext={() => changeSlide('tops')} />}
+          {slide === 'tops' && <TopsSlide onPrevious={() => changeSlide('eyebrows')} onNext={() => changeSlide('shoes')} />}
+          {slide === 'shoes' && <ShoesSlide onPrevious={() => changeSlide('tops')} onNext={() => changeSlide('hair')} />}
         </div>
       </div>
     </section>
