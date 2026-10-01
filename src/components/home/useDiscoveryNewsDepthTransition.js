@@ -6,8 +6,12 @@ import './DiscoveryNewsDepthTransition.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const clamp01 = value => Math.min(1, Math.max(0, value));
+const smoothstep = value => {
+  const t = clamp01(value);
+  return t * t * (3 - 2 * t);
+};
 
-function updateDotVisual(discovery, progress, mobile, dotLayerRef) {
+function updateDotVisual(discovery, news, progress, mobile, dotLayerRef) {
   // Clone the live section only when the depth transition starts, so the dots
   // retain the currently selected game's images and colors.
   if (progress > 0 && !dotLayerRef.current) {
@@ -15,6 +19,11 @@ function updateDotVisual(discovery, progress, mobile, dotLayerRef) {
     layer.className = 'home-discovery__dot-layer';
     layer.setAttribute('aria-hidden', 'true');
     layer.inert = true;
+    const filter = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    filter.classList.add('home-discovery__dot-filter');
+    filter.setAttribute('aria-hidden', 'true');
+    filter.innerHTML = '<filter id="home-discovery-dot-luma" color-interpolation-filters="sRGB"><feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.1169 0.3934 0.0396 0 0.45" result="tone"/><feComposite in="tone" in2="SourceGraphic" operator="in"/></filter>';
+    layer.append(filter);
     for (const child of [...discovery.children]) {
       const copy = child.cloneNode(true);
       copy.removeAttribute('id');
@@ -26,11 +35,21 @@ function updateDotVisual(discovery, progress, mobile, dotLayerRef) {
     dotLayerRef.current = layer;
   }
 
-  const conversion = clamp01((progress - 0.2) / 0.38);
-  const retreat = clamp01((progress - 0.72) / 0.28);
+  const conversion = smoothstep((progress - 0.18) / 0.4);
+  const retreat = smoothstep((progress - 0.85) / 0.15);
+  const backgroundReveal = mobile ? 0 : smoothstep((progress - 0.35) / 0.25);
   discovery.style.setProperty('--home-dot-source-opacity', String(1 - conversion));
   discovery.style.setProperty('--home-dot-opacity', String(conversion * (1 - retreat)));
-  discovery.style.setProperty('--home-dot-radius', `${(mobile ? 1.9 : 2.65) * (1 - 0.78 * retreat)}px`);
+  discovery.style.setProperty('--home-dot-radius', `${(mobile ? 0.9 : 1.05) * (1 - 0.72 * retreat)}px`);
+  discovery.style.setProperty('--home-dot-gap-opacity', String((1 - 0.22 * conversion) * (1 - backgroundReveal)));
+  if (!mobile) {
+    discovery.style.setProperty('--home-dark-limit', `${Math.min(1 - progress, 1 - backgroundReveal) * 100}%`);
+    discovery.style.setProperty('--home-edge-size', `${280 * smoothstep((progress - 0.1) / 0.25)}px`);
+    const newsEdge = 140 * smoothstep(progress / 0.25) * (1 - smoothstep((progress - 0.82) / 0.18));
+    news.style.setProperty('--home-news-edge-softness', `${newsEdge}px`);
+    news.style.setProperty('--home-news-cover-opacity', String(1 - 0.78 * smoothstep((progress - 0.5) / 0.12)));
+    news.classList.toggle('home-news--soft-overlap', progress > 0 && progress < 1);
+  }
 
   if (progress === 0 && dotLayerRef.current) {
     dotLayerRef.current.remove();
@@ -39,7 +58,7 @@ function updateDotVisual(discovery, progress, mobile, dotLayerRef) {
   }
 }
 
-function clearDotVisual(discovery, dotLayerRef) {
+function clearDotVisual(discovery, news, dotLayerRef) {
   dotLayerRef.current?.remove();
   dotLayerRef.current = null;
   if (discovery.classList.contains('home-discovery--dot-active')) {
@@ -48,6 +67,12 @@ function clearDotVisual(discovery, dotLayerRef) {
   discovery.style.removeProperty('--home-dot-source-opacity');
   discovery.style.removeProperty('--home-dot-opacity');
   discovery.style.removeProperty('--home-dot-radius');
+  discovery.style.removeProperty('--home-dot-gap-opacity');
+  discovery.style.removeProperty('--home-dark-limit');
+  discovery.style.removeProperty('--home-edge-size');
+  news.classList.remove('home-news--soft-overlap');
+  news.style.removeProperty('--home-news-edge-softness');
+  news.style.removeProperty('--home-news-cover-opacity');
 }
 
 export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
@@ -82,7 +107,7 @@ export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
               onUpdate: self => {
                 if (self.progress > 0) discovery.dataset.depthActive = 'true';
                 else delete discovery.dataset.depthActive;
-                updateDotVisual(discovery, self.progress, mobile, dotLayerRef);
+                updateDotVisual(discovery, news, self.progress, mobile, dotLayerRef);
               },
             },
           }).to(discovery, {
@@ -104,7 +129,7 @@ export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
             context.revert();
             context = undefined;
           }
-          clearDotVisual(discovery, dotLayerRef);
+          clearDotVisual(discovery, news, dotLayerRef);
           delete discovery.dataset.depthActive;
         } else if (!context && scheduledFrame === undefined) {
           scheduledFrame = requestAnimationFrame(createTrigger);
@@ -117,7 +142,7 @@ export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
         observer.disconnect();
         if (scheduledFrame !== undefined) cancelAnimationFrame(scheduledFrame);
         context?.revert();
-        clearDotVisual(discovery, dotLayerRef);
+        clearDotVisual(discovery, news, dotLayerRef);
         delete discovery.dataset.depthActive;
       };
     });

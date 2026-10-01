@@ -145,24 +145,34 @@ test('Discovery dots sample the live scene and reverse with the depth progress',
   const measure = () => page.evaluate(() => {
     const discovery = document.querySelector('.home-discovery');
     const dotLayer = discovery.querySelector('.home-discovery__dot-layer');
+    const news = document.querySelector('.home-news');
     return {
       scale: new DOMMatrix(getComputedStyle(discovery).transform).a,
       original: Number(discovery.style.getPropertyValue('--home-dot-source-opacity')),
       dots: Number(discovery.style.getPropertyValue('--home-dot-opacity')),
       radius: parseFloat(discovery.style.getPropertyValue('--home-dot-radius')),
+      gap: Number(discovery.style.getPropertyValue('--home-dot-gap-opacity')),
+      darkLimit: parseFloat(discovery.style.getPropertyValue('--home-dark-limit')),
+      background: getComputedStyle(discovery).backgroundColor,
+      edge: getComputedStyle(discovery, '::before').maskImage,
+      newsMask: getComputedStyle(news).maskImage,
+      newsEdge: parseFloat(news.style.getPropertyValue('--home-news-edge-softness')),
+      newsCover: Number(news.style.getPropertyValue('--home-news-cover-opacity')),
+      newsBackground: getComputedStyle(news).backgroundColor,
       cloneImage: dotLayer?.querySelector('.home-discovery__image')?.getAttribute('src'),
       sourceImage: discovery.querySelector(':scope > .home-discovery__game-discovery-console .home-discovery__image')?.getAttribute('src'),
       mask: dotLayer ? getComputedStyle(dotLayer).maskImage : 'none',
     };
   });
   const samples = new Map();
-  for (const offset of [378, 702, 918, 1080, 918, 702, 378, 0]) {
+  for (const offset of [378, 594, 702, 864, 918, 1026, 1080, 1026, 918, 864, 702, 594, 378, 0]) {
     await page.evaluate(y => window.scrollTo(0, y), anchor + offset);
     await expect.poll(async () => (await measure()).scale).toBeCloseTo(1 - 0.12 * offset / 1080, 2);
     const sample = await measure();
     if (offset === 0) {
       await expect(page.locator('.home-discovery__dot-layer')).toHaveCount(0);
       expect(sample.original).toBe(1);
+      expect(sample.newsMask).toBe('none');
       continue;
     }
     expect(sample.cloneImage).toBe(sample.sourceImage);
@@ -171,10 +181,33 @@ test('Discovery dots sample the live scene and reverse with the depth progress',
       expect(sample.original).toBeCloseTo(samples.get(offset).original, 2);
       expect(sample.dots).toBeCloseTo(samples.get(offset).dots, 2);
       expect(sample.radius).toBeCloseTo(samples.get(offset).radius, 2);
+      expect(sample.gap).toBeCloseTo(samples.get(offset).gap, 2);
+      expect(sample.darkLimit).toBeCloseTo(samples.get(offset).darkLimit, 2);
+      expect(sample.newsEdge).toBeCloseTo(samples.get(offset).newsEdge, 2);
+      expect(sample.newsCover).toBeCloseTo(samples.get(offset).newsCover, 2);
     } else samples.set(offset, sample);
+    if (offset === 378) await page.screenshot({ path: testInfo.outputPath('discovery-background-edge.png') });
     if (offset === 702) await page.screenshot({ path: testInfo.outputPath('discovery-dots.png') });
+    if (offset === 918) await page.screenshot({ path: testInfo.outputPath('discovery-dots-on-white.png') });
+    if (offset === 1026) await page.screenshot({ path: testInfo.outputPath('discovery-dots-faint.png') });
   }
   expect(samples.get(378).original).toBeGreaterThan(samples.get(702).original);
-  expect(samples.get(702).dots).toBeGreaterThan(samples.get(918).dots);
-  expect(samples.get(702).radius).toBeGreaterThan(samples.get(918).radius);
+  expect(samples.get(594).original).toBeLessThan(0.02);
+  expect(samples.get(702).dots).toBe(1);
+  expect(samples.get(864).dots).toBe(1);
+  expect(samples.get(918).dots).toBe(1);
+  expect(samples.get(918).dots).toBeGreaterThan(samples.get(1026).dots);
+  expect(samples.get(378).darkLimit).toBeGreaterThan(samples.get(594).darkLimit);
+  expect(samples.get(702).darkLimit).toBe(0);
+  expect(samples.get(918).darkLimit).toBe(0);
+  expect(samples.get(702).gap).toBe(0);
+  expect(samples.get(702).background).toBe('rgb(255, 255, 255)');
+  expect(samples.get(702).newsBackground).toBe('rgba(0, 0, 0, 0)');
+  expect(samples.get(702).newsCover).toBeCloseTo(0.22, 2);
+  expect(samples.get(702).edge).toContain('linear-gradient');
+  expect(samples.get(702).newsMask).toContain('linear-gradient');
+  expect(samples.get(702).newsEdge).toBeGreaterThan(100);
+  expect(samples.get(1080).newsMask).toBe('none');
+  expect(samples.get(1080).newsBackground).toBe('rgb(255, 255, 255)');
+  expect(samples.get(918).radius).toBeGreaterThan(samples.get(1026).radius);
 });
