@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import HomeNewsModal from './HomeNewsModal.jsx';
 import { homeNewsData } from './homeNewsData.js';
 import { homeAsset } from './homeAssets.js';
+import useWhatsNewIntro from './useWhatsNewIntro.js';
+import useWhatsNewParallax from './useWhatsNewParallax.js';
+import './WhatsNewIntro.css';
+import './WhatsNewFloat.css';
 
 export default function WhatsNewSection({ mobile = false }) {
   const [selectedNews, setSelectedNews] = useState(null);
@@ -12,6 +16,9 @@ export default function WhatsNewSection({ mobile = false }) {
 }
 
 function NewsCards({ mobile, onSelect }) {
+  const sectionRef = useRef(null);
+  useWhatsNewIntro(sectionRef, mobile);
+  useWhatsNewParallax(sectionRef, mobile);
   const cardProps = key => ({
     role: 'button',
     tabIndex: 0,
@@ -27,8 +34,8 @@ function NewsCards({ mobile, onSelect }) {
     },
   });
   if (mobile) return (
-      <section aria-label="새로운 소식" className="home-news-mobile" data-node-id="2156:7527">
-        <p className="home-news-mobile__text" data-node-id="2156:7528">{`WHAT'S NEW?`}</p>
+      <section ref={sectionRef} aria-label="새로운 소식" className="home-news-mobile" data-node-id="2156:7527">
+        <p className="home-news-mobile__text" data-node-id="2156:7528" role="heading" aria-level="2" aria-label="WHAT'S NEW?"><span className="home-news-mobile__intro-word" aria-hidden="true">WHAT&apos;S</span>{' '}<span className="home-news-mobile__intro-word" aria-hidden="true">NEW?</span></p>
         <p className="home-news-mobile__text-2" data-node-id="2156:7529">
           오늘의 새로운 소식을 만나보세요!
         </p>
@@ -159,7 +166,7 @@ function NewsCards({ mobile, onSelect }) {
       </section>
   );
   return (
-      <section aria-label="새로운 소식" className="home-news" data-node-id="1215:8562" data-name="03_What's-New">
+      <section ref={sectionRef} aria-label="새로운 소식" className="home-news" data-node-id="1215:8562" data-name="03_What's-New">
         <div className="home-news__layer" data-node-id="1215:8566">
           <div className="home-news__layer-2">
             <div className="home-news__image-1043-edited-3-1" data-name="image_1043_edited (3) 1">
@@ -177,28 +184,28 @@ function NewsCards({ mobile, onSelect }) {
         <div className="home-news__image-1042-edited-3-1" data-node-id="1215:8571" data-name="image_1042_edited (3) 1">
           <img alt="" className="home-news__image-4" src={homeAsset('5d287.png')} />
         </div>
-        <div className="home-news__gemini-generated-image-mmbaskmmbaskmmba-1" data-node-id="1215:8573" data-name="Gemini_Generated_Image_mmbaskmmbaskmmba 1">
+        <div className="home-news__gemini-generated-image-mmbaskmmbaskmmba-1" data-node-id="1215:8573" data-name="Gemini_Generated_Image_mmbaskmmbaskmmba 1" data-news-parallax="180">
           <div className="home-news__layer-7">
             <img alt="" className="home-news__image-5" src={homeAsset('eacc5.png')} />
           </div>
         </div>
-        <div className="home-news__halftone-generator-50-1" data-node-id="1215:8574" data-name="halftone-generator (50) 1">
+        <div className="home-news__halftone-generator-50-1" data-node-id="1215:8574" data-name="halftone-generator (50) 1" data-news-parallax="220">
           <div className="home-news__layer-8">
             <img alt="" className="home-news__image-6" src={homeAsset('9bd6b.png')} />
           </div>
         </div>
-        <div className="home-news__gemini-generated-image-49c76g49c76g49c7-1" data-node-id="1215:8575" data-name="Gemini_Generated_Image_49c76g49c76g49c7 1">
+        <div className="home-news__gemini-generated-image-49c76g49c76g49c7-1" data-node-id="1215:8575" data-name="Gemini_Generated_Image_49c76g49c76g49c7 1" data-news-parallax="150">
           <div className="home-news__layer-9">
             <img alt="" className="home-news__image-7" src={homeAsset('ca649.png')} />
           </div>
         </div>
-        <div className="home-news__halftone-generator-51-1" data-node-id="1215:8576" data-name="halftone-generator (51) 1">
+        <div className="home-news__halftone-generator-51-1" data-node-id="1215:8576" data-name="halftone-generator (51) 1" data-news-parallax="200">
           <img alt="" className="home-news__image-8" src={homeAsset('d5a02.png')} />
         </div>
-        <div className="home-news__halftone-generator-47-1" data-node-id="1215:8577" data-name="halftone-generator (47) 1">
+        <div className="home-news__halftone-generator-47-1" data-node-id="1215:8577" data-name="halftone-generator (47) 1" data-news-parallax="190">
           <img alt="" className="home-news__image-9" src={homeAsset('8e017.png')} />
         </div>
-        <div className="home-news__layer-10" data-node-id="1215:8578">
+        <div className="home-news__layer-10" data-node-id="1215:8578" data-news-parallax="160">
           <div className="home-news__layer-11">
             <div className="home-news__gemini-generated-image-ubbmuuubbmuuubbm-1" data-name="Gemini_Generated_Image_ubbmuuubbmuuubbm 1">
               <div className="home-news__layer-12">
@@ -299,7 +306,7 @@ function NewsCards({ mobile, onSelect }) {
             <img alt="" className="home-news__image-16" src={homeAsset('8cfbb.svg')} />
           </div>
         </div>
-        <p className="home-news__text-21" data-node-id="1215:8626">{`WHAT'S NEW?`}</p>
+        <p className="home-news__text-21" data-node-id="1215:8626" role="heading" aria-level="2" aria-label="WHAT'S NEW?"><span className="home-news__intro-word" aria-hidden="true">WHAT&apos;S</span>{' '}<span className="home-news__intro-word" aria-hidden="true">NEW?</span></p>
         <div className="home-news__dot" data-node-id="1215:8629" data-name="Dot" />
         <div className="home-news__dot-2" data-node-id="1215:8630" data-name="Dot" />
         <div className="home-news__dot-3" data-node-id="1215:8631" data-name="Dot" />

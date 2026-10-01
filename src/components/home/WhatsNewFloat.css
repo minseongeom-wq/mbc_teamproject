@@ -1,0 +1,19 @@
+@media (prefers-reduced-motion: no-preference) {
+  .home-news__image {
+    animation: home-news-float-left 6.4s ease-in-out -1.2s infinite;
+  }
+
+  .home-news__image-4 {
+    animation: home-news-float-right 7.2s ease-in-out -3.4s infinite;
+  }
+}
+
+@keyframes home-news-float-left {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(5px, -16px, 0); }
+}
+
+@keyframes home-news-float-right {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-6px, -13px, 0); }
+}
