@@ -6,6 +6,7 @@ import AmiiboSection from '../../components/home/AmiiboSection.jsx';
 import NintendoPicksSection from '../../components/home/NintendoPicksSection.jsx';
 import DailyNintendoSection from '../../components/home/DailyNintendoSection.jsx';
 import DailyNintendoBanner from '../../components/home/DailyNintendoBanner.jsx';
+import NintendoIntro from '../../components/home/intro/NintendoIntro.jsx';
 import '../../components/home/home.css';
 import '../../components/home/home-design.css';
 
@@ -20,6 +21,7 @@ export default function HomePage() {
   const mobile = width < 1024;
   return (
     <div className="home-page" ref={container}>
+      <NintendoIntro />
       <div className="home-page__canvas" style={{ '--home-scale': width / (mobile ? 360 : 1920), '--home-width': mobile ? '360px' : '1920px' }}>
         <HeroSection mobile={mobile} />
         <GameDiscoverySection key={mobile ? 'mobile' : 'desktop'} mobile={mobile} />

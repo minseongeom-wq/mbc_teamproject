@@ -1,0 +1,93 @@
+.nintendo-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  overflow: hidden;
+  background: var(--color-action-primary, #e60012);
+  touch-action: none;
+  overscroll-behavior: contain;
+  isolation: isolate;
+  outline: none;
+}
+
+.nintendo-intro__logo-layer { position: absolute; inset: 0; z-index: 1; }
+
+.nintendo-intro__video-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-action-primary, #e60012);
+}
+
+.nintendo-intro__video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.nintendo-intro[data-video-ready='true'][data-phase='video'] .nintendo-intro__video,
+.nintendo-intro[data-video-ready='true'][data-phase='revealing'] .nintendo-intro__video { visibility: visible; }
+
+.nintendo-intro__filter { position: absolute; pointer-events: none; }
+
+.nintendo-intro[data-phase='revealing'] { will-change: transform; }
+
+.nintendo-intro__play {
+  position: absolute;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border: 2px solid currentColor;
+  border-radius: 24px;
+  background: var(--color-action-primary, #e60012);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nintendo-intro__stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--intro-fit, 1));
+  transform-origin: center;
+}
+
+.nintendo-intro__logo {
+  position: absolute;
+  inset: 0;
+  transform-origin: 960.0117797851562px 609.8238220214844px;
+}
+
+.nintendo-intro__letter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+}
+
+.nintendo-intro__letter img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.nintendo-intro:not([data-phase='hold']) .nintendo-intro__letter,
+.nintendo-intro:not([data-phase='hold']) .nintendo-intro__logo {
+  will-change: transform;
+}
