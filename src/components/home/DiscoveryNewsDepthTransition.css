@@ -3,3 +3,22 @@
 
 .home-page__canvas > .home-news,
 .home-page__canvas > .home-news-mobile { z-index: 2; }
+
+.home-discovery--dot-active > :not(.home-discovery__dot-layer) { opacity: var(--home-dot-source-opacity, 1); }
+
+.home-discovery__dot-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--home-dot-opacity, 0);
+  -webkit-mask-image: radial-gradient(circle at center, #000 var(--home-dot-radius, 2.65px), transparent calc(var(--home-dot-radius, 2.65px) + 0.4px));
+  mask-image: radial-gradient(circle at center, #000 var(--home-dot-radius, 2.65px), transparent calc(var(--home-dot-radius, 2.65px) + 0.4px));
+  -webkit-mask-size: var(--home-dot-spacing, 7px) var(--home-dot-spacing, 7px);
+  mask-size: var(--home-dot-spacing, 7px) var(--home-dot-spacing, 7px);
+}
+
+.home-discovery-mobile .home-discovery__dot-layer { --home-dot-spacing: 5px; }

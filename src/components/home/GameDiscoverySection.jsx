@@ -17,7 +17,7 @@ export default function GameDiscoverySection({ mobile = false }) {
     setActive(nextActive);
   }
   if (mobile) return (
-      <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery-mobile" data-node-id="2156:6633" data-name="게임기 - 젤다">
+      <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery-mobile" data-scroll-position={discoveryScroll.position} data-node-id="2156:6633" data-name="게임기 - 젤다">
         <div className="home-discovery-mobile__layer" data-node-id="2156:6634">
           <button type="button" className="home-discovery-mobile__text" data-node-id="2156:6635" aria-pressed={mode === 'together'} onClick={() => selectMode('together')}>Play Together</button>
         </div>
@@ -65,7 +65,7 @@ export default function GameDiscoverySection({ mobile = false }) {
       </section>
   );
   return (
-      <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery" data-node-id="1148:6518" data-name="02_Game-Discovery">
+      <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery" data-scroll-position={discoveryScroll.position} data-node-id="1148:6518" data-name="02_Game-Discovery">
         <div className="home-discovery__game-discovery-console" data-node-id="1148:6519" data-name="Game-Discovery-Console">
           <div className="home-discovery__console-image" data-node-id="1148:6520" data-name="Console image">
             <img alt="" className="home-discovery__image" src={homeAsset('discovery-console-right.png')} />

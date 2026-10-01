@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+const STEP_COOLDOWN = 180;
+
 const getOrder = (mobile, mode) => mode === 'together'
   ? [1, 3, 4].filter(index => !mobile || index !== 4)
   : mobile ? [1, 2, 3, 1] : [0, 1, 2, 3, 4, 0, 1];
@@ -36,8 +38,9 @@ export default function useDiscoveryScroll({ mobile, mode, onSelect }) {
     const section = sectionRef.current;
     const order = getOrder(mobile, mode);
     const ready = () => {
-      if (!section || section.classList.contains('home-discovery--booting') || document.querySelector('.nintendo-intro, dialog[open]')) return false;
+      if (!section || section.dataset.transitionReady !== 'true' || section.dataset.depthActive === 'true' || section.classList.contains('home-discovery--booting') || document.querySelector('.nintendo-intro, dialog[open]')) return false;
       const rect = section.getBoundingClientRect();
+      // The depth effect can move the pinned section slightly below the viewport top.
       return rect.top >= -window.innerHeight * 0.15
         && rect.top <= window.innerHeight * 0.2
         && rect.bottom >= window.innerHeight * 0.6;
@@ -59,14 +62,14 @@ export default function useDiscoveryScroll({ mobile, mode, onSelect }) {
       if (completedRef.current && event.deltaY > 0) return;
       if (positionRef.current === 0 && event.deltaY < 0) return;
       if (positionRef.current === order.length - 1 && event.deltaY > 0) {
-        if (performance.now() - lastStepRef.current < 520) event.preventDefault();
+        if (performance.now() - lastStepRef.current < STEP_COOLDOWN) event.preventDefault();
         else completedRef.current = true;
         return;
       }
       event.preventDefault();
       if (Math.sign(wheelAmountRef.current) !== Math.sign(event.deltaY)) wheelAmountRef.current = 0;
       wheelAmountRef.current += event.deltaY;
-      if (Math.abs(wheelAmountRef.current) < 80 || performance.now() - lastStepRef.current < 520) return;
+      if (Math.abs(wheelAmountRef.current) < 80 || performance.now() - lastStepRef.current < STEP_COOLDOWN) return;
       const direction = Math.sign(wheelAmountRef.current);
       wheelAmountRef.current = 0;
       advance(direction);
@@ -77,7 +80,7 @@ export default function useDiscoveryScroll({ mobile, mode, onSelect }) {
     const onTouchMove = event => {
       if (!ready() || touchYRef.current === null) return;
       const delta = touchYRef.current - event.touches[0].clientY;
-      if (delta > 0 && positionRef.current === order.length - 1 && performance.now() - lastStepRef.current >= 520) {
+      if (delta > 0 && positionRef.current === order.length - 1 && performance.now() - lastStepRef.current >= STEP_COOLDOWN) {
         completedRef.current = true;
         return;
       }
@@ -88,7 +91,7 @@ export default function useDiscoveryScroll({ mobile, mode, onSelect }) {
       touchYRef.current = null;
       if (!ready() || startY === null || completedRef.current) return;
       const delta = startY - event.changedTouches[0].clientY;
-      if (Math.abs(delta) < 45 || performance.now() - lastStepRef.current < 520) return;
+      if (Math.abs(delta) < 45 || performance.now() - lastStepRef.current < STEP_COOLDOWN) return;
       advance(Math.sign(delta));
     };
     window.addEventListener('wheel', onWheel, { capture: true, passive: false });
