@@ -769,7 +769,7 @@
 .home-daily-mobile__d3079d81-99d7-42e4-b95b-a9f42a93335d-7-2 { position: absolute; height: 349.349px; left: 0; top: 0; width: 181px; }
 .home-daily-mobile__layer-19 { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .home-daily-mobile__image-13 { position: absolute; height: 110.45%; left: -21.05%; max-width: none; top: -5.86%; width: 142.11%; }
-.home-daily { background-color: var(--color-white, #fff); height: 1432px; overflow: clip; position: relative; flex-shrink: 0; width: 1920px; }
+.home-daily { background-color: #f3f3f3; height: 1432px; overflow: clip; position: relative; flex-shrink: 0; width: 1920px; }
 .home-daily__chatgpt-image-2026-9-11-04-30-37-1 { position: absolute; height: 735px; left: calc(48.75% + 24px); top: calc(50% + 404.5px); width: 2172px; translate: -50% -50%; }
 .home-daily__layer { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .home-daily__image { position: absolute; left: 0; max-width: none; width: 100%; height: 100%; top: 0; }
@@ -830,13 +830,13 @@
 .home-daily__calendar-image-4 { position: absolute; height: 188px; left: 50%; top: 50%; width: 178px; translate: -50% -50%; }
 .home-daily__layer-24 { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .home-daily__image-15 { position: absolute; height: 110.54%; left: -220.07%; max-width: none; top: -4.76%; width: 324.01%; }
-.home-daily__text { word-break: break-word; position: absolute; font-family: 'DeltaGlassKR', sans-serif; font-weight: 400; line-height: 0.9; left: calc(60% + 27.89px); font-style: normal; font-size: 68px; color: var(--color-white, #fff); top: 889px; white-space: nowrap; }
-.home-daily__layer-25 { word-break: break-word; position: absolute; font-family: 'Common Pretendard', sans-serif; font-weight: 300; line-height: 0; left: calc(60% + 26.89px); font-style: normal; font-size: 24px; color: var(--color-white, #fff); top: 958px; width: 254px; white-space: pre-wrap; }
+.home-daily__text { word-break: break-word; position: absolute; font-family: 'DeltaGlassKR', sans-serif; font-weight: 400; line-height: 0.9; left: calc(60% + 27.89px); font-style: normal; font-size: 61px; color: var(--color-white, #fff); top: 889px; white-space: nowrap; }
+.home-daily__layer-25 { word-break: break-word; position: absolute; font-family: 'Common Pretendard', sans-serif; font-weight: 300; line-height: 0; left: calc(60% + 26.89px); font-style: normal; font-size: 19px; color: var(--color-white, #fff); top: 958px; width: 254px; white-space: pre-wrap; }
 .home-daily__text-2 { line-height: 1.5; margin-bottom: 0; }
 .home-daily__text-3 { line-height: 1.5; margin-bottom: 0; }
 .home-daily__text-4 { line-height: 1.5; margin-bottom: 0; }
 .home-daily__text-5 { line-height: 1.5; }
-.home-daily__text-6 { word-break: break-word; position: absolute; font-family: 'Common Pretendard', sans-serif; font-weight: 300; line-height: normal; left: 81px; font-style: normal; color: var(--color-action-primary, #e60012); font-size: 55px; top: 291px; white-space: nowrap; }
+.home-daily__text-6 { word-break: break-word; position: absolute; font-family: 'Common Pretendard', sans-serif; font-weight: 300; line-height: normal; left: 81px; font-style: normal; color: var(--color-black, #000); font-size: 54px; top: 291px; white-space: nowrap; }
 .home-daily__text-7 { word-break: break-word; position: absolute; font-family: 'Pexel Grotesk', sans-serif; font-weight: 400; line-height: 1.5; left: calc(7.5% + 102px); font-style: normal; color: var(--color-text-primary, #151515); font-size: 70px; top: 344px; white-space: nowrap; }
 .home-banner-mobile { background-color: var(--color-action-primary, #e60012); height: 157px; overflow: clip; position: relative; flex-shrink: 0; width: 360px; }
 .home-banner-mobile__layer { position: absolute; height: 43px; left: calc(50% - 62.5px); top: 278px; width: 205px; translate: -50% 0; }

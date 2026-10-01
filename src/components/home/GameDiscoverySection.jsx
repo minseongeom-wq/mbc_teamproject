@@ -3,16 +3,21 @@ import { useState } from 'react';
 import GameCarousel from './GameCarousel.jsx';
 import { homeGames } from './homeGames.js';
 import { homeAsset } from './homeAssets.js';
+import useDiscoveryScroll from './useDiscoveryScroll.js';
+import './GameDiscoveryScroll.css';
 
 export default function GameDiscoverySection({ mobile = false }) {
   const [active, setActive] = useState(2);
   const [mode, setMode] = useState('solo');
+  const discoveryScroll = useDiscoveryScroll({ mobile, mode, onSelect: setActive });
   function selectMode(nextMode) {
+    const nextActive = nextMode === 'together' && !homeGames[active].together ? 1 : active;
+    discoveryScroll.reset(nextMode, nextActive);
     setMode(nextMode);
-    if (nextMode === 'together' && !homeGames[active].together) setActive(1);
+    setActive(nextActive);
   }
   if (mobile) return (
-      <section aria-label="게임 둘러보기" className="home-discovery-mobile" data-node-id="2156:6633" data-name="게임기 - 젤다">
+      <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery-mobile" data-node-id="2156:6633" data-name="게임기 - 젤다">
         <div className="home-discovery-mobile__layer" data-node-id="2156:6634">
           <button type="button" className="home-discovery-mobile__text" data-node-id="2156:6635" aria-pressed={mode === 'together'} onClick={() => selectMode('together')}>Play Together</button>
         </div>
@@ -56,11 +61,11 @@ export default function GameDiscoverySection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <MobileGameCarousel active={active} onSelect={setActive} mode={mode} />
+        <MobileGameCarousel active={active} onSelect={discoveryScroll.select} mode={mode} />
       </section>
   );
   return (
-      <section aria-label="게임 둘러보기" className="home-discovery" data-node-id="1148:6518" data-name="02_Game-Discovery">
+      <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery" data-node-id="1148:6518" data-name="02_Game-Discovery">
         <div className="home-discovery__game-discovery-console" data-node-id="1148:6519" data-name="Game-Discovery-Console">
           <div className="home-discovery__console-image" data-node-id="1148:6520" data-name="Console image">
             <img alt="" className="home-discovery__image" src={homeAsset('discovery-console-right.png')} />
@@ -78,7 +83,7 @@ export default function GameDiscoverySection({ mobile = false }) {
               <button type="button" className="home-discovery__text-2" data-node-id="1148:6526" aria-pressed={mode === 'solo'} onClick={() => selectMode('solo')}>Play Solo</button>
               <button type="button" className="home-discovery__text-3" data-node-id="1148:6527" aria-pressed={mode === 'together'} onClick={() => selectMode('together')}>Play Together</button>
             </div>
-            <GameCarousel active={active} onSelect={setActive} mode={mode} />
+            <GameCarousel active={active} onSelect={discoveryScroll.select} mode={mode} scrollPosition={discoveryScroll.position} />
           </div>
           <div className="home-discovery__game-selected-info" data-node-id="1148:6557" data-name="Game-Selected-Info" aria-live="polite">
             <div className="home-discovery__game-title-block" data-node-id="1148:6559" data-name="Game-Title-Block">

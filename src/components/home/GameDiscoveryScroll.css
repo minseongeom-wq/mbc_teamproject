@@ -1,0 +1,8 @@
+/* Wheel input moves only the cards inside the existing Switch viewport. */
+.home-discovery__game-carousel {
+  transition: left 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-discovery__game-carousel { transition: none; }
+}

@@ -156,7 +156,7 @@ test('real video ended reveals the already-mounted Home with a one-second panel 
   const video = page.locator('.nintendo-intro__video');
   await expect(video).toHaveCSS('object-fit', 'contain');
   await expect(page.locator('.nintendo-intro__video-wrapper')).toHaveCSS('background-color', 'rgb(230, 0, 18)');
-  expect(await video.evaluate(v => ({ muted: v.muted, inline: v.playsInline, autoplay: v.autoplay, loop: v.loop, duration: v.duration, rate: v.playbackRate }))).toEqual({ muted: true, inline: true, autoplay: true, loop: false, duration: 8, rate: 1 });
+  expect(await video.evaluate(v => ({ muted: v.muted, inline: v.playsInline, autoplay: v.autoplay, loop: v.loop, duration: v.duration, rate: v.playbackRate }))).toEqual({ muted: true, inline: true, autoplay: true, loop: false, duration: 8, rate: 1.25 });
   await page.mouse.wheel(0, 1000);
   await page.keyboard.press('PageDown');
   expect(await page.evaluate(() => window.scrollY)).toBe(0);

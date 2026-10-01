@@ -54,6 +54,34 @@
   cursor: pointer;
 }
 
+.nintendo-intro__skip {
+  position: fixed;
+  z-index: 5;
+  top: 48px;
+  right: 24px;
+  width: 72px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #151515;
+  font: 700 12px/1 'Common Pretendard', sans-serif;
+  letter-spacing: 0.08em;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
+}
+
+.nintendo-intro__skip:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+@media (pointer: fine) {
+  .nintendo-intro, .nintendo-intro .nintendo-intro__skip { cursor: none; }
+}
+
+@media (pointer: coarse) {
+  .nintendo-intro__skip { top: 20px; right: 20px; transform: none; }
+}
+
 .nintendo-intro__stage {
   position: absolute;
   left: 50%;

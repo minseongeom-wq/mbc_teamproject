@@ -1,0 +1,5 @@
+.home-page__canvas > .home-discovery,
+.home-page__canvas > .home-discovery-mobile { z-index: 1; }
+
+.home-page__canvas > .home-news,
+.home-page__canvas > .home-news-mobile { z-index: 2; }

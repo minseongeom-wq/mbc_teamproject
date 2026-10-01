@@ -67,7 +67,7 @@ export default function LogoIntro({ onComplete }) {
             rotation: target.rotation,
             scaleX: target.scaleX,
             scaleY: target.scaleY,
-            duration: letter.duration,
+            duration: letter.duration * 0.38,
             ease: index % 3 === 0 ? 'power2.inOut' : 'power3.inOut',
           }, `scatter+=${letter.delay}`);
         });

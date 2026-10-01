@@ -5,6 +5,7 @@ export default function IntroVideo({ videoRef, active, onEnded, onError, onPlayi
   const matrixRef = useRef(null);
 
   useLayoutEffect(() => {
+    videoRef.current.playbackRate = 1.25;
     const panel = matrixRef.current.closest('.nintendo-intro');
     const channels = getComputedStyle(panel).backgroundColor.match(/[\d.]+/g).slice(0, 3).map(Number);
     // This supplied clip is a white silhouette over decoded RGB(247,23,13).

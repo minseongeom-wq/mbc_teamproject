@@ -205,7 +205,7 @@ export default function DailyNintendoSection({ mobile = false }) {
           날마다 만나는 닌텐도
         </p>
         <p className="home-daily__text-7" data-node-id="1148:6781">
-          NINTENDO Widget 04
+          NINTENDO PICKS 07
         </p>
       </section>
   );

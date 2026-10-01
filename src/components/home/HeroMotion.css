@@ -1,0 +1,49 @@
+/* Only the first Home hero's character layers float; Figma layout stays fixed. */
+.home-hero :is(
+  .home-hero__hero-visual-01,
+  .home-hero__hero-visual-02,
+  .home-hero__hero-visual-03,
+  .home-hero__hero-visual-05,
+  .home-hero__layer-14
+),
+.home-hero-mobile :is(
+  .home-hero-mobile__layer-3,
+  .home-hero-mobile__layer-6,
+  .home-hero-mobile__layer-10,
+  .home-hero-mobile__layer-13
+) {
+  animation: home-hero-float var(--float-duration) ease-in-out var(--float-delay) infinite;
+  transform-origin: center center;
+}
+
+.home-hero__hero-visual-01 { --float-duration: 6.1s; --float-delay: -1.4s; --float-x: 4px; --float-y: -16px; --float-tilt: -1.5deg; }
+.home-hero__hero-visual-02 { --float-duration: 5.3s; --float-delay: -3.2s; --float-x: -6px; --float-y: -15px; --float-tilt: -1.2deg; }
+.home-hero__hero-visual-03 { --float-duration: 4.6s; --float-delay: -0.9s; --float-x: -3px; --float-y: -10px; --float-tilt: 2.2deg; }
+.home-hero__hero-visual-05 { --float-duration: 6.4s; --float-delay: -2.1s; --float-x: 4px; --float-y: -13px; --float-tilt: 1.1deg; }
+.home-hero__layer-14 { --float-duration: 5.8s; --float-delay: -2.9s; --float-x: -5px; --float-y: -14px; --float-tilt: -1deg; }
+
+.home-hero-mobile__layer-3 { --float-duration: 4.7s; --float-delay: -1.2s; --float-x: 3px; --float-y: -7px; --float-tilt: 1.4deg; }
+.home-hero-mobile__layer-6 { --float-duration: 5.8s; --float-delay: -2.7s; --float-x: -2px; --float-y: -9px; --float-tilt: 1.1deg; }
+.home-hero-mobile__layer-10 { --float-duration: 5.5s; --float-delay: -2s; --float-x: 3px; --float-y: -8px; --float-tilt: -1deg; }
+.home-hero-mobile__layer-13 { --float-duration: 4.9s; --float-delay: -3s; --float-x: -2px; --float-y: -7px; --float-tilt: 1deg; }
+
+@keyframes home-hero-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(var(--float-x), var(--float-y), 0) rotate(var(--float-tilt)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero :is(
+    .home-hero__hero-visual-01,
+    .home-hero__hero-visual-02,
+    .home-hero__hero-visual-03,
+    .home-hero__hero-visual-05,
+    .home-hero__layer-14
+  ),
+  .home-hero-mobile :is(
+    .home-hero-mobile__layer-3,
+    .home-hero-mobile__layer-6,
+    .home-hero-mobile__layer-10,
+    .home-hero-mobile__layer-13
+  ) { animation: none; }
+}
