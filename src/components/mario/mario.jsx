@@ -1651,7 +1651,14 @@ export default function Mario() {
                                 data-node-id="2712:12799"
                                 style={{ color: activeCharacterData.color }}
                             >
-                                {activeCharacterData.korean}
+                                {activeCharacterData.korean}{' '}
+                                <span
+                                    className="mario-layer-79"
+                                    data-node-id="2712:12804"
+                                    style={{ color: activeCharacterData.color }}
+                                >
+                                    ({activeCharacterData.english})
+                                </span>
                             </p>
                         </div>
                         <div
@@ -1677,13 +1684,6 @@ export default function Mario() {
                                 </p>
                             </div>
                         </div>
-                        <p
-                            className="mario-layer-79"
-                            data-node-id="2712:12804"
-                            style={{ color: activeCharacterData.color }}
-                        >
-                            ({activeCharacterData.english})
-                        </p>
                     </div>
                     <div
                         className="mario-layer-80"

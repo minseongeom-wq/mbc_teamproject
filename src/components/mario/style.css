@@ -195,12 +195,13 @@
     margin-top: 0px;
 }
 .mario-characters {
-    height: 1288px;
+    height: 1492px;
     margin-top: 0px;
 }
 .mario-adventure {
     height: 141px;
-    margin-top: -16px;
+    margin-top: 17px;
+    margin-bottom: 44px;
 }
 .mario-worlds {
     height: 5057px;
@@ -209,6 +210,7 @@
 .mario-divider {
     height: 460px;
     margin-top: -182px;
+    top: -28px;
 }
 .mario-divider {
     overflow: visible;
@@ -238,7 +240,7 @@
 }
 .mario-powerups {
     height: 2029px;
-    margin-top: -123px;
+    margin-top: -103px;
 }
 .mario-powerup-scroll {
     display: contents;
@@ -248,7 +250,7 @@
         display: block;
         position: relative;
         height: var(--powerup-track-height, 2029px);
-        margin-top: -123px;
+        margin-top: -103px;
     }
     .mario-powerup-scroll > .mario-powerups {
         position: sticky;
@@ -1114,9 +1116,8 @@
     animation: none;
 }
 
-.mario-characters
-    .mario-layer-70
-    > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
+.mario-characters .mario-layer-70 > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75),
+.mario-characters .mario-layer-70 .mario-layer-79 {
     opacity: 0;
     animation: mario-character-info-enter 0.36s ease-out forwards;
     will-change: transform, opacity;
@@ -1134,7 +1135,7 @@
     animation-delay: 0.46s;
 }
 
-.mario-characters .mario-layer-70 > .mario-layer-79 {
+.mario-characters .mario-layer-70 .mario-layer-79 {
     animation-delay: 0.38s;
 }
 
@@ -1154,9 +1155,8 @@
     .mario-characters .mario-layer-55,
     .mario-characters .mario-selected-character,
     .mario-characters .mario-layer-51,
-    .mario-characters
-        .mario-layer-70
-        > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75, .mario-layer-79) {
+    .mario-characters .mario-layer-70 > :is(.mario-layer-71, .mario-layer-73, .mario-layer-75),
+    .mario-characters .mario-layer-70 .mario-layer-79 {
         animation: none;
         opacity: 1;
         transform: none;
@@ -1399,7 +1399,7 @@
 }
 .mario-page .mario-layer-47 {
     position: absolute;
-    height: 1324px;
+    height: 1492px;
     left: 0;
     overflow: clip;
     top: 0;
@@ -1408,7 +1408,7 @@
 .mario-page .mario-layer-48 {
     position: absolute;
     background: white;
-    height: 1324px;
+    height: 1492px;
     left: 0;
     top: 0;
     width: 1920px;
@@ -1418,7 +1418,7 @@
     left: 50%;
     width: 720px;
     height: 720px;
-    top: calc(50% + 107px);
+    top: calc(50% + 105px);
     translate: -50% -50%;
 }
 .mario-page .mario-layer-50 {
@@ -1429,7 +1429,10 @@
     justify-content: center;
     left: 50%;
     padding: 10px;
-    top: 769px;
+    width: 1002px;
+    height: 298px;
+    box-sizing: border-box;
+    top: 897px;
     translate: -50% 0;
 }
 .mario-page .mario-layer-51 {
@@ -1452,8 +1455,11 @@
     align-items: center;
     justify-content: center;
     left: calc(50% - 0.5px);
+    width: 469px;
+    height: 73px;
+    box-sizing: border-box;
     padding: 10px;
-    top: 278px;
+    top: 378px;
     translate: -50% 0;
 }
 .mario-page .mario-layer-53 {
@@ -1471,9 +1477,9 @@
 .mario-page .mario-layer-54 {
     position: absolute;
     height: 120px;
-    left: 536px;
+    left: 533px;
     border-radius: 30px;
-    top: 373px;
+    top: 473px;
     width: 124px;
     border: 4px solid #e60012;
 }
@@ -1489,64 +1495,64 @@
 }
 .mario-page .mario-layer-56 {
     position: absolute;
-    border-width: 4px;
+    border-width: 6px;
     border-color: #08a937;
     border-style: solid;
     height: 120px;
-    left: 681px;
+    left: 679px;
     border-radius: 30px;
-    top: 373px;
+    top: 473px;
     width: 124px;
 }
 .mario-page .mario-layer-57 {
     position: absolute;
-    border-width: 4px;
+    border-width: 6px;
     border-color: #f196bf;
     border-style: solid;
     height: 120px;
-    left: 826px;
+    left: 825px;
     border-radius: 30px;
-    top: 373px;
+    top: 473px;
     width: 124px;
 }
 .mario-page .mario-layer-58 {
     position: absolute;
-    border-width: 4px;
+    border-width: 6px;
     border-color: #70b921;
     border-style: solid;
     height: 120px;
     left: 971px;
     border-radius: 30px;
-    top: 373px;
+    top: 473px;
     width: 124px;
 }
 .mario-page .mario-layer-59 {
     position: absolute;
-    border-width: 4px;
+    border-width: 6px;
     border-color: #18419a;
     border-style: solid;
     height: 120px;
-    left: 1116px;
+    left: 1117px;
     border-radius: 30px;
-    top: 373px;
+    top: 473px;
     width: 124px;
 }
 .mario-page .mario-layer-60 {
     position: absolute;
-    border-width: 4px;
+    border-width: 6px;
     border-color: #f8bf10;
     border-style: solid;
     height: 120px;
-    left: 1261px;
+    left: 1263px;
     border-radius: 30px;
-    top: 373px;
+    top: 473px;
     width: 124px;
 }
 .mario-page .mario-layer-61 {
     position: absolute;
     height: 489px;
     left: 841px;
-    top: 517px;
+    top: 645px;
     width: 239px;
 }
 .mario-page .mario-layer-62 {
@@ -1564,31 +1570,31 @@
 .mario-page .mario-layer-61[data-character='luigi'] {
     height: 537px;
     left: 827px;
-    top: 520px;
+    top: 648px;
     width: 266px;
 }
 .mario-page .mario-layer-61[data-character='peach'] {
     height: 516px;
     left: 827px;
-    top: 505px;
+    top: 633px;
     width: 289px;
 }
 .mario-page .mario-layer-61[data-character='yoshi'] {
     height: 517px;
     left: 776px;
-    top: 515px;
+    top: 643px;
     width: 369px;
 }
 .mario-page .mario-layer-61[data-character='kinopio'] {
     height: 435px;
     left: 816px;
-    top: 561px;
+    top: 689px;
     width: 286px;
 }
 .mario-page .mario-layer-61[data-character='koopa'] {
     height: 372px;
     left: 772px;
-    top: 582px;
+    top: 710px;
     width: 376px;
 }
 .mario-page .mario-selected-character:not(.is-mario) {
@@ -1642,12 +1648,12 @@
 }
 .mario-page .mario-layer-63 {
     position: absolute;
-    left: 1157px;
+    left: 1159px;
     overflow: clip;
     border-radius: 49px;
     width: 49px;
     height: 49px;
-    top: 701px;
+    top: 826px;
 }
 .mario-page .mario-layer-64 {
     position: absolute;
@@ -1673,10 +1679,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    left: 715px;
+    left: 710px;
     width: 49px;
     height: 49px;
-    top: 701px;
+    top: 830px;
 }
 .mario-page .mario-layer-68 {
     flex: none;
@@ -1692,54 +1698,108 @@
 .mario-page .mario-layer-70 {
     position: absolute;
     background: white;
-    border-width: 2.5px;
+    border-width: 1.5px;
     border-color: var(--character-color, red);
     border-style: dashed;
     height: 180px;
     left: 1261px;
     overflow: clip;
-    border-radius: 40px;
-    top: 556px;
+    border-radius: 15px;
+    top: 686px;
     width: 289px;
 }
 .mario-page .mario-layer-70[data-character='luigi'] {
-    left: 1274px;
-    top: 556px;
+    left: 1261px;
+    top: 686px;
     width: 273px;
 }
 .mario-page .mario-layer-70[data-character='peach'] {
     left: 1261px;
-    top: 556px;
+    top: 686px;
     width: 253px;
 }
 .mario-page .mario-layer-70[data-character='yoshi'] {
     left: 1261px;
-    top: 556px;
+    top: 686px;
     width: 273px;
 }
 .mario-page .mario-layer-70[data-character='kinopio'] {
     left: 1261px;
-    top: 556px;
+    top: 686px;
     width: 273px;
 }
 .mario-page .mario-layer-70[data-character='koopa'] {
     left: 1261px;
-    top: 556px;
+    top: 686px;
     width: 253px;
 }
-.mario-page .mario-layer-70[data-character='peach'] .mario-layer-79,
-.mario-page .mario-layer-70[data-character='yoshi'] .mario-layer-79 {
-    left: 77.75px;
+.mario-page .mario-layer-70:not([data-character='mario']) {
+    border-width: 2.5px;
+    border-radius: 15px;
 }
-.mario-page .mario-layer-70[data-character='kinopio'] .mario-layer-79 {
-    left: 127.75px;
+.mario-page .mario-layer-70:not([data-character='mario']) .mario-layer-71 {
+    left: 12px;
+    top: 16px;
 }
-.mario-page .mario-layer-70[data-character='koopa'] .mario-layer-79 {
-    left: 76.75px;
+.mario-page .mario-layer-70:not([data-character='mario']) .mario-layer-73 {
+    left: 12px;
+    top: 64px;
+}
+.mario-page .mario-layer-70:not([data-character='mario']) .mario-layer-75 {
+    left: 12px;
+    top: 98px;
+}
+.mario-page .mario-layer-70[data-character='luigi'] .mario-layer-73,
+.mario-page .mario-layer-70[data-character='yoshi'] .mario-layer-73,
+.mario-page .mario-layer-70[data-character='kinopio'] .mario-layer-73 {
+    width: 245px;
+}
+.mario-page .mario-layer-70[data-character='peach'] .mario-layer-73,
+.mario-page .mario-layer-70[data-character='koopa'] .mario-layer-73 {
+    width: 225px;
 }
 .mario-page .mario-layer-70[data-character='yoshi'] .mario-layer-73 {
     left: 50%;
     translate: -50% 0;
+}
+.mario-page .mario-layer-70[data-character='luigi'] .mario-layer-75 {
+    width: 179px;
+}
+.mario-page .mario-layer-70[data-character='peach'] .mario-layer-75 {
+    width: 157px;
+}
+.mario-page .mario-layer-70[data-character='yoshi'] .mario-layer-75 {
+    width: 174px;
+}
+.mario-page .mario-layer-70[data-character='kinopio'] .mario-layer-75,
+.mario-page .mario-layer-70[data-character='koopa'] .mario-layer-75 {
+    width: 186px;
+}
+.mario-page .mario-layer-70:not([data-character='mario']) .mario-layer-76 {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.42px;
+}
+.mario-page .mario-layer-70[data-character='luigi'] .mario-layer-76 {
+    font-size: 14.5px;
+    letter-spacing: 0.435px;
+}
+.mario-page .mario-layer-70[data-character='luigi'] .mario-layer-79 {
+    margin-left: -2.5px;
+}
+.mario-page .mario-layer-70[data-character='peach'] .mario-layer-79,
+.mario-page .mario-layer-70[data-character='yoshi'] .mario-layer-79 {
+    margin-left: -3.33px;
+}
+.mario-page .mario-layer-70[data-character='kinopio'] .mario-layer-79 {
+    margin-left: -3.75px;
+}
+.mario-page .mario-layer-70[data-character='koopa'] .mario-layer-79 {
+    margin-left: -4.33px;
+}
+.mario-page .mario-layer-70:not([data-character='mario']) .mario-layer-79 {
+    position: relative;
+    top: -1px;
 }
 .mario-page .mario-layer-71 {
     position: absolute;
@@ -1747,9 +1807,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    left: 12.75px;
+    left: 13.25px;
+    width: max-content;
+    height: 48px;
+    box-sizing: border-box;
     padding: 10px;
-    top: 16.75px;
+    top: 22.25px;
 }
 .mario-page .mario-layer-72 {
     word-break: break-word;
@@ -1769,10 +1832,13 @@
     align-content: stretch;
     display: flex;
     align-items: center;
-    justify-content: center;
-    left: 12.75px;
+    justify-content: flex-start;
+    left: 13.25px;
+    width: 260px;
+    height: 41px;
+    box-sizing: border-box;
     padding: 10px;
-    top: 64.75px;
+    top: 58.25px;
 }
 .mario-page .mario-layer-74 {
     word-break: break-word;
@@ -1790,10 +1856,13 @@
     align-content: stretch;
     display: flex;
     align-items: center;
-    justify-content: center;
-    left: 12.75px;
+    justify-content: flex-start;
+    left: 14.25px;
+    width: 192px;
+    height: 60px;
+    box-sizing: border-box;
     padding: 10px;
-    top: 98.75px;
+    top: 94.25px;
 }
 .mario-page .mario-layer-76 {
     word-break: break-word;
@@ -1802,9 +1871,9 @@
     font-style: normal;
     position: relative;
     flex-shrink: 0;
-    font-size: 14px;
+    font-size: 14.5px;
     color: var(--mario-black-1, black);
-    letter-spacing: 0.42px;
+    letter-spacing: 0.435px;
     white-space: nowrap;
 }
 .mario-page .mario-layer-77 {
@@ -1816,16 +1885,17 @@
 }
 .mario-page .mario-layer-79 {
     word-break: break-word;
-    position: absolute;
+    display: inline-block;
+    position: static;
     font-family: 'Jalnan Gothic', 'Common Pretendard', sans-serif;
     font-weight: 400;
     line-height: normal;
-    left: var(--character-english-left, 103.75px);
+    margin-left: 2px;
     font-style: normal;
     font-size: 18px;
     color: red;
-    top: 30.75px;
     letter-spacing: 0.72px;
+    vertical-align: baseline;
     white-space: nowrap;
 }
 .mario-page .mario-layer-80 {
@@ -1835,8 +1905,11 @@
     align-items: center;
     justify-content: center;
     left: 216px;
+    width: 174px;
+    height: 54px;
+    box-sizing: border-box;
     padding: 10px;
-    top: 234px;
+    top: 334px;
 }
 .mario-page .mario-layer-81 {
     word-break: break-word;
@@ -1857,8 +1930,11 @@
     align-items: center;
     justify-content: center;
     left: 1522px;
+    width: 182px;
+    height: 88px;
+    box-sizing: border-box;
     padding: 10px;
-    top: 234px;
+    top: 334px;
 }
 .mario-page .mario-layer-83 {
     word-break: break-word;
@@ -2008,14 +2084,14 @@
     position: absolute;
     translate: 2px 0;
     aspect-ratio: 1152/2048;
-    left: 87.14%;
+    left: calc(87.14% - 2px);
     mask-mode: alpha;
     mask-composite: intersect;
     mask-clip: no-clip;
     mask-repeat: no-repeat;
     mask-position: -1673px -48px;
     mask-size: 1920px 357px;
-    right: 5%;
+    right: calc(5% + 2px);
     top: 48px;
 }
 .mario-page .mario-layer-100 {
@@ -2051,12 +2127,12 @@
 .mario-page .mario-layer-103 {
     position: absolute;
     display: flex;
-    height: 103.107px;
+    height: 110.501px;
     align-items: center;
     justify-content: center;
-    left: calc(50% - 579.45px);
+    left: calc(50% - 559.55px);
     top: calc(50% - 92.18px);
-    width: 351.395px;
+    width: 378.495px;
 }
 .mario-page .mario-layer-104 {
     flex: none;
@@ -2069,8 +2145,8 @@
     font-style: normal;
     position: relative;
     color: #e60012;
-    font-size: 65px;
-    letter-spacing: 1.3px;
+    font-size: 70px;
+    letter-spacing: 1.4px;
     white-space: nowrap;
 }
 .mario-page .mario-layer-106 {
@@ -2110,12 +2186,12 @@
 .mario-page .mario-layer-111 {
     position: absolute;
     display: flex;
-    height: 125.167px;
+    height: 134.252px;
     align-items: center;
     justify-content: center;
-    left: calc(50% - 294.32px);
-    top: calc(50% - 25.57px);
-    width: 810.843px;
+    left: calc(50% - 274.33px);
+    top: calc(50% - 27.66px);
+    width: 873.044px;
 }
 .mario-page .mario-layer-112 {
     flex: none;
@@ -2128,8 +2204,8 @@
     font-style: normal;
     position: relative;
     color: #123b18;
-    font-size: 65px;
-    letter-spacing: 1.3px;
+    font-size: 70px;
+    letter-spacing: 1.4px;
     white-space: nowrap;
 }
 .mario-page .mario-layer-114 {
@@ -3758,7 +3834,7 @@
     height: 220px;
     left: 364px;
     border-radius: 20px;
-    top: 1064px;
+    top: 1063px;
     width: 318px;
 }
 .mario-page .mario-layer-286 {
@@ -3968,7 +4044,7 @@
     font-family: 'Black Han Sans', 'Common Pretendard', sans-serif;
     font-weight: 400;
     line-height: normal;
-    left: 1806px;
+    left: 1799px;
     font-size: 20px;
     color: black;
     text-align: right;
@@ -3996,12 +4072,12 @@
     font-family: 'Common Pretendard', 'Pretendard Variable', Pretendard, sans-serif;
     font-weight: 500;
     line-height: 1.3;
-    left: 1691px;
+    left: 1693px;
     font-style: normal;
     font-size: 15px;
     color: black;
     text-align: right;
-    top: 1825px;
+    top: 1821px;
     white-space: nowrap;
     translate: -100% 0;
 }
@@ -4011,7 +4087,7 @@
     font-family: 'Common Pretendard', 'Pretendard Variable', Pretendard, sans-serif;
     font-weight: 500;
     line-height: 0;
-    left: 1645px;
+    left: 1646px;
     font-style: normal;
     font-size: 15px;
     color: black;
@@ -4134,7 +4210,7 @@
     align-items: center;
     justify-content: center;
     left: 1160px;
-    top: 859px;
+    top: 861px;
     width: 71px;
 }
 .mario-page .mario-layer-332 {
@@ -4155,8 +4231,8 @@
     height: 84.353px;
     align-items: center;
     justify-content: center;
-    left: 206px;
-    top: 13px;
+    left: 209px;
+    top: 16px;
     width: 83.91px;
 }
 .mario-page .mario-layer-335 {
@@ -4332,18 +4408,21 @@
     left: 655px;
     top: 880px;
     width: 610px;
+    z-index: 1;
 }
 .mario-page .mario-powerup-hero[data-powerup='fire'] {
     height: 700px;
     left: 500px;
     top: 1010px;
     width: 920px;
+    z-index: 1;
 }
 .mario-page .mario-powerup-hero[data-powerup='elephant'] {
     height: 560px;
     left: 570px;
     top: 1110px;
     width: 780px;
+    z-index: 1;
 }
 .mario-page .mario-powerup-hero[data-powerup='drill'] {
     height: 800px;
@@ -4428,13 +4507,13 @@
     position: absolute;
     display: contents;
     left: 226px;
-    top: 227px;
+    top: 235px;
 }
 .mario-page .mario-layer-351 {
     position: absolute;
     height: 122px;
     left: 388.39px;
-    top: 275px;
+    top: 285px;
     width: 132.077px;
 }
 .mario-page .mario-layer-352 {
@@ -4448,7 +4527,7 @@
     font-size: 36px;
     color: black;
     text-align: center;
-    top: 426px;
+    top: 443px;
     letter-spacing: 0.54px;
     width: 466.599px;
     translate: -50% 0;
@@ -4471,17 +4550,17 @@
     font-size: 20px;
     color: black;
     text-align: center;
-    top: 558px;
+    top: 569px;
     letter-spacing: -0.3px;
     width: 459.021px;
     translate: -50% 0;
 }
 .mario-page .mario-layer-356 {
-    line-height: 37px;
+    line-height: 1.68;
     margin-bottom: 0;
 }
 .mario-page .mario-layer-357 {
-    line-height: 37px;
+    line-height: 1.68;
 }
 .mario-page .mario-layer-358 {
     word-break: break-word;
@@ -4494,7 +4573,7 @@
     font-size: 14px;
     color: black;
     text-align: center;
-    top: 685px;
+    top: 700px;
     letter-spacing: 0.28px;
     width: 256px;
     translate: -50% 0;
@@ -4510,7 +4589,7 @@
     font-size: 14px;
     color: black;
     text-align: center;
-    top: 707px;
+    top: 723px;
     letter-spacing: 0.28px;
     width: 391px;
     translate: -50% 0;
@@ -4519,14 +4598,14 @@
     position: absolute;
     height: 18px;
     left: 375.73px;
-    top: 760px;
+    top: 775px;
     width: 19.487px;
 }
 .mario-page .mario-layer-361 {
     position: absolute;
     height: 18px;
     left: 0;
-    top: 0;
+    top: -1px;
     width: 169.632px;
 }
 .mario-page .mario-layer-362 {
@@ -4558,7 +4637,7 @@
     position: absolute;
     height: 6.5px;
     left: 7.5px;
-    top: 6px;
+    top: 5px;
     width: 3.5px;
 }
 .mario-page .mario-layer-365 {
@@ -4570,7 +4649,7 @@
     height: 495px;
     left: 918px;
     isolation: isolate;
-    top: 275px;
+    top: 285px;
     width: 770px;
 }
 .mario-page .mario-layer-367 {
@@ -4609,7 +4688,7 @@
     position: absolute;
     height: 149px;
     left: 1367px;
-    top: 664px;
+    top: 674px;
     width: 327px;
 }
 .mario-page .mario-layer-371 {
@@ -4627,7 +4706,7 @@
     align-items: center;
     justify-content: center;
     left: 724px;
-    top: 400px;
+    top: 410px;
     width: 277px;
 }
 .mario-page .mario-layer-373 {
@@ -4649,7 +4728,7 @@
     height: 6px;
     left: 426.82px;
     border-radius: 3px;
-    top: 539px;
+    top: 549px;
     width: 64.956px;
 }
 .mario-page .mario-layer-376 {
@@ -4658,8 +4737,8 @@
     height: 44px;
     align-items: center;
     justify-content: center;
-    left: 850px;
-    top: 343px;
+    left: 848px;
+    top: 351px;
     width: 37px;
 }
 .mario-page .mario-layer-377 {
@@ -4673,8 +4752,8 @@
     height: 47px;
     align-items: center;
     justify-content: center;
-    left: 899px;
-    top: 283px;
+    left: 897px;
+    top: 291px;
     width: 39px;
 }
 .mario-page .mario-layer-379 {
@@ -4688,8 +4767,8 @@
     height: 45px;
     align-items: center;
     justify-content: center;
-    left: 949px;
-    top: 227px;
+    left: 947px;
+    top: 235px;
     width: 38px;
 }
 .mario-page .mario-layer-381 {
