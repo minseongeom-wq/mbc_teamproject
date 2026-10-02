@@ -67,12 +67,13 @@ export default function GameDiscoverySection({ mobile = false }) {
   return (
       <section ref={discoveryScroll.sectionRef} aria-label="게임 둘러보기" className="home-discovery" data-scroll-position={discoveryScroll.position} data-node-id="1148:6518" data-name="02_Game-Discovery">
         <div className="home-discovery__game-discovery-console" data-node-id="1148:6519" data-name="Game-Discovery-Console">
+          <img alt="" className="home-discovery__console-shell" data-node-id="3760:4622" src={homeAsset('1cd5b.png')} />
           <div className="home-discovery__console-image" data-node-id="1148:6520" data-name="Console image">
             <img alt="" className="home-discovery__image" src={homeAsset('discovery-console-right.png')} />
           </div>
           <div className="home-discovery__game-background" data-node-id="1148:6521" data-name="Game background">
             <div className="home-discovery__background-image" data-node-id="1148:6522" data-name="Background image">
-              <img alt="" className="home-discovery__image-2" src={homeAsset('discovery-console-background.png')} />
+              <img alt="" className="home-discovery__image-2" src={homeAsset('75de7.svg')} />
             </div>
           </div>
           <div className="home-discovery__game-carousel-viewport" data-node-id="1148:6523" data-name="Game-Carousel-Viewport">

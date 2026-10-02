@@ -11,7 +11,7 @@ const socials = [
   ['카카오톡 채널', 'https://pf.kakao.com/_Xxiwzxj', '90994.png', 'kakao'],
 ];
 
-export default function Footer({ variant = 'default' }) {
+export default function Footer({ variant = 'default', homeDesign = false }) {
   const wordmark = useRef(null);
   const [scale, setScale] = useState(1);
   useLayoutEffect(() => {
@@ -28,7 +28,7 @@ export default function Footer({ variant = 'default' }) {
   }
   return <footer className={`common-footer common-footer--${variant}`}>
     <div className="common-footer__inner">
-      <button type="button" className="common-footer__top" onClick={backToTop}><img src={`${import.meta.env.BASE_URL}images/common/${zelda ? '6f9ac.svg' : 'd839f.svg'}`} alt="" />Back to top</button>
+      <button type="button" className="common-footer__top" onClick={backToTop}><img src={`${import.meta.env.BASE_URL}images/common/${zelda ? '6f9ac.svg' : homeDesign ? 'b0f93.svg' : 'd839f.svg'}`} alt="" />Back to top</button>
       <div className="common-footer__links">
         <nav className="common-footer__support" aria-label="푸터 메뉴">
           <Link to={routePaths.support}>온라인 고객 상담<img src={arrow} alt="" /></Link>
@@ -47,7 +47,7 @@ export default function Footer({ variant = 'default' }) {
         <a href="https://www.nintendo.com/kr/" target="_blank" rel="noreferrer">한국닌텐도주식회사<br />Nintendo of Korea</a>
         <div><p>ⓒ 2006 Nintendo of Korea Co., Ltd. All Rights Reserved.</p><p>비공식 리뉴얼 프로젝트 · 실제 상품 판매 및 결제 서비스가 아닙니다.</p></div>
       </div>
-      <div className="common-footer__wordmark" ref={wordmark}><img src={`${import.meta.env.BASE_URL}images/common/${zelda ? '283f0.svg' : 'e4eaa.svg'}`} style={{ zoom: scale }} alt="Nintendo" /></div>
+      <div className="common-footer__wordmark" ref={wordmark}><img src={`${import.meta.env.BASE_URL}images/common/${zelda ? '283f0.svg' : homeDesign ? '85121.svg' : 'e4eaa.svg'}`} style={{ zoom: scale }} alt="Nintendo" /></div>
     </div>
   </footer>;
 }

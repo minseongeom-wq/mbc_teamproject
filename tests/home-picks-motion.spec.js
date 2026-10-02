@@ -21,11 +21,17 @@ async function state(page, requested) {
       triggers: triggers.length, progress: trigger?.animation.progress(),
       repeat: trigger?.animation.repeat(), pin: Boolean(trigger?.pin),
       duration: trigger?.animation.duration(),
+      distance: trigger ? trigger.end - trigger.start : 0,
+      normalDistance: rect.height + window.innerHeight,
       paused: trigger?.animation.paused(),
       scroll: window.scrollY,
       upper: root.querySelector('[data-node-id="2485:10407"] path').getAttribute('stroke-dasharray'),
       lower: root.querySelector('[data-node-id="2485:10408"] path').getAttribute('stroke-dasharray'),
       title: visual('2485:10470'), first: visual('2485:10420'), last: visual('2485:10457'),
+      words: [...root.querySelectorAll('.home-picks__intro-word')].map(word => ({
+        opacity: Number(getComputedStyle(word).opacity),
+        scale: new DOMMatrix(getComputedStyle(word).transform).a,
+      })),
       points: [...root.querySelectorAll('.home-picks__checkpoint')].map(n => Number(getComputedStyle(n).opacity)),
       geometry: [...root.querySelectorAll('img,p,svg')].map(node => {
         const r = node.getBoundingClientRect();
@@ -74,7 +80,13 @@ for (const width of [1920, 1280, 1024]) {
     expect(initial.pin).toBe(false);
     expect(initial.duration).toBe(1);
     expect(initial.paused).toBe(true);
+    expect(initial.distance / initial.normalDistance).toBeCloseTo(2, 2);
     expect(initial.title.opacity).toBe(0);
+    expect(initial.words).toHaveLength(2);
+    initial.words.forEach(word => {
+      expect(word.opacity).toBe(0);
+      expect(word.scale).toBeCloseTo(0.86, 2);
+    });
     expect(initial.first.opacity).toBe(0);
     expect(initial.upper).toBe('0 1');
     await page.waitForTimeout(350);
@@ -114,6 +126,10 @@ for (const width of [1920, 1280, 1024]) {
 
     await seek(page, 1);
     const final = await state(page);
+    final.words.forEach(word => {
+      expect(word.opacity).toBe(1);
+      expect(word.scale).toBeCloseTo(1, 2);
+    });
     expect(final.upper).toBe('1 1');
     expect(final.lower).toBe('1 1');
     expect(final.last).toEqual({ opacity: 1, y: 0 });
