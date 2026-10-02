@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const cases = [
   [
     "/",
-    "메인"
+    "40th"
   ],
   [
     "/store",
@@ -75,10 +75,14 @@ for (const [url, heading] of cases) {
     const response = await page.goto(url);
     expect(response.ok()).toBeTruthy();
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(heading);
-    await expect(page.getByRole('article')).toHaveCount(3);
-    await expect(page.getByText('준비 중', { exact: true })).toBeVisible();
-    await expect(page.locator('.placeholder-page__english')).toBeVisible();
-    await expect(page.getByRole('navigation', { name: '관련 페이지' }).getByRole('link')).toHaveCount(2);
+    if (url === '/') {
+      await expect(page.locator('.home-page section')).toHaveCount(7);
+    } else {
+      await expect(page.getByRole('article')).toHaveCount(3);
+      await expect(page.getByText('준비 중', { exact: true })).toBeVisible();
+      await expect(page.locator('.placeholder-page__english')).toBeVisible();
+      await expect(page.getByRole('navigation', { name: '관련 페이지' }).getByRole('link')).toHaveCount(2);
+    }
     await page.reload();
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(heading);
     expect(errors).toEqual([]);

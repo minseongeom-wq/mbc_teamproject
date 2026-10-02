@@ -16,7 +16,7 @@ const destinations = [
 
 async function checkPage(page, path, heading) {
   await expect(page).toHaveURL(new RegExp(`${path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`));
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText(heading);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(path === '/' ? '40th' : heading);
   await expect(page.getByRole('banner')).toHaveCount(1);
   await expect(page.getByRole('contentinfo')).toHaveCount(1);
   await expect(page.getByRole('main')).toHaveCount(1);
@@ -86,6 +86,7 @@ for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 
 
 test('키보드로 IP 메뉴를 열고 Mario로 이동', async ({ page }) => {
   await page.goto('/');
+  await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
   const toggle = page.getByRole('button', { name: 'MENU', exact: true });
   await toggle.focus();
   await page.keyboard.press('Enter');

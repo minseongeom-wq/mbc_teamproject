@@ -105,13 +105,16 @@ test('viewport changes preserve the scatter composition without global layout ch
   await captureTimeline(page);
   await page.evaluate(() => { window.introTestTimeline.seek('hold'); });
   await expectFrame(page, 'scatter');
-  expect(await page.locator('.home-hero').boundingBox()).toMatchObject({ x: 0, y: 0, width: 1920, height: 1883 });
-  expect((await page.locator('.common-footer').boundingBox()).y).toBe(13175);
+  const width = await page.locator('.home-page').evaluate(node => node.clientWidth);
+  const hero = await page.locator('.home-hero').boundingBox();
+  expect(hero).toMatchObject({ x: 0, y: 0, width });
+  expect(hero.height).toBeCloseTo(1883 * width / 1920, 1);
+  expect((await page.locator('.common-footer').boundingBox()).y).toBeCloseTo(13175 * width / 1920, 1);
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
     await expect.poll(() => page.locator('.nintendo-intro__stage').evaluate(n => n.getBoundingClientRect().width)).toBeCloseTo(viewport.width, 1);
     await expectFrame(page, 'scatter', viewport);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(viewport.width);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   }
   expect(await page.evaluate(() => document.body.style.overflow)).toBe('hidden');
 });

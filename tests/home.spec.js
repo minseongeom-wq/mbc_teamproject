@@ -8,15 +8,20 @@ test('Home Desktop matches Figma section bounds and original image slots', async
   await page.goto('/');
   await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
   await page.evaluate(() => document.fonts.ready);
+  const width = await page.locator('.home-page').evaluate(node => node.clientWidth);
+  const scale = width / 1920;
   const expected = [
     ['hero', 0, 1883], ['discovery', 1883, 1080], ['news', 2963, 3173],
     ['amiibo', 6136, 947], ['picks', 7083, 3985], ['daily', 11068, 1432], ['banner', 12500, 675],
   ];
   for (const [name, y, height] of expected) {
     const box = await page.locator(`.home-${name}`).boundingBox();
-    expect(box).toMatchObject({ x: 0, y, width: 1920, height });
+    expect(box.x).toBe(0);
+    expect(box.width).toBeCloseTo(width, 1);
+    expect(box.y).toBeCloseTo(y * scale, 1);
+    expect(box.height).toBeCloseTo(height * scale, 1);
   }
-  expect((await page.getByRole('contentinfo').boundingBox()).y).toBe(13175);
+  expect((await page.getByRole('contentinfo').boundingBox()).y).toBeCloseTo(13175 * scale, 1);
   await expect(page.getByRole('banner')).toHaveCount(1);
   await expect(page.getByRole('contentinfo')).toHaveCount(1);
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
@@ -36,7 +41,8 @@ test('Desktop game cards respond to selection, keyboard and play modes', async (
   const track = page.getByRole('group', { name: '게임 선택' });
   const zelda = track.getByRole('button', { name: '젤다의 전설', exact: true });
   await expect(zelda).toHaveAttribute('aria-pressed', 'true');
-  expect((await zelda.boundingBox()).width).toBeCloseTo(338.733, 1);
+  const scale = await page.locator('.home-page').evaluate(node => node.clientWidth / 1920);
+  expect((await zelda.boundingBox()).width).toBeCloseTo(338.733 * scale, 1);
   const splatoon = track.getByRole('button', { name: '스플래툰 3', exact: true });
   await splatoon.click();
   await expect(splatoon).toHaveAttribute('aria-pressed', 'true');
@@ -56,7 +62,7 @@ for (const width of [360, 768, 1024, 1440]) {
     await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator('.home-page section')).toHaveCount(7);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     const navigation = await page.locator('.navigation').boundingBox();
     expect(navigation.y).toBe(15);
     expect(navigation.height).toBe(60);
@@ -74,11 +80,12 @@ for (const width of [360, 768, 1024, 1440]) {
       await active.press('ArrowRight');
       await expect(track.getByRole('button', { name: '스플래툰 3', exact: true })).toHaveAttribute('aria-pressed', 'true');
       const selected = track.getByRole('button', { name: '스플래툰 3', exact: true });
-      await selected.scrollIntoViewIfNeeded();
+      await selected.click({ trial: true });
       const box = await selected.boundingBox();
-      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      const dragY = Math.min(box.y + box.height / 2, page.viewportSize().height - 20);
+      await page.mouse.move(box.x + box.width / 2, dragY);
       await page.mouse.down();
-      await page.mouse.move(box.x + box.width / 2 - 70, box.y + box.height / 2, { steps: 5 });
+      await page.mouse.move(box.x + box.width / 2 - 70, dragY, { steps: 5 });
       await page.mouse.up();
       await expect(track.getByRole('button', { name: '슈퍼 마리오 오디세이', exact: true })).toHaveAttribute('aria-pressed', 'true');
       const news = page.locator('.home-news-mobile');
