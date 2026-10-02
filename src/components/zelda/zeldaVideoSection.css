@@ -171,13 +171,13 @@
 
 .zelda-video__description {
   position: absolute;
-  top: 84.9074074%;
+  top: calc(84.9074074% - 10px);
   left: 50.0260417%;
   width: 22.96875%;
   margin: 0;
   transform: translateX(-50%);
-  font-family: 'Pretendard Variable', Pretendard, sans-serif;
-  font-size: 1.25cqw;
+  font-family: 'Zelda Pretendard', Pretendard, sans-serif;
+  font-size: .9375cqw;
   font-weight: 300;
   line-height: 1.5;
   text-align: center;

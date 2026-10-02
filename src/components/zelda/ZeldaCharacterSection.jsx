@@ -34,6 +34,7 @@ const characters = [
   },
 ];
 const asset = name => `${import.meta.env.BASE_URL}images/zelda/${name}.png`;
+const clampProgress = value => Math.min(1, Math.max(0, value));
 
 export default function ZeldaCharacterSection({ onTransitionPhase }) {
   const trackRef = useRef(null);
@@ -49,31 +50,26 @@ export default function ZeldaCharacterSection({ onTransitionPhase }) {
       const { top } = track.getBoundingClientRect();
       const index = Math.min(characters.length - 1, Math.max(0, Math.floor(-top / window.innerHeight + .001)));
       const sceneHeight = track.firstElementChild.offsetHeight;
-      const fadeStart = characters.length * sceneHeight;
-      const fadeEnd = fadeStart + sceneHeight * .4;
-      const fadeProgress = Math.min(1, Math.max(0, (-top - fadeStart) / Math.max(1, fadeEnd - fadeStart)));
-      const darkProgress = Math.min(1, Math.max(0, (fadeProgress - .5) * 2));
-      const overlapProgress = Math.min(1, Math.max(0, (-top - fadeEnd) / (sceneHeight * .5)));
-      const overlapFinish = Math.min(1, Math.max(0, (-top - fadeEnd - sceneHeight * .5) / (sceneHeight * .5)));
-      // Resolve the overlap over 50svh: quick frame exit, background, then images.
-      const resolveProgress = Math.min(1, Math.max(0, (-top - fadeEnd - sceneHeight) / (sceneHeight * .5)));
-      const characterExit = Math.min(1, resolveProgress / .4);
-      const backgroundReveal = Math.min(1, resolveProgress / .8);
-      const imageReveal = resolveProgress <= .8
-        ? Math.max(0, (resolveProgress - .4) / .8)
-        : .5 + (resolveProgress - .8) / .4;
-      track.style.setProperty('--character-image-opacity', String(1 - fadeProgress));
-      track.dataset.overlapping = String(overlapProgress > 0);
-      track.style.setProperty('--character-background-dark-opacity', String(darkProgress));
-      track.parentElement.style.setProperty('--zelda-overlap-progress', String(overlapProgress));
-      track.parentElement.style.setProperty('--zelda-overlap-finish', String(overlapFinish));
-      track.parentElement.style.setProperty('--character-exit', String(characterExit));
-      track.parentElement.style.setProperty('--gameplay-background-reveal', String(backgroundReveal));
-      track.parentElement.style.setProperty('--gameplay-image-reveal', String(imageReveal));
-      track.parentElement.style.setProperty('--gameplay-reveal-blur', `${2.5 * (overlapProgress + overlapFinish) * (1 - backgroundReveal)}px`);
-      track.parentElement.style.setProperty('--zelda-overlap-blur', `${2.5 * (overlapProgress + overlapFinish)}px`);
-      track.parentElement.style.setProperty('--zelda-background-blur', `${10 * overlapProgress * (1 - backgroundReveal)}px`);
-      const phase = -top >= fadeEnd + sceneHeight * 1.5 ? 'complete' : -top >= fadeEnd ? 'blend' : 'character';
+      // One stage spans 2/3svh. Each following stage starts after half of it.
+      const stageDistance = sceneHeight * 1.9 / 3;
+      const scrolled = -top - characters.length * sceneHeight;
+      const imageExit = clampProgress(scrolled / stageDistance);
+      const frameExit = clampProgress((scrolled - stageDistance * .5) / stageDistance);
+      const background = clampProgress((scrolled - stageDistance) / stageDistance);
+      const frameEnter = clampProgress((scrolled - stageDistance * 1.5) / stageDistance);
+      const imageEnter = clampProgress((scrolled - stageDistance * 2) / stageDistance);
+      const progress = clampProgress(scrolled / (sceneHeight * 1.9));
+      track.dataset.overlapping = String(progress > 0);
+      const style = track.parentElement.style;
+      style.setProperty('--character-image-opacity', String(1 - imageExit));
+      style.setProperty('--character-frame-opacity', String(1 - frameExit));
+      style.setProperty('--character-frame-blur', `${8 * frameExit}px`);
+      style.setProperty('--character-image-scale', String(1 - .04 * imageExit));
+      style.setProperty('--gameplay-background-reveal', String(background));
+      style.setProperty('--gameplay-frame-reveal', String(frameEnter));
+      style.setProperty('--gameplay-frame-blur', `${8 * (1 - frameEnter)}px`);
+      style.setProperty('--gameplay-image-reveal', String(imageEnter));
+      const phase = progress >= 1 ? 'complete' : progress > 0 ? 'blend' : 'character';
       onTransitionPhase?.(phase);
       setSelectedId(current => current === characters[index].id ? current : characters[index].id);
     };
@@ -106,14 +102,10 @@ export default function ZeldaCharacterSection({ onTransitionPhase }) {
     <section ref={trackRef} className={`zelda-character zelda-character--${selected.id}`} aria-labelledby="zelda-character-title">
       <div className="zelda-character__stage" style={{
         '--character-background': `url("${asset('character-background')}")`,
-        '--character-background-dark': `url("${asset('character-background-dark')}")`,
-        '--character-background-transition': `url("${asset('character-background-transition')}")`,
         '--character-gameplay-background': `url("${asset('gameplay-background')}")`,
       }}>
       <div className="zelda-character__canvas">
         <div className="zelda-character__backgrounds" aria-hidden="true">
-        <div className="zelda-character__background-dark" aria-hidden="true" />
-        <div className="zelda-character__background-transition" aria-hidden="true" />
         </div>
         <div className="zelda-character__background-gameplay" aria-hidden="true" />
         <div className="zelda-character__content">
@@ -128,7 +120,7 @@ export default function ZeldaCharacterSection({ onTransitionPhase }) {
         <span className="zelda-character__light" aria-hidden="true" />
         <div className="zelda-character__portrait">
           <div key={`portrait-${selected.id}`} className="zelda-character__portrait-art">
-            <img src={asset(`character-${selected.id}`)} alt={selected.name} />
+            <img src={asset(selected.id === 'link' ? 'character-link-portrait' : `character-${selected.id}`)} alt={selected.name} />
           </div>
         </div>
         <p key={`description-${selected.id}`} className="zelda-character__description">{selected.description}</p>
