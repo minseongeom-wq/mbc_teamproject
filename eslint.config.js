@@ -2,15 +2,25 @@ import js from '@eslint/js';
 import globals from 'globals';
 
 export default [
-  { ignores: ['dist/**', 'node_modules/**', 'test-results/**', 'playwright-report/**'] },
-  js.configs.recommended,
-  {
-    files: ['**/*.{js,jsx}'],
-    languageOptions: {
-      ecmaVersion: 'latest', sourceType: 'module',
-      parserOptions: { ecmaFeatures: { jsx: true } },
-      globals: { ...globals.browser, ...globals.node },
+    {
+        ignores: [
+            'dist/**',
+            'node_modules/**',
+            'test-results/**',
+            'playwright-report/**',
+            'reports/performance/**',
+            '.awards-trail-check.mjs',
+        ],
     },
-    rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z]' }] },
-  },
+    js.configs.recommended,
+    {
+        files: ['**/*.{js,jsx}'],
+        languageOptions: {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+            parserOptions: { ecmaFeatures: { jsx: true } },
+            globals: { ...globals.browser, ...globals.node },
+        },
+        rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z]' }] },
+    },
 ];
