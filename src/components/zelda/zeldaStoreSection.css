@@ -5,7 +5,7 @@
 .zelda-store__logo img { position: absolute; left: 50%; top: 0; transform: translateX(-50%); max-width: none; }
 .zelda-store__logo img:last-child { left: calc(50% + .04px); }
 .zelda-store h2 { position: absolute; left: 553px; top: 446px; transform: translateX(-50%); font: 500 36px/1.3 'DNF Forged Blade', serif; letter-spacing: .54px; text-align: center; white-space: nowrap; }
-.zelda-store__description { position: absolute; left: 550px; top: 566px; transform: translateX(-50%); font-size: 24px; font-weight: 300; line-height: 1.5; text-align: center; white-space: nowrap; }
+.zelda-store__description { position: absolute; left: 550px; top: 566px; transform: translateX(-50%); font-size: 18px; font-weight: 300; line-height: 1.5; text-align: center; white-space: nowrap; }
 .zelda-store__details { position: absolute; left: 427px; top: 704px; width: 248px; height: 103px; font-size: 16px; font-weight: 700; line-height: 1.35; text-align: center; }
 .zelda-store__details > p { position: absolute; left: 121.5px; transform: translateX(-50%); white-space: nowrap; }
 .zelda-store__details > p:nth-child(2) { top: 23px; left: 121px; }

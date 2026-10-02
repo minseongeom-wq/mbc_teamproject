@@ -22,6 +22,10 @@ const descriptions = [
 export default function ZeldaContent3Section() {
   const [selected, setSelected] = useState(0);
   const listRef = useRef(null);
+  const selectWeapon = index => {
+    if (index !== selected) listRef.current?.closest('.zelda-combat')?.classList.remove('zelda-transition-settled');
+    setSelected(index);
+  };
   useEffect(() => {
     const list = listRef.current;
     const onWheel = event => {
@@ -39,9 +43,9 @@ export default function ZeldaContent3Section() {
   }, []);
   return (
     <section className="zelda-combat" data-view={selected === 0 ? 'content3' : `content3_${selected + 1}`} aria-labelledby="zelda-combat-title">
+      <img key={weapons[selected][0]} className={`zelda-combat__background zelda-combat__background--${weapons[selected][0]}`} src={asset(`${weapons[selected][0]}-background.gif`)} alt="" />
+      <div className="zelda-combat__shade" />
       <div className="zelda-combat__canvas">
-        <img key={weapons[selected][0]} className={`zelda-combat__background zelda-combat__background--${weapons[selected][0]}`} src={asset(`${weapons[selected][0]}-background.gif`)} alt="" />
-        <div className="zelda-combat__shade" />
         <div className="zelda-combat__heading">
           <p>모험을 위한 기술</p>
           <h2 id="zelda-combat-title">COMBAT</h2>
@@ -56,7 +60,7 @@ export default function ZeldaContent3Section() {
         </div>
         <div ref={listRef} className="zelda-combat__list" tabIndex={0} role="region" aria-label="전투 기술 목록">
           {weapons.map(([id, title, label, extension], index) => (
-            <button type="button" className={`zelda-combat__card zelda-combat__card--${id}`} key={id} aria-pressed={selected === index} aria-label={`${title} ${label}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)}>
+            <button type="button" className={`zelda-combat__card zelda-combat__card--${id}`} key={id} aria-pressed={selected === index} aria-label={`${title} ${label}`} onMouseEnter={() => selectWeapon(index)} onFocus={() => selectWeapon(index)} onClick={() => selectWeapon(index)}>
               <div className="zelda-combat__image-slot">
                 <img src={asset(`${id}.${extension}`)} alt="" loading="lazy" />
               </div>
