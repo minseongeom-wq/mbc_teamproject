@@ -1,6 +1,26 @@
+import { useRef } from 'react';
+import usePicksMotion from './usePicksMotion.js';
+import upperLine from './assets/picks-upper-line.svg?raw';
+import lowerLine from './assets/picks-lower-line.svg?raw';
 import { homeAsset } from './homeAssets.js';
 
+const checkpoints = [
+  ['2485:10409', 'ed445.svg', 1526, 3338],
+  ['2485:10410', '644e2.svg', 240, 486],
+  ['2485:10411', '78360.svg', 1065, 1329],
+  ['2485:10412', '2f93a.svg', 181, 1155],
+  ['2485:10413', 'f7b83.svg', 280, 2887],
+  ['2485:10414', 'ab508.svg', 928, 937],
+  ['2485:10415', '9006b.svg', 1588, 486],
+  ['2485:10416', '7b060.svg', 604, 2201],
+  ['2485:10417', '4a4e8.svg', 1212, 2258],
+  ['2485:10418', '9e849.svg', 1080, 2916],
+  ['2485:10419', 'ca366.svg', 606, 3682],
+];
+
 export default function NintendoPicksSection({ mobile = false }) {
+  const sectionRef = useRef(null);
+  usePicksMotion(sectionRef, mobile);
   if (mobile) return (
       <section aria-label="Nintendo Picks" className="home-picks-mobile" data-node-id="2156:6672">
         <p className="home-picks-mobile__text" data-node-id="2156:6673">
@@ -197,13 +217,20 @@ export default function NintendoPicksSection({ mobile = false }) {
       </section>
   );
   return (
-      <section aria-label="Nintendo Picks" className="home-picks" data-node-id="1148:6675" data-name="05_Nintendo-Picks">
+      <section ref={sectionRef} aria-label="Nintendo Picks" className="home-picks" data-node-id="2485:10400" data-name="05_Nintendo-Picks">
         <div aria-hidden className="home-picks__layer">
           <div className="home-picks__layer-2" />
           <img alt="" className="home-picks__image" src={homeAsset('9de49.png')} />
         </div>
+        <div className="home-picks__background-line" aria-hidden="true" data-node-id="2485:10406" data-name="Background Line">
+          <div className="home-picks__path home-picks__path--upper" dangerouslySetInnerHTML={{ __html: upperLine }} data-node-id="2485:10407" />
+          <div className="home-picks__path home-picks__path--lower" dangerouslySetInnerHTML={{ __html: lowerLine }} data-node-id="2485:10408" />
+          {checkpoints.map(([nodeId, asset, left, top]) => (
+            <img key={nodeId} alt="" className="home-picks__checkpoint" src={homeAsset(asset)} style={{ left, top }} data-node-id={nodeId} />
+          ))}
+        </div>
         <div className="home-picks__picks-visual-05" data-node-id="1148:6676" data-name="Picks-Visual-05" />
-        <div className="home-picks__1section" data-node-id="1148:6678" data-name="1section">
+        <div className="home-picks__1section" data-node-id="2485:10420" data-name="1section">
           <div className="home-picks__picks-visual-01" data-node-id="1148:6679" data-name="Picks-Visual-01" />
           <div className="home-picks__layer-3" data-node-id="1148:6681">
             <p className="home-picks__text">{`젤다의 전설 시리즈 `}</p>
@@ -217,7 +244,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             <p className="home-picks__text-5">약 30분 동안 시리즈의 40주년 관련 정보와 향후 전개를 다룰 예정입니다.</p>
           </div>
         </div>
-        <div className="home-picks__3section" data-node-id="1148:6684" data-name="3section">
+        <div className="home-picks__3section" data-node-id="2485:10425" data-name="3section">
           <div className="home-picks__layer-5" data-node-id="1148:6685">
             <p className="home-picks__text-6">{`Xenoblade Genesis `}</p>
             <p className="home-picks__text-7">2027년 발매</p>
@@ -235,7 +262,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-picks__4section" data-node-id="1148:6689" data-name="4section">
+        <div className="home-picks__4section" data-node-id="2485:10430" data-name="4section">
           <div className="home-picks__layer-8" data-node-id="1148:6690">
             <p className="home-picks__text-11">Pokemon Pokopia</p>
             <p className="home-picks__text-12">바다 업데이트</p>
@@ -284,7 +311,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-picks__5section" data-node-id="1148:6698" data-name="5section">
+        <div className="home-picks__5section" data-node-id="2485:10439" data-name="5section">
           <div className="home-picks__layer-20" data-node-id="1148:6699">
             <p className="home-picks__text-18">{`Minecraft  `}</p>
             <p className="home-picks__text-19">Nintendo Switch 2 버전</p>
@@ -307,7 +334,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             <p className="home-picks__text-25">추가할 예정입니다.</p>
           </div>
         </div>
-        <div className="home-picks__6section" data-node-id="1148:6704" data-name="6section">
+        <div className="home-picks__6section" data-node-id="2485:10445" data-name="6section">
           <div className="home-picks__layer-25" data-node-id="1148:6705">
             <p className="home-picks__text-26">{`Rhythm Paradise Groove `}</p>
             <p className="home-picks__text-27">정식 발매</p>
@@ -368,7 +395,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-picks__7section" data-node-id="1148:6717" data-name="7section">
+        <div className="home-picks__7section" data-node-id="2485:10457" data-name="7section">
           <div className="home-picks__layer-39" data-node-id="1148:6718">
             <p className="home-picks__text-35">{`Star Fox의 신작 발매 예정 `}</p>
             <p className="home-picks__text-36">얼굴 인식 기능 탑재</p>
@@ -392,7 +419,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-picks__2section" data-node-id="1148:6725" data-name="2section">
+        <div className="home-picks__2section" data-node-id="2485:10465" data-name="2section">
           <p className="home-picks__text-40" data-node-id="1148:6726">
             ELDEN RING ‘빛바랜 자’ 에디션
           </p>
@@ -405,19 +432,21 @@ export default function NintendoPicksSection({ mobile = false }) {
             <p className="home-picks__text-44">영마 토렌트 스킨 등이 포함된 스위치 2 전용 에디션입니다.</p>
           </div>
         </div>
-        <div className="home-picks__picks-bottom-visual-03" data-node-id="1148:6731" data-name="Picks-Bottom-Visual-03" />
+        <div className="home-picks__picks-bottom-visual-03" data-node-id="2485:10469" data-name="Picks-Bottom-Visual-03" />
+        <div className="home-picks__title" data-node-id="2485:10470">
         <p className="home-picks__text-45" data-node-id="1148:6733">
           지금 주목해야 할 7가지 소식
         </p>
         <p className="home-picks__text-46" data-node-id="1148:6734">
           NINTENDO PICKS 07
         </p>
-        <div className="home-picks__cover-image-2" data-node-id="1148:6735" data-name="Cover image">
+        </div>
+        <div className="home-picks__cover-image-2" data-node-id="2485:10473" data-name="Cover image">
           <div className="home-picks__layer-45">
             <img alt="" className="home-picks__image-19" src={homeAsset('6d128.png')} />
           </div>
         </div>
-        <div className="home-picks__layer-46" data-node-id="1148:6736">
+        <div className="home-picks__layer-46" data-node-id="2485:10474">
           <div className="home-picks__layer-47">
             <div className="home-picks__badge-image" data-name="Badge image">
               <div className="home-picks__layer-48">
@@ -426,7 +455,7 @@ export default function NintendoPicksSection({ mobile = false }) {
             </div>
           </div>
         </div>
-        <div className="home-picks__card-image" data-node-id="1148:6745" data-name="Card image">
+        <div className="home-picks__card-image" data-node-id="2485:10475" data-name="Card image">
           <div className="home-picks__image-21" data-node-id="1148:6746" data-name="Image">
             <div className="home-picks__image-22" data-node-id="1148:6747" data-name="Image">
               <img alt="" className="home-picks__image-23" src={homeAsset('ffc42.png')} />

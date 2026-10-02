@@ -1,0 +1,31 @@
+{
+  "source": {"fileKey":"e0m4kzzInBhdHR8Hrp5jPN","nodeId":"2485:10400"},
+  "easing": {"easeOut":[0,0,0.58,1],"easeInOut":[0.42,0,0.58,1],"checkpoint":[0.45,1.45,0.8,1]},
+  "nodes": [
+    {"nodeId":"2485:10407","kind":"path","times":{"strokeDasharray":[0,0.026,0.553,1]}},
+    {"nodeId":"2485:10408","kind":"path","times":{"strokeDasharray":[0,0.513,0.947,1]}},
+    {"nodeId":"2485:10409","kind":"checkpoint","times":{"opacity":[0,0.7566,0.7934,1],"scaleX":[0,0.7566,0.8013,1]}},
+    {"nodeId":"2485:10410","kind":"checkpoint","times":{"opacity":[0,0.0724,0.1092,1],"scaleX":[0,0.0724,0.1171,1]}},
+    {"nodeId":"2485:10411","kind":"checkpoint","times":{"opacity":[0,0.2829,0.3197,1],"scaleX":[0,0.2829,0.3276,1]}},
+    {"nodeId":"2485:10412","kind":"checkpoint","times":{"opacity":[0,0.2039,0.2408,1],"scaleX":[0,0.2039,0.2487,1]}},
+    {"nodeId":"2485:10413","kind":"checkpoint","times":{"opacity":[0,0.5855,0.6224,1],"scaleX":[0,0.5855,0.6303,1]}},
+    {"nodeId":"2485:10414","kind":"checkpoint","times":{"opacity":[0,0.1513,0.1882,1],"scaleX":[0,0.1513,0.1961,1]}},
+    {"nodeId":"2485:10415","kind":"checkpoint","times":{"opacity":[0,0.0921,0.1289,1],"scaleX":[0,0.0921,0.1368,1]}},
+    {"nodeId":"2485:10416","kind":"checkpoint","times":{"opacity":[0,0.4276,0.4645,1],"scaleX":[0,0.4276,0.4724,1]}},
+    {"nodeId":"2485:10417","kind":"checkpoint","times":{"opacity":[0,0.4671,0.5039,1],"scaleX":[0,0.4671,0.5118,1]}},
+    {"nodeId":"2485:10418","kind":"checkpoint","times":{"opacity":[0,0.6513,0.6882,1],"scaleX":[0,0.6513,0.6961,1]}},
+    {"nodeId":"2485:10419","kind":"checkpoint","times":{"opacity":[0,0.8618,0.8987,1],"scaleX":[0,0.8618,0.9066,1]}},
+    {"nodeId":"2485:10420","kind":"reveal","y":30,"times":{"opacity":[0,0.0816,0.1474,1],"y":[0,0.0816,0.1579,1]}},
+    {"nodeId":"2485:10425","kind":"reveal","y":30,"times":{"opacity":[0,0.2829,0.3487,1],"y":[0,0.2829,0.3592,1]}},
+    {"nodeId":"2485:10430","kind":"reveal","y":32,"times":{"opacity":[0,0.3947,0.4632,1],"y":[0,0.3947,0.4737,1]}},
+    {"nodeId":"2485:10439","kind":"reveal","y":30,"times":{"opacity":[0,0.5329,0.6013,1],"y":[0,0.5329,0.6118,1]}},
+    {"nodeId":"2485:10445","kind":"reveal","y":30,"times":{"opacity":[0,0.6382,0.7066,1],"y":[0,0.6382,0.7171,1]}},
+    {"nodeId":"2485:10457","kind":"reveal","y":34,"times":{"opacity":[0,0.7632,0.8316,1],"y":[0,0.7632,0.8421,1]}},
+    {"nodeId":"2485:10465","kind":"reveal","y":30,"times":{"opacity":[0,0.1868,0.2526,1],"y":[0,0.1868,0.2632,1]}},
+    {"nodeId":"2485:10469","kind":"reveal","y":24,"times":{"opacity":[0,0.8618,0.9303,1],"y":[0,0.8618,0.9408,1]}},
+    {"nodeId":"2485:10470","kind":"reveal","y":24,"times":{"opacity":[0,0.0066,0.0789,1],"y":[0,0.0066,0.0855,1]}},
+    {"nodeId":"2485:10473","kind":"reveal","y":24,"times":{"opacity":[0,0.1,0.1658,1],"y":[0,0.1,0.1763,1]}},
+    {"nodeId":"2485:10474","kind":"reveal","y":20,"times":{"opacity":[0,0.1132,0.1789,1],"y":[0,0.1132,0.1895,1]}},
+    {"nodeId":"2485:10475","kind":"reveal","y":24,"times":{"opacity":[0,0.2079,0.2737,1],"y":[0,0.2079,0.2842,1]}}
+  ]
+}
