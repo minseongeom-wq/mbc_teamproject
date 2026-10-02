@@ -3,7 +3,7 @@ export const storeCategoryPages = {
   digital: {
     title: "다운로드로 시작하는 새로운 즐거움!",
     description: "마음에 드는 게임부터 추가 콘텐츠까지, 다양한 디지털 상품을 만나보세요.",
-    height: 3287,
+    height: 3165,
     rails: [
       { title: "Nintendo Switch2 - 디지털 상품", products: [
         {"name":"Maestro 마에스트로","price":"₩39,800","image":"443ea.png"},
@@ -117,8 +117,8 @@ export const storeCategoryPages = {
       ] },
       { title: "추가팩 가입자라면 무료로 즐길 수 있는 소프트웨어", products: [
         {"name":"Virtual Boy – Nintendo Classics","price":"₩0","image":"29a7a.png"},
-        {"name":"젤다의 전설 브레스 오브 더 와일드 Nintendo Switch 2 Edition 업그레이드 패스","price":"","image":"ad27e.png"},
-        {"name":"젤다의 전설 티어스 오브 더 킹덤 Nintendo Switch 2 Edition 업그레이드 패스","price":"","image":"72328.png"},
+        {"name":"젤다의 전설 브레스 오브 더 와일드 Nintendo Switch 2 Edition 업그레이드 패스","price":"₩10,000","image":"ad27e.png"},
+        {"name":"젤다의 전설 티어스 오브 더 킹덤 Nintendo Switch 2 Edition 업그레이드 패스","price":"₩10,000","image":"72328.png"},
         {"name":"마리오 카트 8 디럭스 - 부스터 코스트 패스","price":"₩25,000","image":"480ae.png"},
         {"name":"모여봐요 동물의 숲 해피 홈 파라다이스","price":"₩25,000","image":"f7db2.png"},
         {"name":"Spatoon 2: Octo Expansion","price":"₩19,800","image":"09821.png"},

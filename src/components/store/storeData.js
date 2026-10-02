@@ -53,7 +53,7 @@ export const categoryCards = [
   { label: 'Nintendo Switch 2', image: '5ceec.png', type: 'promo' },
   { label: 'Nintendo Switch 2에서 즐길 수 있는 소프트웨어 메이커!', lines: ['Nintendo Switch 2에서', '즐길 수 있는 소프트웨어 메이커!'], image: '3277d.png', type: 'editorial', crop: 'category-maker' },
   { label: '한 대의 본체로 함께 즐길 수 있는 게임을 소개합니다.', lines: ['한 대의 본체로 함께 즐길 수', '있는 게임을 소개합니다.'], image: '8469a.png', type: 'editorial', crop: 'category-together' },
-  { label: 'Nintendo Switch Online', image: '5dc36.png', type: 'editorial', crop: 'category-online' },
+  { label: 'Nintendo Switch Online', lines: ['Nintendo', 'Switch Online'], image: '5dc36.png', type: 'editorial', crop: 'category-online' },
   { label: 'MARIO', image: '435f0.png', type: 'ip', color: '#e70012', background: '#e60012', crop: 'category-mario', href: '/ip/mario' },
   { label: 'ZELDA', image: '6c684.png', type: 'ip', color: '#4cc3a8', crop: 'category-zelda', href: '/ip/zelda' },
   { label: 'SPLATOON', image: 'edb64.png', type: 'ip', color: '#24343d', crop: 'category-splatoon', href: '/ip/splatoon' },
@@ -72,11 +72,11 @@ export const genreCards = [
 ];
 
 export const featureCards = [
-  ['Nintendo Switch 2', 'aa8c4.svg'],
-  ['Nintendo Switch Sports Resort 세트', 'af908.svg', ['Nintendo Switch', 'Sports Resort 세트']],
-  ['파이어 엠블렘 만자천홍 Dagdan Collection', '6907c.svg', ['파이어 엠블렘 만자천홍', 'Dagdan Collection']],
-  ['파이어 엠블렘 만자천홍', 'c41f6.svg'],
-  ['Virtual Boy for Nintendo Switch 2', 'a645a.svg'],
-  ['Nintendo 64 컨트롤러', 'e99eb.svg'],
-  ['오비탈스 Orbitals', '7f4e4.svg'],
+  ['Nintendo Switch 2', '1f138.svg'],
+  ['Nintendo Switch Sports Resort 세트', '59727.svg', ['Nintendo Switch', 'Sports Resort 세트']],
+  ['파이어 엠블렘 만자천홍 Dagdan Collection', '9ec03.svg', ['파이어 엠블렘 만자천홍', 'Dagdan Collection']],
+  ['파이어 엠블렘 만자천홍', '63137.svg'],
+  ['Virtual Boy for Nintendo Switch 2', 'd4a5e.svg'],
+  ['Nintendo 64 컨트롤러', '15ff1.svg'],
+  ['오비탈스 Orbitals', '17654.svg'],
 ];

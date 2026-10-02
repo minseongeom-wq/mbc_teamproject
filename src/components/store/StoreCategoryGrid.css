@@ -1,12 +1,12 @@
-.store-category-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, 412.5px); gap: 25px; margin-top: 100px; }
-.store-category-card { position: relative; overflow: hidden; border: 1px solid #d2d2cd; border-radius: 15px; background: var(--card-background, #ededed); }
-.store-category-card__art { position: absolute; inset: -1px; overflow: hidden; }
+.store-category-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 374.5px 374.5px; column-gap: 22px; row-gap: 26px; margin-top: 100px; }
+.store-category-card { position: relative; overflow: hidden; border-radius: 13.676px; background: var(--card-background, #ededed); box-shadow: 0 9.118px 9.118px rgb(0 0 0 / 7%); }
+.store-category-card__art { position: absolute; inset: 0; overflow: hidden; }
 .store-category-card__art img { position: absolute; display: block; width: 100%; height: 100%; object-fit: cover; }
-.store-category-card--editorial .store-category-card__caption, .store-category-card--ip .store-category-card__caption { position: absolute; left: -1px; right: -1px; bottom: -1px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 122px; padding: 11px 12px 0; text-align: center; }
+.store-category-card--editorial .store-category-card__caption, .store-category-card--ip .store-category-card__caption { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box; height: 111.235px; padding: 17.555px 12px 0; text-align: center; }
 .store-category-card__caption > span { white-space: nowrap; }
-.store-category-card--editorial .store-category-card__caption { background: #ededed; font-size: 22px; font-weight: 300; line-height: 1.5; }
-.store-category-card--ip .store-category-card__caption { background: var(--card-color); color: #fff; font-family: 'Pexel Grotesk', Arial, sans-serif; font-size: 56px; line-height: 1.35; }
-.store-category-card__marker { position: absolute; left: calc(50% - 40px); bottom: 15px; width: 80px; height: 12px; background: #fff; }
+.store-category-card--editorial .store-category-card__caption { background: #fff; font-size: 15.79px; font-weight: 400; line-height: 1.3; }
+.store-category-card--ip .store-category-card__caption { background: var(--card-color); color: #fff; font-family: 'Pexel Grotesk', Arial, sans-serif; font-size: 36.471px; line-height: 1.35; }
+.store-category-card__marker { position: absolute; left: calc(50% - 30.088px); bottom: 12.532px; width: 60.176px; height: 9.118px; border-radius: 4px; background: #dadada; }
 .store-category-card--promo .store-category-card__art img { left: -15.12%; top: .09%; width: 130.71%; height: 99.82%; object-fit: fill; }
 .category-maker img { left: -15.18%; top: -.87%; width: 130.36%; height: 72.82%; object-fit: fill; }
 .category-together img { left: -6.27%; top: -.38%; width: 112.53%; height: 70.88%; object-fit: fill; }

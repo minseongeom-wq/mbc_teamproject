@@ -4,13 +4,7 @@ import { storeImage } from './storeData.js';
 import './StoreHeroSection.css';
 
 const categories = ['전체상품', '디지털 상품', '실물 상품', '특집', 'Switch Online'];
-const categoryUnderline = {
-  '전체상품': '2e07c.svg',
-  '디지털 상품': 'db9c0.svg',
-  '실물 상품': '18def.svg',
-  '특집': 'd7b56.svg',
-  'Switch Online': '2be01.svg',
-};
+const categoryUnderline = 'e3f13.svg';
 
 export default function StoreHeroSection({ compact = false, activeCategory = '' }) {
   const navigate = useNavigate();
@@ -34,7 +28,7 @@ export default function StoreHeroSection({ compact = false, activeCategory = '' 
               {compact && index > 0 && <img className="store-hero__category-divider" src={storeImage('30979.svg')} alt="" />}
               <span className="store-hero__category-label">
                 {category}
-                <img className="store-hero__category-underline" src={storeImage(categoryUnderline[category])} alt="" />
+                <img className="store-hero__category-underline" src={storeImage(categoryUnderline)} alt="" />
               </span>
             </Link>
           ))}

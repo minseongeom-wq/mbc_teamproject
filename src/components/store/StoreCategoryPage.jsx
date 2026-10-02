@@ -43,8 +43,8 @@ function OnlinePlanComparison() {
             <tbody>{planBenefits.map(([name, description, basic, expansion], index) => (
               <tr key={name}>
                 <th scope="row"><strong>{name}</strong><span>{description}</span></th>
-                <td aria-label={basic ? '포함' : '미포함'}>{basic ? <img className="store-online-plans__check" src={storeImage('0ef95.svg')} width="54" height="54" alt="" /> : '—'}{index === 2 && <small>NES · SNES · Game Boy</small>}</td>
-                <td aria-label={expansion ? '포함' : '미포함'}>{expansion ? <img className="store-online-plans__check" src={storeImage(index === 0 ? '51207.svg' : '0ef95.svg')} width="54" height="54" alt="" /> : '—'}{index === 2 && <small>Nintendo 64 · GBA · GameCube · Mega Drive</small>}</td>
+                <td aria-label={basic ? '포함' : '미포함'}>{basic ? <img className="store-online-plans__check" src={storeImage('0ef95.svg')} width="54" height="54" alt="" /> : <span className="store-online-plans__unavailable" aria-hidden="true" />}{index === 2 && <small>NES · SNES · Game Boy</small>}</td>
+                <td aria-label={expansion ? '포함' : '미포함'}>{expansion ? <img className="store-online-plans__check" src={storeImage(index === 0 ? '51207.svg' : '0ef95.svg')} width="54" height="54" alt="" /> : <span className="store-online-plans__unavailable" aria-hidden="true" />}{index === 2 && <small>Nintendo 64 · GBA · GameCube · Mega Drive</small>}</td>
               </tr>
             ))}</tbody>
           </table>
@@ -80,7 +80,7 @@ export default function StoreCategoryPage() {
         <div className="store-subpage__rails">
           {rails.length ? rails.map((rail, index) => (
             <div id={pageKey === 'online' && index === 0 ? 'store-online-passes' : undefined} key={`${rail.title}-${index}`}>
-              <StoreProductRail title={rail.title} products={rail.products.map((product, productIndex) => ({ ...product, badge: badgeSlots[pageKey]?.[index]?.includes(productIndex) }))} className={((pageKey === 'feature' || pageKey === 'physical') && index === 1) ? 'store-rail--highlight-prices' : ''} sale={pageKey === 'digital' && index === 1} />
+            <StoreProductRail title={rail.title} products={rail.products.map((product, productIndex) => ({ ...product, badge: pageKey === 'digital' || badgeSlots[pageKey]?.[index]?.includes(productIndex) }))} className={((pageKey === 'feature' || pageKey === 'physical') && index === 1) ? 'store-rail--highlight-prices' : ''} sale={pageKey === 'digital' && index === 1} nextIcon={['digital', 'online'].includes(pageKey) ? '1e22d.svg' : undefined} />
             </div>
           )) : <p className="store-subpage__empty">일치하는 상품이 없습니다.</p>}
         </div>
