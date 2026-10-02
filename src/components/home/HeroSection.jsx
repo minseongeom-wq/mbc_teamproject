@@ -1,8 +1,61 @@
+import { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { homeAsset } from './homeAssets.js';
+import './HeroMotion.css';
 
-export default function HeroSection({ mobile = false }) {
+export default function HeroSection({ mobile = false, onDiscover }) {
+  const sectionRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const intro = document.querySelector('.nintendo-intro');
+    if (!intro) return;
+
+    const section = sectionRef.current;
+    const characterSelectors = mobile
+      ? '.home-hero-mobile__layer-3, .home-hero-mobile__layer-6, .home-hero-mobile__layer-10'
+      : '.home-hero__hero-visual-01, .home-hero__hero-visual-02, .home-hero__hero-visual-03, .home-hero__hero-visual-05, .home-hero__layer-14';
+    const characters = [...section.querySelectorAll(characterSelectors)]
+      .map(character => character.firstElementChild)
+      .filter(Boolean);
+    const discoverCharacter = section.querySelector(mobile ? '.home-hero-mobile__layer-13' : '.home-hero__hero-visual-06');
+    if (discoverCharacter) characters.push(discoverCharacter);
+
+    let played = false;
+    let observer;
+    const ctx = gsap.context(() => {
+      gsap.set(characters, { scale: 0.64, transformOrigin: 'center center' });
+    }, section);
+    ctx.add('revealCharacters', () => {
+      if (played) return;
+      played = true;
+      observer?.disconnect();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(characters, { clearProps: 'transform' });
+        return;
+      }
+      gsap.to(characters, {
+        scale: 1,
+        duration: 0.78,
+        stagger: 0.075,
+        ease: 'back.out(1.8)',
+        onComplete: () => gsap.set(characters, { clearProps: 'transform' }),
+      });
+    });
+
+    observer = new MutationObserver(() => {
+      const currentIntro = document.querySelector('.nintendo-intro');
+      if (!currentIntro || currentIntro.dataset.phase === 'revealing') ctx.revealCharacters();
+    });
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-phase'] });
+    if (intro.dataset.phase === 'revealing') ctx.revealCharacters();
+    return () => {
+      observer.disconnect();
+      ctx.revert();
+    };
+  }, [mobile]);
+
   if (mobile) return (
-      <section aria-label="마리오 40주년" className="home-hero-mobile" data-node-id="2156:6615">
+      <section ref={sectionRef} aria-label="마리오 40주년" className="home-hero-mobile" data-node-id="2156:6615">
         <div className="home-hero-mobile__layer" data-node-id="2156:6620">
           <p className="home-hero-mobile__text">SUPER MAARIO</p>
           <p className="home-hero-mobile__text-2">BROS.</p>
@@ -45,7 +98,7 @@ export default function HeroSection({ mobile = false }) {
         <h1 className="home-hero-mobile__text-7" data-node-id="2156:6619">
           40th
         </h1>
-        <div className="home-hero-mobile__layer-13" data-node-id="2156:7621">
+        <button type="button" className="home-hero-mobile__layer-13" data-node-id="2156:7621" aria-label="게임 둘러보기로 이동" onClick={onDiscover}>
           <div className="home-hero-mobile__layer-14">
             <div className="home-hero-mobile__halftone-generator-7-7" data-name="halftone-generator (7) 7">
               <div className="home-hero-mobile__layer-15">
@@ -53,11 +106,11 @@ export default function HeroSection({ mobile = false }) {
               </div>
             </div>
           </div>
-        </div>
+        </button>
       </section>
   );
   return (
-      <section aria-label="마리오 40주년" className="home-hero" data-node-id="1148:6400" data-name="01_Hero">
+      <section ref={sectionRef} aria-label="마리오 40주년" className="home-hero" data-node-id="1148:6400" data-name="01_Hero">
         <h1 className="home-hero__text" data-node-id="1148:6401">
           <span className="home-hero__layer">40</span>
           <span className="home-hero__layer-2">th</span>
@@ -74,7 +127,7 @@ export default function HeroSection({ mobile = false }) {
           <p className="home-hero__text-3">BROS.</p>
         </div>
         <div className="home-hero__hero-visual-04" data-node-id="1148:6409" data-name="Hero-Visual-04" />
-        <div className="home-hero__hero-visual-06" data-node-id="1148:6410" data-name="Hero-Visual-06">
+        <button type="button" className="home-hero__hero-visual-06" data-node-id="1148:6410" data-name="Hero-Visual-06" aria-label="게임 둘러보기로 이동" onClick={onDiscover}>
           <div className="home-hero__layer-5" data-node-id="1148:6413">
             <div className="home-hero__layer-6">
               <div className="home-hero__halftone-generator-8-2" data-name="halftone-generator (8) 2">
@@ -84,7 +137,7 @@ export default function HeroSection({ mobile = false }) {
               </div>
             </div>
           </div>
-        </div>
+        </button>
         <div className="home-hero__layer-8" data-node-id="1148:6414">
           <p className="home-hero__text-4">40 YEARS OF ADVENTURE</p>
           <p className="home-hero__text-5">40년간 이어진 모험</p>

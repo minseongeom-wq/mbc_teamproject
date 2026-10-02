@@ -1,0 +1,26 @@
+.home-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  background: #000;
+  pointer-events: none;
+}
+
+
+.home-discovery.home-discovery--booting .home-discovery__game-carousel-viewport {
+  background-color: #151515;
+}
+.home-discovery.home-discovery--booting .home-discovery__game-carousel-viewport > *,
+.home-discovery.home-discovery--booting .home-discovery__game-selected-info,
+.home-discovery.home-discovery--booting .home-discovery__layer-3 { opacity: 0; }
+.home-discovery-mobile.home-discovery--booting { background-color: #151515; }
+
+/* The character may float, while its clickable hit area stays still. */
+.home-hero-mobile__layer-13 { animation: none !important; }
+.home-hero-mobile__layer-13 .home-hero-mobile__layer-14 {
+  animation: home-hero-float var(--float-duration) ease-in-out var(--float-delay) infinite;
+  transform-origin: center center;
+}

@@ -6,6 +6,7 @@ test('Home Desktop matches Figma section bounds and original image slots', async
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
+  await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
   await page.evaluate(() => document.fonts.ready);
   const expected = [
     ['hero', 0, 1883], ['discovery', 1883, 1080], ['news', 2963, 3173],
@@ -31,6 +32,7 @@ test('Home Desktop matches Figma section bounds and original image slots', async
 test('Desktop game cards respond to selection, keyboard and play modes', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
+  await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
   const track = page.getByRole('group', { name: '게임 선택' });
   const zelda = track.getByRole('button', { name: '젤다의 전설', exact: true });
   await expect(zelda).toHaveAttribute('aria-pressed', 'true');
@@ -51,6 +53,7 @@ for (const width of [360, 768, 1024, 1440]) {
   test(`Home responsive assets and shared Navigation at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
+    await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator('.home-page section')).toHaveCount(7);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);

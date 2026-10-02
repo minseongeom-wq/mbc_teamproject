@@ -11,6 +11,7 @@ for (const width of [1440, 1030, 390]) {
   test(`Opening and closing news preserves the Home background at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
+    await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     // Exercise a classic scrollbar, including a viewport near Home's breakpoint.
     await page.addStyleTag({ content: 'html::-webkit-scrollbar { width: 16px; }' });
     const card = page.locator('[data-news-id="splatoon"]');
@@ -43,9 +44,11 @@ for (const width of [1440, 1030, 390]) {
 for (const width of [1920, 390]) {
   test(`News modal content, dismissal, focus and links at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1080 });
+    test.setTimeout(90000);
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto('/');
+    await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     for (const [id, title, link] of items) {
       const card = page.locator(`[data-news-id="${id}"]`);
       await card.focus();
@@ -89,6 +92,7 @@ for (const width of [1920, 390]) {
       await expect(modal).toHaveCount(0);
       await expect(page.locator('body')).not.toHaveCSS('overflow', 'hidden');
       await page.goto('/');
+      await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     }
     expect(errors).toEqual([]);
   });

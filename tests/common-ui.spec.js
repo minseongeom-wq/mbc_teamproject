@@ -4,6 +4,7 @@ for (const width of [320, 390, 768, 1280, 1920]) {
   test(`공통 UI 간격과 자산 및 메뉴 동작 ${width}px`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
+    await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     const nav = page.locator('.navigation');
     const position = await nav.boundingBox();
     expect(position.y).toBe(15);
@@ -46,6 +47,7 @@ for (const width of [320, 390, 768, 1280, 1920]) {
 test('경로별 Variant 및 계정 이동', async ({ page }, testInfo) => {
   for (const [path, variant] of [['/', 'red'], ['/ip/mario', 'red'], ['/ip/splatoon', 'red'], ['/ip/zelda', 'zelda'], ['/store', 'white'], ['/store/products/demo-product', 'white'], ['/mypage', 'white'], ['/store/order', 'red'], ['/store/checkout', 'red'], ['/support', 'red'], ['/login', 'red'], ['/signup', 'red'], ['/about/history', 'red']]) {
     await page.goto(path);
+    if (path === '/') await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 20000 });
     await expect(page.getByRole('banner')).toHaveClass(new RegExp(`common-header--${variant}`));
     await expect(page.getByRole('contentinfo')).toHaveClass(new RegExp(`common-footer--${variant === 'zelda' ? 'zelda' : 'default'}`));
     await expect(page.getByRole('banner')).toHaveCount(1);

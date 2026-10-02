@@ -1,4 +1,5 @@
 /* Home-only layout integration; shared component internals stay unchanged. */
+html:has(.home-page) { scrollbar-gutter: stable; }
 .site-shell:has(.home-page) { position: relative; }
 .site-shell > main:has(.home-page) { padding-inline: 0; }
 .site-shell:has(.home-page) > .common-footer { margin-top: 0; }

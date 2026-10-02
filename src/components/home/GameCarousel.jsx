@@ -5,15 +5,13 @@ const cardArt = [
   (
               <div className="home-discovery__game-card-01" data-node-id="1148:6530" data-name="Game-Card-01">
                 <div className="home-discovery__game-image" data-node-id="1148:6531" data-name="Game image">
-                  <img alt="" className="home-discovery__image-3" src={homeAsset('ede00.svg')} />
+                  <img alt="" className="home-discovery__image-3" src={homeAsset('animal-crossing-island.png')} />
+                  <img alt="" className="home-discovery__animal-logo" src={homeAsset('animal-crossing-logo.png')} />
                 </div>
-                <div className="home-discovery__icon" data-node-id="1148:6532" data-name="Icon" />
-                <div className="home-discovery__icon-2" data-node-id="1148:6533" data-name="Icon" />
-                <div className="home-discovery__icon-3" data-node-id="1148:6534" data-name="Icon" />
-                <div className="home-discovery__icon-4" data-node-id="1148:6535" data-name="Icon" />
-                <p className="home-discovery__text-4" data-node-id="1148:6536">
-                  TEC
-                </p>
+                <div className="home-discovery__icon" data-node-id="1148:6532" data-name="Icon"><img src={homeAsset('1d81c.png')} alt="" /></div>
+                <div className="home-discovery__icon-2" data-node-id="1148:6533" data-name="Icon"><img src={homeAsset('ac1d0.png')} alt="" /></div>
+                <div className="home-discovery__icon-3" data-node-id="1148:6534" data-name="Icon"><img src={homeAsset('e4a61.png')} alt="" /></div>
+                <div className="home-discovery__icon-4" data-node-id="1148:6535" data-name="Icon"><img src={homeAsset('9fa86.png')} alt="" /></div>
               </div>
   ),
   (
@@ -84,21 +82,24 @@ const cardArt = [
   )
 ];
 
-export default function GameCarousel({ active, onSelect, mode }) {
+export default function GameCarousel({ active, onSelect, mode, scrollPosition }) {
   const visible = homeGames.map((game, index) => ({ ...game, index })).filter(game => mode !== 'together' || game.together);
-  const activePosition = visible.findIndex(game => game.index === active);
+  // The two repeated cards let downward scrolling continue past the last
+  // original card without moving the Figma starting composition.
+  const cards = mode === 'together' ? visible : [...visible, ...visible.slice(0, 2)];
+  const activePosition = scrollPosition ?? visible.findIndex(game => game.index === active);
   return (
     <div className="home-discovery__game-carousel home-game-carousel" role="group" aria-label="게임 선택" style={{ left: 254.81 - activePosition * 268.545 }} onKeyDown={event => {
       const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
       if (!direction) return;
       event.preventDefault();
-      const next = visible[(activePosition + direction + visible.length) % visible.length].index;
-      onSelect(next);
-      event.currentTarget.querySelector('[data-game="' + next + '"]').focus();
+      const nextPosition = (activePosition + direction + cards.length) % cards.length;
+      onSelect(cards[nextPosition].index, nextPosition);
+      event.currentTarget.querySelector(`[data-carousel-position="${nextPosition}"]`).focus();
     }}>
-      {visible.map(game => {
-        const size = game.index === active ? 338.733 : 237.266;
-        return <button type="button" key={game.index} data-game={game.index} aria-label={game.title} aria-pressed={game.index === active} onClick={() => onSelect(game.index)} className="home-game-carousel__card" style={{ width: size, height: size }}>
+      {cards.map((game, position) => {
+        const size = position === activePosition ? 338.733 : 237.266;
+        return <button type="button" key={`${game.index}-${position}`} data-game={game.index} data-carousel-position={position} aria-label={game.title} aria-pressed={position === activePosition} onClick={() => onSelect(game.index, position)} className="home-game-carousel__card" style={{ width: size, height: size }}>
           <span className="home-game-carousel__art" style={{ zoom: size / (game.index === 2 ? 338.733 : 237.266) }}>{cardArt[game.index]}</span>
         </button>;
       })}
