@@ -12,7 +12,9 @@ export default [
             '.awards-trail-check.mjs',
         ],
     },
+
     js.configs.recommended,
+
     {
         files: ['**/*.{js,jsx}'],
         languageOptions: {
@@ -21,6 +23,8 @@ export default [
             parserOptions: { ecmaFeatures: { jsx: true } },
             globals: { ...globals.browser, ...globals.node },
         },
-        rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z]' }] },
+        rules: {
+            'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z]' }],
+        },
     },
 ];
