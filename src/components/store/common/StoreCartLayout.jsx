@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { routePaths } from '../../../routes/routePaths.js';
 import { StoreCartContext } from './StoreCartContext.js';
 import { initialStoreCartItems, storeCartStorageKey } from './storeCartData.js';
 import StoreCartButton from './StoreCartButton.jsx';
@@ -19,6 +20,7 @@ function readCart() {
 }
 
 export default function StoreCartLayout() {
+  const { pathname } = useLocation();
   const [items, setItems] = useState(readCart);
   const [isOpen, setIsOpen] = useState(false);
   const cartButtonRef = useRef(null);
@@ -112,7 +114,7 @@ export default function StoreCartLayout() {
 
   return <StoreCartContext.Provider value={cart}>
     <Outlet />
-    <StoreCartButton ref={cartButtonRef} open={isOpen} onClick={() => setIsOpen(true)} />
+    {pathname !== routePaths.checkout && <StoreCartButton ref={cartButtonRef} open={isOpen} onClick={() => setIsOpen(true)} />}
     <CartDrawer ref={drawerRef} open={isOpen} onClose={closeCart} closeButtonRef={closeButtonRef} />
   </StoreCartContext.Provider>;
 }

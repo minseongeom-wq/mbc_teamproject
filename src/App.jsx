@@ -10,7 +10,7 @@ import StoreCartLayout from './components/store/common/StoreCartLayout.jsx';
 import ProductListPage from './pages/product-list/ProductListPage.jsx';
 import ProductDetailPage from './pages/product-detail/ProductDetailPage.jsx';
 import OrderReviewPage from './pages/order-review/OrderReviewPage.jsx';
-import CheckoutPage from './pages/checkout/CheckoutPage.jsx';
+import PaymentPage from './components/payment/PaymentPage.jsx';
 import SwitchPage from './pages/hardware/SwitchPage.jsx';
 import HistoryPage from './pages/history/HistoryPage.jsx';
 import CommunityPage from './pages/community/CommunityPage.jsx';
@@ -33,7 +33,7 @@ export default function App() {
           <Route path={routePaths.productList} element={<ProductListPage />} />
           <Route path={routePaths.productDetail} element={<ProductDetailPage />} />
           <Route path={routePaths.orderReview} element={<OrderReviewPage />} />
-          <Route path={routePaths.checkout} element={<CheckoutPage />} />
+          <Route path={routePaths.checkout} element={<PaymentPage />} />
         </Route>
         <Route path={routePaths.hardware} element={<SwitchPage />} />
         <Route path={routePaths.history} element={<HistoryPage />} />
