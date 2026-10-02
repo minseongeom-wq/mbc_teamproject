@@ -1,212 +1,70 @@
+﻿import { useRef } from 'react';
 import { homeAsset } from './homeAssets.js';
+import useDailyNintendoScroll from './useDailyNintendoScroll.js';
+import { dailyPhoneScreens } from './dailyNintendoData.js';
+import './daily-nintendo.css';
 
+const widgets = [
+  { id: '04', title: '위젯', copy: '좋아하는 게임 시리즈의\n위젯을 설정하면 콘텐츠를\n확인할 수 있습니다.\n배경화면도 당신이 원하는 캐릭터로 만들어보세요.' },
+  { id: '03', title: '스케줄과 내 일정 확인', copy: '소프트웨어의 발매일이나 게임 내의 이벤트 등을 캘린더에 저장해 알림을 받을 수 있습니다.' },
+  { id: '02', title: '날마다 만나는 콘텐츠', copy: '최신 뉴스를 비롯해 영상과 만화 등 당신이 관심 있는 게임 시리즈를 중심으로 다양한 콘텐츠를 만날 수 있습니다.' },
+  { id: '01', title: '애니메이션 캘린더', copy: '당신이 좋아하는 캐릭터가\n애니메이션으로 날짜를 알려드립니다.\n4개의 게임 시리즈 중\n선택할 수 있습니다.' },
+].reverse();
+const phones = ['kirby-wallpaper', '01', '02', '03', '04', 'splatoon'];
+function PhoneContent({ id }) {
+  const screen = { kirby: 'aabb0.png', '04': '5c3ac.png', '03': 'bcf99.png', '02': '464bf.png', '01': 'daily-pikmin-screen.png', splatoon: '33b43.png', zelda: '5c047.png', calendar: 'bcf99.png', 'kirby-wallpaper': '8f036.png' }[id];
+  return <>
+    <div className={`daily-carousel__screen ${id === '02' ? 'daily-carousel__screen--content' : ''}`}>
+      {id === '01'
+        ? <video data-widget-video src="/videos/daily/widget-01-pikmin.mp4" poster={homeAsset(screen)} muted loop playsInline preload="metadata" aria-hidden="true" />
+        : <img src={homeAsset(screen)} alt="" />}
+    </div>
+    {id === 'kirby-wallpaper' && <div className="daily-carousel__kirby-widget"><img src={homeAsset('77d5e.png')} alt="" /></div>}
+    {id === '03' && <div className="daily-carousel__screen-dim" />}
+    <div className="daily-carousel__frame"><img src={homeAsset('b9e69.png')} alt="" /></div>
+    {id === '03' && <img className="daily-carousel__schedule" src={homeAsset('e1a9c.png')} alt="" />}
+  </>;
+}
 export default function DailyNintendoSection({ mobile = false }) {
-  if (mobile) return (
-      <section aria-label="날마다 만나는 닌텐도" className="home-daily-mobile" data-node-id="2156:6694">
-        <p className="home-daily-mobile__text" data-node-id="2156:6695">
-          날마다 만나는 닌텐도
-        </p>
-        <p className="home-daily-mobile__text-2" data-node-id="2156:6696">
-          <span className="home-daily-mobile__layer">NINTENDO Wid</span>
-          <span className="home-daily-mobile__layer-2">get</span>
-        </p>
-        <p className="home-daily-mobile__text-3" data-node-id="2156:6697">
-          01
-        </p>
-        <p className="home-daily-mobile__text-4" data-node-id="2156:6698">
-          02
-        </p>
-        <p className="home-daily-mobile__text-5" data-node-id="2156:6699">
-          03
-        </p>
-        <p className="home-daily-mobile__text-6" data-node-id="2156:6700">
-          04
-        </p>
-        <div className="home-daily-mobile__layer-3" data-node-id="2156:7467">
-          <div className="home-daily-mobile__img-image" data-node-id="2156:6701" data-name="img/image">
-            <img alt="" className="home-daily-mobile__image" src={homeAsset('61389.svg')} />
-          </div>
-          <div className="home-daily-mobile__img-image-2" data-node-id="2156:6702" data-name="img/image">
-            <img alt="" className="home-daily-mobile__image-2" src={homeAsset('a17e6.svg')} />
-          </div>
-          <div className="home-daily-mobile__img-image-3" data-node-id="2156:6703" data-name="img/image">
-            <img alt="" className="home-daily-mobile__image-3" src={homeAsset('9d316.svg')} />
-          </div>
-          <div className="home-daily-mobile__img-image-4" data-node-id="2156:6704" data-name="img/image">
-            <img alt="" className="home-daily-mobile__image-4" src={homeAsset('ad926.svg')} />
-          </div>
-        </div>
-        <p className="home-daily-mobile__text-7" data-node-id="2156:6705">
-          위젯
-        </p>
-        <div className="home-daily-mobile__layer-4" data-node-id="2156:6706">
-          <p className="home-daily-mobile__text-8">좋아하는 게임 시리즈 위젯을</p>
-          <p className="home-daily-mobile__text-9">설정하고, 원하는 캐릭터로</p>
-          <p className="home-daily-mobile__text-10">배경화면을 꾸며보세요.</p>
-        </div>
-        <div className="home-daily-mobile__layer-5" data-node-id="2156:6707" />
-        <div className="home-daily-mobile__layer-6"><img alt="" className="home-daily-mobile__image-5" src={homeAsset('94fd4.svg')} /></div>
-        <div className="home-daily-mobile__layer-7"><img alt="" className="home-daily-mobile__image-6" src={homeAsset('94fd4.svg')} /></div>
-        <div className="home-daily-mobile__img-image-5" data-node-id="2156:6711" data-name="img/image">
-          <img alt="" className="home-daily-mobile__image-7" src={homeAsset('248b3.svg')} />
-        </div>
-        <div className="home-daily-mobile__layer-8" data-node-id="2156:7500">
-          <div className="home-daily-mobile__layer-9">
-            <div className="home-daily-mobile__layer-10">
-              <div className="home-daily-mobile__image-760" data-node-id="2156:7501" data-name="image 760">
-                <div className="home-daily-mobile__layer-11">
-                  <img alt="" className="home-daily-mobile__image-8" src={homeAsset('464bf.png')} />
-                </div>
-              </div>
-              <div className="home-daily-mobile__d3079d81-99d7-42e4-b95b-a9f42a93335d-5" data-node-id="2156:7502" data-name="d3079d81-99d7-42e4-b95b-a9f42a93335d 5">
-                <div className="home-daily-mobile__layer-12">
-                  <img alt="" className="home-daily-mobile__image-9" src={homeAsset('b9e69.png')} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="home-daily-mobile__layer-13" data-node-id="2156:7511">
-          <div className="home-daily-mobile__layer-14">
-            <div className="home-daily-mobile__02-phon-box" data-name="02_phon_box">
-              <div className="home-daily-mobile__layer-15" data-node-id="2156:7513" />
-              <div className="home-daily-mobile__chatgpt-image-2026-9-13-07-42-22-1" data-node-id="2156:7514" data-name="ChatGPT Image 2026년 9월 13일 오후 07_42_22 1">
-                <img alt="" className="home-daily-mobile__image-10" src={homeAsset('5c3ac.png')} />
-              </div>
-              <div className="home-daily-mobile__d3079d81-99d7-42e4-b95b-a9f42a93335d-7" data-node-id="2156:7515" data-name="d3079d81-99d7-42e4-b95b-a9f42a93335d 7">
-                <div className="home-daily-mobile__layer-16">
-                  <img alt="" className="home-daily-mobile__image-11" src={homeAsset('b9e69.png')} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="home-daily-mobile__layer-17" data-node-id="2156:6710">
-          <img alt="" className="home-daily-mobile__image-12" src={homeAsset('39b60.svg')} />
-        </div>
-        <div className="home-daily-mobile__layer-18" data-node-id="2156:7468">
-          <div className="home-daily-mobile__nintendo-today-1" data-node-id="2156:7469" data-name="Nintendo Today 닌텐도 1">
-            <img className="home-daily-mobile__pikmin-screen" src={homeAsset('daily-pikmin-screen.png')} alt="피크민 Nintendo Today 위젯" />
-          </div>
-          <div className="home-daily-mobile__d3079d81-99d7-42e4-b95b-a9f42a93335d-7-2" data-node-id="2156:7470" data-name="d3079d81-99d7-42e4-b95b-a9f42a93335d 7">
-            <div className="home-daily-mobile__layer-19">
-              <img alt="" className="home-daily-mobile__image-13" src={homeAsset('b9e69.png')} />
-            </div>
-          </div>
-        </div>
-      </section>
-  );
+  const section = useRef(null);
+  useDailyNintendoScroll(section, mobile);
   return (
-      <section aria-label="날마다 만나는 닌텐도" className="home-daily" data-node-id="1148:6749" data-name="06_Daily-Nintendo">
-        <div className="home-daily__chatgpt-image-2026-9-11-04-30-37-1" data-node-id="1148:6750" data-name="ChatGPT Image 2026년 9월 11일 오후 04_30_37 1">
-          <div className="home-daily__layer">
-            <img alt="" className="home-daily__image" src={homeAsset('c2c57.png')} />
-          </div>
+    <section ref={section} className={`daily-carousel ${mobile ? 'daily-carousel--mobile' : ''}`} data-daily-scroll data-name="06_Daily-Nintendo" data-node-id="1148:6749" aria-label="날마다 만나는 닌텐도">
+      <div className="daily-carousel__stage">
+        <h2 className="daily-carousel__heading">날마다 만나는 닌텐도</h2>
+        <div className="daily-carousel__titles">
+          <p className="daily-carousel__title" data-title aria-label="NINTENDO Widget 01부터 04까지">
+            <span>NINTENDO Widget</span>
+            <span className="daily-carousel__number-window" aria-hidden="true">
+              <span className="daily-carousel__number-track" data-number-track>
+                {widgets.map(widget => <span key={widget.id} className="daily-carousel__number" data-number={widget.id}>{widget.id}</span>)}
+              </span>
+            </span>
+          </p>
         </div>
-        <div className="home-daily__03-phon-box" data-node-id="1148:6751" data-name="03_phon_box">
-          <div className="home-daily__layer-2" data-node-id="1148:6753">
-            <div className="home-daily__layer-3">
-              <div className="home-daily__phon-box" data-name="Phon box" />
-            </div>
-          </div>
-          <div className="home-daily__layer-4" data-node-id="1148:6754">
-            <div className="home-daily__layer-5">
-              <div className="home-daily__chatgpt-image-2026-9-13-07-43-36-1" data-name="ChatGPT Image 2026년 9월 13일 오후 07_43_36 1">
-                <img alt="" className="home-daily__image-2" src={homeAsset('33b43.png')} />
-              </div>
-            </div>
-          </div>
-          <div className="home-daily__layer-6" data-node-id="1148:6755">
-            <div className="home-daily__layer-7">
-              <div className="home-daily__d3079d81-99d7-42e4-b95b-a9f42a93335d-7" data-name="d3079d81-99d7-42e4-b95b-a9f42a93335d 7">
-                <div className="home-daily__layer-8">
-                  <img alt="" className="home-daily__image-3" src={homeAsset('b9e69.png')} />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="daily-carousel__visuals">
+        <img className="daily-carousel__background" src={homeAsset('c2c57.png')} alt="" />
+        <div className="daily-carousel__calendars" aria-hidden="true">
+          {[1, 2, 3, 4].map((id, i) => <div className={`daily-carousel__calendar daily-carousel__calendar--${id}`} key={id} data-calendar={i}><div className="daily-carousel__calendar-crop"><img src={homeAsset(id % 2 ? '77d5e.png' : 'e0d2e.png')} alt="" /></div></div>)}
         </div>
-        <div className="home-daily__02-phon-box" data-node-id="1148:6756" data-name="02_phon_box">
-          <div className="home-daily__phon-box-2" data-node-id="1148:6758" data-name="Phon box" />
-          <div className="home-daily__chatgpt-image-2026-9-13-07-42-22-1" data-node-id="1148:6759" data-name="ChatGPT Image 2026년 9월 13일 오후 07_42_22 1">
-            <img alt="" className="home-daily__image-4" src={homeAsset('5c3ac.png')} />
-          </div>
-          <div className="home-daily__d3079d81-99d7-42e4-b95b-a9f42a93335d-7-2" data-node-id="1148:6760" data-name="d3079d81-99d7-42e4-b95b-a9f42a93335d 7">
-            <div className="home-daily__layer-9">
-              <img alt="" className="home-daily__image-5" src={homeAsset('b9e69.png')} />
-            </div>
-          </div>
+        <div className="daily-carousel__support daily-carousel__state" data-support="2"><img src={homeAsset('f18df.png')} alt="게임 일정과 알림 예시" /></div>
+        <div className="daily-carousel__content-grid daily-carousel__state" data-support="1" aria-hidden="true">
+          {[0, 1, 2].map(i => <div key={i}><img src={homeAsset('464bf.png')} alt="" /></div>)}
         </div>
-        <div className="home-daily__01-phon-box" data-node-id="1148:6761" data-name="01_phon_box">
-          <div className="home-daily__layer-10" data-node-id="1148:6763">
-            <div className="home-daily__layer-11">
-              <div className="home-daily__phon-box-3" data-name="Phon box" />
-            </div>
-          </div>
-          <div className="home-daily__layer-12" data-node-id="1148:6764">
-            <div className="home-daily__layer-13">
-              <div className="home-daily__chatgpt-image-2026-9-13-07-37-34-1" data-name="ChatGPT Image 2026년 9월 13일 오후 07_37_34 1">
-                <img alt="" className="home-daily__image-6" src={homeAsset('aabb0.png')} />
-              </div>
-            </div>
-          </div>
-          <div className="home-daily__layer-14" data-node-id="1148:6765">
-            <div className="home-daily__layer-15">
-              <div className="home-daily__d3079d81-99d7-42e4-b95b-a9f42a93335d-7-3" data-name="d3079d81-99d7-42e4-b95b-a9f42a93335d 7">
-                <div className="home-daily__layer-16">
-                  <img alt="" className="home-daily__image-7" src={homeAsset('b9e69.png')} />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="daily-carousel__phones">
+          {phones.map((id, i) => <div key={id} className="daily-carousel__phone" data-phone={i} data-content={id} role="img" aria-label={`Widget ${id} phone`}>
+            {[...new Set(dailyPhoneScreens.map(state => state[i]).filter(Boolean))].map((screen, index) =>
+              <div key={screen} className="daily-carousel__phone-art" data-screen={screen} style={{ opacity: index === 0 ? 1 : 0 }}>
+                <PhoneContent id={screen} />
+              </div>)}
+          </div>)}
         </div>
-        <div className="home-daily__04-calender-image" data-node-id="1148:6766" data-name="04_calender-image">
-          <div className="home-daily__layer-17"><img alt="" className="home-daily__image-8" src={homeAsset('94fd4.svg')} /></div>
-          <div className="home-daily__calendar-image" data-node-id="1148:6768" data-name="Calendar image">
-            <div className="home-daily__layer-18">
-              <img alt="" className="home-daily__image-9" src={homeAsset('e0d2e.png')} />
-            </div>
-          </div>
+        <div className="daily-carousel__descriptions">
+          {widgets.map((widget, i) => <div key={widget.id} className={`daily-carousel__description daily-carousel__state ${i === 0 ? 'daily-carousel__state--initial' : ''}`} data-description={i} data-widget={widget.id}><h3>{widget.title}</h3><p>{widget.copy}</p></div>)}
         </div>
-        <div className="home-daily__03-calender-image" data-node-id="1148:6769" data-name="03_calender-image">
-          <div className="home-daily__layer-19"><img alt="" className="home-daily__image-10" src={homeAsset('94fd4.svg')} /></div>
-          <div className="home-daily__calendar-image-2" data-node-id="1148:6771" data-name="Calendar image">
-            <div className="home-daily__layer-20">
-              <img alt="" className="home-daily__image-11" src={homeAsset('77d5e.png')} />
-            </div>
-          </div>
         </div>
-        <div className="home-daily__02-calender-image" data-node-id="1148:6772" data-name="02_calender-image">
-          <div className="home-daily__layer-21"><img alt="" className="home-daily__image-12" src={homeAsset('94fd4.svg')} /></div>
-          <div className="home-daily__calendar-image-3" data-node-id="1148:6774" data-name="Calendar image">
-            <div className="home-daily__layer-22">
-              <img alt="" className="home-daily__image-13" src={homeAsset('e0d2e.png')} />
-            </div>
-          </div>
-        </div>
-        <div className="home-daily__01-calender-image" data-node-id="1148:6775" data-name="01_calender-image">
-          <div className="home-daily__layer-23"><img alt="" className="home-daily__image-14" src={homeAsset('94fd4.svg')} /></div>
-          <div className="home-daily__calendar-image-4" data-node-id="1148:6777" data-name="Calendar image">
-            <div className="home-daily__layer-24">
-              <img alt="" className="home-daily__image-15" src={homeAsset('77d5e.png')} />
-            </div>
-          </div>
-        </div>
-        <p className="home-daily__text" data-node-id="1148:6778">
-          위젯
-        </p>
-        <div className="home-daily__layer-25" data-node-id="1148:6779">
-          <p className="home-daily__text-2">좋아하는 게임 시리즈의</p>
-          <p className="home-daily__text-3">{`위젯을 설정하면 콘텐츠를 `}</p>
-          <p className="home-daily__text-4">확인할 수 있습니다.</p>
-          <p className="home-daily__text-5">배경화면도 당신이 원하는 캐릭터로 만들어보세요.</p>
-        </div>
-        <p className="home-daily__text-6" data-node-id="1148:6780">
-          날마다 만나는 닌텐도
-        </p>
-        <p className="home-daily__text-7" data-node-id="1148:6781">
-          NINTENDO PICKS 07
-        </p>
-      </section>
+      </div>
+    </section>
   );
 }
+

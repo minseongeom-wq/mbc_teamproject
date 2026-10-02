@@ -1,0 +1,90 @@
+﻿.daily-carousel { --daily-gap: clamp(0px, calc(1208px - (100svh - 48px) / var(--home-scale) - 254px), 22px); --daily-scale: min(1, calc((100svh - 48px) / ((930px - var(--daily-gap)) * var(--home-scale)))); position: relative; background: var(--color-bg-primary, #fff); height: calc(100svh / var(--home-scale)); width: 1920px; overflow: clip; }
+/* Remove the artboard's empty top margin before fitting the title-to-phone
+   content range. The fit uses one uniform scale and leaves 24px at both ends. */
+.daily-carousel__stage { position: relative; width: 1920px; height: 1432px; overflow: clip; isolation: isolate; transform: translateY(calc(24px / var(--home-scale) - 278px * var(--daily-scale))) scale(var(--daily-scale)); transform-origin: top center; }
+.daily-carousel__visuals { position: absolute; inset: 0; transform: translateY(calc(-1 * var(--daily-gap))); }
+.daily-carousel__background { position: absolute; width: 2172px; height: 735px; max-width: none; left: -126px; top: 753px; }
+.daily-carousel__heading { position: absolute; top: 278px; left: 81px; font-size: 54px; font-weight: 300; color: #e60012; }
+.daily-carousel__titles { position: absolute; left: 246px; top: 333px; }
+.daily-carousel__title { display: flex; align-items: center; gap: .3em; font: 400 70px/1.5 'Pexel Grotesk', sans-serif; white-space: nowrap; }
+.daily-carousel__number-window { display: block; height: 1.5em; overflow: hidden; }
+.daily-carousel__number-track { display: block; will-change: transform; }
+.daily-carousel__number { display: block; height: 1.5em; line-height: 1.5; }
+.daily-carousel__state { position: absolute; opacity: 0; visibility: hidden; }
+.daily-carousel__state--initial { opacity: 1; visibility: visible; }
+.daily-carousel__phone { position: absolute; left: calc(50% - 177px); top: 518px; width: 354px; height: 678px; transform-origin: center; will-change: transform; }
+.daily-carousel__phone:nth-child(1) { transform: translate(-850px, 201px) rotate(-31.8deg) scale(.992); }
+.daily-carousel__phone:nth-child(2) { z-index: 5; }
+.daily-carousel__phone:nth-child(3) { transform: translate(850px, 201px) rotate(31.8deg) scale(.992); }
+.daily-carousel__phone:nth-child(n+4) { transform: translate(2200px, 200px) rotate(31.8deg) scale(.92); }
+.daily-carousel__phone-art { position: absolute; inset: 0; }
+.daily-carousel__screen-dim { position: absolute; inset: 0; background: rgb(0 0 0 / 23%); border-radius: 35px; }
+.daily-carousel__kirby-widget { position: absolute; left: 35px; top: 61px; width: 279px; height: 294px; overflow: hidden; }
+.daily-carousel__kirby-widget img { position: absolute; width: 324.01%; height: 110.54%; left: -112.54%; top: -4.76%; max-width: none; }
+.daily-carousel__screen { position: absolute; left: 9.11px; top: -1px; width: 337px; height: 674px; border-radius: 30px; background: #fff; overflow: hidden; }
+.daily-carousel__screen > img, .daily-carousel__screen > video { width: 100%; height: 100%; object-fit: cover; }
+.daily-carousel__screen--content > img { position: absolute; width: 680.58%; height: 139.05%; left: -424.46%; top: -13.73%; max-width: none; }
+.daily-carousel__frame { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.daily-carousel__frame img { position: absolute; width: 142.11%; height: 110.45%; left: -21.05%; top: -5.86%; max-width: none; }
+.daily-carousel__schedule { position: absolute; width: 327px; height: 307px; left: 11px; top: 363px; border-radius: 28px; }
+.daily-carousel__calendar { opacity: 0; position: absolute; width: 176px; height: 176px; top: 593px; overflow: hidden; border-radius: 10px; }
+.daily-carousel__calendar-crop { position: absolute; left: 50%; top: calc(50% + 3px); width: 178px; height: 188px; translate: -50% -50%; overflow: hidden; }
+.daily-carousel__calendar img { position: absolute; max-width: none; }
+.daily-carousel__calendar--1 { left: calc(50% - 616px); }
+.daily-carousel__calendar--1 .daily-carousel__calendar-crop { top: 50%; }
+.daily-carousel__calendar--1 img { width: 324.01%; height: 110.54%; left: -220.07%; top: -4.76%; }
+.daily-carousel__calendar--2 { left: calc(50% - 396px); }
+.daily-carousel__calendar--2 .daily-carousel__calendar-crop { width: 176px; height: 186px; top: calc(50% + 4px); }
+.daily-carousel__calendar--2 img { width: 217.2%; height: 107.48%; left: -3.23%; top: -4.08%; }
+.daily-carousel__calendar--3 { left: calc(50% + 220px); }
+.daily-carousel__calendar--3 .daily-carousel__calendar-crop { width: 178.208px; left: calc(50% - .5px); }
+.daily-carousel__calendar--3 img { width: 325.79%; height: 110.54%; left: -5.05%; top: -4.76%; }
+.daily-carousel__calendar--4 { left: calc(50% + 440px); }
+.daily-carousel__calendar--4 .daily-carousel__calendar-crop { width: 179px; left: calc(50% + .5px); }
+.daily-carousel__calendar--4 img { width: 217.2%; height: 107.48%; left: -110.75%; top: -4.08%; }
+.daily-carousel__descriptions { position: absolute; left: calc(50% + 220px); top: 892px; }
+.daily-carousel__description { width: 352px; color: var(--color-text-inverse, #fff); }
+.daily-carousel__description h3 { font: 400 61px/.9 'DeltaGlassKR', sans-serif; margin-bottom: 11px; white-space: nowrap; }
+.daily-carousel__description p { font-size: 19px; font-weight: 300; line-height: var(--line-height-body, 1.4); max-width: 294px; }
+.daily-carousel__description[data-widget="04"] { width: 254px; }
+.daily-carousel__description[data-widget="04"] h3 { margin-bottom: 11.1px; }
+.daily-carousel__description p { white-space: pre-line; }
+.daily-carousel__description[data-widget="03"] { left: -794px; top: 67px; width: 362px; }
+.daily-carousel__description[data-widget="03"] p { text-align: right; margin-left: 25px; max-width: 337px; }
+.daily-carousel__description[data-widget="02"], .daily-carousel__description[data-widget="01"] { top: 67px; }
+.daily-carousel__description[data-widget="01"] p { max-width: 352px; }
+.daily-carousel__support { left: calc(50% + 194px); top: 561px; width: 488px; height: 280px; }
+.daily-carousel__support img { width: 100%; height: 100%; }
+.daily-carousel__content-grid { left: calc(50% - 392px); top: 643px; width: 217px; display: flex; flex-wrap: wrap; }
+.daily-carousel__content-grid > div { position: relative; width: 144px; height: 227px; overflow: hidden; }
+.daily-carousel__content-grid > div:first-child { width: 217px; height: 215px; }
+.daily-carousel__content-grid > div:last-child { width: 73px; height: 228px; }
+.daily-carousel__content-grid img { position: absolute; width: 653.73%; height: 186.15%; left: -118.87%; top: -63.63%; max-width: none; }
+.daily-carousel__content-grid > div:first-child img { width: 410.04%; left: -137.74%; top: -63%; }
+.daily-carousel__content-grid > div:last-child img { width: 1289.55%; left: -231.74%; }
+.daily-carousel--mobile { --daily-gap: 0px; --daily-scale: min(1, calc((100svh - 48px) / (782px * var(--home-scale)))); width: 360px; }
+.daily-carousel--mobile .daily-carousel__stage { width: 360px; height: 840px; transform: translateY(calc(24px / var(--home-scale) - 52px * var(--daily-scale))) scale(var(--daily-scale)); }
+.daily-carousel--mobile .daily-carousel__heading { left: 21px; top: 52px; font-size: 22px; }
+.daily-carousel--mobile .daily-carousel__titles { left: 21px; top: 83px; }
+.daily-carousel--mobile .daily-carousel__title { font-size: 32px; }
+.daily-carousel--mobile .daily-carousel__phone { left: 89.5px; top: 291px; width: 181px; height: 349px; }
+.daily-carousel--mobile .daily-carousel__screen { left: 4.6px; top: 2px; width: 172px; height: 345px; border-radius: 16px; }
+.daily-carousel--mobile .daily-carousel__schedule { width: 167px; height: 157px; left: 6px; top: 186px; border-radius: 14px; }
+.daily-carousel--mobile .daily-carousel__kirby-widget { left: 18px; top: 31px; width: 143px; height: 151px; }
+.daily-carousel--mobile .daily-carousel__background { left: -140px; top: 430px; width: 640px; height: 420px; }
+.daily-carousel--mobile .daily-carousel__calendar { top: 186px; width: 70px; height: 70px; }
+.daily-carousel--mobile .daily-carousel__calendar-crop { zoom: .397727; }
+.daily-carousel--mobile .daily-carousel__calendar--1 { left: 20px; }
+.daily-carousel--mobile .daily-carousel__calendar--2 { left: 103px; }
+.daily-carousel--mobile .daily-carousel__calendar--3 { left: 186px; }
+.daily-carousel--mobile .daily-carousel__calendar--4 { left: 269px; }
+.daily-carousel--mobile .daily-carousel__descriptions { left: 21px; top: 730px; z-index: 6; }
+.daily-carousel--mobile .daily-carousel__description { left: 0; top: 0; width: 318px; }
+.daily-carousel--mobile .daily-carousel__description h3 { font-size: 27px; line-height: 1.35; white-space: normal; margin-bottom: 4px; }
+.daily-carousel--mobile .daily-carousel__description p { font-size: 13px; max-width: 318px; margin-left: 0; text-align: left; }
+.daily-carousel--mobile .daily-carousel__description p { white-space: normal; }
+.daily-carousel--mobile .daily-carousel__support { left: 230px; top: 264px; width: 125px; height: 72px; }
+.daily-carousel--mobile .daily-carousel__content-grid { left: 25px; top: 320px; transform: scale(.29); transform-origin: top left; }
+.daily-carousel--mobile .daily-carousel__phone:nth-child(1) { transform: translate(-154px,133px) rotate(-27.49deg) scale(.992); }
+.daily-carousel--mobile .daily-carousel__phone:nth-child(3) { transform: translate(154px,133px) rotate(27.49deg) scale(.992); }
+
