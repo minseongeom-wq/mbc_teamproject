@@ -34,6 +34,7 @@
   background: #8c8c8c var(--gameplay-background) center / cover no-repeat;
   pointer-events: auto;
 }
+.zelda-gameplay--overlap-complete[data-interacted="false"] .zelda-gameplay__stage { background: transparent; }
 
 .zelda-gameplay__canvas {
   position: absolute;
@@ -50,6 +51,7 @@
 .zelda-gameplay__canvas h3 { margin: 0; }
 
 .zelda-gameplay__background-base,
+.zelda-gameplay__background-previous,
 .zelda-gameplay__background {
   position: absolute;
   left: 50%;
@@ -61,44 +63,58 @@
   transform: translate(-50%, -50%);
 }
 .zelda-gameplay__background-base,
+.zelda-gameplay__background-previous.zelda-gameplay__background--landscape,
 .zelda-gameplay__background--landscape { transform: translate(-50%, -50%) scaleX(-1); }
+.zelda-gameplay__background-previous { animation: none; }
 .zelda-gameplay__foreground { position: absolute; inset: 0; }
+.zelda-gameplay--overlap-complete[data-interacted="true"] .zelda-gameplay__foreground { animation: zelda-gameplay-scene-reveal .45s ease-out both; }
+.zelda-gameplay--overlap-complete[data-interacted="true"] .zelda-gameplay__background { --zelda-reveal-opacity: 0; --zelda-reveal-blur: 10px; }
 
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__background-base { opacity: 0; }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__background {
+@keyframes zelda-gameplay-scene-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zelda-gameplay--overlap-complete[data-interacted="true"] .zelda-gameplay__foreground { animation: none; }
+}
+
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__background-base { opacity: 0; }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__background-previous { opacity: 0; }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__background {
   animation: none;
   /* During overlap the shared background sits below both foreground groups. */
   opacity: 0;
   will-change: opacity;
 }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__activity {
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__activity {
   opacity: calc(.7 * var(--gameplay-frame-reveal, 0));
   filter: blur(var(--gameplay-frame-blur, 0px));
   will-change: opacity, filter;
 }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__heading {
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__heading {
   opacity: calc(.5 * var(--gameplay-frame-reveal, 0));
   filter: blur(var(--gameplay-frame-blur, 0px));
   will-change: opacity, filter;
 }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__timeline,
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__left-frame,
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__right-frame {
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__timeline,
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__left-frame,
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__right-frame {
   opacity: var(--gameplay-frame-reveal, 0);
   filter: blur(var(--gameplay-frame-blur, 0px));
   will-change: opacity, filter;
 }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__note {
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__note {
   opacity: calc(.5 * var(--gameplay-frame-reveal, 0));
   filter: blur(var(--gameplay-frame-blur, 0px));
 }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__diamond { background: transparent; }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__diamond::before { content: ''; position: absolute; inset: 0; background: rgb(255 255 255 / .5); opacity: var(--gameplay-frame-reveal, 0); filter: blur(var(--gameplay-frame-blur, 0px)); mix-blend-mode: plus-lighter; pointer-events: none; }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__diamond-image,
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__image-base { opacity: var(--gameplay-image-reveal, 0); }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__hover-image { opacity: calc(.5 * var(--gameplay-image-reveal, 0)); }
-.zelda-gameplay--overlap-active:not(.zelda-gameplay--overlap-complete) .zelda-gameplay__diamond-border { opacity: var(--gameplay-frame-reveal, 0); filter: blur(var(--gameplay-frame-blur, 0px)); border-color: rgb(255 255 255 / .2); }
-.zelda-gameplay--overlap-complete[data-interacted="false"] .zelda-gameplay__background { animation: none; opacity: 1; filter: none; }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__diamond { background: transparent; }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__diamond::before { content: ''; position: absolute; inset: 0; background: rgb(255 255 255 / .5); opacity: var(--gameplay-frame-reveal, 0); filter: blur(var(--gameplay-frame-blur, 0px)); mix-blend-mode: plus-lighter; pointer-events: none; }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__diamond-image,
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__image-base { opacity: var(--gameplay-image-reveal, 0); }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__hover-image { opacity: calc(.5 * var(--gameplay-image-reveal, 0)); }
+.zelda-gameplay--overlap-active:is(:not(.zelda-gameplay--overlap-complete), [data-interacted="false"]) .zelda-gameplay__diamond-border { opacity: var(--gameplay-frame-reveal, 0); filter: blur(var(--gameplay-frame-blur, 0px)); border-color: rgb(255 255 255 / .2); }
+.zelda-gameplay--overlap-complete[data-interacted="false"] .zelda-gameplay__background { animation: none; opacity: 0; filter: none; }
 .zelda-gameplay [hidden] { display: none; }
 .zelda-gameplay:not([data-view="content2"]) .zelda-gameplay__activity--cook,
 .zelda-gameplay:not([data-view="content2"]) .zelda-gameplay__activity--travel { left: 0; }
