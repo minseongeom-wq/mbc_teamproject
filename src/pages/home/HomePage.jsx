@@ -18,12 +18,18 @@ export default function HomePage() {
   const container = useRef(null);
   const heroTransition = useHeroDiscoveryTransition(container);
   const [width, setWidth] = useState(() => Math.min(window.innerWidth, 1920));
+  const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 1023px)').matches);
   useLayoutEffect(() => {
+    const media = window.matchMedia('(max-width: 1023px)');
+    const updateMobile = () => setMobile(media.matches);
+    media.addEventListener('change', updateMobile);
     const observer = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width));
     observer.observe(container.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      media.removeEventListener('change', updateMobile);
+    };
   }, []);
-  const mobile = width < 1024;
   useDiscoveryNewsDepthTransition(container, mobile);
   return (
     <div className="home-page" ref={container}>
