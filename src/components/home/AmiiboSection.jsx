@@ -1,5 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { homeAsset } from './homeAssets.js';
+import useAmiiboScroll from './useAmiiboScroll.js';
+import './AmiiboScroll.css';
 
 const mobileFigures = [
 (          <div className="home-amiibo-mobile__01-image-box" data-node-id="2156:6923" data-name="01_image-box">
@@ -131,8 +133,10 @@ const desktopFigures = [
 ];
 
 export default function AmiiboSection({ mobile = false }) {
+  const sectionRef = useRef(null);
+  useAmiiboScroll(sectionRef, mobile);
   if (mobile) return (
-      <section aria-label="amiibo" className="home-amiibo-mobile" data-node-id="2156:6959">
+      <section ref={sectionRef} aria-label="amiibo" className="home-amiibo-mobile" data-amiibo-scroll data-node-id="2156:6959">
         <div className="home-amiibo-mobile__layer" data-node-id="2156:6960">
           <p className="home-amiibo-mobile__text" data-node-id="2156:6961">
             AMIIBO
@@ -152,7 +156,7 @@ export default function AmiiboSection({ mobile = false }) {
       </section>
   );
   return (
-      <section aria-label="amiibo" className="home-amiibo" data-node-id="1148:6626" data-name="04_Amiibo">
+      <section ref={sectionRef} aria-label="amiibo" className="home-amiibo" data-amiibo-scroll data-node-id="1148:6626" data-name="04_Amiibo">
         <p className="home-amiibo__text" data-node-id="1148:6627">
           게임과 이어지는 특별한 캐릭터
         </p>
