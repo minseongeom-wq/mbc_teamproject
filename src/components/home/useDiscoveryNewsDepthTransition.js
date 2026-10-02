@@ -105,12 +105,9 @@ export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
               anticipatePin: 1,
               invalidateOnRefresh: true,
               onUpdate: self => {
-                // CSS zoom produces fractional section boundaries, while the
-                // browser rounds scrollY. That rounding must not bypass cards.
-                const progress = self.scroll() <= self.start + 1 ? 0 : self.progress;
-                if (progress > 0) discovery.dataset.depthActive = 'true';
+                if (self.progress > 0) discovery.dataset.depthActive = 'true';
                 else delete discovery.dataset.depthActive;
-                updateDotVisual(discovery, news, progress, mobile, dotLayerRef);
+                updateDotVisual(discovery, news, self.progress, mobile, dotLayerRef);
               },
             },
           }).to(discovery, {

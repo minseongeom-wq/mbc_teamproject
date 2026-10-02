@@ -1,24 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-test('Overshooting Discovery still stops at the console until all cards are viewed', async ({ page }) => {
-  await page.route('**/videos/Sequence%2002_1.mp4', route => route.abort());
-  await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('/');
-  await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 10000 });
-  const start = await page.locator('.home-discovery').evaluate(node => Math.floor(window.scrollY + node.getBoundingClientRect().top));
-  await page.evaluate(y => window.scrollTo(0, y + 300), start);
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeCloseTo(start, 0);
-  const selected = page.locator('.home-game-carousel__card[aria-pressed="true"]');
-  for (const game of ['3', '4', '0', '1']) {
-    await page.mouse.wheel(0, 120);
-    await expect(selected).toHaveAttribute('data-game', game);
-    expect(await page.evaluate(() => window.scrollY)).toBeCloseTo(start, 0);
-    await page.waitForTimeout(580);
-  }
-  await page.mouse.wheel(0, 350);
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(start + 100);
-});
-
 test('Switch cards consume downward scroll before Home continues to the next section', async ({ page }) => {
   await page.route('**/videos/Sequence%2002_1.mp4', route => route.abort());
   await page.setViewportSize({ width: 1920, height: 1080 });
@@ -77,7 +58,7 @@ test('Discovery cards resume after the depth transition reverses at a scaled des
   await expect(page.locator('.home-transition')).toBeHidden({ timeout: 12000 });
   await expect(page.locator('.home-discovery')).not.toHaveClass(/home-discovery--booting/);
   await expect(page.locator('.home-discovery')).toHaveAttribute('data-transition-ready', 'true');
-  await expect(page.locator('.pin-spacer:has(> .home-discovery)')).toHaveCount(1);
+  await expect(page.locator('.pin-spacer')).toHaveCount(1);
 
   const selected = page.locator('.home-game-carousel__card[aria-pressed="true"]');
   const initialScroll = await page.evaluate(() => window.scrollY);

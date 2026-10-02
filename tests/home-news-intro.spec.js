@@ -6,7 +6,7 @@ test('News heading and existing pixels enter in order and reset on upward scroll
   await page.goto('/');
   await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 10000 });
   await page.locator('.home-hero__hero-visual-06').click();
-  await expect(page.locator('.pin-spacer:has(> .home-discovery)')).toHaveCount(1, { timeout: 12000 });
+  await expect(page.locator('.pin-spacer')).toHaveCount(1, { timeout: 12000 });
 
   const words = page.locator('.home-news__intro-word');
   const pixels = page.locator('.home-news__dot, .home-news__dot-2, .home-news__dot-3');

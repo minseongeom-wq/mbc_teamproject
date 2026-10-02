@@ -161,11 +161,11 @@ test('Continuous upward wheel input carries through console shutdown into Hero',
   });
   expect(frames.some(frame => frame.opacity > 0.9 && frame.top > 10 && frame.top < 710)).toBe(true);
   await expect(page.locator('.home-hero')).toBeInViewport();
-  await expect(page.locator('.pin-spacer:has(> .home-discovery, > .home-discovery-mobile)')).toHaveCount(0);
+  await expect(page.locator('.pin-spacer')).toHaveCount(0);
   await expect(page.locator('.home-discovery')).not.toHaveAttribute('data-transition-ready', 'true');
   await page.locator('.home-hero__hero-visual-06').click();
   await expectCompletedDiscovery(page);
-  await expect(page.locator('.pin-spacer:has(> .home-discovery, > .home-discovery-mobile)')).toHaveCount(1);
+  await expect(page.locator('.pin-spacer')).toHaveCount(1);
 });
 
 test('Changing direction during the rising Hero panel boots Discovery again', async ({ page }) => {

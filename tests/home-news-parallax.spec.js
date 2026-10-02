@@ -7,7 +7,7 @@ test('Background News characters rise with scroll and return to the same positio
   await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 10000 });
   await page.locator('.home-hero__hero-visual-06').click();
   await expect(page.locator('.home-transition')).toBeHidden({ timeout: 12000 });
-  await expect(page.locator('.pin-spacer:has(> .home-discovery)')).toHaveCount(1, { timeout: 12000 });
+  await expect(page.locator('.pin-spacer')).toHaveCount(1, { timeout: 12000 });
 
   const anchor = await page.evaluate(() => window.scrollY);
   const offsets = () => page.locator('.home-news [data-news-parallax]').evaluateAll(elements =>

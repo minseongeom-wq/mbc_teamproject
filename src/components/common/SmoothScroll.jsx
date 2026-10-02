@@ -17,29 +17,9 @@ export default function SmoothScroll() {
       touchMultiplier: 1,
       syncTouch: false,
       autoRaf: false,
-      virtualScroll: ({ event }) => {
-        if (!event.defaultPrevented) return true;
-        // Console cards and modal/intro controls own this input. Also cancel
-        // any previous inertia so it cannot carry the page past the console.
-        lenis.scrollTo(window.scrollY, { immediate: true, force: true });
-        return false;
-      },
     });
 
-    const update = (time) => {
-      if (getComputedStyle(document.body).overflowY === 'hidden') {
-        lenis.stop();
-        lenis.scrollTo(window.scrollY, { immediate: true, force: true });
-        return;
-      }
-      if (lenis.isStopped) lenis.start();
-      // Hero transitions and browser navigation can reposition the page
-      // directly. Discard stale inertia instead of undoing that position.
-      if (Math.abs(lenis.actualScroll - lenis.animatedScroll) > 1) {
-        lenis.scrollTo(lenis.actualScroll, { immediate: true, force: true });
-      }
-      lenis.raf(time * 1000);
-    };
+    const update = (time) => lenis.raf(time * 1000);
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
