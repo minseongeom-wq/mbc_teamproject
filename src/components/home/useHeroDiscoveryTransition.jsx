@@ -79,7 +79,7 @@ export default function useHeroDiscoveryTransition(containerRef) {
     gsap.set(screen, { backgroundColor: '#151515' });
     gsap.set([...screenContent, selectedInfo, caption].filter(Boolean), { autoAlpha: 0 });
     if (caption) gsap.set(caption, { y: 12 });
-    window.scrollTo(0, window.scrollY + discovery.getBoundingClientRect().top);
+    window.scrollTo(0, Math.floor(window.scrollY + discovery.getBoundingClientRect().top));
     discoveryScrollYRef.current = window.scrollY;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -166,7 +166,11 @@ export default function useHeroDiscoveryTransition(containerRef) {
       if (!discovery) return;
       const top = discovery.getBoundingClientRect().top;
       if (top > 0) return;
-      discoveryScrollYRef.current = window.scrollY + top;
+      discoveryScrollYRef.current = Math.floor(window.scrollY + top);
+      // A large wheel step or a running smooth-scroll tween can overshoot the
+      // console. Stop at its entrance before handing input to the card carousel.
+      gsap.killTweensOf(window);
+      if (top < -1) window.scrollTo(0, discoveryScrollYRef.current);
       discovery.dataset.transitionReady = 'true';
       phaseRef.current = 'completed';
     };

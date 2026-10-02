@@ -89,7 +89,7 @@ test('Wheel reversal changes depth progress before changing Discovery cards', as
   await page.locator('.home-hero__hero-visual-06').click();
   await expect(page.locator('.home-discovery')).not.toHaveClass(/home-discovery--booting/, { timeout: 12000 });
   await expect(page.locator('.home-discovery')).toHaveAttribute('data-transition-ready', 'true');
-  await expect(page.locator('.pin-spacer')).toHaveCount(1);
+  await expect(page.locator('.pin-spacer:has(> .home-discovery)')).toHaveCount(1);
   await page.evaluate(() => window.scrollBy(0, 400));
   await expect.poll(() => page.locator('.home-discovery').evaluate(element => new DOMMatrix(getComputedStyle(element).transform).a)).toBeLessThan(0.99);
 
@@ -110,7 +110,7 @@ test('Depth scale and News position follow the same progress in both directions'
   await page.goto('/');
   await expect(page.locator('.nintendo-intro')).toHaveCount(0, { timeout: 10000 });
   await page.locator('.home-hero__hero-visual-06').click();
-  await expect(page.locator('.pin-spacer')).toHaveCount(1, { timeout: 12000 });
+  await expect(page.locator('.pin-spacer:has(> .home-discovery)')).toHaveCount(1, { timeout: 12000 });
 
   const anchor = await page.evaluate(() => window.scrollY);
   const measure = () => page.evaluate(() => ({
@@ -139,7 +139,7 @@ test('Discovery dots sample the live scene and reverse with the depth progress',
   await page.mouse.click(480, 320);
   await expect(page.locator('.nintendo-intro')).toHaveCount(0);
   await page.locator('.home-hero__hero-visual-06').click();
-  await expect(page.locator('.pin-spacer')).toHaveCount(1, { timeout: 12000 });
+  await expect(page.locator('.pin-spacer:has(> .home-discovery)')).toHaveCount(1, { timeout: 12000 });
 
   const anchor = await page.evaluate(() => window.scrollY);
   const measure = () => page.evaluate(() => {
