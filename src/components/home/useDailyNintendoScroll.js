@@ -9,13 +9,39 @@ gsap.registerPlugin(ScrollTrigger);
 export default function useDailyNintendoScroll(sectionRef, mobile) {
   useLayoutEffect(() => {
     const section = sectionRef.current;
+    const wrapper = section.querySelector('.daily-scene-wrapper');
+    let resizeFrame;
+    const updateScale = () => {
+      if (!mobile) {
+        const scale = Math.min(1, wrapper.clientWidth / 1920);
+        wrapper.style.setProperty('--daily-scene-scale', scale);
+        // Move the entire scene: its first heading is at y=278 in Figma.
+        // Anchor that content 24px from the viewport top, without resizing it.
+        wrapper.style.setProperty('--daily-scene-offset-y', `${24 - 278 * scale}px`);
+      }
+    };
+    updateScale();
+    let wrapperWidth = wrapper.clientWidth;
+    let wrapperHeight = wrapper.clientHeight;
+    const resizeObserver = new ResizeObserver(() => {
+      if (mobile || (wrapper.clientWidth === wrapperWidth && wrapper.clientHeight === wrapperHeight)) return;
+      wrapperWidth = wrapper.clientWidth;
+      wrapperHeight = wrapper.clientHeight;
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => {
+        updateScale();
+        ScrollTrigger.refresh();
+      });
+    });
+    resizeObserver.observe(wrapper);
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       let active = true;
       let frame;
       let timeline;
       const canvas = section.closest('.home-page__canvas');
-      const zoom = () => Number.parseFloat(getComputedStyle(canvas).zoom) || 1;
+      const canvasZoom = () => Number.parseFloat(getComputedStyle(canvas).zoom) || 1;
+      const zoom = () => mobile ? canvasZoom() : 1;
       const pinY = gsap.quickSetter(section, 'y', 'px');
       const videos = [...section.querySelectorAll('[data-widget-video]')];
       const pendingPlayback = new WeakSet();
@@ -45,7 +71,10 @@ export default function useDailyNintendoScroll(sectionRef, mobile) {
         });
       };
       const updatePin = self => {
-        pinY(Math.max(0, Math.min(self.end - self.start, self.scroll() - self.start)) / zoom());
+        // Measure the spacer's actual position. An upstream section may change
+        // its height before ScrollTrigger has refreshed the cached start.
+        const travel = -self.spacer.getBoundingClientRect().top;
+        pinY(Math.max(0, Math.min(self.end - self.start, travel)) / zoom());
         updateVideos();
       };
       const context = gsap.context(() => {
@@ -56,7 +85,7 @@ export default function useDailyNintendoScroll(sectionRef, mobile) {
         const calendars = [...section.querySelectorAll('[data-calendar]')];
         const supports = [...section.querySelectorAll('[data-support]')];
         const heading = section.querySelector('.daily-carousel__heading');
-        // Figma side slots remain on the same width-scaled Home artboard.
+        // All slots remain in the scene's original Figma coordinates.
         // Bounds from the four Figma frames, expressed as device centers.
         const slots = [
           [[111.77, 1058.02, 351, 678, -31.88], [959.89, 857, 354, 678, 0], [1807.66, 1058.02, 351, 678, 31.88]],
@@ -104,10 +133,11 @@ export default function useDailyNintendoScroll(sectionRef, mobile) {
             pin: true, pinType: 'transform', scrub: true,
             invalidateOnRefresh: true, onUpdate: updatePin,
             onRefresh: self => {
-              // Home uses CSS zoom: compensate pin translation and spacer once.
-              const spacing = (self.end - self.start) / zoom();
+              // The spacer still inherits Home's zoom even though desktop Daily
+              // cancels it. Express both spacing and section height in its units.
+              const spacing = (self.end - self.start) / canvasZoom();
               self.spacer.style.paddingBottom = spacing + 'px';
-              self.spacer.style.height = section.offsetHeight + spacing + 'px';
+              self.spacer.style.height = section.offsetHeight * zoom() / canvasZoom() + spacing + 'px';
               updatePin(self);
             },
           },
@@ -150,7 +180,7 @@ export default function useDailyNintendoScroll(sectionRef, mobile) {
       }, section);
       const refresh = () => {
         cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(() => { if (active) timeline.scrollTrigger.refresh(); });
+        frame = requestAnimationFrame(() => { if (active) ScrollTrigger.refresh(); });
       };
       const observer = new ResizeObserver(refresh);
       observer.observe(section);
@@ -167,7 +197,11 @@ export default function useDailyNintendoScroll(sectionRef, mobile) {
         context.revert();
       };
     });
-    return () => media.revert();
+    return () => {
+      resizeObserver.disconnect();
+      cancelAnimationFrame(resizeFrame);
+      media.revert();
+    };
   }, [sectionRef, mobile]);
 }
 

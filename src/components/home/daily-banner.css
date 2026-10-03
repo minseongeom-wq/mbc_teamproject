@@ -1,0 +1,19 @@
+/* 07 1–5 share one 1920 × 675 composition, scaled by Home's existing zoom. */
+.home-page .home-banner--interactive { height: calc(100dvh / var(--home-scale, 1)); }
+.home-banner__scene { position: absolute; left: 0; top: calc(50% - 337.5px); width: 1920px; height: 675px; overflow: clip; }
+.home-banner__placeholder { position: absolute; left: -83px; top: 303px; }
+.home-page .home-banner--interactive .home-banner__slugun-text { display: block; height: 172px; }
+.home-page .home-banner--interactive .home-banner__slogan-text { display: block; position: absolute; left: 91px; top: 0; width: 726px; height: 75px; }
+.home-banner__word { position: absolute; font: 400 68px/1 'DeltaGlassKR', sans-serif; letter-spacing: 1.632px; color: var(--color-white, #fff); white-space: nowrap; will-change: transform; }
+.home-banner__word--putting { left: 163px; top: 4px; translate: -100% 0; transform: translateY(-24px); text-align: right; }
+.home-banner__word--smiles { left: 319px; top: 3.5px; translate: -100% 0; text-align: right; }
+.home-banner__word--on-the { left: 448px; top: 3.5px; }
+.home-banner__word--faces { left: 599px; top: 4px; }
+.home-page .home-banner--interactive .home-banner__element { position: absolute; left: 339px; top: 0; }
+.home-page .home-banner--interactive .home-banner__slogan-text-2 { display: block; position: absolute; left: 0; top: 97px; height: 75px; }
+.home-page .home-banner--interactive .home-banner__text-3 { position: absolute; left: 66.5px; top: 3.5px; }
+.home-page .home-banner--interactive .home-banner__element-2 { position: absolute; left: 347.5px; top: 0; }
+.home-page .home-banner--interactive .home-banner__text-4 { position: absolute; left: 456.5px; top: 3.5px; }
+.home-banner__mario { position: absolute; left: 635px; top: 144px; width: 88px; height: 88px; transform-origin: center bottom; will-change: transform; }
+.home-banner__mario-crop { position: absolute; left: 0; top: 3px; width: 88px; height: 85px; overflow: hidden; }
+.home-banner__mario-crop img { position: absolute; width: 378.82%; height: 521.34%; left: -271.5%; top: -183.44%; max-width: none; }

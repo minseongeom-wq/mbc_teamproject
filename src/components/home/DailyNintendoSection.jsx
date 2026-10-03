@@ -30,7 +30,8 @@ export default function DailyNintendoSection({ mobile = false }) {
   useDailyNintendoScroll(section, mobile);
   return (
     <section ref={section} className={`daily-carousel ${mobile ? 'daily-carousel--mobile' : ''}`} data-daily-scroll data-name="06_Daily-Nintendo" data-node-id="1148:6749" aria-label="날마다 만나는 닌텐도">
-      <div className="daily-carousel__stage">
+      <div className="daily-scene-wrapper">
+      <div className="daily-scene daily-carousel__stage">
         <h2 className="daily-carousel__heading">날마다 만나는 닌텐도</h2>
         <div className="daily-carousel__titles">
           <p className="daily-carousel__title" data-title aria-label="NINTENDO Widget 01부터 04까지">
@@ -63,6 +64,7 @@ export default function DailyNintendoSection({ mobile = false }) {
           {widgets.map((widget, i) => <div key={widget.id} className={`daily-carousel__description daily-carousel__state ${i === 0 ? 'daily-carousel__state--initial' : ''}`} data-description={i} data-widget={widget.id}><h3>{widget.title}</h3><p>{widget.copy}</p></div>)}
         </div>
         </div>
+      </div>
       </div>
     </section>
   );

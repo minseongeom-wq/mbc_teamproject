@@ -34,7 +34,7 @@ async function seek(page, progress) {
     return Math.abs((await state(page)).progress - Math.min(1, progress));
   }).toBeLessThan(.003);
 }
-for (const [width, height] of [[1920, 1432], [1920, 1080], [1896, 904], [1440, 720], [1280, 900], [390, 844], [390, 667]]) {
+for (const [width, height] of [[1920, 1432], [1920, 1080], [1896, 904], [1600, 1000], [1536, 960], [1440, 720], [1280, 900], [390, 844], [390, 667]]) {
   test('Daily scrub carousel reverses and releases at ' + width + 'x' + height, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -105,9 +105,10 @@ for (const [width, height] of [[1920, 1432], [1920, 1080], [1896, 904], [1440, 7
           return { top: r.top, bottom: r.bottom, left: r.left, right: r.right };
         });
       }, index);
-      for (const box of boxes) {
+      for (const [index, box] of boxes.entries()) {
         expect(box.top).toBeGreaterThanOrEqual(-1);
-        expect(box.bottom).toBeLessThanOrEqual(height + 1);
+        // The desktop phones and description may continue below the viewport.
+        if (width < 1024 || index < 2) expect(box.bottom).toBeLessThanOrEqual(height + 1);
         expect(box.left).toBeGreaterThanOrEqual(-1);
         expect(box.right).toBeLessThanOrEqual(width + 1);
       }
@@ -120,7 +121,11 @@ for (const [width, height] of [[1920, 1432], [1920, 1080], [1896, 904], [1440, 7
       return stage.width / node.getBoundingClientRect().width;
     });
     expect(filledWidth).toBeLessThanOrEqual(1.001);
-    expect(filledWidth).toBeGreaterThan(.7);
+    if (width < 1024) expect(filledWidth).toBeGreaterThan(.7);
+    else {
+      const availableWidth = await page.evaluate(() => document.querySelector('.home-page').clientWidth);
+      expect(filledWidth).toBeCloseTo(Math.min(1, availableWidth / 1920) * 1920 / availableWidth, 3);
+    }
     const visibleScreens = () => section.locator('[data-phone]').evaluateAll(phones =>
       phones.map(phone => [...phone.querySelectorAll('[data-screen]')]
         .find(screen => Number(getComputedStyle(screen).opacity) === 1)?.dataset.screen));
@@ -184,5 +189,86 @@ for (const [width, height] of [[1920, 1432], [1920, 1080], [1896, 904], [1440, 7
     await expect.poll(() => widgetVideo.evaluate(video => video.paused)).toBe(true);
   });
 }
+
+test('Daily scene scales as one unit and refreshes its pin after desktop resize', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1432 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.route('**/videos/Sequence%2002_1.mp4', route => route.abort());
+  await page.goto('/');
+  await expect(page.locator('.nintendo-intro')).toHaveCount(0);
+  await page.locator('.home-hero__hero-visual-06').click();
+  await expect(page.locator('[data-scroll-position]')).toHaveAttribute('data-transition-ready', 'true');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect.poll(async () => (await state(page)).count).toBe(1);
+  const geometry = () => page.locator('[data-daily-scroll]').evaluate(section => {
+    const wrapper = section.querySelector('.daily-scene-wrapper');
+    const scene = section.querySelector('.daily-scene');
+    const bounds = scene.getBoundingClientRect();
+    const scale = bounds.width / 1920;
+    return {
+      scale, width: bounds.width, height: bounds.height,
+      wrapperHeight: wrapper.getBoundingClientRect().height,
+      sectionHeight: section.getBoundingClientRect().height,
+      center: bounds.left + bounds.width / 2,
+      centerY: bounds.top + bounds.height / 2,
+      headingTop: section.querySelector('.daily-carousel__heading').getBoundingClientRect().top,
+      top: bounds.top, bottom: bounds.bottom,
+      origin: getComputedStyle(scene).transformOrigin,
+      layoutWidth: scene.offsetWidth, layoutHeight: scene.offsetHeight,
+      elements: [...scene.querySelectorAll('[data-phone], [data-calendar], .daily-carousel__background')].map(node => {
+        const rect = node.getBoundingClientRect();
+        return [(rect.left - bounds.left) / scale, (rect.top - bounds.top) / scale, rect.width / scale, rect.height / scale];
+      }),
+    };
+  });
+  await seek(page, 111 / 115);
+  const baseline = await geometry();
+  for (const [width, height] of [[1680, 900], [1600, 900], [1536, 864], [1440, 720], [1440, 900], [1280, 1200], [1920, 1432]]) {
+    await page.setViewportSize({ width, height });
+    const availableWidth = await page.evaluate(() => document.querySelector('.home-page').clientWidth);
+    const expectedScale = Math.min(1, availableWidth / 1920);
+    await expect.poll(async () => (await geometry()).scale).toBeCloseTo(expectedScale, 3);
+    await seek(page, 111 / 115);
+    const current = await geometry();
+    expect(current.layoutWidth).toBe(1920);
+    expect(current.layoutHeight).toBe(1432);
+    expect(current.origin).toBe('960px 716px');
+    expect(current.center).toBeCloseTo(availableWidth / 2, 1);
+    expect(current.headingTop).toBeCloseTo(24, 0);
+    expect(current.height).toBeCloseTo(1432 * expectedScale, 1);
+    expect(current.wrapperHeight).toBeCloseTo(24 + (1432 - 278) * expectedScale, 1);
+    expect(current.bottom).toBeCloseTo(current.sectionHeight, 0);
+    expect(current.sectionHeight).toBeCloseTo(current.wrapperHeight, 1);
+    current.elements.forEach((rect, index) => rect.forEach((value, axis) =>
+      expect(value).toBeCloseTo(baseline.elements[index][axis], 1)));
+    expect((await state(page)).count).toBe(1);
+    expect(Math.abs((await state(page)).top)).toBeLessThan(2);
+    await seek(page, 44 / 115);
+    // Browser scroll coordinates round to pixels, including after a height resize.
+    expect((await state(page)).numberPosition).toBeCloseTo(.5, 2);
+    await seek(page, 111 / 115);
+  }
+  // Simulate an upstream layout shift before the cached trigger start refreshes.
+  const oldMargin = await page.evaluate(async () => {
+    const section = document.querySelector('[data-daily-scroll]');
+    const preceding = section.parentElement.previousElementSibling;
+    const oldMargin = preceding.style.marginBottom;
+    preceding.style.marginBottom = '160px';
+    const resource = performance.getEntriesByType('resource').find(item => item.name.includes('/gsap_ScrollTrigger.js'));
+    const { ScrollTrigger } = await import(resource.name);
+    window.scrollTo(0, window.scrollY + 2);
+    ScrollTrigger.update();
+    return oldMargin;
+  });
+  await expect.poll(async () => Math.abs((await state(page)).top)).toBeLessThan(2);
+  await page.evaluate(async oldMargin => {
+    document.querySelector('[data-daily-scroll]').parentElement.previousElementSibling.style.marginBottom = oldMargin;
+    const resource = performance.getEntriesByType('resource').find(item => item.name.includes('/gsap_ScrollTrigger.js'));
+    const { ScrollTrigger } = await import(resource.name);
+    ScrollTrigger.refresh();
+  }, oldMargin);
+  await seek(page, 1.02);
+  expect((await state(page)).active).toBe(false);
+});
 
 
