@@ -43,3 +43,24 @@ html:has(.home-page) { scrollbar-gutter: stable; }
 @media (prefers-reduced-motion: reduce) {
   .home-page *, .home-page *::before, .home-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Home desktop footer slots from Figma 1148:1907. Shared routes retain their layout. */
+@media (min-width: 1024px) {
+  .site-shell:has(.home-page) > .common-header:not(.common-header--open) { padding-top: 8px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__inner {
+    position: relative;
+    height: 1026px;
+    padding: 0;
+    max-width: 1920px;
+  }
+  .site-shell:has(.home-page) > .common-footer .common-footer__top { position: absolute; right: 4.0625%; top: 121px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__links { position: static; margin: 0; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__support { position: absolute; left: 4.114583%; top: 453px; font-size: 19px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__social { position: absolute; right: 3.958333%; top: 414px; font-size: 19px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__support a { gap: 7px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__support img { width: 21px; height: 21px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__contact-row { position: absolute; top: 632px; left: 4.0625%; right: 4.114583%; margin: 0; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__contact { line-height: 1.3; gap: 4.4px; margin-top: -6px; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__company-row { position: absolute; left: 4.21875%; right: 4.114583%; top: 758px; margin: 0; }
+  .site-shell:has(.home-page) > .common-footer .common-footer__wordmark { position: absolute; left: 4.21875%; right: 4.166667%; top: 850.367px; width: auto; margin: 0; }
+}

@@ -38,7 +38,7 @@ export default function MainLayout() {
           </nav>
         )}
       </main>
-      <Footer variant={isZelda ? 'zelda' : 'default'} />
+      <Footer variant={isZelda ? 'zelda' : 'default'} homeDesign={pathname === routePaths.home} />
     </div>
   );
 }

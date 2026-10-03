@@ -94,17 +94,28 @@ export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
         scheduledFrame = undefined;
         if (context || !ready()) return;
         context = gsap.context(() => {
+          const setY = gsap.quickSetter(discovery, 'y', 'px');
+          const updatePin = self => {
+            const zoom = Number.parseFloat(getComputedStyle(canvas).zoom) || 1;
+            const travel = Math.max(0, Math.min(self.end - self.start, self.scroll() - self.start));
+            // Keep design-sized sections in their zoomed canvas. Fixed pinning
+            // otherwise applies CSS zoom twice to viewport-sized pin bounds.
+            setY(travel / zoom - 36 * self.progress);
+          };
           gsap.timeline({
             scrollTrigger: {
               trigger: discovery,
               start: 'top top',
               end: () => `+=${Math.max(window.innerHeight, discovery.getBoundingClientRect().height)}`,
               pin: discovery,
+              pinType: 'transform',
               pinSpacing: false,
               scrub: true,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              onRefresh: updatePin,
               onUpdate: self => {
+                updatePin(self);
                 // CSS zoom produces fractional section boundaries, while the
                 // browser rounds scrollY. That rounding must not bypass cards.
                 const progress = self.scroll() <= self.start + 1 ? 0 : self.progress;
@@ -115,7 +126,6 @@ export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
             },
           }).to(discovery, {
             scale: 0.88,
-            y: -36,
             ease: 'none',
             transformOrigin: 'center center',
           });

@@ -170,7 +170,7 @@ function NewsCards({ mobile, onSelect }) {
         <div className="home-news__layer" data-node-id="1215:8566">
           <div className="home-news__layer-2">
             <div className="home-news__image-1043-edited-3-1" data-name="image_1043_edited (3) 1">
-              <img alt="" className="home-news__image" src={homeAsset('83bfb.png')} />
+              <img alt="" className="home-news__image" src={homeAsset('c7a3c.png')} />
             </div>
           </div>
         </div>
@@ -179,19 +179,23 @@ function NewsCards({ mobile, onSelect }) {
             <div className="home-news__halftone-generator-70-1" data-name="halftone-generator (70) 1" />
           </div>
         </div>
-        <div className="home-news__layer-5" data-node-id="1215:8569"><img alt="" className="home-news__image-2" src={homeAsset('news-pixel-2.png')} /></div>
-        <div className="home-news__layer-6" data-node-id="1215:8570"><img alt="" className="home-news__image-3" src={homeAsset('news-pixel-3.png')} /></div>
+        <div className="home-news__layer-5" data-node-id="1215:8569"><img alt="" className="home-news__image-2" src={homeAsset('news-orange-latest.png')} /></div>
+        <div className="home-news__layer-6" data-node-id="1215:8570"><img alt="" className="home-news__image-3" src={homeAsset('news-blue-latest.png')} /></div>
         <div className="home-news__image-1042-edited-3-1" data-node-id="1215:8571" data-name="image_1042_edited (3) 1">
           <img alt="" className="home-news__image-4" src={homeAsset('5d287.png')} />
         </div>
         <div className="home-news__gemini-generated-image-mmbaskmmbaskmmba-1" data-node-id="1215:8573" data-name="Gemini_Generated_Image_mmbaskmmbaskmmba 1" data-news-parallax="180">
           <div className="home-news__layer-7">
-            <img alt="" className="home-news__image-5" src={homeAsset('eacc5.png')} />
+            <img alt="" className="home-news__image-5" src={homeAsset('7fb38.png')} />
           </div>
         </div>
         <div className="home-news__halftone-generator-50-1" data-node-id="1215:8574" data-name="halftone-generator (50) 1" data-news-parallax="220">
-          <div className="home-news__layer-8">
-            <img alt="" className="home-news__image-6" src={homeAsset('9bd6b.png')} />
+          <div className="home-news__luigi-rotation">
+            <div className="home-news__luigi-art">
+              <div className="home-news__layer-8">
+                <img alt="" className="home-news__image-6" src={homeAsset('9bd6b.png')} />
+              </div>
+            </div>
           </div>
         </div>
         <div className="home-news__gemini-generated-image-49c76g49c76g49c7-1" data-node-id="1215:8575" data-name="Gemini_Generated_Image_49c76g49c76g49c7 1" data-news-parallax="150">
@@ -244,7 +248,7 @@ function NewsCards({ mobile, onSelect }) {
         </div>
         <div {...cardProps('pikmin')} className="home-news__news-text-card-03" data-node-id="1215:8600" data-name="News-Text-Card-03">
           <div className="home-news__bi-arrow-up-right" data-node-id="1215:8601" data-name="bi:arrow-up-right">
-            <img alt="" className="home-news__image-13" src={homeAsset('8cfbb.svg')} />
+            <img alt="" className="home-news__image-13" src={homeAsset('5047b.svg')} />
           </div>
           <div className="home-news__text-box" data-node-id="1215:8603" data-name="text-box">
             <p className="home-news__text-9" data-node-id="1215:8604">
@@ -268,7 +272,7 @@ function NewsCards({ mobile, onSelect }) {
             </p>
           </div>
           <div className="home-news__bi-arrow-up-right-2" data-node-id="1215:8611" data-name="bi:arrow-up-right">
-            <img alt="" className="home-news__image-14" src={homeAsset('8cfbb.svg')} />
+            <img alt="" className="home-news__image-14" src={homeAsset('5047b.svg')} />
           </div>
         </div>
         <div {...cardProps('marioKart')} className="home-news__news-text-card-02" data-node-id="1215:8613" data-name="News-Text-Card-02">
@@ -281,7 +285,7 @@ function NewsCards({ mobile, onSelect }) {
             </div>
           </div>
           <div className="home-news__bi-arrow-up-right-3" data-node-id="1215:8617" data-name="bi:arrow-up-right">
-            <img alt="" className="home-news__image-15" src={homeAsset('8cfbb.svg')} />
+            <img alt="" className="home-news__image-15" src={homeAsset('5047b.svg')} />
           </div>
         </div>
         <div {...cardProps('splatoon')} className="home-news__news-text-card-01" data-node-id="1215:8619" data-name="News-Text-Card-01">
@@ -303,7 +307,7 @@ function NewsCards({ mobile, onSelect }) {
             </div>
           </div>
           <div className="home-news__bi-arrow-up-right-4" data-node-id="1215:8623" data-name="bi:arrow-up-right">
-            <img alt="" className="home-news__image-16" src={homeAsset('8cfbb.svg')} />
+            <img alt="" className="home-news__image-16" src={homeAsset('5047b.svg')} />
           </div>
         </div>
         <p className="home-news__text-21" data-node-id="1215:8626" role="heading" aria-level="2" aria-label="WHAT'S NEW?"><span className="home-news__intro-word" aria-hidden="true">WHAT&apos;S</span>{' '}<span className="home-news__intro-word" aria-hidden="true">NEW?</span></p>

@@ -217,6 +217,7 @@ export default function NintendoPicksSection({ mobile = false }) {
       </section>
   );
   return (
+    <div className="home-picks-scroll-driver">
       <section ref={sectionRef} aria-label="Nintendo Picks" className="home-picks" data-node-id="2485:10400" data-name="05_Nintendo-Picks">
         <div aria-hidden className="home-picks__layer">
           <div className="home-picks__layer-2" />
@@ -438,7 +439,8 @@ export default function NintendoPicksSection({ mobile = false }) {
           지금 주목해야 할 7가지 소식
         </p>
         <p className="home-picks__text-46" data-node-id="1148:6734">
-          NINTENDO PICKS 07
+          <span className="home-picks__intro-word" style={{ display: 'inline-block' }}>NINTENDO</span>{' '}
+          <span className="home-picks__intro-word" style={{ display: 'inline-block' }}>PICKS 07</span>
         </p>
         </div>
         <div className="home-picks__cover-image-2" data-node-id="2485:10473" data-name="Cover image">
@@ -466,5 +468,6 @@ export default function NintendoPicksSection({ mobile = false }) {
           </div>
         </div>
       </section>
+    </div>
   );
 }

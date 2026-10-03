@@ -1,6 +1,11 @@
+import { useRef } from 'react';
 import { homeAsset } from './homeAssets.js';
+import useDailyBannerScroll from './useDailyBannerScroll.js';
+import './daily-banner.css';
 
 export default function DailyNintendoBanner({ mobile = false }) {
+  const section = useRef(null);
+  useDailyBannerScroll(section, mobile);
   if (mobile) return (
       <section aria-label="Putting Smiles on the Faces of Everyone" className="home-banner-mobile" data-node-id="2156:6712">
         <div className="home-banner-mobile__layer" data-node-id="2156:6713" />
@@ -29,16 +34,25 @@ export default function DailyNintendoBanner({ mobile = false }) {
       </section>
   );
   return (
-      <section aria-label="Putting Smiles on the Faces of Everyone" className="home-banner" data-node-id="1148:6782" data-name="07_Daily-Nintendo-Banner">
+      <section ref={section} aria-label="Putting Smiles on the Faces of Everyone Nintendo Touches" className="home-banner home-banner--interactive" data-banner-scroll data-node-id="1147:2670" data-name="07_Daily-Nintendo-Banner">
+        <div className="home-banner__scene">
+        <img className="home-banner__placeholder" src={homeAsset('94fd4.svg')} width="300" height="300" alt="" />
+        <div className="home-banner__mario" data-banner-mario aria-hidden="true">
+          <div className="home-banner__mario-crop" data-banner-mario-art>
+            <img src={homeAsset('2f91e.png')} alt="" />
+          </div>
+        </div>
         <div className="home-banner__slugun-text" data-node-id="1148:6785" data-name="Slugun-text">
           <div className="home-banner__slogan-text" data-node-id="1148:6786" data-name="Slogan text">
-            <p className="home-banner__text" data-node-id="1148:6787">{`Putting Smiles `}</p>
-            <div className="home-banner__element" data-node-id="1148:6788" data-name="element">
+            <p className="home-banner__word home-banner__word--putting" data-banner-word="putting">Putting</p>
+            <p className="home-banner__word home-banner__word--smiles" data-banner-word="smiles">{`Smiles `}</p>
+            <div className="home-banner__element" data-node-id="1148:6788" data-name="element" data-banner-block>
               <div className="home-banner__halftone-generator-21-1" data-node-id="1148:6790" data-name="halftone-generator (21) 1">
                 <img alt="" className="home-banner__image" src={homeAsset('66341.png')} />
               </div>
             </div>
-            <p className="home-banner__text-2" data-node-id="1148:6791">{`on the Faces  `}</p>
+            <p className="home-banner__word home-banner__word--on-the" data-banner-word="on-the">on the</p>
+            <p className="home-banner__word home-banner__word--faces" data-banner-word="faces">Faces</p>
           </div>
           <div className="home-banner__slogan-text-2" data-node-id="1148:6792" data-name="Slogan text">
             <p className="home-banner__text-3" data-node-id="1148:6793">
@@ -69,6 +83,7 @@ export default function DailyNintendoBanner({ mobile = false }) {
               <img alt="" className="home-banner__image-4" src={homeAsset('664b4.png')} />
             </div>
           </div>
+        </div>
         </div>
       </section>
   );
