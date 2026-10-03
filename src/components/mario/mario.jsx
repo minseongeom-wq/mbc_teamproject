@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import imgIntroCloud07 from "./assets/intro-cloud-07.png";
 
 const imgCon3MarioPowerUps = "/images/mario/con3-mario-power-ups.png";
 const imgCon4NintendoSwitch2Enhancement =
@@ -272,11 +273,11 @@ export default function Mario() {
   };
   useEffect(() => {
     const track = powerScrollRef.current;
-    const scene = track.querySelector('#mario-powerups');
-    const art = scene.querySelector('.mario-powerup-hero');
+    const scene = track.querySelector("#mario-powerups");
+    const art = scene.querySelector(".mario-powerup-hero");
     const artCenter = art.offsetTop + art.offsetHeight / 2;
-    const desktop = matchMedia('(min-width: 768px)');
-    const powers = ['drill', 'elephant', 'fire', 'bubble', 'cat'];
+    const desktop = matchMedia("(min-width: 768px)");
+    const powers = ["drill", "elephant", "fire", "bubble", "cat"];
     let frame = 0;
     let scale = 1;
     let pinTop = 0;
@@ -291,9 +292,13 @@ export default function Mario() {
         return;
       }
       const distance = pinTop * scale - track.getBoundingClientRect().top;
-      powerHoverEnabledRef.current = distance >= 0 && distance < lead + step * powers.length;
+      powerHoverEnabledRef.current =
+        distance >= 0 && distance < lead + step * powers.length;
       if (!powerHoverEnabledRef.current) setHoveredPower(null);
-      const index = Math.min(powers.length - 1, Math.floor((distance - lead) / step));
+      const index = Math.min(
+        powers.length - 1,
+        Math.floor((distance - lead) / step),
+      );
       setScrollPower(index < 0 ? null : powers[index]);
     };
     const schedule = () => {
@@ -304,132 +309,429 @@ export default function Mario() {
         // Account for the existing zoom without changing the scene's coordinates.
         scale = scene.getBoundingClientRect().width / scene.offsetWidth;
         const viewport = window.innerHeight / scale;
-        pinTop = -Math.max(0, Math.min(artCenter - viewport / 2, scene.offsetHeight - viewport));
+        pinTop = -Math.max(
+          0,
+          Math.min(artCenter - viewport / 2, scene.offsetHeight - viewport),
+        );
         lead = window.innerHeight * 0.25;
         step = window.innerHeight * 0.75;
-        track.style.setProperty('--powerup-pin-top', `${pinTop}px`);
-        track.style.setProperty('--powerup-track-height', `${scene.offsetHeight + (lead + step * powers.length) / scale}px`);
+        track.style.setProperty("--powerup-pin-top", `${pinTop}px`);
+        track.style.setProperty(
+          "--powerup-track-height",
+          `${scene.offsetHeight + (lead + step * powers.length) / scale}px`,
+        );
       }
       schedule();
     };
     const observer = new ResizeObserver(measure);
     observer.observe(scene);
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', measure);
-    desktop.addEventListener('change', measure);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", measure);
+    desktop.addEventListener("change", measure);
     measure();
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', measure);
-      desktop.removeEventListener('change', measure);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", measure);
+      desktop.removeEventListener("change", measure);
     };
   }, []);
   const navigate = useNavigate();
   const activeCharacterData = characterSelection[activeCharacter];
   useEffect(() => {
     const page = pageRef.current;
-    const intro = page.querySelector('#mario-intro');
-    const hero = page.querySelector('#mario-hero');
-    const desktop = matchMedia('(min-width: 768px)');
-    const clouds = [...intro.querySelectorAll(':scope > :is(.mario-layer-3, .mario-layer-5, .mario-layer-7, .mario-layer-8, .mario-layer-11, .mario-layer-13, .mario-layer-14)')];
+    const intro = page.querySelector("#mario-intro");
+    const hero = page.querySelector("#mario-hero");
+    const logo = intro.querySelector(".mario-layer-6");
+    const navigation = page
+      .closest(".site-shell")
+      ?.querySelector(":scope > .common-header");
+    const clouds = [
+      ...intro.querySelectorAll(':scope > [data-name^="cloud "]'),
+    ];
+    const secondLayer = clouds.filter((cloud) =>
+      /^cloud (09|1[0-8])$/.test(cloud.dataset.name),
+    );
+
+    const desktop = matchMedia("(min-width: 768px)");
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     let ready = false;
+    let pending = false;
     let disposed = false;
-    let phase = 'idle';
+    let phase = "idle";
     let lockedY = window.scrollY;
     let frame = 0;
-    let holdTimer = 0;
+    let releaseTimer = 0;
+    let generation = 0;
     let exits = [];
-    const isLocked = () => ['exiting', 'hold', 'scrolling'].includes(phase);
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-
-    const scrollToHero = () => {
-      phase = 'scrolling';
+    let transitionClouds = null;
+    let navExit = null;
+    let navReturn = null;
+    let touchY = null;
+    const isLocked = () =>
+      ["exiting", "descending", "settling"].includes(phase);
+    const setPhase = (next) => {
+      phase = next;
+      page.dataset.introTransition = next;
+    };
+    const restoreNavigation = () => {
+      navExit?.cancel();
+      navReturn?.cancel();
+      navExit = null;
+      navReturn = null;
+    };
+    const releaseScroll = () => {
+      clearTimeout(releaseTimer);
+      // Absorb the trackpad momentum remaining at landing before restoring scroll.
+      releaseTimer = window.setTimeout(() => setPhase("done"), 140);
+    };
+    const returnNavigation = () => {
+      if (!navigation || navReturn || !navExit) return;
+      navReturn = navigation.animate(
+        [
+          { translate: "0 -120%", opacity: 0 },
+          { translate: "0 0", opacity: 1 },
+        ],
+        {
+          duration: 200,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          fill: "forwards",
+        },
+      );
+      navReturn.finished.then(restoreNavigation, () => {});
+    };
+    const coverCloudHandoff = () => {
+      // Bridge the first-layer exit and the delayed lower layer in viewport
+      // space, independently of the existing cloud/camera animations.
+      const layer = document.createElement("div");
+      layer.className = "mario-transition-clouds";
+      layer.setAttribute("aria-hidden", "true");
+      transitionClouds = layer;
+      const passes = ["cloud 13", "cloud 14"].map((name, index) => {
+        const source = clouds
+          .find((cloud) => cloud.dataset.name === name)
+          .querySelector("img");
+        const image = source.cloneNode(false);
+        image.className = "mario-transition-cloud";
+        image.alt = "";
+        image.draggable = false;
+        const width = window.innerWidth * (index ? 0.8 : 0.86);
+        const height =
+          width * (source.naturalHeight / source.naturalWidth || 0.75);
+        Object.assign(image.style, {
+          width: `${width}px`,
+          height: `${height}px`,
+          left: `${window.innerWidth * (index ? 0.26 : -0.06)}px`,
+          top: `${window.innerHeight + 2}px`,
+        });
+        layer.append(image);
+        return image.animate(
+          [
+            { translate: "0 0" },
+            { translate: `0 ${-(window.innerHeight + height + 4)}px` },
+          ],
+          {
+            delay: index ? 220 : 0,
+            duration: index ? 1700 : 1250,
+            easing: "linear",
+            fill: "both",
+          },
+        );
+      });
+      page.append(layer);
+      exits.push(...passes);
+      Promise.all(passes.map((animation) => animation.finished)).then(
+        () => {
+          layer.remove();
+          if (transitionClouds === layer) transitionClouds = null;
+        },
+        () => {},
+      );
+    };
+    const descend = () => {
+      setPhase("descending");
       const startY = window.scrollY;
       const targetY = hero.getBoundingClientRect().top + startY;
       const startedAt = performance.now();
-      const duration = reducedMotion.matches ? 0 : 1100;
+      const duration = reducedMotion.matches ? 0 : 950;
+      const cameraBridges = [];
+      const sceneScale =
+        intro.getBoundingClientRect().width / intro.offsetWidth;
+      if (!reducedMotion.matches) {
+        // Keep these clouds in place until the camera starts falling through them.
+
+        exits.push(
+          ...secondLayer.map((cloud, index) => {
+            const foreground = cloud.offsetWidth >= 600;
+            const rect = cloud.getBoundingClientRect();
+            const isGapCloud = ["cloud 16", "cloud 17", "cloud 18"].includes(
+              cloud.dataset.name,
+            );
+            if (isGapCloud) {
+              // Add camera compensation separately so the existing rise
+              // delay, duration, easing and floating stay untouched.
+              const depth = {
+                "cloud 16": 1,
+                "cloud 17": 0.85,
+                "cloud 18": 0.7,
+              }[cloud.dataset.name];
+              const cameraDistance = ((targetY - startY) / sceneScale) * depth;
+              const bridge = cloud.animate(
+                [
+                  { transform: "translateY(0px)" },
+                  { transform: `translateY(${cameraDistance}px)` },
+                ],
+                { duration, fill: "both", composite: "add" },
+              );
+              bridge.pause();
+              bridge.currentTime = 0;
+              cameraBridges.push(bridge);
+              exits.push(bridge);
+            }
+
+            const cloudDistance = isGapCloud
+              ? window.innerHeight * 0.85
+              : rect.height * 1.4;
+
+            const cloudDelays = [0, 140, 280, 70, 400, 80, 260, 160, 580, 440];
+            const cloudDelay = cloudDelays[index] ?? 0;
+
+            return cloud.animate(
+              [
+                { translate: "0 0" },
+                { translate: `0 ${-cloudDistance}px` },
+              ],
+              {
+                delay: cloudDelay,
+                duration: foreground
+                  ? 580 + (index % 2) * 80
+                  : 680 + (index % 3) * 90,
+                easing: "cubic-bezier(0.3, 0, 0.65, 1)",
+                fill: "forwards",
+              },
+            );
+          }),
+        );
+      }
       const animate = (now) => {
-        const progress = duration ? Math.min(1, (now - startedAt) / duration) : 1;
-        const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+        const progress = duration
+          ? Math.min(1, (now - startedAt) / duration)
+          : 1;
+        // Carry the cloud pass into a quick descent, then settle at the Hero.
+        const eased = progress;
         lockedY = startY + (targetY - startY) * eased;
-        window.scrollTo({ top: lockedY, behavior: 'instant' });
+        // Retain centre coverage during descent, then continuously remove
+        // compensation before landing so no offset survives into the Hero.
+        const handoff = Math.min(1, Math.max(0, (progress - 0.65) / 0.35));
+        const retention = 1 - handoff * handoff * (3 - 2 * handoff);
+        cameraBridges.forEach((bridge) => {
+          bridge.currentTime = duration * eased * retention;
+        });
+        window.scrollTo({ top: lockedY, behavior: "instant" });
+        if (progress >= 0.7) returnNavigation();
         if (progress < 1) frame = requestAnimationFrame(animate);
-        else phase = 'done';
+        else {
+          frame = 0;
+          restoreNavigation();
+          setPhase("settling");
+          releaseScroll();
+        }
       };
       frame = requestAnimationFrame(animate);
     };
     const trigger = () => {
-      phase = 'exiting';
+      pending = false;
       lockedY = window.scrollY;
-      const exitDistance = intro.offsetHeight - Math.min(...clouds.map((cloud) => cloud.offsetTop)) + 100;
-      // Animate only Intro cloud wrappers; their existing entrance transforms stay intact.
-      exits = clouds.map((cloud) => cloud.animate(
-        [{ translate: '0 0' }, { translate: '0 ' + exitDistance + 'px' }],
-        { duration: reducedMotion.matches ? 0 : 2400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' },
-      ));
-      holdTimer = window.setTimeout(() => {
-  if (disposed || phase !== 'exiting') return;
-
-  phase = 'hold';
-  scrollToHero();
-}, reducedMotion.matches ? 0 : 1950); // Resizing/unmounting cancels the exit and releases the lock.
-    };
-    const handleInput = (event, downward) => {
-      if (!desktop.matches || event.defaultPrevented) return;
-      if (isLocked()) {
-        event.preventDefault();
+      setPhase("exiting");
+      if (reducedMotion.matches) {
+        descend();
         return;
       }
-      if (phase !== 'idle' || !downward) return;
+      const run = ++generation;
+      coverCloudHandoff();
+      if (navigation) {
+        navExit = navigation.animate(
+          [
+            { translate: "0 0", opacity: 1 },
+            { translate: "0 -120%", opacity: 0 },
+          ],
+          {
+            duration: 220,
+            easing: "cubic-bezier(0.4, 0, 0.8, 1)",
+            fill: "forwards",
+          },
+        );
+      }
+      exits.push(
+        logo.animate(
+          [
+            { translate: "0 0", opacity: 1 },
+            { translate: "0 -110px", opacity: 0 },
+          ],
+          {
+            delay: 100,
+            duration: 320,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+          },
+        ),
+      );
+      const distance =
+        Math.max(
+          ...clouds.map((cloud) => cloud.offsetTop + cloud.offsetHeight),
+        ) + 80;
+      const cloudExits = clouds.flatMap((cloud, index) => {
+        if (secondLayer.includes(cloud)) return [];
+        const foreground = cloud.offsetWidth >= 600;
+        const depth = foreground ? 1.12 : 1 + (index % 3) * 0.025;
+        return cloud.animate(
+          [
+            { translate: "0 0" },
+            { translate: "0 " + -distance * depth + "px" },
+          ],
+          {
+            delay: 180 + (foreground ? (index % 3) * 10 : 30 + (index % 4) * 12),
+            duration: foreground ? 900 + (index % 3) * 20 : 990 + (index % 4) * 20,
+            easing: "cubic-bezier(0.45, 0, 0.8, 1)",
+            fill: "forwards",
+          },
+        );
+      });
+      exits.push(...cloudExits);
+      // Overlap the last 180ms of the first layer with the descent and second layer.
+      const lastCloud = cloudExits.reduce((latest, animation) =>
+        animation.effect.getComputedTiming().endTime >
+        latest.effect.getComputedTiming().endTime
+          ? animation
+          : latest,
+      );
+      const descentAt = lastCloud.effect.getComputedTiming().endTime - 180;
+      const connectLayers = () => {
+        if (disposed || run !== generation || phase !== "exiting") return;
+        if (lastCloud.currentTime >= descentAt) descend();
+        else frame = requestAnimationFrame(connectLayers);
+      };
+      frame = requestAnimationFrame(connectLayers);
+    };
+    const handleInput = (event, delta) => {
+      if (!desktop.matches) return;
+      if (isLocked()) {
+        event.preventDefault();
+        if (phase === "settling") releaseScroll();
+        return;
+      }
+      if (
+        event.defaultPrevented ||
+        phase !== "idle" ||
+        delta <= 0 ||
+        navigation?.classList.contains("common-header--open")
+      )
+        return;
+      const bounds = intro.getBoundingClientRect();
+      if (bounds.bottom <= 0 || bounds.top > window.innerHeight) return;
       event.preventDefault();
       if (ready) trigger();
+      else pending = true;
     };
     const onWheel = (event) => {
-      if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-      handleInput(event, event.deltaY > 0);
+      if (event.ctrlKey) return;
+      if (!isLocked() && Math.abs(event.deltaX) > Math.abs(event.deltaY))
+        return;
+      handleInput(event, event.deltaY);
     };
     const onKey = (event) => {
-      if (event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input, textarea, select, button, a, [contenteditable], dialog')) return;
-      if (!['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home', ' '].includes(event.key)) return;
-      handleInput(event, ['ArrowDown', 'PageDown', 'End'].includes(event.key) || (event.key === ' ' && !event.shiftKey));
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      if (
+        ![
+          "ArrowDown",
+          "ArrowUp",
+          "PageDown",
+          "PageUp",
+          "End",
+          "Home",
+          " ",
+        ].includes(event.key)
+      )
+        return;
+      if (
+        !isLocked() &&
+        event.target.closest(
+          "input, textarea, select, button, a, [contenteditable], dialog",
+        )
+      )
+        return;
+      const downward =
+        ["ArrowDown", "PageDown", "End"].includes(event.key) ||
+        (event.key === " " && !event.shiftKey);
+      handleInput(event, downward ? 1 : -1);
+    };
+    const onTouchStart = (event) => {
+      touchY = event.touches[0]?.clientY ?? null;
     };
     const onTouchMove = (event) => {
-      if (desktop.matches && isLocked()) event.preventDefault();
+      const nextY = event.touches[0]?.clientY;
+      if (touchY !== null && nextY !== undefined)
+        handleInput(event, touchY - nextY);
+      touchY = nextY ?? null;
+    };
+    const cancel = () => {
+      generation++;
+      pending = false;
+      cancelAnimationFrame(frame);
+      clearTimeout(releaseTimer);
+      frame = 0;
+      exits.forEach((animation) => animation.cancel());
+      exits = [];
+      transitionClouds?.remove();
+      transitionClouds = null;
+      restoreNavigation();
+      setPhase("idle");
     };
     const guardScroll = () => {
       if (isLocked() && Math.abs(window.scrollY - lockedY) > 1) {
-        window.scrollTo({ top: lockedY, behavior: 'instant' });
+        window.scrollTo({ top: lockedY, behavior: "instant" });
+      } else if (phase === "done" && intro.getBoundingClientRect().top >= -1) {
+        cancel();
       }
     };
-    const cancel = () => {
-      cancelAnimationFrame(frame);
-      clearTimeout(holdTimer);
-      exits.forEach((animation) => animation.cancel());
-      exits = [];
-      phase = 'idle';
-    };
-    // Preserve the existing entrance animations and wait for their actual completion.
-    const entrance = intro.getAnimations({ subtree: true }).filter(
-  (animation) => animation.animationName === 'mario-intro-logo-fade-in',
-);
-    Promise.allSettled(entrance.map((animation) => animation.finished)).then(() => {
-      if (!disposed) ready = true;
+    // Keep the initial logo entrance and its timing intact, including early input.
+    const entrance = intro
+      .getAnimations({ subtree: true })
+      .filter(
+        (animation) => animation.animationName === "mario-intro-logo-fade-in",
+      );
+    Promise.allSettled(entrance.map((animation) => animation.finished)).then(
+      () => {
+        if (disposed) return;
+        ready = true;
+        if (pending && desktop.matches) trigger();
+      },
+    );
+    window.addEventListener("wheel", onWheel, {
+      passive: false,
+      capture: true,
     });
-    window.addEventListener('wheel', onWheel, { passive: false, capture: true });
-    window.addEventListener('keydown', onKey, true);
-    window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
-    window.addEventListener('scroll', guardScroll, { passive: true });
-    window.addEventListener('resize', cancel);
+    window.addEventListener("keydown", onKey, true);
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, {
+      passive: false,
+      capture: true,
+    });
+    window.addEventListener("scroll", guardScroll, { passive: true });
+    window.addEventListener("resize", cancel);
+    reducedMotion.addEventListener("change", cancel);
     return () => {
       disposed = true;
       cancel();
-      window.removeEventListener('wheel', onWheel, true);
-      window.removeEventListener('keydown', onKey, true);
-      window.removeEventListener('touchmove', onTouchMove, true);
-      window.removeEventListener('scroll', guardScroll);
-      window.removeEventListener('resize', cancel);
+      delete page.dataset.introTransition;
+      window.removeEventListener("wheel", onWheel, true);
+      window.removeEventListener("keydown", onKey, true);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove, true);
+      window.removeEventListener("scroll", guardScroll);
+      window.removeEventListener("resize", cancel);
+      reducedMotion.removeEventListener("change", cancel);
     };
   }, []);
   useEffect(() => {
@@ -449,13 +751,18 @@ export default function Mario() {
       const introTop = visibleIntro.getBoundingClientRect().top;
       const heroTop = hero.getBoundingClientRect().top;
       const distance = heroTop - introTop;
-      const progress = distance > 0
-        ? Math.min(1, Math.max(0, -introTop / distance))
-        : 1;
+      const progress =
+        distance > 0 ? Math.min(1, Math.max(0, -introTop / distance)) : 1;
       const remaining = reducedMotion.matches ? 0 : 1 - progress;
       hero.style.setProperty("--hero-character-offset", `${18 * remaining}px`);
-      hero.style.setProperty("--hero-character-scale", `${1 + 0.05 * remaining}`);
-      hero.style.setProperty("--hero-cloud-offset", `${reducedMotion.matches ? 0 : 10 * progress}px`);
+      hero.style.setProperty(
+        "--hero-character-scale",
+        `${1 + 0.05 * remaining}`,
+      );
+      hero.style.setProperty(
+        "--hero-cloud-offset",
+        `${reducedMotion.matches ? 0 : 10 * progress}px`,
+      );
     };
     updateDepth();
     const observer = new ResizeObserver(updateDepth);
@@ -511,81 +818,77 @@ export default function Mario() {
       frame = null;
     };
     const onWheel = (event) => {
-  if (matchMedia('(min-width: 768px)').matches) return;
-  if (event.ctrlKey || event.defaultPrevented) return;
+      if (matchMedia("(min-width: 768px)").matches) return;
+      if (event.ctrlKey || event.defaultPrevented) return;
 
-  if (frame !== null) {
-    event.preventDefault();
-    return;
-  }
+      if (frame !== null) {
+        event.preventDefault();
+        return;
+      }
 
-  if (
-    Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
-    event.target.closest("button, a, input, select, textarea, dialog")
-  ) {
-    return;
-  }
+      if (
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
+        event.target.closest("button, a, input, select, textarea, dialog")
+      ) {
+        return;
+      }
 
-  const visibleIntro = matchMedia("(max-width: 767px)").matches
-    ? mobileIntro
-    : intro;
-  const introBounds = visibleIntro.getBoundingClientRect();
-  const heroBounds = hero.getBoundingClientRect();
+      const visibleIntro = matchMedia("(max-width: 767px)").matches
+        ? mobileIntro
+        : intro;
+      const introBounds = visibleIntro.getBoundingClientRect();
+      const heroBounds = hero.getBoundingClientRect();
 
-  let targetY = null;
+      let targetY = null;
 
-  // 인트로 → 히어로
-  if (
-    event.deltaY > 0 &&
-    introBounds.top > -10 &&
-    introBounds.top < 10 &&
-    heroBounds.top > 1
-  ) {
-    targetY = window.scrollY + heroBounds.top;
-  }
+      // 인트로 → 히어로
+      if (
+        event.deltaY > 0 &&
+        introBounds.top > -10 &&
+        introBounds.top < 10 &&
+        heroBounds.top > 1
+      ) {
+        targetY = window.scrollY + heroBounds.top;
+      }
 
-  // 히어로 → 인트로
-  if (
-    event.deltaY < 0 &&
-    heroBounds.top > -10 &&
-    heroBounds.top < 10
-  ) {
-    targetY = window.scrollY + introBounds.top;
-  }
+      // 히어로 → 인트로
+      if (event.deltaY < 0 && heroBounds.top > -10 && heroBounds.top < 10) {
+        targetY = window.scrollY + introBounds.top;
+      }
 
-  if (targetY === null) return;
+      if (targetY === null) return;
 
-  event.preventDefault();
+      event.preventDefault();
 
-  const startY = window.scrollY;
-  const startX = window.scrollX;
+      const startY = window.scrollY;
+      const startX = window.scrollX;
 
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    window.scrollTo({
-      left: startX,
-      top: targetY,
-      behavior: "instant",
-    });
-    return;
-  }
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        window.scrollTo({
+          left: startX,
+          top: targetY,
+          behavior: "instant",
+        });
+        return;
+      }
 
-  const startedAt = performance.now();
+      const startedAt = performance.now();
 
-  const animate = (now) => {
-    const progress = Math.min((now - startedAt) / 1100, 1);
-    const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+      const animate = (now) => {
+        const progress = Math.min((now - startedAt) / 1100, 1);
+        const eased = (1 - Math.cos(Math.PI * progress)) / 2;
 
-    window.scrollTo({
-      left: startX,
-      top: startY + (targetY - startY) * eased,
-      behavior: "instant",
-    });
+        window.scrollTo({
+          left: startX,
+          top: startY + (targetY - startY) * eased,
+          behavior: "instant",
+        });
 
-    frame = progress < 1 ? requestAnimationFrame(animate) : null;
-  };
+        frame = progress < 1 ? requestAnimationFrame(animate) : null;
+      };
 
-  frame = requestAnimationFrame(animate);
-};
+      frame = requestAnimationFrame(animate);
+    };
     page.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("resize", cancelScroll);
     window.addEventListener("keydown", cancelScroll);
@@ -600,114 +903,106 @@ export default function Mario() {
   }, []);
 
   // CON1 이후 부드러운 휠 스크롤
-useEffect(() => {
-  const page = pageRef.current;
-  if (!page) return;
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
 
-  let targetY = window.scrollY;
-  let currentY = window.scrollY;
-  let frame = null;
+    let targetY = window.scrollY;
+    let currentY = window.scrollY;
+    let frame = null;
 
-  const smoothScroll = () => {
-    currentY += (targetY - currentY) * 0.11;
+    const smoothScroll = () => {
+      currentY += (targetY - currentY) * 0.11;
 
-    if (Math.abs(targetY - currentY) < 0.5) {
-      window.scrollTo(0, targetY);
-      currentY = targetY;
-      frame = null;
-      return;
-    }
+      if (Math.abs(targetY - currentY) < 0.5) {
+        window.scrollTo(0, targetY);
+        currentY = targetY;
+        frame = null;
+        return;
+      }
 
-    window.scrollTo(0, currentY);
-    frame = requestAnimationFrame(smoothScroll);
-  };
-
-  const onSmoothWheel = (event) => {
-    if (event.ctrlKey || event.defaultPrevented) return;
-
-    // CON1 위치
-    const con1 = page.querySelector("#mario-characters");
-    if (!con1) return;
-
-    const con1Top =
-      con1.getBoundingClientRect().top + window.scrollY;
-
-    const wheelTargetY = window.scrollY + event.deltaY * 1.05;
-    const isEnteringCon1 =
-      event.deltaY > 0 &&
-      window.scrollY < con1Top &&
-      wheelTargetY >= con1Top - 20;
-
-    // 인트로 / 히어로 영역에서는 기존 스크롤 로직 사용
-    if (window.scrollY < con1Top - 20 && !isEnteringCon1) return;
-
-    // 버튼, 링크 등 조작 중에는 기본 동작 유지
-    if (
-      event.target.closest(
-        "button, a, input, select, textarea, dialog"
-      )
-    ) {
-      return;
-    }
-
-    // Hand upward scrolling back to the hero before the CON1 lower bound clamps it.
-    if (event.deltaY < 0 && targetY + event.deltaY * 1.05 < con1Top) {
-      if (frame !== null) cancelAnimationFrame(frame);
-      frame = null;
-      targetY = window.scrollY;
-      currentY = window.scrollY;
-      return;
-    }
-
-    if (isEnteringCon1) {
-      targetY = window.scrollY;
-      currentY = window.scrollY;
-    }
-
-    event.preventDefault();
-
-    // 휠 이동량 누적
-    targetY += event.deltaY * 1.05;
-
-    const maxScroll =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    targetY = Math.max(
-      con1Top,
-      Math.min(targetY, maxScroll)
-    );
-
-    if (frame === null) {
-      currentY = window.scrollY;
+      window.scrollTo(0, currentY);
       frame = requestAnimationFrame(smoothScroll);
-    }
-  };
+    };
 
-  // 사용자가 다른 방식으로 스크롤하면 위치 다시 동기화
-  const syncScroll = () => {
-    if (frame === null) {
-      targetY = window.scrollY;
-      currentY = window.scrollY;
-    }
-  };
+    const onSmoothWheel = (event) => {
+      if (event.ctrlKey || event.defaultPrevented) return;
 
-  page.addEventListener("wheel", onSmoothWheel, {
-    passive: false,
-  });
+      // CON1 위치
+      const con1 = page.querySelector("#mario-characters");
+      if (!con1) return;
 
-  window.addEventListener("scroll", syncScroll, {
-    passive: true,
-  });
+      const con1Top = con1.getBoundingClientRect().top + window.scrollY;
 
-  return () => {
-    page.removeEventListener("wheel", onSmoothWheel);
-    window.removeEventListener("scroll", syncScroll);
+      const wheelTargetY = window.scrollY + event.deltaY * 1.05;
+      const isEnteringCon1 =
+        event.deltaY > 0 &&
+        window.scrollY < con1Top &&
+        wheelTargetY >= con1Top - 20;
 
-    if (frame !== null) {
-      cancelAnimationFrame(frame);
-    }
-  };
-}, []);
+      // 인트로 / 히어로 영역에서는 기존 스크롤 로직 사용
+      if (window.scrollY < con1Top - 20 && !isEnteringCon1) return;
+
+      // 버튼, 링크 등 조작 중에는 기본 동작 유지
+      if (event.target.closest("button, a, input, select, textarea, dialog")) {
+        return;
+      }
+
+      // Hand upward scrolling back to the hero before the CON1 lower bound clamps it.
+      if (event.deltaY < 0 && targetY + event.deltaY * 1.05 < con1Top) {
+        if (frame !== null) cancelAnimationFrame(frame);
+        frame = null;
+        targetY = window.scrollY;
+        currentY = window.scrollY;
+        return;
+      }
+
+      if (isEnteringCon1) {
+        targetY = window.scrollY;
+        currentY = window.scrollY;
+      }
+
+      event.preventDefault();
+
+      // 휠 이동량 누적
+      targetY += event.deltaY * 1.05;
+
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      targetY = Math.max(con1Top, Math.min(targetY, maxScroll));
+
+      if (frame === null) {
+        currentY = window.scrollY;
+        frame = requestAnimationFrame(smoothScroll);
+      }
+    };
+
+    // 사용자가 다른 방식으로 스크롤하면 위치 다시 동기화
+    const syncScroll = () => {
+      if (frame === null) {
+        targetY = window.scrollY;
+        currentY = window.scrollY;
+      }
+    };
+
+    page.addEventListener("wheel", onSmoothWheel, {
+      passive: false,
+    });
+
+    window.addEventListener("scroll", syncScroll, {
+      passive: true,
+    });
+
+    return () => {
+      page.removeEventListener("wheel", onSmoothWheel);
+      window.removeEventListener("scroll", syncScroll);
+
+      if (frame !== null) {
+        cancelAnimationFrame(frame);
+      }
+    };
+  }, []);
   useEffect(() => {
     const page = pageRef.current;
     const observer = new ResizeObserver(([entry]) => {
@@ -730,91 +1025,35 @@ useEffect(() => {
       dialogRef.current.showModal();
   }, [selected]);
   useEffect(() => {
-  const characters = pageRef.current?.querySelector("#mario-characters");
+    const characters = pageRef.current?.querySelector("#mario-characters");
 
-  if (!characters) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setCharactersEntered(true);
-        observer.disconnect();
-      }
-    },
-    {
-      threshold: 0.3,
-    },
-  );
-
-  observer.observe(characters);
-
-  return () => observer.disconnect();
-}, []);
-  useEffect(() => {
-  const banner = pageRef.current?.querySelector(".mario-layer-86");
-
-  if (!banner) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setBannerEntered(true);
-        observer.disconnect();
-      }
-    },
-    {
-      threshold: 0.8,
-    },
-  );
-
-  observer.observe(banner);
-
-  return () => observer.disconnect();
-}, []);
-
-  /* CON2 - World 01 entrance */
-useEffect(() => {
-  const world01 = pageRef.current?.querySelector(".mario-layer-138");
-
-  if (!world01) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setWorld01Entered(true);
-        observer.disconnect();
-      }
-    },
-    {
-      threshold: 0.8,
-    },
-  );
-
-  observer.observe(world01);
-
-  return () => observer.disconnect();
-}, []);
-  /* CON2 - World 02~05 Info entrance */
-useEffect(() => {
-  const worlds = [
-    { video: ".mario-layer-141", info: ".mario-layer-202" },
-    { video: ".mario-layer-145", info: ".mario-layer-203" },
-    { video: ".mario-layer-146", info: ".mario-layer-204" },
-    { video: ".mario-layer-147", info: ".mario-layer-205" },
-  ];
-
-  const observers = [];
-
-  worlds.forEach(({ video, info }) => {
-    const videoElement = pageRef.current?.querySelector(video);
-    const infoElement = pageRef.current?.querySelector(info);
-
-    if (!videoElement || !infoElement) return;
+    if (!characters) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          infoElement.classList.add("is-entered");
+          setCharactersEntered(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.3,
+      },
+    );
+
+    observer.observe(characters);
+
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const banner = pageRef.current?.querySelector(".mario-layer-86");
+
+    if (!banner) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBannerEntered(true);
           observer.disconnect();
         }
       },
@@ -823,14 +1062,70 @@ useEffect(() => {
       },
     );
 
-    observer.observe(videoElement);
-    observers.push(observer);
-  });
+    observer.observe(banner);
 
-  return () => {
-    observers.forEach((observer) => observer.disconnect());
-  };
-}, []);
+    return () => observer.disconnect();
+  }, []);
+
+  /* CON2 - World 01 entrance */
+  useEffect(() => {
+    const world01 = pageRef.current?.querySelector(".mario-layer-138");
+
+    if (!world01) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWorld01Entered(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.8,
+      },
+    );
+
+    observer.observe(world01);
+
+    return () => observer.disconnect();
+  }, []);
+  /* CON2 - World 02~05 Info entrance */
+  useEffect(() => {
+    const worlds = [
+      { video: ".mario-layer-141", info: ".mario-layer-202" },
+      { video: ".mario-layer-145", info: ".mario-layer-203" },
+      { video: ".mario-layer-146", info: ".mario-layer-204" },
+      { video: ".mario-layer-147", info: ".mario-layer-205" },
+    ];
+
+    const observers = [];
+
+    worlds.forEach(({ video, info }) => {
+      const videoElement = pageRef.current?.querySelector(video);
+      const infoElement = pageRef.current?.querySelector(info);
+
+      if (!videoElement || !infoElement) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            infoElement.classList.add("is-entered");
+            observer.disconnect();
+          }
+        },
+        {
+          threshold: 0.8,
+        },
+      );
+
+      observer.observe(videoElement);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
 
   useEffect(() => {
     const track = dividerRef.current;
@@ -850,10 +1145,16 @@ useEffect(() => {
     <div className="mario-page" ref={pageRef}>
       <h1 className="mario-sr-only">슈퍼 마리오의 세계</h1>
       <section className="mario-mobile-intro" aria-label="intro">
-        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--top-left" aria-hidden="true">
+        <div
+          className="mario-mobile-intro__cloud mario-mobile-intro__cloud--top-left"
+          aria-hidden="true"
+        >
           <img src={img16} alt="" />
         </div>
-        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--top-right" aria-hidden="true">
+        <div
+          className="mario-mobile-intro__cloud mario-mobile-intro__cloud--top-right"
+          aria-hidden="true"
+        >
           <img src={img21} alt="" />
         </div>
         <img
@@ -861,10 +1162,16 @@ useEffect(() => {
           src={img8D20F950367F4636823F1De375876E331}
           alt="SUPER NINTENDO WORLD"
         />
-        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--bottom-right" aria-hidden="true">
+        <div
+          className="mario-mobile-intro__cloud mario-mobile-intro__cloud--bottom-right"
+          aria-hidden="true"
+        >
           <img src={img21} alt="" />
         </div>
-        <div className="mario-mobile-intro__cloud mario-mobile-intro__cloud--bottom-left" aria-hidden="true">
+        <div
+          className="mario-mobile-intro__cloud mario-mobile-intro__cloud--bottom-left"
+          aria-hidden="true"
+        >
           <img src={img21} alt="" />
         </div>
       </section>
@@ -873,10 +1180,16 @@ useEffect(() => {
         <div className="mario-mobile-hero__decoration" aria-hidden="true">
           <img src={imgEllipse32} alt="" />
         </div>
-        <div className="mario-mobile-hero__cloud mario-mobile-hero__cloud--left" aria-hidden="true">
+        <div
+          className="mario-mobile-hero__cloud mario-mobile-hero__cloud--left"
+          aria-hidden="true"
+        >
           <img src={img21} alt="" />
         </div>
-        <div className="mario-mobile-hero__cloud mario-mobile-hero__cloud--right" aria-hidden="true">
+        <div
+          className="mario-mobile-hero__cloud mario-mobile-hero__cloud--right"
+          aria-hidden="true"
+        >
           <img src={img21} alt="" />
         </div>
         <img
@@ -891,72 +1204,173 @@ useEffect(() => {
             <img src={imgHero} alt="" />
           </div>
           <div className="mario-intro-scroll">
-          <section
-            id="mario-intro"
-            className="mario-scene mario-intro"
-            aria-label="intro"
-          >
-            <div
-              className="mario-layer-3"
-              data-node-id="2712:13185"
-              data-name="구름1 1"
+            <section
+              id="mario-intro"
+              className="mario-scene mario-intro"
+              aria-label="intro"
             >
-              <img alt="" className="mario-layer-4" src={img16} />
-            </div>
-            <div
-              className="mario-layer-5"
-              data-node-id="2712:13186"
-              data-name="구름1 1"
-            >
-              <img alt="" className="mario-layer-4" src={img16} />
-            </div>
-            <div
-              className="mario-layer-6"
-              data-node-id="2712:13187"
-              data-name="8d20f950-367f-4636-823f-1de375876e33 1"
-            >
-              <img
-                alt="SUPER NINTENDO WORLD"
-                className="mario-layer-4"
-                src={img8D20F950367F4636823F1De375876E331}
-              />
-            </div>
-            <div
-              className="mario-layer-7"
-              data-node-id="2712:13188"
-              data-name="구름2 1"
-            >
-              <img alt="" className="mario-layer-4" src={img21} />
-            </div>
-            <div className="mario-layer-8" data-node-id="2712:13189">
-              <div className="mario-layer-9">
-                <div className="mario-layer-10" data-name="구름2 3">
-                  <img alt="" className="mario-layer-4" src={img21} />
+              <div
+                className="mario-layer-3 mario-intro-cloud--03"
+                data-node-id="2890:4421"
+                data-name="cloud 03"
+              >
+                <img alt="" className="mario-layer-4" src={img16} />
+              </div>
+              <div
+                className="mario-layer-5 mario-intro-cloud--07"
+                data-node-id="3423:3059"
+                data-name="cloud 07"
+              >
+                <img alt="" className="mario-layer-4" src={imgIntroCloud07} />
+              </div>
+              <div
+                className="mario-layer-7 mario-intro-cloud--08"
+                data-node-id="2890:4424"
+                data-name="cloud 08"
+              >
+                <img alt="" className="mario-layer-4" src={img21} />
+              </div>
+              <div
+                className="mario-layer-8 mario-intro-cloud--09"
+                data-node-id="2890:4425"
+                data-name="cloud 09"
+              >
+                <div className="mario-layer-9">
+                  <div className="mario-layer-10" data-name="구름2 3">
+                    <img alt="" className="mario-layer-4" src={img21} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mario-layer-11" data-node-id="2712:13190">
-              <div className="mario-layer-9">
-                <div className="mario-layer-12" data-name="구름2 4">
-                  <img alt="" className="mario-layer-4" src={img21} />
+              <div
+                className="mario-layer-11 mario-intro-cloud--11"
+                data-node-id="2890:4426"
+                data-name="cloud 11"
+              >
+                <div className="mario-layer-9">
+                  <div className="mario-layer-12" data-name="구름2 4">
+                    <img alt="" className="mario-layer-4" src={img21} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="mario-layer-13"
-              data-node-id="2712:13191"
-              data-name="구름2 2"
-            >
-              <img alt="" className="mario-layer-4" src={img21} />
-            </div>
-            <div className="mario-layer-14" data-node-id="2712:13192">
-              <div className="mario-layer-15">
-                <div className="mario-layer-16" data-name="구름3 5">
-                  <img alt="" className="mario-layer-4" src={img31} />
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--10"
+                data-node-id="3423:3045"
+                data-name="cloud 10"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--05"
+                data-node-id="3423:3050"
+                data-name="cloud 05"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--04"
+                data-node-id="3423:3047"
+                data-name="cloud 04"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--12"
+                data-node-id="3423:3048"
+                data-name="cloud 12"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--15"
+                data-node-id="3423:3049"
+                data-name="cloud 15"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--16"
+                data-name="cloud 16"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--17"
+                data-name="cloud 17"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--18"
+                data-name="cloud 18"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--01"
+                data-node-id="3423:3046"
+                data-name="cloud 01"
+                aria-hidden="true"
+              >
+                <img alt="" src={img21} />
+              </div>
+              <div
+                className="mario-layer-13 mario-intro-cloud--06"
+                data-node-id="2890:4427"
+                data-name="cloud 06"
+              >
+                <img alt="" className="mario-layer-4" src={img21} />
+              </div>
+              <div
+                className="mario-layer-14 mario-intro-cloud--02"
+                data-node-id="2890:4428"
+                data-name="cloud 02"
+              >
+                <div className="mario-layer-15">
+                  <div className="mario-layer-16" data-name="구름3 5">
+                    <img alt="" className="mario-layer-4" src={img31} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--13"
+                data-node-id="3423:3055"
+                data-name="cloud 13"
+                aria-hidden="true"
+              >
+                <img alt="" src={img16} />
+              </div>
+              <div
+                className="mario-intro-cloud-added mario-intro-cloud--14"
+                data-node-id="3423:3056"
+                data-name="cloud 14"
+                aria-hidden="true"
+              >
+                <img alt="" src={img16} />
+              </div>
+              <div
+                className="mario-layer-6"
+                data-node-id="2712:13187"
+                data-name="8d20f950-367f-4636-823f-1de375876e33 1"
+              >
+                <img
+                  alt="SUPER NINTENDO WORLD"
+                  className="mario-layer-4"
+                  src={img8D20F950367F4636823F1De375876E331}
+                />
+              </div>
+            </section>
           </div>
           <section
             id="mario-hero"
@@ -984,10 +1398,10 @@ useEffect(() => {
                 SCROLL DOWN
               </p>
               <img
-  src="/images/mario/scroll-down-arrow.png"
-  alt=""
-  className="mario-scroll-down-arrow"
-/>
+                src="/images/mario/Union.png"
+                alt=""
+                className="mario-scroll-down-arrow"
+              />
             </button>
             <div
               className="mario-layer-27"
@@ -1065,7 +1479,7 @@ useEffect(() => {
         <section
           id="mario-characters"
           className={`mario-scene mario-characters ${
-          charactersEntered ? "is-entered" : ""
+            charactersEntered ? "is-entered" : ""
           }`}
           aria-label="마리오와 친구들"
           data-node-id="2865:5511"
@@ -1295,7 +1709,9 @@ useEffect(() => {
                     >
                       <span
                         className="mario-character-arrow mario-character-arrow-next"
-                        style={{ backgroundColor: activeCharacterData.color }}
+                        style={{
+                          backgroundColor: activeCharacterData.color,
+                        }}
                       />
                     </div>
                   </div>
@@ -1321,7 +1737,14 @@ useEffect(() => {
                 data-node-id="2712:12799"
                 style={{ color: activeCharacterData.color }}
               >
-                {activeCharacterData.korean}
+                {activeCharacterData.korean}{" "}
+                <span
+                  className="mario-layer-79"
+                  data-node-id="2712:12804"
+                  style={{ color: activeCharacterData.color }}
+                >
+                  ({activeCharacterData.english})
+                </span>
               </p>
             </div>
             <div
@@ -1347,13 +1770,6 @@ useEffect(() => {
                 </p>
               </div>
             </div>
-            <p
-              className="mario-layer-79"
-              data-node-id="2712:12804"
-              style={{ color: activeCharacterData.color }}
-            >
-              ({activeCharacterData.english})
-            </p>
           </div>
           <div
             className="mario-layer-80"
@@ -1400,33 +1816,33 @@ useEffect(() => {
                 <img alt="" className="mario-layer-44" src={imgGroup3} />
               </div>
               <div className="mario-banner-character-clip">
-              <div className="mario-layer-89" data-node-id="2712:13134">
-                <div className="mario-layer-90">
-                  <div
-                    className="mario-layer-91"
-                    style={{ maskImage: `url("${imgGroup2}")` }}
-                    data-name="Asset / 1303"
-                  >
-                    <div className="mario-layer-1">
-                      <img
-                        alt=""
-                        className="mario-layer-92"
-                        src={imgAsset1303}
-                      />
+                <div className="mario-layer-89" data-node-id="2712:13134">
+                  <div className="mario-layer-90">
+                    <div
+                      className="mario-layer-91"
+                      style={{ maskImage: `url("${imgGroup2}")` }}
+                      data-name="Asset / 1303"
+                    >
+                      <div className="mario-layer-1">
+                        <img
+                          alt=""
+                          className="mario-layer-92"
+                          src={imgAsset1303}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="mario-layer-93"
-                data-node-id="2712:13135"
-                style={{ maskImage: `url("${imgGroup2}")` }}
-                data-name="Asset / 1302"
-              >
-                <div className="mario-layer-1">
-                  <img alt="" className="mario-layer-94" src={imgAsset1302} />
+                <div
+                  className="mario-layer-93"
+                  data-node-id="2712:13135"
+                  style={{ maskImage: `url("${imgGroup2}")` }}
+                  data-name="Asset / 1302"
+                >
+                  <div className="mario-layer-1">
+                    <img alt="" className="mario-layer-94" src={imgAsset1302} />
+                  </div>
                 </div>
-              </div>
               </div>
               <div
                 className="mario-layer-95"
@@ -1459,14 +1875,14 @@ useEffect(() => {
                 </div>
               </div>
               <div className="mario-banner-character-clip">
-              <div
-                className="mario-layer-99"
-                data-node-id="2712:13139"
-                style={{ maskImage: `url("${imgGroup2}")` }}
-                data-name="Asset / 1298"
-              >
-                <img alt="" className="mario-layer-4" src={imgAsset1298} />
-              </div>
+                <div
+                  className="mario-layer-99"
+                  data-node-id="2712:13139"
+                  style={{ maskImage: `url("${imgGroup2}")` }}
+                  data-name="Asset / 1298"
+                >
+                  <img alt="" className="mario-layer-4" src={imgAsset1298} />
+                </div>
               </div>
               <div
                 className="mario-layer-100"
@@ -1785,7 +2201,11 @@ useEffect(() => {
                 src={imgCharacterArtGrassLand}
               />
               <div className="mario-world-plant-clip">
-                <img alt="" className="mario-layer-140 mario-world-plant-idle" src={imgCharacterArtGrassLand} />
+                <img
+                  alt=""
+                  className="mario-layer-140 mario-world-plant-idle"
+                  src={imgCharacterArtGrassLand}
+                />
               </div>
             </div>
           </div>
@@ -1929,86 +2349,86 @@ useEffect(() => {
             </div>
           </div>
           <div className="mario-world-sand-idle">
-          <div
-            className="mario-layer-160"
-            data-node-id="2712:12912"
-            data-name="World Decor / Foreground"
-          >
-            <div className="mario-layer-1">
-              <img
-                alt=""
-                className="mario-layer-161"
-                src={imgWorldDecorForeground}
-              />
+            <div
+              className="mario-layer-160"
+              data-node-id="2712:12912"
+              data-name="World Decor / Foreground"
+            >
+              <div className="mario-layer-1">
+                <img
+                  alt=""
+                  className="mario-layer-161"
+                  src={imgWorldDecorForeground}
+                />
+              </div>
             </div>
-          </div>
-          <div
-            className="mario-layer-162"
-            data-node-id="2712:12913"
-            data-name="Decor / Character 03"
-          >
-            <div className="mario-layer-1">
-              <img
-                alt=""
-                className="mario-layer-163"
-                src={imgDecorCharacter03}
-              />
+            <div
+              className="mario-layer-162"
+              data-node-id="2712:12913"
+              data-name="Decor / Character 03"
+            >
+              <div className="mario-layer-1">
+                <img
+                  alt=""
+                  className="mario-layer-163"
+                  src={imgDecorCharacter03}
+                />
+              </div>
             </div>
-          </div>
           </div>
           <div className="mario-world-shell-idle">
-          <div
-            className="mario-layer-164"
-            data-node-id="2712:12914"
-            data-name="Decor / Object Group"
-          >
-            <div className="mario-layer-165" data-node-id="2712:12915">
-              <div className="mario-layer-166">
-                <div
-                  className="mario-layer-167"
-                  data-name="Decor / Object Group / Part 01"
-                >
-                  <img
-                    alt=""
-                    className="mario-layer-4"
-                    src={imgDecorObjectGroupPart01}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mario-layer-168" data-node-id="2712:12916">
-              <div className="mario-layer-166">
-                <div
-                  className="mario-layer-169"
-                  data-name="Decor / Object Group / Part 02"
-                >
-                  <div className="mario-layer-1">
+            <div
+              className="mario-layer-164"
+              data-node-id="2712:12914"
+              data-name="Decor / Object Group"
+            >
+              <div className="mario-layer-165" data-node-id="2712:12915">
+                <div className="mario-layer-166">
+                  <div
+                    className="mario-layer-167"
+                    data-name="Decor / Object Group / Part 01"
+                  >
                     <img
                       alt=""
-                      className="mario-layer-170"
-                      src={imgDecorObjectGroupPart02}
+                      className="mario-layer-4"
+                      src={imgDecorObjectGroupPart01}
                     />
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="mario-layer-171" data-node-id="2712:12917">
-              <div className="mario-layer-166">
-                <div
-                  className="mario-layer-172"
-                  data-name="Decor / Object Group / Part 03"
-                >
-                  <div className="mario-layer-1">
-                    <img
-                      alt=""
-                      className="mario-layer-173"
-                      src={imgDecorObjectGroupPart03}
-                    />
+              <div className="mario-layer-168" data-node-id="2712:12916">
+                <div className="mario-layer-166">
+                  <div
+                    className="mario-layer-169"
+                    data-name="Decor / Object Group / Part 02"
+                  >
+                    <div className="mario-layer-1">
+                      <img
+                        alt=""
+                        className="mario-layer-170"
+                        src={imgDecorObjectGroupPart02}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mario-layer-171" data-node-id="2712:12917">
+                <div className="mario-layer-166">
+                  <div
+                    className="mario-layer-172"
+                    data-name="Decor / Object Group / Part 03"
+                  >
+                    <div className="mario-layer-1">
+                      <img
+                        alt=""
+                        className="mario-layer-173"
+                        src={imgDecorObjectGroupPart03}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>
           <div
             className="mario-layer-174"
@@ -2773,401 +3193,423 @@ useEffect(() => {
           </div>
         </section>
         <div ref={powerScrollRef} className="mario-powerup-scroll">
-        <section
-          id="mario-powerups"
-          className="mario-scene mario-powerups"
-          aria-label="powerups"
-        >
-          <div aria-hidden className="mario-layer-276">
-            <img
-              alt=""
-              className="mario-layer-277"
-              src={imgCon3MarioPowerUps}
-            />
-            <div
-              className="mario-layer-278"
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), linear-gradient(90deg, rgba(255, 213, 40, 0.05) 0%, rgba(255, 213, 40, 0.05) 100%)",
-              }}
-            />
-          </div>
-          <div
-            className="mario-layer-279"
-            data-node-id="2712:12703"
-            data-name="Section Title / Mario Worlds"
+          <section
+            id="mario-powerups"
+            className="mario-scene mario-powerups"
+            aria-label="powerups"
           >
-            <div
-              className="mario-layer-125"
-              data-node-id="I2712:12703;2059:4257"
-              data-name="Section Badge / World"
-            >
-              <div
-                className="mario-layer-126"
-                data-node-id="I2712:12703;2203:5217"
-                data-name="Shape / 2176"
+            <div aria-hidden className="mario-layer-276">
+              <img
+                alt=""
+                className="mario-layer-277"
+                src={imgCon3MarioPowerUps}
               />
               <div
-                className="mario-layer-127"
-                data-node-id="I2712:12703;2203:4929"
-                data-name="Line"
-              >
-                <div className="mario-layer-128">
-                  <img alt="" className="mario-layer-26" src={imgLine} />
-                </div>
-              </div>
+                className="mario-layer-278"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), linear-gradient(90deg, rgba(255, 213, 40, 0.05) 0%, rgba(255, 213, 40, 0.05) 100%)",
+                }}
+              />
+            </div>
+            <div
+              className="mario-layer-279"
+              data-node-id="2712:12703"
+              data-name="Section Title / Mario Worlds"
+            >
               <div
-                className="mario-layer-129"
-                data-node-id="I2712:12703;2203:4935"
-                data-name="Line / 02"
+                className="mario-layer-125"
+                data-node-id="I2712:12703;2059:4257"
+                data-name="Section Badge / World"
               >
-                <div className="mario-layer-128">
-                  <img alt="" className="mario-layer-26" src={imgLine} />
+                <div
+                  className="mario-layer-126"
+                  data-node-id="I2712:12703;2203:5217"
+                  data-name="Shape / 2176"
+                />
+                <div
+                  className="mario-layer-127"
+                  data-node-id="I2712:12703;2203:4929"
+                  data-name="Line"
+                >
+                  <div className="mario-layer-128">
+                    <img alt="" className="mario-layer-26" src={imgLine} />
+                  </div>
                 </div>
-              </div>
-              <div
-                className="mario-layer-130"
-                data-node-id="I2712:12703;2203:4967"
-              >
-                <div className="mario-layer-65">
-                  <div className="mario-layer-131" data-name="Line / 03">
-                    <div className="mario-layer-132">
-                      <img alt="" className="mario-layer-26" src={imgLine03} />
+                <div
+                  className="mario-layer-129"
+                  data-node-id="I2712:12703;2203:4935"
+                  data-name="Line / 02"
+                >
+                  <div className="mario-layer-128">
+                    <img alt="" className="mario-layer-26" src={imgLine} />
+                  </div>
+                </div>
+                <div
+                  className="mario-layer-130"
+                  data-node-id="I2712:12703;2203:4967"
+                >
+                  <div className="mario-layer-65">
+                    <div className="mario-layer-131" data-name="Line / 03">
+                      <div className="mario-layer-132">
+                        <img
+                          alt=""
+                          className="mario-layer-26"
+                          src={imgLine03}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
+                <p
+                  className="mario-layer-133"
+                  data-node-id="I2712:12703;2203:5004"
+                >
+                  POWER
+                </p>
               </div>
               <p
-                className="mario-layer-133"
-                data-node-id="I2712:12703;2203:5004"
+                className="mario-layer-134"
+                data-node-id="I2712:12703;2059:4265"
               >
-                POWER
+                아이템 하나로 달라지는 마리오
+              </p>
+              <p
+                className="mario-layer-135"
+                data-node-id="I2712:12703;2059:4266"
+              >
+                <span className="mario-layer-136">새로</span>
+                <span className="mario-layer-280">운</span>
+                <span className="mario-layer-136">{` 모습`}</span>
+                <span className="mario-layer-280">과</span>
+                <span className="mario-layer-136">{` 능력`}</span>
+                <span className="mario-layer-280">을</span>
+                <span className="mario-layer-136">{` 발견`}</span>
+                <span className="mario-layer-280">해요</span>
               </p>
             </div>
-            <p className="mario-layer-134" data-node-id="I2712:12703;2059:4265">
-              아이템 하나로 달라지는 마리오
-            </p>
-            <p className="mario-layer-135" data-node-id="I2712:12703;2059:4266">
-              <span className="mario-layer-136">새로</span>
-              <span className="mario-layer-280">운</span>
-              <span className="mario-layer-136">{` 모습`}</span>
-              <span className="mario-layer-280">과</span>
-              <span className="mario-layer-136">{` 능력`}</span>
-              <span className="mario-layer-280">을</span>
-              <span className="mario-layer-136">{` 발견`}</span>
-              <span className="mario-layer-280">해요</span>
-            </p>
-          </div>
-          <div
-            className="mario-layer-281 mario-powerup-hero"
-            data-powerup={activePower ?? "default"}
-            data-node-id="2712:12705"
-            data-name="Character Art / Mario / Default"
-          >
-            <img
-              key={activePower ?? "default"}
-              alt=""
-              className={
-                activePower ? "mario-powerup-hero-art" : "mario-layer-4"
-              }
-              src={
-                activePower
-                  ? powerUpHoverArt[activePower]
-                  : imgCharacterArtMarioDefault
-              }
-            />
-          </div>
-          <div
-            className="mario-layer-282"
-            data-node-id="2712:12706"
-            data-name="Decor / Mushroom Pair"
-          >
             <div
-              className="mario-layer-283"
-              data-node-id="2712:12707"
-              data-name="Asset / 1342"
+              className="mario-layer-281 mario-powerup-hero"
+              data-powerup={activePower ?? "default"}
+              data-node-id="2712:12705"
+              data-name="Character Art / Mario / Default"
             >
-              <img alt="" className="mario-layer-4" src={imgAsset1342} />
+              <img
+                key={activePower ?? "default"}
+                alt=""
+                className={
+                  activePower ? "mario-powerup-hero-art" : "mario-layer-4"
+                }
+                src={
+                  activePower
+                    ? powerUpHoverArt[activePower]
+                    : imgCharacterArtMarioDefault
+                }
+              />
             </div>
             <div
-              className="mario-layer-284"
-              data-node-id="2712:12708"
-              data-name="Asset / 1341"
+              className="mario-layer-282"
+              data-node-id="2712:12706"
+              data-name="Decor / Mushroom Pair"
             >
-              <img alt="" className="mario-layer-4" src={imgAsset1341} />
-            </div>
-          </div>
-          <div
-            className={`mario-layer-285 mario-powerup-card ${activePower === "drill" ? "is-active" : ""}`}
-            data-node-id="2712:12713"
-            data-name="Item / Drill Mushroom"
-            onMouseEnter={() => hoverPower("drill")}
-            onMouseLeave={() => setHoveredPower(null)}
-          >
-            <div className="mario-layer-286" data-node-id="2712:12714">
-              <p className="mario-layer-287">DRILL</p>
-              <p className="mario-layer-288">MUSHROOM</p>
-            </div>
-            <div className="mario-layer-289" data-node-id="2712:12715">
-              <div className="mario-layer-290">
-                <div className="mario-layer-291" data-name="드릴버섯">
-                  <img alt="" className="mario-layer-4" src={img} />
-                </div>
+              <div
+                className="mario-layer-283"
+                data-node-id="2712:12707"
+                data-name="Asset / 1342"
+              >
+                <img alt="" className="mario-layer-4" src={imgAsset1342} />
+              </div>
+              <div
+                className="mario-layer-284"
+                data-node-id="2712:12708"
+                data-name="Asset / 1341"
+              >
+                <img alt="" className="mario-layer-4" src={imgAsset1341} />
               </div>
             </div>
-          </div>
-          <div
-            className={`mario-layer-292 mario-powerup-card ${activePower === "elephant" ? "is-active" : ""}`}
-            data-node-id="2712:12716"
-            data-name="Item / Elephant Fruit"
-            onMouseEnter={() => hoverPower("elephant")}
-            onMouseLeave={() => setHoveredPower(null)}
-          >
-            <div className="mario-layer-293" data-node-id="2712:12717">
-              <p className="mario-layer-287">ELEPHANT</p>
-              <p className="mario-layer-288">FRUIT</p>
-            </div>
-            <div className="mario-layer-294" data-node-id="2712:12718">
-              <div className="mario-layer-221">
-                <div className="mario-layer-295" data-name="코끼리열매">
-                  <img alt="" className="mario-layer-4" src={img1} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className={`mario-layer-296 mario-powerup-card ${activePower === "cat" ? "is-active" : ""}`}
-            data-node-id="2712:12719"
-            data-name="Item / Super Bell"
-            onMouseEnter={() => hoverPower("cat")}
-            onMouseLeave={() => setHoveredPower(null)}
-          >
-            <p className="mario-layer-297" data-node-id="2712:12720">
-              SUPER BELL
-            </p>
-            <div className="mario-layer-298" data-node-id="2712:12721">
-              <div className="mario-layer-299">
-                <div className="mario-layer-300" data-name="벨">
-                  <img alt="" className="mario-layer-4" src={img2} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="mario-layer-301"
-            data-node-id="2712:12722"
-            data-name="Item / Fire Flower Art"
-          >
             <div
-              className="mario-layer-302"
-              data-node-id="2712:12723"
-              data-name="Asset / 1345"
+              className={`mario-layer-285 mario-powerup-card ${activePower === "drill" ? "is-active" : ""}`}
+              data-node-id="2712:12713"
+              data-name="Item / Drill Mushroom"
+              onMouseEnter={() => hoverPower("drill")}
+              onMouseLeave={() => setHoveredPower(null)}
+            >
+              <div className="mario-layer-286" data-node-id="2712:12714">
+                <p className="mario-layer-287">DRILL</p>
+                <p className="mario-layer-288">MUSHROOM</p>
+              </div>
+              <div className="mario-layer-289" data-node-id="2712:12715">
+                <div className="mario-layer-290">
+                  <div className="mario-layer-291" data-name="드릴버섯">
+                    <img alt="" className="mario-layer-4" src={img} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`mario-layer-292 mario-powerup-card ${activePower === "elephant" ? "is-active" : ""}`}
+              data-node-id="2712:12716"
+              data-name="Item / Elephant Fruit"
+              onMouseEnter={() => hoverPower("elephant")}
+              onMouseLeave={() => setHoveredPower(null)}
+            >
+              <div className="mario-layer-293" data-node-id="2712:12717">
+                <p className="mario-layer-287">ELEPHANT</p>
+                <p className="mario-layer-288">FRUIT</p>
+              </div>
+              <div className="mario-layer-294" data-node-id="2712:12718">
+                <div className="mario-layer-221">
+                  <div className="mario-layer-295" data-name="코끼리열매">
+                    <img alt="" className="mario-layer-4" src={img1} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`mario-layer-296 mario-powerup-card ${activePower === "cat" ? "is-active" : ""}`}
+              data-node-id="2712:12719"
+              data-name="Item / Super Bell"
+              onMouseEnter={() => hoverPower("cat")}
+              onMouseLeave={() => setHoveredPower(null)}
+            >
+              <p className="mario-layer-297" data-node-id="2712:12720">
+                SUPER BELL
+              </p>
+              <div className="mario-layer-298" data-node-id="2712:12721">
+                <div className="mario-layer-299">
+                  <div className="mario-layer-300" data-name="벨">
+                    <img alt="" className="mario-layer-4" src={img2} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="mario-layer-301"
+              data-node-id="2712:12722"
+              data-name="Item / Fire Flower Art"
+            >
+              <div
+                className="mario-layer-302"
+                data-node-id="2712:12723"
+                data-name="Asset / 1345"
+              >
+                <div className="mario-layer-1">
+                  <img alt="" className="mario-layer-303" src={imgAsset1345} />
+                </div>
+              </div>
+            </div>
+            <div
+              className={`mario-layer-304 mario-powerup-card ${activePower === "fire" ? "is-active" : ""}`}
+              data-node-id="2712:12724"
+              data-name="Item / Fire Flower"
+              onMouseEnter={() => hoverPower("fire")}
+              onMouseLeave={() => setHoveredPower(null)}
+            >
+              <div className="mario-layer-305" data-node-id="2712:12725">
+                <p className="mario-layer-287">FIRE</p>
+                <p className="mario-layer-288">FLOWER</p>
+              </div>
+            </div>
+            <div
+              className={`mario-layer-306 mario-powerup-card ${activePower === "bubble" ? "is-active" : ""}`}
+              data-node-id="2712:12726"
+              data-name="Item / Bubble Flower"
+              onMouseEnter={() => hoverPower("bubble")}
+              onMouseLeave={() => setHoveredPower(null)}
+            >
+              <div className="mario-layer-307" data-node-id="2712:12727">
+                <p className="mario-layer-287">BUBBLE</p>
+                <p className="mario-layer-288">FLOWER</p>
+              </div>
+              <div className="mario-layer-308" data-node-id="2712:12728">
+                <div className="mario-layer-309">
+                  <div className="mario-layer-310" data-name="버블플라워">
+                    <img alt="" className="mario-layer-4" src={img3} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p
+              className="mario-layer-311"
+              data-node-id="2712:12729"
+              style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}
+            >
+              JUMP · MUSHROOM · PIPE
+            </p>
+            <p
+              className="mario-layer-312"
+              data-node-id="2712:12730"
+              style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}
+            >
+              STAR · BLOCK
+            </p>
+            <p className="mario-layer-313" data-node-id="2712:12731">
+              모험은 점프에서 시작된다 !
+            </p>
+            <div className="mario-layer-314" data-node-id="2712:12732">
+              <p className="mario-layer-287">점프하며 펼쳐지는</p>
+              <p className="mario-layer-288">새로운 모험!</p>
+            </div>
+            <div className="mario-layer-315" data-node-id="2712:12733">
+              <div className="mario-layer-316">
+                <div className="mario-layer-317" data-name="Asset / 1330">
+                  <div className="mario-layer-1">
+                    <img
+                      alt=""
+                      className="mario-layer-318"
+                      src={imgAsset1330}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mario-layer-319" data-node-id="2712:12734">
+              <div className="mario-layer-320">
+                <div className="mario-layer-321" data-name="Asset / 1330 / 02">
+                  <img alt="" className="mario-layer-4" src={imgAsset133002} />
+                </div>
+              </div>
+            </div>
+            <div className="mario-layer-322" data-node-id="2712:12735">
+              <div className="mario-layer-323">
+                <div className="mario-layer-324" data-name="Asset / 1332">
+                  <img alt="" className="mario-layer-4" src={imgAsset1332} />
+                </div>
+              </div>
+            </div>
+            <div
+              className="mario-layer-325"
+              data-node-id="2712:12736"
+              data-name="Asset / 1325"
             >
               <div className="mario-layer-1">
-                <img alt="" className="mario-layer-303" src={imgAsset1345} />
+                <img alt="" className="mario-layer-326" src={imgAsset1325} />
               </div>
             </div>
-          </div>
-          <div
-            className={`mario-layer-304 mario-powerup-card ${activePower === "fire" ? "is-active" : ""}`}
-            data-node-id="2712:12724"
-            data-name="Item / Fire Flower"
-            onMouseEnter={() => hoverPower("fire")}
-            onMouseLeave={() => setHoveredPower(null)}
-          >
-            <div className="mario-layer-305" data-node-id="2712:12725">
-              <p className="mario-layer-287">FIRE</p>
-              <p className="mario-layer-288">FLOWER</p>
-            </div>
-          </div>
-          <div
-            className={`mario-layer-306 mario-powerup-card ${activePower === "bubble" ? "is-active" : ""}`}
-            data-node-id="2712:12726"
-            data-name="Item / Bubble Flower"
-            onMouseEnter={() => hoverPower("bubble")}
-            onMouseLeave={() => setHoveredPower(null)}
-          >
-            <div className="mario-layer-307" data-node-id="2712:12727">
-              <p className="mario-layer-287">BUBBLE</p>
-              <p className="mario-layer-288">FLOWER</p>
-            </div>
-            <div className="mario-layer-308" data-node-id="2712:12728">
-              <div className="mario-layer-309">
-                <div className="mario-layer-310" data-name="버블플라워">
-                  <img alt="" className="mario-layer-4" src={img3} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <p
-            className="mario-layer-311"
-            data-node-id="2712:12729"
-            style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}
-          >
-            JUMP · MUSHROOM · PIPE
-          </p>
-          <p
-            className="mario-layer-312"
-            data-node-id="2712:12730"
-            style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}
-          >
-            STAR · BLOCK
-          </p>
-          <p className="mario-layer-313" data-node-id="2712:12731">
-            모험은 점프에서 시작된다 !
-          </p>
-          <div className="mario-layer-314" data-node-id="2712:12732">
-            <p className="mario-layer-287">점프하며 펼쳐지는</p>
-            <p className="mario-layer-288">새로운 모험!</p>
-          </div>
-          <div className="mario-layer-315" data-node-id="2712:12733">
-            <div className="mario-layer-316">
-              <div className="mario-layer-317" data-name="Asset / 1330">
-                <div className="mario-layer-1">
-                  <img alt="" className="mario-layer-318" src={imgAsset1330} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mario-layer-319" data-node-id="2712:12734">
-            <div className="mario-layer-320">
-              <div className="mario-layer-321" data-name="Asset / 1330 / 02">
-                <img alt="" className="mario-layer-4" src={imgAsset133002} />
-              </div>
-            </div>
-          </div>
-          <div className="mario-layer-322" data-node-id="2712:12735">
-            <div className="mario-layer-323">
-              <div className="mario-layer-324" data-name="Asset / 1332">
-                <img alt="" className="mario-layer-4" src={imgAsset1332} />
-              </div>
-            </div>
-          </div>
-          <div
-            className="mario-layer-325"
-            data-node-id="2712:12736"
-            data-name="Asset / 1325"
-          >
-            <div className="mario-layer-1">
-              <img alt="" className="mario-layer-326" src={imgAsset1325} />
-            </div>
-          </div>
-          <div
-            className="mario-layer-327"
-            data-node-id="2712:12737"
-            data-name="Decor / Star Cluster"
-          >
             <div
-              className="mario-layer-328"
-              data-node-id="2712:12738"
-              data-name="Asset / 1326"
+              className="mario-layer-327"
+              data-node-id="2712:12737"
+              data-name="Decor / Star Cluster"
             >
-              <img alt="" className="mario-layer-4" src={imgAsset1326} />
-            </div>
-            <div className="mario-layer-329" data-node-id="2712:12739">
-              <div className="mario-layer-68">
-                <div className="mario-layer-330" data-name="Asset / 1340">
-                  <img alt="" className="mario-layer-4" src={imgAsset1326} />
+              <div
+                className="mario-layer-328"
+                data-node-id="2712:12738"
+                data-name="Asset / 1326"
+              >
+                <img alt="" className="mario-layer-4" src={imgAsset1326} />
+              </div>
+              <div className="mario-layer-329" data-node-id="2712:12739">
+                <div className="mario-layer-68">
+                  <div className="mario-layer-330" data-name="Asset / 1340">
+                    <img alt="" className="mario-layer-4" src={imgAsset1326} />
+                  </div>
+                </div>
+              </div>
+              <div className="mario-layer-331" data-node-id="2712:12740">
+                <div className="mario-layer-68">
+                  <div className="mario-layer-332" data-name="Asset / 1337">
+                    <img alt="" className="mario-layer-4" src={imgAsset1337} />
+                  </div>
+                </div>
+              </div>
+              <div
+                className="mario-layer-333"
+                data-node-id="2712:12741"
+                data-name="Asset / 1338"
+              >
+                <img alt="" className="mario-layer-4" src={imgAsset1337} />
+              </div>
+              <div className="mario-layer-334" data-node-id="2712:12742">
+                <div className="mario-layer-335">
+                  <div className="mario-layer-336" data-name="Asset / 1339">
+                    <img alt="" className="mario-layer-4" src={imgAsset1337} />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="mario-layer-331" data-node-id="2712:12740">
+            <div className="mario-layer-337" data-node-id="2712:12743">
               <div className="mario-layer-68">
-                <div className="mario-layer-332" data-name="Asset / 1337">
-                  <img alt="" className="mario-layer-4" src={imgAsset1337} />
+                <div className="mario-layer-338" data-name="Asset / 1335">
+                  <div className="mario-layer-1">
+                    <img
+                      alt=""
+                      className="mario-layer-339"
+                      src={imgAsset1335}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
             <div
-              className="mario-layer-333"
-              data-node-id="2712:12741"
-              data-name="Asset / 1338"
+              className="mario-layer-340"
+              data-node-id="2712:12744"
+              data-name="Asset / 1337"
             >
-              <img alt="" className="mario-layer-4" src={imgAsset1337} />
+              <div className="mario-layer-1">
+                <img alt="" className="mario-layer-339" src={imgAsset1335} />
+              </div>
             </div>
-            <div className="mario-layer-334" data-node-id="2712:12742">
-              <div className="mario-layer-335">
-                <div className="mario-layer-336" data-name="Asset / 1339">
-                  <img alt="" className="mario-layer-4" src={imgAsset1337} />
+            <div
+              className="mario-layer-341"
+              data-node-id="2712:12745"
+              data-name="Asset / 1336"
+            >
+              <img alt="" className="mario-layer-4" src={imgAsset1336} />
+            </div>
+            <div className="mario-layer-342" data-node-id="2712:12746">
+              <div className="mario-layer-68">
+                <div className="mario-layer-343" data-name="Asset / 1344">
+                  <div className="mario-layer-1">
+                    <img
+                      alt=""
+                      className="mario-layer-344"
+                      src={imgAsset1344}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="mario-layer-337" data-node-id="2712:12743">
-            <div className="mario-layer-68">
-              <div className="mario-layer-338" data-name="Asset / 1335">
-                <div className="mario-layer-1">
-                  <img alt="" className="mario-layer-339" src={imgAsset1335} />
-                </div>
-              </div>
+            <div
+              className="mario-layer-345"
+              data-node-id="2712:12747"
+              data-name="Label / Adventure"
+            >
+              <p className="mario-layer-346" data-node-id="2712:12748">
+                ADVENTURE
+              </p>
             </div>
-          </div>
-          <div
-            className="mario-layer-340"
-            data-node-id="2712:12744"
-            data-name="Asset / 1337"
-          >
-            <div className="mario-layer-1">
-              <img alt="" className="mario-layer-339" src={imgAsset1335} />
-            </div>
-          </div>
-          <div
-            className="mario-layer-341"
-            data-node-id="2712:12745"
-            data-name="Asset / 1336"
-          >
-            <img alt="" className="mario-layer-4" src={imgAsset1336} />
-          </div>
-          <div className="mario-layer-342" data-node-id="2712:12746">
-            <div className="mario-layer-68">
-              <div className="mario-layer-343" data-name="Asset / 1344">
-                <div className="mario-layer-1">
-                  <img alt="" className="mario-layer-344" src={imgAsset1344} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="mario-layer-345"
-            data-node-id="2712:12747"
-            data-name="Label / Adventure"
-          >
-            <p className="mario-layer-346" data-node-id="2712:12748">
-              ADVENTURE
-            </p>
-          </div>
-          <div
-            aria-hidden
-            className="mario-powerup-hover-target mario-powerup-hover-target--drill"
-            onMouseEnter={() => hoverPower("drill")}
-            onMouseLeave={() => setHoveredPower(null)}
-          />
-          <div
-            aria-hidden
-            className="mario-powerup-hover-target mario-powerup-hover-target--elephant"
-            onMouseEnter={() => hoverPower("elephant")}
-            onMouseLeave={() => setHoveredPower(null)}
-          />
-          <div
-            aria-hidden
-            className="mario-powerup-hover-target mario-powerup-hover-target--cat"
-            onMouseEnter={() => hoverPower("cat")}
-            onMouseLeave={() => setHoveredPower(null)}
-          />
-          <div
-            aria-hidden
-            className="mario-powerup-hover-target mario-powerup-hover-target--fire-main"
-            onMouseEnter={() => hoverPower("fire")}
-            onMouseLeave={() => setHoveredPower(null)}
-          />
-          
-          <div
-            aria-hidden
-            className="mario-powerup-hover-target mario-powerup-hover-target--bubble"
-            onMouseEnter={() => hoverPower("bubble")}
-            onMouseLeave={() => setHoveredPower(null)}
-          />
-        </section>
+            <div
+              aria-hidden
+              className="mario-powerup-hover-target mario-powerup-hover-target--drill"
+              onMouseEnter={() => hoverPower("drill")}
+              onMouseLeave={() => setHoveredPower(null)}
+            />
+            <div
+              aria-hidden
+              className="mario-powerup-hover-target mario-powerup-hover-target--elephant"
+              onMouseEnter={() => hoverPower("elephant")}
+              onMouseLeave={() => setHoveredPower(null)}
+            />
+            <div
+              aria-hidden
+              className="mario-powerup-hover-target mario-powerup-hover-target--cat"
+              onMouseEnter={() => hoverPower("cat")}
+              onMouseLeave={() => setHoveredPower(null)}
+            />
+            <div
+              aria-hidden
+              className="mario-powerup-hover-target mario-powerup-hover-target--fire-main"
+              onMouseEnter={() => hoverPower("fire")}
+              onMouseLeave={() => setHoveredPower(null)}
+            />
+
+            <div
+              aria-hidden
+              className="mario-powerup-hover-target mario-powerup-hover-target--bubble"
+              onMouseEnter={() => hoverPower("bubble")}
+              onMouseLeave={() => setHoveredPower(null)}
+            />
+          </section>
         </div>
         <section
           id="mario-games"
