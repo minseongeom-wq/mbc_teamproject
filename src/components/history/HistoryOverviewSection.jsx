@@ -14,6 +14,7 @@ function HistoryOverviewSection() {
   const surfaceRef = useRef(null);
   const sceneRenderRef = useRef(null);
   const progressRef = useRef(0);
+  const scrollMotionRef = useRef({ velocity: 0, updatedAt: 0, active: false });
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -68,13 +69,29 @@ function HistoryOverviewSection() {
             end: () => `+=${Math.round(window.innerHeight * historyOverviewYears.length * 1.8)}`,
             pin: true, pinSpacing: true, scrub: 0.9,
             invalidateOnRefresh: true, anticipatePin: 1,
+            onUpdate: self => {
+              scrollMotionRef.current = {
+                velocity: self.isActive ? Math.abs(self.getVelocity()) : 0,
+                updatedAt: performance.now(), active: self.isActive,
+              };
+              sceneRenderRef.current?.();
+            },
+            onToggle: self => {
+              scrollMotionRef.current.active = self.isActive;
+              if (!self.isActive) scrollMotionRef.current.velocity = 0;
+              sceneRenderRef.current?.();
+            },
           },
         });
         render(0);
       });
       media.add('(prefers-reduced-motion: reduce)', () => render(0));
     }, section);
-    return () => { observer.disconnect(); context.revert(); };
+    return () => {
+      scrollMotionRef.current.active = false;
+      observer.disconnect();
+      context.revert();
+    };
   }, []);
 
   return (
@@ -82,7 +99,7 @@ function HistoryOverviewSection() {
       <div className="history-overview__surface" ref={surfaceRef}>
       <div className="history-overview__stage" ref={stageRef}>
         <div className="history-overview__canvas-host">
-          <HistoryOverviewCanvas progressRef={progressRef} renderRef={sceneRenderRef} />
+          <HistoryOverviewCanvas progressRef={progressRef} renderRef={sceneRenderRef} scrollMotionRef={scrollMotionRef} />
         </div>
         {historyOverviewYears.map((item) => (
           <div className="history-overview__sequence" key={item.year}>

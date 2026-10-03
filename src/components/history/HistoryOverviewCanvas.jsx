@@ -14,7 +14,7 @@ function disposeTree(root) {
   });
 }
 
-export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
+export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMotionRef }) {
   const hostRef = useRef(null);
 
   useEffect(() => {
@@ -33,6 +33,10 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
     light.position.set(-400, 600, 900);
     scene.add(light);
     let disposed = false;
+    let bendFrame;
+    let bend = 0;
+    let lastRenderTime = performance.now();
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const textures = new Set();
     const textureLoader = new THREE.TextureLoader();
     const loadTexture = (url) => {
@@ -94,13 +98,19 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
     const orbitItems = historyOverviewYears.flatMap((item, yearIndex) => {
       const visuals = [{ ...item.yearVisual, slotOffset: 0 }, ...item.cards];
       return visuals.map((visual) => {
-        const geometry = new THREE.PlaneGeometry(visual.width, visual.height, 24, 1);
+        const geometry = new THREE.PlaneGeometry(visual.width, visual.height, visual.slotOffset === 0 ? 24 : 48, 1);
         // Years wrap gently around a cylinder; their center stays on the orbit.
-        // Card curvature remains the existing shallow paper bow.
+        // Cards bend along the orbit, with their center anchored to the same slot.
         const positions = geometry.attributes.position;
+        // Retain flat coordinates so repeated bending never deforms the mesh cumulatively.
+        const flatX = Float32Array.from({ length: positions.count }, (_, index) => positions.getX(index));
+        const baseBendRadius = visual.slotOffset === 0 ? 1800 : 1000;
         if (visual.slotOffset !== 0) {
+          const radius = 1000;
           for (let i = 0; i < positions.count; i++) {
-            positions.setZ(i, Math.cos(positions.getX(i) / visual.width * Math.PI) * 14);
+            const angle = positions.getX(i) / radius;
+            positions.setX(i, Math.sin(angle) * radius);
+            positions.setZ(i, (Math.cos(angle) - 1) * radius);
           }
         } else {
           const radius = 1800;
@@ -130,12 +140,36 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
         const mesh = new THREE.Mesh(geometry, material);
         mesh.name = item.year + '-' + visual.slotOffset;
         world.add(mesh);
-        return { mesh, config: { slot: yearIndex * 3 + visual.slotOffset, radius: 570 + (visual.slotOffset === 2 ? 25 : 0) } };
+        return { mesh, flatX, baseBendRadius, config: { slot: yearIndex * 3 + visual.slotOffset, radius: 570 + (visual.slotOffset === 2 ? 25 : 0) } };
       });
     });
 
     function render() {
       if (disposed) return;
+      cancelAnimationFrame(bendFrame);
+      bendFrame = undefined;
+      const now = performance.now();
+      const elapsed = Math.max(0, Math.min((now - lastRenderTime) / 1000, .05));
+      lastRenderTime = now;
+      const motion = scrollMotionRef.current;
+      // Both scroll directions bend inward. Expire the velocity sample when scrolling stops.
+      const target = !reducedMotion.matches && motion.active && now - motion.updatedAt < 120
+        ? Math.min(motion.velocity / 2400, 1) : 0;
+      const previousBend = bend;
+      bend = reducedMotion.matches ? 0 : THREE.MathUtils.lerp(bend, target, 1 - Math.exp(-elapsed / (target > bend ? .1 : .28)));
+      if (Math.abs(bend - target) < .0005) bend = target;
+      if (bend !== previousBend) {
+        orbitItems.forEach(({ mesh, flatX, baseBendRadius }) => {
+          const radius = baseBendRadius / (1 + bend * 1.25);
+          const positions = mesh.geometry.attributes.position;
+          for (let index = 0; index < positions.count; index++) {
+            const angle = flatX[index] / radius;
+            positions.setX(index, Math.sin(angle) * radius);
+            positions.setZ(index, (Math.cos(angle) - 1) * radius);
+          }
+          positions.needsUpdate = true;
+        });
+      }
       const phase = progressRef.current;
 
       orbitItems.forEach(({ mesh, config }) => {
@@ -161,6 +195,8 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
         model.rotation.set(config.rotation[0] + local * 0.1, config.rotation[1] + local * 0.8, config.rotation[2]);
       });
       renderer.render(scene, camera);
+      // Continue only while reacting or settling; a resting scene does not run an idle loop.
+      if (target > 0 || bend > 0) bendFrame = requestAnimationFrame(render);
     }
     renderRef.current = render;
     const loader = new GLTFLoader();
@@ -189,6 +225,7 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
     render();
     return () => {
       disposed = true;
+      cancelAnimationFrame(bendFrame);
       renderRef.current = null;
       disposeTree(scene);
       textures.forEach((texture) => texture.dispose());
@@ -196,7 +233,7 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef }) {
       renderer.forceContextLoss();
       renderer.domElement.remove();
     };
-  }, [progressRef, renderRef]);
+  }, [progressRef, renderRef, scrollMotionRef]);
 
   return <div className="history-overview__canvas" ref={hostRef} aria-hidden="true" />;
 }
