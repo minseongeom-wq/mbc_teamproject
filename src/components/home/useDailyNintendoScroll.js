@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Each step moves ALL permanent cards one slot; no source swapping or timers.
 export default function useDailyNintendoScroll(sectionRef, mobile) {
   useLayoutEffect(() => {
+    if (mobile) return;
     const section = sectionRef.current;
     const wrapper = section.querySelector('.daily-scene-wrapper');
     let resizeFrame;

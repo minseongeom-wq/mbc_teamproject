@@ -7,6 +7,7 @@ export default function HeroSection({ mobile = false, onDiscover }) {
   const sectionRef = useRef(null);
 
   useLayoutEffect(() => {
+    if (mobile) return;
     const intro = document.querySelector('.nintendo-intro');
     if (!intro) return;
 

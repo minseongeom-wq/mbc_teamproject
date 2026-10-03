@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function useWhatsNewIntro(sectionRef, mobile) {
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (mobile || !section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const context = gsap.context(() => {
       const words = [...section.querySelectorAll(mobile

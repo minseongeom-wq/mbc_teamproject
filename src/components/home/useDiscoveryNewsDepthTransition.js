@@ -77,6 +77,7 @@ function clearDotVisual(discovery, news, dotLayerRef) {
 
 export default function useDiscoveryNewsDepthTransition(containerRef, mobile) {
   useLayoutEffect(() => {
+    if (mobile) return;
     const canvas = containerRef.current?.querySelector('.home-page__canvas');
     const discovery = canvas?.querySelector('.home-discovery, .home-discovery-mobile');
     const news = canvas?.querySelector('.home-news, .home-news-mobile');

@@ -36,11 +36,11 @@ export default function GameDiscoverySection({ mobile = false }) {
             <p className="home-discovery-mobile__text-6">{`지금 마음에 드는 게임을 찾아 `}</p>
             <p className="home-discovery-mobile__text-7">나만의 플레이를 시작해 보세요!</p>
           </div>
-          <div className="home-discovery-mobile__image-817" data-node-id="2156:6645" data-name="image 817">
-            <img alt="" className="home-discovery-mobile__image-4" src={homeAsset('b1a62.png')} />
+          <div className="home-discovery-mobile__image-817" data-node-id="3957:9509" data-name="image 1239">
+            <img alt="" className="home-discovery-mobile__image-4" src={homeAsset('discovery-mobile-console.png')} />
           </div>
-          <div className="home-discovery-mobile__image-816" data-node-id="2156:6646" data-name="image 816">
-            <img alt="" className="home-discovery-mobile__image-5" src={homeAsset('f006d.png')} />
+          <div className="home-discovery-mobile__image-816" data-node-id="3957:9514" data-name="image 1240">
+            <img alt="" className="home-discovery-mobile__image-5" src={homeAsset('discovery-mobile-console.png')} />
           </div>
         </div>
         <div className="home-discovery-mobile__layer-9" data-node-id="2156:6647">

@@ -93,10 +93,10 @@
 .home-discovery-mobile__text-5 { line-height: 1.3; margin-bottom: 0; font-size: 13px; }
 .home-discovery-mobile__text-6 { line-height: 1.3; margin-bottom: 0; font-size: 13px; }
 .home-discovery-mobile__text-7 { line-height: 1.3; font-size: 13px; }
-.home-discovery-mobile__image-817 { position: absolute; height: 179px; left: 0; top: 1px; width: 50px; }
-.home-discovery-mobile__image-4 { position: absolute; inset: 0; max-width: none; object-position: bottom; pointer-events: none; width: 100%; height: 100%; }
-.home-discovery-mobile__image-816 { position: absolute; height: 179px; left: 310px; top: 0; width: 50px; }
-.home-discovery-mobile__image-5 { position: absolute; inset: 0; max-width: none; object-position: bottom; pointer-events: none; width: 100%; height: 100%; }
+.home-discovery-mobile__image-817 { position: absolute; height: 179px; left: 0; top: 0.32px; width: 69px; overflow: hidden; }
+.home-discovery-mobile__image-4 { position: absolute; left: -523.36%; top: 0; max-width: none; pointer-events: none; width: 623.54%; height: 100%; }
+.home-discovery-mobile__image-816 { position: absolute; height: 179px; left: 291px; top: 0.32px; width: 69px; overflow: hidden; }
+.home-discovery-mobile__image-5 { position: absolute; left: 0.3%; top: 0.09%; max-width: none; pointer-events: none; width: 623.54%; height: 100%; }
 .home-discovery-mobile__layer-9 { position: absolute; height: 12px; left: 50%; top: 718px; width: 48px; translate: -50% 0; }
 .home-discovery-mobile__image-6 { position: absolute; display: block; inset: 0; max-width: none; width: 100%; height: 100%; }
 .home-discovery-mobile__layer-10 { position: absolute; align-content: stretch; display: flex; align-items: center; justify-content: space-between; left: 55px; top: 678px; width: 250px; }

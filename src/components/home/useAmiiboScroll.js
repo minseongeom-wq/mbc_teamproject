@@ -12,7 +12,7 @@ const OPEN = 'inset(0% 0%)';
 export default function useAmiiboScroll(sectionRef, mobile) {
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (mobile || !section) return;
     const media = gsap.matchMedia();
 
     media.add('(prefers-reduced-motion: no-preference)', () => {

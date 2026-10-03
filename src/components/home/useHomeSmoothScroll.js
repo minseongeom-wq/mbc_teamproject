@@ -4,8 +4,9 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollToPlugin);
 
-export default function useHomeSmoothScroll() {
+export default function useHomeSmoothScroll(mobile = false) {
   useEffect(() => {
+    if (mobile) return;
     let destination = window.scrollY;
     let tween;
 
@@ -55,5 +56,5 @@ export default function useHomeSmoothScroll() {
       window.removeEventListener('keydown', stop);
       stop();
     };
-  }, []);
+  }, [mobile]);
 }

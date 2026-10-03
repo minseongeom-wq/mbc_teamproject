@@ -14,11 +14,11 @@ import '../../components/home/home.css';
 import '../../components/home/home-design.css';
 
 export default function HomePage() {
-  useHomeSmoothScroll();
   const container = useRef(null);
-  const heroTransition = useHeroDiscoveryTransition(container);
   const [width, setWidth] = useState(() => Math.min(window.innerWidth, 1920));
   const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 1023px)').matches);
+  useHomeSmoothScroll(mobile);
+  const heroTransition = useHeroDiscoveryTransition(container, mobile);
   useLayoutEffect(() => {
     const media = window.matchMedia('(max-width: 1023px)');
     const updateMobile = () => setMobile(media.matches);
@@ -33,8 +33,8 @@ export default function HomePage() {
   useDiscoveryNewsDepthTransition(container, mobile);
   return (
     <div className="home-page" ref={container}>
-      <NintendoIntro />
-      <div className="home-page__canvas" style={{ '--home-scale': width / (mobile ? 360 : 1920), '--home-width': mobile ? '360px' : '1920px' }}>
+      {!mobile && <NintendoIntro />}
+      <div key={mobile ? 'mobile' : 'desktop'} className="home-page__canvas" style={{ '--home-scale': width / (mobile ? 360 : 1920), '--home-width': mobile ? '360px' : '1920px' }}>
         <HeroSection mobile={mobile} onDiscover={heroTransition.start} />
         <GameDiscoverySection key={mobile ? 'mobile' : 'desktop'} mobile={mobile} />
         <WhatsNewSection mobile={mobile} />

@@ -1,4 +1,11 @@
 /* Home-only layout integration; shared component internals stay unchanged. */
+@media (max-width: 1023px) {
+  .home-page *, .home-page *::before, .home-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
 html:has(.home-page) { scrollbar-gutter: stable; }
 .site-shell:has(.home-page) { position: relative; }
 .site-shell:has(.home-page) > .common-header { position: absolute; inset: 0 0 auto; z-index: var(--z-header, 200); }
@@ -33,6 +40,13 @@ html:has(.home-page) { scrollbar-gutter: stable; }
 .home-page .home-amiibo-mobile__infinite-marquee-animation-amibo { --amiibo-gap: 17.03px; }
 .home-page section:hover > [data-name='infinite marquee animation-Amibo'] { animation-play-state: paused; }
 @keyframes home-amiibo-scroll { to { transform: translateX(calc(-50% - var(--amiibo-gap) / 2)); } }
+/* Mobile keeps only the continuous figure marquee, without scroll or hover effects. */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  .home-page .home-amiibo-mobile > .home-amiibo-mobile__infinite-marquee-animation-amibo {
+    animation: home-amiibo-scroll 45s linear infinite !important;
+    animation-play-state: running;
+  }
+}
 /* The mobile Figma places news cards on one horizontal track. */
 .home-news-mobile { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
 .home-news-mobile::-webkit-scrollbar { display: none; }

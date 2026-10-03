@@ -20,7 +20,7 @@ function createConsoleTimeline({ overlay, consoleElement, screen, screenContent,
   return timeline;
 }
 
-export default function useHeroDiscoveryTransition(containerRef) {
+export default function useHeroDiscoveryTransition(containerRef, mobile = false) {
   const overlayRef = useRef(null);
   const timelineRef = useRef(null);
   const sequenceRef = useRef(null);
@@ -92,6 +92,10 @@ export default function useHeroDiscoveryTransition(containerRef) {
   }, [containerRef, bootConsole]);
 
   const start = useCallback(() => {
+    if (mobile) {
+      containerRef.current?.querySelector('.home-discovery-mobile')?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      return;
+    }
     if (phaseRef.current !== 'hero' || document.querySelector('.nintendo-intro, dialog[open]')) return;
     if (!containerRef.current?.querySelector('.home-discovery, .home-discovery-mobile')) return;
     phaseRef.current = 'animatingPanel';
@@ -107,7 +111,7 @@ export default function useHeroDiscoveryTransition(containerRef) {
       ease: 'power2.inOut',
       onComplete: completePanel,
     });
-  }, [containerRef, completePanel]);
+  }, [containerRef, completePanel, mobile]);
 
   const startReverse = useCallback((discovery, top) => {
     if (phaseRef.current !== 'completed') return;
@@ -160,6 +164,7 @@ export default function useHeroDiscoveryTransition(containerRef) {
   }, []);
 
   useLayoutEffect(() => {
+    if (mobile) return;
     const restoreAtDiscovery = () => {
       if (phaseRef.current !== 'hero' || document.querySelector('.nintendo-intro, dialog[open]')) return;
       const discovery = containerRef.current?.querySelector('.home-discovery, .home-discovery-mobile');
@@ -247,11 +252,11 @@ export default function useHeroDiscoveryTransition(containerRef) {
       if (sequenceRef.current) document.body.style.overflow = sequenceRef.current.oldOverflow;
       if (reverseOverflowRef.current !== null) document.body.style.overflow = reverseOverflowRef.current;
     };
-  }, [containerRef, completePanel, startReverse]);
+  }, [containerRef, completePanel, startReverse, mobile]);
 
   const overlay = createPortal(
     <div className="home-transition" ref={overlayRef} aria-hidden="true" />,
     document.body,
   );
-  return { start, overlay };
+  return { start, overlay: mobile ? null : overlay };
 }

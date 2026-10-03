@@ -35,6 +35,7 @@ export default function useDiscoveryScroll({ mobile, mode, onSelect }) {
   };
 
   useEffect(() => {
+    if (mobile) return;
     const section = sectionRef.current;
     const order = getOrder(mobile, mode);
     const ready = () => {
