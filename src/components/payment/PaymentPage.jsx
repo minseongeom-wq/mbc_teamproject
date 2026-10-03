@@ -74,7 +74,12 @@ export default function PaymentPage() {
       <section className="payment-check" aria-labelledby="payment-check-title">
         <div className="payment-check__products">
           <h1 id="payment-check-title">제품 확인</h1>
-          <div className="payment-check__list">
+          <div
+            className={`payment-check__list${items.length > 2 ? ' payment-check__list--scrollable' : ''}`}
+            tabIndex={items.length > 2 ? 0 : undefined}
+            role={items.length > 2 ? 'region' : undefined}
+            aria-label={items.length > 2 ? '결제 상품 목록' : undefined}
+          >
             {items.length ? (
               items.map((item) => (
                 <ProductRow
