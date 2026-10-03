@@ -1,6 +1,6 @@
 import "./HistoryBrandStatement01.css";
 
-function HistoryBrandStatement01() {
+function HistoryBrandStatement01({ imageSrc = '/images/history/originality.png' }) {
   return (
     <section className="history-brand-01">
       {/* 중앙 타이틀 */}
@@ -12,7 +12,7 @@ function HistoryBrandStatement01() {
       <div className="history-brand-01__visual">
         <div className="history-service-motion__image">
           <img
-            src="/images/history/originality.png"
+            src={imageSrc}
             alt=""
           />
         </div>

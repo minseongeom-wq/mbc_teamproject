@@ -1,6 +1,6 @@
 import "./HistoryBrandStatement03.css";
 
-function HistoryBrandStatement03() {
+function HistoryBrandStatement03({ imageSrc = '/images/history/sincerity.png' }) {
   return (
     <section className="history-brand-03">
       <h2 className="history-brand-03__title">
@@ -10,7 +10,7 @@ function HistoryBrandStatement03() {
       <div className="history-brand-03__visual">
         <div className="history-service-motion__image">
           <img
-            src="/images/history/sincerity.png"
+            src={imageSrc}
             alt=""
           />
         </div>

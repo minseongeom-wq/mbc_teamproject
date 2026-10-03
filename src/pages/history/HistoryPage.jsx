@@ -1,4 +1,6 @@
 import IntroTransition from '../../components/interaction/IntroTransition';
+import { useSyncExternalStore } from 'react';
+import HistoryMobilePage from '../../components/history/HistoryMobilePage.jsx';
 import HistoryHeroStorySection from '../../components/history/HistoryHeroStorySection';
 import HistoryStoryTransitionSection from '../../components/history/HistoryStoryTransitionSection';
 import HistoryServiceStack from '../../components/history/HistoryServiceStack';
@@ -10,7 +12,15 @@ import HistoryDetailsIntroSection from '../../components/history/HistoryDetailsI
 import HistoryBrandStoryDescriptionSection from '../../components/history/HistoryBrandStoryDescriptionSection';
 import "./HistoryPage.css";
 
+const mobileQuery = '(max-width: 1023px)';
+function subscribeViewport(callback) {
+    const media = window.matchMedia(mobileQuery);
+    media.addEventListener('change', callback);
+    return () => media.removeEventListener('change', callback);
+}
 function HistoryPage() {
+    const mobile = useSyncExternalStore(subscribeViewport, () => window.matchMedia(mobileQuery).matches, () => false);
+    if (mobile) return <HistoryMobilePage />;
     return (
         <main className="history-page">
             <IntroTransition
