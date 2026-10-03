@@ -1,5 +1,13 @@
 .store-category-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 374.5px 374.5px; column-gap: 22px; row-gap: 26px; margin-top: 100px; }
 .store-category-card { position: relative; overflow: hidden; border-radius: 13.676px; background: var(--card-background, #ededed); box-shadow: 0 9.118px 9.118px rgb(0 0 0 / 7%); }
+.store-category-card { transform-origin: center center; transition: transform 220ms ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  .store-category-card:hover { transform: scale(1.03); z-index: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .store-category-card { transition: none; }
+  .store-category-card:hover { transform: none; }
+}
 .store-category-card__art { position: absolute; inset: 0; overflow: hidden; }
 .store-category-card__art img { position: absolute; display: block; width: 100%; height: 100%; object-fit: cover; }
 .store-category-card--editorial .store-category-card__caption, .store-category-card--ip .store-category-card__caption { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box; height: 111.235px; padding: 17.555px 12px 0; text-align: center; }
