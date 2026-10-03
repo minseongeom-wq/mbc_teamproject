@@ -1,6 +1,7 @@
 ﻿import { useRef } from 'react';
 import { homeAsset } from './homeAssets.js';
 import useDailyNintendoScroll from './useDailyNintendoScroll.js';
+import useMobileDailyCarousel from './useMobileDailyCarousel.js';
 import { dailyPhoneScreens } from './dailyNintendoData.js';
 import './daily-nintendo.css';
 
@@ -28,10 +29,47 @@ function PhoneContent({ id }) {
 export default function DailyNintendoSection({ mobile = false }) {
   const section = useRef(null);
   useDailyNintendoScroll(section, mobile);
+  const mobileCarousel = useMobileDailyCarousel(section, mobile);
+  if (mobile) return (
+    <section ref={section} className="daily-carousel daily-carousel--mobile" data-node-id="2156:6694" aria-label="날마다 만나는 닌텐도">
+      <div className="daily-scene-wrapper">
+        <div className="daily-scene daily-carousel__stage"
+          onPointerDown={mobileCarousel.onPointerDown}
+          onPointerUp={mobileCarousel.onPointerUp}
+          onPointerCancel={mobileCarousel.onPointerCancel}
+          onDragStart={event => event.preventDefault()}>
+          <h2 className="daily-carousel__heading">날마다 만나는 닌텐도</h2>
+          <div className="daily-carousel__titles"><p className="daily-carousel__title">NINTENDO Widget</p></div>
+          <div className="daily-carousel__widget-tabs" aria-label="닌텐도 위젯 선택">
+            {['61389.svg', 'a17e6.svg', '9d316.svg', 'ad926.svg'].map((asset, index) => (
+              <button key={asset} type="button" aria-label={`Widget ${widgets[index].id}`} aria-pressed={mobileCarousel.step === index}
+                onClick={() => mobileCarousel.select(index)}>
+                <span>{widgets[index].id}</span>
+                <img src={homeAsset(asset)} alt="" />
+              </button>
+            ))}
+          </div>
+          <div className="daily-carousel__phones">
+            {phones.map((id, i) => <div key={id} className="daily-carousel__phone" data-phone={i} role="img" aria-label={`닌텐도 위젯 phone ${i + 1}`}>
+              {[...new Set([...dailyPhoneScreens.map(state => state[i]).filter(Boolean), ...(i === 0 ? ['04'] : [])])].map(screen => (
+                <div key={screen} className="daily-carousel__phone-art" data-screen={screen}><PhoneContent id={screen} /></div>
+              ))}
+            </div>)}
+          </div>
+          <img className="daily-carousel__mobile-ellipse" src={homeAsset('39b60.svg')} alt="" />
+          <span className="home-page__sr-only" role="status" aria-live="polite">Widget {widgets[mobileCarousel.step].id}</span>
+        </div>
+      </div>
+    </section>
+  );
   return (
     <section ref={section} className={`daily-carousel ${mobile ? 'daily-carousel--mobile' : ''}`} data-daily-scroll data-name="06_Daily-Nintendo" data-node-id="1148:6749" aria-label="날마다 만나는 닌텐도">
       <div className="daily-scene-wrapper">
-      <div className="daily-scene daily-carousel__stage">
+      <div className="daily-scene daily-carousel__stage"
+        onPointerDown={mobile ? mobileCarousel.onPointerDown : undefined}
+        onPointerUp={mobile ? mobileCarousel.onPointerUp : undefined}
+        onPointerCancel={mobile ? mobileCarousel.onPointerCancel : undefined}
+        onDragStart={mobile ? event => event.preventDefault() : undefined}>
         <h2 className="daily-carousel__heading">날마다 만나는 닌텐도</h2>
         <div className="daily-carousel__titles">
           <p className="daily-carousel__title" data-title aria-label="NINTENDO Widget 01부터 04까지">
