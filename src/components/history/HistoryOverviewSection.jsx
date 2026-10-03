@@ -43,10 +43,11 @@ function HistoryOverviewSection() {
           // The actual 08 surface travels above its document slot during entry.
           // Compensate its top without fixed positioning (the pin has a transform).
           const floating = p > 0 && p < 1;
-          const radius = Math.hypot(window.innerWidth, window.innerHeight) / 2;
+          // Open the black surface from its center toward both sides like curtains.
+          const sideInset = 50 * (1 - Math.min(1, p / 0.78));
           gsap.set(surface, {
             y: floating ? -section.getBoundingClientRect().top : 0,
-            clipPath: `circle(${p >= 1 ? radius + 2 : radius * Math.min(1, p / 0.78)}px at 50% 50%)`,
+            clipPath: `inset(0% ${sideInset}% 0% ${sideInset}%)`,
           });
           gsap.set(section, { backgroundColor: p < 1 ? previousBackground : 'transparent' });
           gsap.set(canvas, { opacity: gsap.utils.clamp(0, 1, (p - 0.55) / 0.3) });
