@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './zeldaContent3Section.css';
 
 const asset = name => `${import.meta.env.BASE_URL}images/zelda/combat-${name}`;
+const video = name => `${import.meta.env.BASE_URL}videos/zelda/combat-${name}.mp4`;
 const weapons = [
   ['sword', 'SWORD', '검', 'png'],
   ['bow', 'BOW', '활', 'svg'],
@@ -22,9 +23,19 @@ const descriptions = [
 export default function ZeldaContent3Section() {
   const [selected, setSelected] = useState(0);
   const listRef = useRef(null);
+  const scrollTargetRef = useRef(0);
   const selectWeapon = index => {
     if (index !== selected) listRef.current?.closest('.zelda-combat')?.classList.remove('zelda-transition-settled');
     setSelected(index);
+  };
+  const moveCards = direction => {
+    const list = listRef.current;
+    const cards = list?.querySelectorAll('.zelda-combat__card');
+    if (!cards || cards.length < 2) return;
+    const cardStep = cards[1].offsetLeft - cards[0].offsetLeft;
+    const maxScroll = list.scrollWidth - list.clientWidth;
+    scrollTargetRef.current = Math.max(0, Math.min(maxScroll, scrollTargetRef.current + direction * cardStep));
+    list.scrollTo({ left: scrollTargetRef.current, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
   useEffect(() => {
     const list = listRef.current;
@@ -36,16 +47,26 @@ export default function ZeldaContent3Section() {
       if (next !== list.scrollLeft) {
         event.preventDefault();
         list.scrollLeft = next;
+        scrollTargetRef.current = next;
       }
     };
+    const onScrollEnd = () => { scrollTargetRef.current = list.scrollLeft; };
     list.addEventListener('wheel', onWheel, { passive: false });
-    return () => list.removeEventListener('wheel', onWheel);
+    list.addEventListener('scrollend', onScrollEnd);
+    return () => {
+      list.removeEventListener('wheel', onWheel);
+      list.removeEventListener('scrollend', onScrollEnd);
+    };
   }, []);
   return (
     <section className="zelda-combat" data-view={selected === 0 ? 'content3' : `content3_${selected + 1}`} aria-labelledby="zelda-combat-title">
-      <img key={weapons[selected][0]} className={`zelda-combat__background zelda-combat__background--${weapons[selected][0]}`} src={asset(`${weapons[selected][0]}-background.gif`)} alt="" />
-      <div className="zelda-combat__shade" />
       <div className="zelda-combat__canvas">
+        {weapons[selected][0] === 'elemental' ? (
+          <img key="elemental" className="zelda-combat__background zelda-combat__background--elemental" src={asset('elemental-background.gif')} alt="" />
+        ) : (
+          <video key={weapons[selected][0]} className={`zelda-combat__background zelda-combat__background--${weapons[selected][0]}`} src={video(weapons[selected][0])} autoPlay muted loop playsInline aria-hidden="true" />
+        )}
+        <div className="zelda-combat__shade" />
         <div className="zelda-combat__heading">
           <p>모험을 위한 기술</p>
           <h2 id="zelda-combat-title">COMBAT</h2>
@@ -53,9 +74,9 @@ export default function ZeldaContent3Section() {
         <div key={weapons[selected][0]} className="zelda-combat__description">
           <h3>{descriptions[selected][0]}</h3>
           <p>{descriptions[selected][1].map((line, index) => <span key={line}>{index > 0 && <br />}{line}</span>)}</p>
-          <div className="zelda-combat__arrows" aria-hidden="true">
-            <span><img src={asset('arrow-left.svg')} alt="" /></span>
-            <span><img src={asset('arrow-right.svg')} alt="" /></span>
+          <div className="zelda-combat__arrows">
+            <button type="button" aria-label="이전 카드" onClick={() => moveCards(-1)}><img src={asset('arrow-left.svg')} alt="" /></button>
+            <button type="button" aria-label="다음 카드" onClick={() => moveCards(1)}><img src={asset('arrow-right.svg')} alt="" /></button>
           </div>
         </div>
         <div ref={listRef} className="zelda-combat__list" tabIndex={0} role="region" aria-label="전투 기술 목록">

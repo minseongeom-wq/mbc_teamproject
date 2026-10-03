@@ -11,10 +11,11 @@
 .zelda-combat__description h3 { font: 400 56px/1 'Heir of Light', serif; }
 .zelda-combat__description p { font: var(--zelda-body-font); letter-spacing: var(--zelda-body-letter-spacing); overflow-wrap: break-word; }
 .zelda-combat__arrows { display: flex; gap: 23px; }
-.zelda-combat__arrows span { position: relative; width: 69px; height: 47px; border: 2px solid rgb(255 255 255 / .3); overflow: hidden; }
+.zelda-combat__arrows button { position: relative; width: 69px; height: 47px; border: 2px solid rgb(255 255 255 / .3); border-radius: 0; padding: 0; overflow: hidden; background: transparent; cursor: pointer; }
+.zelda-combat__arrows button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .zelda-combat__arrows img { position: absolute; left: 22px; top: 11px; }
-.zelda-combat__arrows span:last-child img { transform: scaleX(-1); }
-.zelda-combat__list { position: absolute; left: 971px; top: 420px; width: 958px; display: flex; align-items: center; gap: 14px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.zelda-combat__arrows button:last-child img { transform: scaleX(-1); }
+.zelda-combat__list { position: absolute; left: 971px; top: 420px; width: 958px; display: flex; align-items: center; gap: 14px; padding-right: 9px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
 .zelda-combat__list::-webkit-scrollbar { display: none; }
 .zelda-combat__list:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .zelda-combat__card { position: relative; flex: 0 0 375px; height: 540px; border: 6px solid rgb(255 255 255 / .3); overflow: hidden; background: rgb(255 255 255 / .2); }
@@ -23,6 +24,8 @@
 .zelda-combat__card:focus-visible { outline: 3px solid #fff; outline-offset: -10px; }
 .zelda-combat [hidden] { display: none; }
 .zelda-combat__background--bow { left: 0; }
+video.zelda-combat__background--bow,
+video.zelda-combat__background--shield { transform: scale(1.2); }
 .zelda-combat[data-view="content3_3"] .zelda-combat__description,
 .zelda-combat[data-view="content3_4"] .zelda-combat__description { width: 481px; }
 .zelda-combat[data-view="content3_5"] .zelda-combat__description p { white-space: pre-wrap; }

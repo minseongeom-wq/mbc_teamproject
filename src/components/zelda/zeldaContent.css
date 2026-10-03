@@ -48,27 +48,30 @@
 .zelda-transition-layer .zelda-combat__canvas,
 .zelda-transition-layer .zelda-villages__canvas,
 .zelda-transition-layer .zelda-about__canvas {
+  --zelda-scene-scale: min(calc(100cqw / 1920px), calc(100svh / 1080px));
   position: absolute;
   left: 50%;
   top: 50%;
   transform-origin: center;
-  transform: translate(-50%, -50%) scale(min(calc(100cqw / 1920px), calc(100svh / 1080px)));
+  transform: translate(-50%, -50%) scale(var(--zelda-scene-scale));
 }
 
-/* Fill the viewport with scenery while the 1920x1080 Figma content keeps its coordinates. */
-.zelda-transition-layer > .zelda-combat > .zelda-combat__background,
-.zelda-transition-layer > .zelda-villages > .zelda-villages__background,
-.zelda-transition-layer > .zelda-about > .zelda-about__background {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+/* Fill the viewport while keeping scenery and overlays in the same blend group. */
+.zelda-transition-layer .zelda-combat__background,
+.zelda-transition-layer .zelda-villages__background,
+.zelda-transition-layer .zelda-about__background {
+  left: calc(50% - 50cqw / var(--zelda-scene-scale));
+  top: calc(50% - 50svh / var(--zelda-scene-scale));
+  width: calc(100cqw / var(--zelda-scene-scale));
+  height: calc(100svh / var(--zelda-scene-scale));
   object-fit: cover;
 }
 
-.zelda-transition-layer > .zelda-combat > .zelda-combat__shade {
-  width: 100%;
-  height: 100%;
+.zelda-transition-layer .zelda-combat__shade {
+  left: calc(50% - 50cqw / var(--zelda-scene-scale));
+  top: calc(50% - 50svh / var(--zelda-scene-scale));
+  width: calc(100cqw / var(--zelda-scene-scale));
+  height: calc(100svh / var(--zelda-scene-scale));
 }
 
 .zelda-transition-entering,
@@ -130,10 +133,8 @@
 .zelda-transition-entering .zelda-villages__diamond { opacity: var(--transition-image-opacity, 0); }
 .zelda-transition-exiting .zelda-combat__list,
 .zelda-transition-exiting .zelda-villages__diamond { opacity: var(--transition-image-opacity, 1); }
-.zelda-transition-entering .zelda-combat__list,
-.zelda-transition-entering .zelda-villages__diamond { scale: var(--transition-image-scale, .96); }
-.zelda-transition-exiting .zelda-combat__list,
-.zelda-transition-exiting .zelda-villages__diamond { scale: var(--transition-image-scale, 1); }
+.zelda-transition-entering .zelda-combat__list { scale: var(--transition-image-scale, .96); }
+.zelda-transition-exiting .zelda-combat__list { scale: var(--transition-image-scale, 1); }
 
 .zelda-transition-entering.zelda-gameplay .zelda-gameplay__stage,
 .zelda-transition-exiting.zelda-gameplay .zelda-gameplay__stage { background: transparent; }
@@ -156,7 +157,7 @@
 .zelda-transition-exiting .zelda-gameplay__note,
 .zelda-transition-exiting .zelda-gameplay__diamond-border { opacity: var(--transition-frame-opacity, 1); filter: blur(var(--transition-frame-blur, 0px)); }
 .zelda-transition-entering .zelda-gameplay__diamond { opacity: var(--transition-image-opacity, 0); scale: var(--transition-image-scale, .96); }
-.zelda-transition-exiting .zelda-gameplay__diamond { opacity: var(--transition-image-opacity, 1); scale: var(--transition-image-scale, 1); }
+.zelda-transition-exiting .zelda-gameplay__diamond { opacity: var(--transition-image-opacity, 1); }
 
 .zelda-transition-entering .zelda-combat__description,
 .zelda-transition-exiting .zelda-combat__description { animation: none; }

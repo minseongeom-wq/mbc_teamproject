@@ -5,8 +5,8 @@ import './zeldaAboutSection.css';
 export default function ZeldaAboutSection() {
   return (
     <section className="zelda-about" aria-labelledby="zelda-about-title">
-      <img className="zelda-about__background" src={`${import.meta.env.BASE_URL}images/zelda/about-background.png`} alt="" loading="lazy" />
       <div className="zelda-about__canvas">
+        <img className="zelda-about__background" src={`${import.meta.env.BASE_URL}images/zelda/about-background.png`} alt="" loading="lazy" />
         <div className="zelda-about__text">
           <h2 id="zelda-about-title">MORE<br />ABOUT</h2>
           <p>하이랄을 더 깊이 만나보세요</p>

@@ -13,8 +13,8 @@ export default function ZeldaContent4Section() {
   const views = { kakariko: 'content4', zora: 'content4_2', gerudo: 'content4_3' };
   return (
     <section className="zelda-villages" data-view={views[selected]} aria-labelledby="zelda-villages-title">
-      {villages.map(([id]) => <img key={id} className={`zelda-villages__background zelda-villages__background--${id}`} src={asset(id === 'kakariko' ? 'background' : id)} alt="" hidden={selected !== id} />)}
       <div className="zelda-villages__canvas">
+        {villages.map(([id]) => <img key={id} className={`zelda-villages__background zelda-villages__background--${id}`} src={asset(id === 'kakariko' ? 'background' : id)} alt="" hidden={selected !== id} />)}
         <div className="zelda-villages__heading">
           <p>모험이 머무는 곳</p>
           <h2 id="zelda-villages-title">VILLAGES OF HYRULE</h2>
