@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routePaths } from '../../routes/routePaths.js';
 import loginSilhouette from './assets/figma-asset-1.svg';
 import loginNintendoLogo from './assets/figma-asset-2.svg';
 import backArrow from './assets/figma-asset-3.svg';
@@ -21,8 +23,9 @@ const initialSignupValues = {
   password: '',
 };
 
-export default function LoginContent() {
-  const [mode, setMode] = useState('login');
+export default function LoginContent({ initialMode = 'login' }) {
+  const navigate = useNavigate();
+  const [mode, setMode] = useState(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signupValues, setSignupValues] = useState(initialSignupValues);
@@ -56,7 +59,7 @@ export default function LoginContent() {
       return;
     }
 
-    setMessage('로그인 기능은 계정 연동 후 이용할 수 있습니다.');
+    navigate(routePaths.mypage);
   };
 
   const handleSignup = (event) => {

@@ -9,7 +9,6 @@
 .common-header { position: absolute; inset: 0 0 auto; z-index: 200; }
 .site-shell:has(.common-header--open) > .common-header.common-header--open { z-index: 1000; }
 .common-header--open .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); max-height: calc(100dvh - 85px); overflow-y: auto; scrollbar-gutter: stable both-edges; overscroll-behavior: contain; }
-.common-header--open .dropdown__account-links a { color: #fff; }
 .common-header a { text-decoration: none; }
 .common-header button { font: inherit; cursor: pointer; }
 .common-header a:focus-visible, .common-header button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
@@ -47,8 +46,6 @@
 .dropdown__nintendo > .dropdown__label { display: none; }
 .dropdown__switch { position: absolute; left: 36.09px; top: 24.15px; }
 .dropdown__nintendo-links { position: absolute; left: 10.59px; top: 13.15px; display: flex; flex-direction: column; gap: 6px; font-family: 'Pexel Grotesk', 'Pexel_Grotesk', Arial, sans-serif; font-size: 26px; line-height: 43px; }
-.dropdown__account-links { display: flex; justify-content: flex-end; gap: 20px; padding-top: 12px; font-size: 14px; }
-.dropdown__account-links a { color: var(--nav-ink); padding: 8px 0; }
 @media (min-width: 1024px) {
   .navigation { width: 664px; gap: 28px; }
   .navigation__primary { flex: 0 0 471px; }

@@ -57,11 +57,10 @@ export default function DropdownMenu({ onNavigate }) {
         <picture><source media="(max-width: 1023px)" srcSet={asset('c2237.svg')} /><img className="dropdown__switch" src={asset('33392.svg')} alt="" /></picture>
         <div className="dropdown__nintendo-links">
           <Link to={routePaths.hardware} aria-label="Nintendo Switch">Switch 2</Link>
-          <Link to={routePaths.mypage} aria-label="마이페이지">My Page</Link>
+          <Link to={routePaths.login} aria-label="마이페이지">My Page</Link>
           <Link to={routePaths.support} aria-label="고객지원">Support</Link>
         </div>
       </section>
     </div>
-    <div className="dropdown__account-links"><Link to={routePaths.login}>로그인</Link><Link to={routePaths.signup}>회원가입</Link></div>
   </nav>;
 }
