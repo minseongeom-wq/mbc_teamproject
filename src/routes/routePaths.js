@@ -6,7 +6,6 @@ export const routePaths = {
   productDetail: '/store/products/:id',
   orderReview: '/store/order',
   checkout: '/store/checkout',
-  hardware: '/switch',
   history: '/about/history',
   community: '/community',
   support: '/support',

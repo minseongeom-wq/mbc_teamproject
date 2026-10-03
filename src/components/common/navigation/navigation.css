@@ -9,6 +9,29 @@
 .common-header { position: absolute; inset: 0 0 auto; z-index: 200; }
 .site-shell:has(.common-header--open) > .common-header.common-header--open { z-index: 1000; }
 .common-header--open .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); max-height: calc(100dvh - 85px); overflow-y: auto; scrollbar-gutter: stable both-edges; overscroll-behavior: contain; }
+.common-header--open .dropdown { animation: navigation-dropdown-open 380ms cubic-bezier(.16, 1, .3, 1) both; }
+.navigation-backdrop { animation: navigation-backdrop-open 200ms ease-out both; }
+.common-header--closing .dropdown { animation: navigation-dropdown-close 260ms cubic-bezier(.4, 0, 1, 1) both; pointer-events: none; }
+.navigation-backdrop--closing { animation: navigation-backdrop-open 260ms ease-in reverse both; }
+
+@keyframes navigation-dropdown-open {
+  from { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateX(-50%) translateY(-12px); }
+  to { opacity: 1; clip-path: inset(0); transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes navigation-backdrop-open {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes navigation-dropdown-close {
+  from { opacity: 1; clip-path: inset(0); transform: translateX(-50%) translateY(0); }
+  to { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateX(-50%) translateY(-12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .common-header--open .dropdown, .common-header--closing .dropdown, .navigation-backdrop { animation: none; }
+}
 .common-header a { text-decoration: none; }
 .common-header button { font: inherit; cursor: pointer; }
 .common-header a:focus-visible, .common-header button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
@@ -85,7 +108,6 @@
   .dropdown__decoration img:nth-child(2) { left: 451px; top: 164px; }
   .dropdown__decoration img:nth-child(3) { left: 726px; top: 156px; }
   .dropdown__quote { left: 445px; top: 285px; width: auto; right: auto; text-align: left; font-size: 75px; line-height: 1.35; white-space: nowrap; }
-  .dropdown__characters:has(a:hover) .dropdown__quote { color: var(--nav-red); }
   .dropdown__pixel-mario { display: block; position: absolute; left: 850px; top: 402px; }
   .dropdown__line-desktop { display: block; position: absolute; left: 19px; top: 501px; }
   .dropdown__line-mobile-left, .dropdown__line-mobile-right { display: none; }

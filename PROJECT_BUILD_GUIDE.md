@@ -253,7 +253,7 @@ npm run dev
 | `/store/order` | OrderReviewPage | 전체 | 주문 확인·수량·합계·로그인 분기 |
 | `/store/checkout` | CheckoutPage | 로그인 | 데모 결제 수단·확인 팝업 |
 | `/store/checkout/result` | CheckoutResultPage | 로그인 | 데모 결제 결과·홈/마이페이지 이동 |
-| `/switch` | NintendoSwitchPage | 전체 | 본체·컨트롤러·주변기기 |
+| `/store/products?category=Switch%20Online` | ProductListPage | 전체 | Switch Online 이용권·플랜 비교 (Switch 2 메뉴) |
 | `/history` | NintendoHistoryPage | 전체 | 브랜드·게임기·IP 연혁 |
 | `/news` | NewsPage | 전체 | 뉴스·공지·이벤트 |
 | `/support` | SupportPage | 전체 | FAQ·문제 검색·상담·수리 안내 |
@@ -318,7 +318,7 @@ npm run dev
 - IP → `/ip` (마리오·젤다·스플래툰)
 - Games → `/games`
 - Nintendo Store → `/store`
-- Nintendo Switch → `/switch`
+- Switch 2 → `/store/products?category=Switch%20Online`
 - News → `/news`
 - Nintendo’s history → `/history`
 - Community → `/community`
@@ -1261,9 +1261,6 @@ src/
 │   │   ├── CheckoutPage.css
 │   │   ├── CheckoutResultPage.jsx
 │   │   └── CheckoutResultPage.css
-│   ├── switch/
-│   │   ├── NintendoSwitchPage.jsx
-│   │   └── NintendoSwitchPage.css
 │   ├── history/
 │   │   ├── NintendoHistoryPage.jsx
 │   │   └── NintendoHistoryPage.css

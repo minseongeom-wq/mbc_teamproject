@@ -5,7 +5,7 @@ const destinations = [
   ['Zelda', '/ip/zelda', 'IP 상세 — Zelda', 'IP'],
   ['Splatoon', '/ip/splatoon', 'IP 상세 — Splatoon', 'IP'],
   ['E-shop', '/store', '닌텐도 스토어'],
-  ['Nintendo Switch', '/switch', '실물제품'],
+  ['Nintendo Switch', '/store/products?category=Switch%20Online', 'Nintendo Switch Online'],
   ['브랜드 / 역사', '/about/history', '브랜드 / 역사'],
   ['Community', '/community', 'SNS형 피드'],
   ['고객지원', '/support', '고객지원'],
@@ -16,7 +16,12 @@ const destinations = [
 
 async function checkPage(page, path, heading) {
   await expect(page).toHaveURL(new RegExp(`${path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`));
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText(path === '/' ? '40th' : heading);
+  if (path === '/store/products?category=Switch%20Online') {
+    await expect(page.locator('.store-online-plans h2')).toHaveText(heading);
+    await expect(page.locator('.store-hero__categories a[aria-current="page"]')).toHaveText('Switch Online');
+  } else {
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(path === '/' ? '40th' : heading);
+  }
   await expect(page.getByRole('banner')).toHaveCount(1);
   await expect(page.getByRole('contentinfo')).toHaveCount(1);
   await expect(page.getByRole('main')).toHaveCount(1);

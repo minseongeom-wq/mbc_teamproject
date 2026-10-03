@@ -27,7 +27,7 @@ PowerShell 실행 정책으로 npm.ps1이 차단되면 `npm.cmd`를 사용합니
 | product-detail | ProductDetailPage.jsx | `/store/products/:id` |
 | order-review | OrderReviewPage.jsx | `/store/order` |
 | checkout | CheckoutPage.jsx | `/store/checkout` |
-| hardware | SwitchPage.jsx | `/switch` |
+| product-list | ProductListPage.jsx | `/store/products?category=Switch%20Online` (Switch 2 메뉴) |
 | history | HistoryPage.jsx | `/about/history` |
 | community | CommunityPage.jsx | `/community` |
 | support | SupportPage.jsx | `/support` |

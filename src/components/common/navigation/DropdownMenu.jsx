@@ -14,7 +14,7 @@ function CharacterIcon({ slug }) {
   </span>;
 }
 
-export default function DropdownMenu({ onNavigate }) {
+export default function DropdownMenu({ onNavigate, isClosing = false }) {
   const container = useRef(null);
   const [scale, setScale] = useState(1);
   useLayoutEffect(() => {
@@ -24,7 +24,7 @@ export default function DropdownMenu({ onNavigate }) {
     update();
     return () => observer.disconnect();
   }, []);
-  return <nav id="main-menu" aria-label="주 메뉴" className="dropdown" ref={container} onClick={event => { if (event.target.closest('a')) onNavigate(); }}>
+  return <nav id="main-menu" aria-label="주 메뉴" className="dropdown" ref={container} inert={isClosing} onClick={event => { if (event.target.closest('a')) onNavigate(); }}>
     <div className="dropdown__grid" style={{ zoom: scale }}>
       <section className="dropdown__panel dropdown__characters" aria-label="IP">
         <div className="dropdown__character-white" />
@@ -34,7 +34,7 @@ export default function DropdownMenu({ onNavigate }) {
           </Link>)}
         </div>
         <div className="dropdown__decoration" aria-hidden="true"><img src={asset('9feba.svg')} alt="" /><img src={asset('2eec7.svg')} alt="" /><img src={asset('8a581.svg')} alt="" /></div>
-        <p className="dropdown__quote"><span className="dropdown__quote-desktop">There's no<br />play like it.</span><span className="dropdown__quote-mobile">There's<br />no play<br />like it.</span></p>
+        <Link className="dropdown__quote" to={routePaths.history} aria-label="There's no play like it. — History"><span className="dropdown__quote-desktop">There's no<br />play like it.</span><span className="dropdown__quote-mobile">There's<br />no play<br />like it.</span></Link>
         <img className="dropdown__pixel-mario" src={asset('f73ad.png')} width="58" height="62" alt="" />
         <img className="dropdown__line-desktop" src={asset('98bc2.svg')} alt="" />
         <img className="dropdown__line-mobile-left" src={asset('bb1e7.svg')} alt="" />
@@ -56,7 +56,7 @@ export default function DropdownMenu({ onNavigate }) {
         <span className="dropdown__label">Nintendo</span>
         <picture><source media="(max-width: 1023px)" srcSet={asset('c2237.svg')} /><img className="dropdown__switch" src={asset('33392.svg')} alt="" /></picture>
         <div className="dropdown__nintendo-links">
-          <Link to={routePaths.hardware} aria-label="Nintendo Switch">Switch 2</Link>
+          <Link to={`${routePaths.productList}?category=${encodeURIComponent('Switch Online')}`} aria-label="Nintendo Switch">Switch 2</Link>
           <Link to={routePaths.login} aria-label="마이페이지">My Page</Link>
           <Link to={routePaths.support} aria-label="고객지원">Support</Link>
         </div>

@@ -26,10 +26,6 @@ const cases = [
     "결제 / 결과 확인"
   ],
   [
-    "/switch",
-    "실물제품"
-  ],
-  [
     "/about/history",
     "브랜드 / 역사"
   ],
