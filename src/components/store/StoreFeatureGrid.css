@@ -1,5 +1,13 @@
 .store-feature-grid { display: flex; flex-wrap: wrap; justify-content: center; align-content: start; column-gap: 18.636px; row-gap: 20px; width: 100%; height: 793.409px; margin-top: 216px; }
 .store-feature-card { position: relative; flex: 0 0 386.705px; width: 386.705px; height: 386.705px; overflow: hidden; border-radius: 12.744px; background: #fff; box-shadow: 4.659px 4.659px 8.496px rgb(0 0 0 / 7%); }
+.store-feature-card { transform-origin: center center; transition: transform 220ms ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  .store-feature-card:hover { transform: scale(1.03); z-index: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .store-feature-card { transition: none; }
+  .store-feature-card:hover { transform: none; }
+}
 .store-feature-card img { position: absolute; top: 103.52px; left: calc(50% - 70.3525px); display: block; width: 140.705px; height: 140.705px; }
 .store-feature-card span { position: absolute; top: 271.162px; left: 0; right: 0; padding: 0 8px; font-size: 13.89px; font-weight: 700; line-height: 1.35; text-align: center; }
 .store-feature-card span > span { position: static; display: block; padding: 0; font: inherit; }

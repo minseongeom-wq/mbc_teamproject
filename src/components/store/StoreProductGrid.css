@@ -1,5 +1,13 @@
 .store-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, 412px); column-gap: 25px; row-gap: 25.5px; height: 850px; margin-top: 106px; }
 .store-genre-card { position: relative; display: grid; place-items: center; overflow: hidden; border-radius: 15px; color: #fff !important; }
+.store-genre-card { transform-origin: center center; transition: transform 220ms ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  .store-genre-card:hover { transform: scale(1.03); z-index: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .store-genre-card { transition: none; }
+  .store-genre-card:hover { transform: none; }
+}
 .store-genre-card img { position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
 .store-genre-card::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / 80%); }
 .store-genre-card span { position: relative; z-index: 1; font-size: 54px; font-weight: 300; line-height: 1; }

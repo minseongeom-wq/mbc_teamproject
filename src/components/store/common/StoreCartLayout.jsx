@@ -5,6 +5,7 @@ import { StoreCartContext } from './StoreCartContext.js';
 import { initialStoreCartItems, storeCartStorageKey } from './storeCartData.js';
 import StoreCartButton from './StoreCartButton.jsx';
 import CartDrawer from './CartDrawer.jsx';
+import useCartAddAnimation from './useCartAddAnimation.js';
 
 function readCart() {
   try {
@@ -23,12 +24,20 @@ export default function StoreCartLayout() {
   const { pathname } = useLocation();
   const [items, setItems] = useState(readCart);
   const [isOpen, setIsOpen] = useState(false);
+  const [notice, setNotice] = useState(null);
   const cartButtonRef = useRef(null);
   const closeButtonRef = useRef(null);
   const drawerRef = useRef(null);
+  const animateAdd = useCartAddAnimation(cartButtonRef);
 
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  useEffect(() => {
+    if (!notice) return;
+    const timeout = window.setTimeout(() => setNotice(null), 2500);
+    return () => window.clearTimeout(timeout);
+  }, [notice]);
 
   useEffect(() => {
     try { localStorage.setItem(storeCartStorageKey, JSON.stringify(items)); } catch { /* Storage is optional. */ }
@@ -92,7 +101,9 @@ export default function StoreCartLayout() {
     items,
     count,
     subtotal,
-    addItem(product) {
+    addItem(product, source) {
+      animateAdd(source);
+      setNotice({ message: `${product.name} 상품을 장바구니에 추가했습니다.` });
       const id = product.id || product.image || product.name;
       const price = typeof product.price === 'number' ? product.price : Number(String(product.price).replace(/[^\d]/g, ''));
       setItems((current) => {
@@ -105,7 +116,7 @@ export default function StoreCartLayout() {
     increase(id) { setItems((current) => current.map((item) => item.id === id ? { ...item, quantity: item.quantity + 1 } : item)); },
     decrease(id) { setItems((current) => current.map((item) => item.id === id ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item)); },
     remove(id) { setItems((current) => current.filter((item) => item.id !== id)); },
-  }), [items, count, subtotal]);
+  }), [items, count, subtotal, animateAdd]);
 
   function closeCart() {
     setIsOpen(false);
@@ -114,7 +125,12 @@ export default function StoreCartLayout() {
 
   return <StoreCartContext.Provider value={cart}>
     <Outlet />
-    {pathname !== routePaths.checkout && <StoreCartButton ref={cartButtonRef} open={isOpen} onClick={() => setIsOpen(true)} />}
-    <CartDrawer ref={drawerRef} open={isOpen} onClose={closeCart} closeButtonRef={closeButtonRef} />
+    <div className="store-cart-notice" role="status" aria-live="polite" aria-atomic="true">{notice?.message}</div>
+    {pathname.replace(/\/$/, '') !== routePaths.checkout && (
+      <>
+        <StoreCartButton ref={cartButtonRef} count={count} open={isOpen} onClick={() => setIsOpen(true)} />
+        <CartDrawer ref={drawerRef} open={isOpen} onClose={closeCart} closeButtonRef={closeButtonRef} />
+      </>
+    )}
   </StoreCartContext.Provider>;
 }
