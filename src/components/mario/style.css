@@ -2514,6 +2514,10 @@
   isolation: isolate;
   background: #151515;
 }
+.mario-page .mario-layer-145 {
+  /* Prevent the shared dark video fallback from leaking through subpixel edges. */
+  background: transparent;
+}
 .mario-page .mario-world-video video {
   display: block;
   width: 100%;
