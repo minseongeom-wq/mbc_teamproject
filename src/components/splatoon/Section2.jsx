@@ -13,11 +13,29 @@ const tapes = [
 
 export default function Section2() {
   const container = useRef(null);
+  const gameVideo = useRef(null);
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => setScale(entry.contentRect.width / 1920));
     observer.observe(container.current);
     return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const target = container.current;
+    const video = gameVideo.current;
+    if (!target || !video) return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        void video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }, { rootMargin: '500px 0px', threshold: 0 });
+    observer.observe(target);
+    return () => {
+      observer.disconnect();
+      video.pause();
+    };
   }, []);
   return (
     <section id="section2" ref={container} className="splatoon-section2" aria-labelledby="splatoon-section2-title">
@@ -25,10 +43,10 @@ export default function Section2() {
         <img className="splatoon-section2__background" src={asset('3a9de.png')} alt="" />
         <div className="splatoon-section2__inner">
           <video
+            ref={gameVideo}
             className="splatoon-section2__game"
             src={asset('section2-switch-comparison.mp4')}
             aria-label="Nintendo Switch 1과 2 비교 영상"
-            autoPlay
             muted
             loop
             playsInline

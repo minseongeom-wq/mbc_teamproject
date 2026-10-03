@@ -33,10 +33,11 @@ const weapons = [
     {
         id: 'shooter',
         name: '슈터',
-        x: 96.404,
-        y: 1110.427,
+        x: 122.132,
+        y: 1104.844,
+        w: 180,
         h: 157,
-        angle: 2.55,
+        angle: -2.45,
         file: '7cbdf.png',
         art: [13, 21, 142, 80, 0],
         crop: { width: '108.7%', height: '192.31%', left: '-4.35%', top: '-47.12%' },
@@ -44,8 +45,9 @@ const weapons = [
     {
         id: 'roller',
         name: '롤러',
-        x: 317.65,
-        y: 1110.713,
+        x: 373,
+        y: 1111.605,
+        w: 180,
         h: 157,
         angle: -2.74,
         file: '87eae.png',
@@ -54,10 +56,11 @@ const weapons = [
     {
         id: 'charger',
         name: '차저',
-        x: 574.008,
-        y: 1095.704,
+        x: 606.545,
+        y: 1078.648,
+        w: 180,
         h: 172,
-        angle: -2.74,
+        angle: 0.36,
         file: '6188c.png',
         art: [-0.812, 38.586, 176.797, 57.017, -22.44],
         crop: { width: '100%', height: '310.08%', left: 0, top: '-110.85%' },
@@ -65,10 +68,11 @@ const weapons = [
     {
         id: 'slosher',
         name: '슬로셔',
-        x: 831.008,
-        y: 1094.704,
-        h: 172,
-        angle: -2.74,
+        x: 860.156,
+        y: 1068.027,
+        w: 177.163,
+        h: 172.72,
+        angle: 2.06,
         file: '6871d.png',
         art: [36.901, 8.098, 99, 114, 16.53],
         crop: { width: '123.65%', height: '160.26%', left: '-15.63%', top: '-26.82%' },
@@ -76,10 +80,11 @@ const weapons = [
     {
         id: 'splatling',
         name: '스피너',
-        x: 1094.673,
-        y: 1088.743,
+        x: 1111.49,
+        y: 1082.875,
+        w: 180,
         h: 172,
-        angle: 7.67,
+        angle: 5.6,
         file: 'f87bc.png',
         art: [5, 1, 159, 119, 0],
         crop: { width: '100%', height: '133.68%', left: 0, top: '-16.84%' },
@@ -87,10 +92,11 @@ const weapons = [
     {
         id: 'dualies',
         name: '머누버',
-        x: 1357.652,
-        y: 1081.329,
+        x: 1369.464,
+        y: 1081.008,
+        w: 180,
         h: 172,
-        angle: 2.49,
+        angle: 2.48,
         file: '96b81.png',
         art: [16.232, -6.096, 138.289, 144.575, 20.89],
         crop: { width: '123.95%', height: '118.56%', left: '-9.97%', top: '-7.19%' },
@@ -98,15 +104,80 @@ const weapons = [
     {
         id: 'stringer',
         name: '스트링거',
-        x: 1606.709,
-        y: 1053.661,
+        x: 1618.316,
+        y: 1061.574,
+        w: 180,
         h: 172,
-        angle: -6.16,
+        angle: -0.26,
         file: 'ad161.png',
         art: [10.405, 23.113, 148.991, 131.388, -44.89],
         crop: { width: '101.88%', height: '100%', left: '-1.88%', top: 0 },
     },
 ];
+const WHEEL_DISTANCE_PER_WEAPON = 650;
+const WHEEL_STEP_COOLDOWN_MS = 620;
+const MAX_WHEEL_DELTA = 160;
+const PROJECTILE_TARGET_CENTER = { x: 1611, y: 671 };
+const PROJECTILE_DURATIONS = [0.62, 0.59, 0.56, 0.53, 0.5, 0.43, 0.38];
+
+function PaintProjectile({ weaponId }) {
+    const weaponIndex = weapons.findIndex(({ id }) => id === weaponId);
+    const weapon = weapons[weaponIndex];
+    const startX = weapon.x + weapon.w / 2 - PROJECTILE_TARGET_CENTER.x;
+    const startY = weapon.y + weapon.h / 2 - PROJECTILE_TARGET_CENTER.y;
+    const point = (value) => `${value.toFixed(2)}px`;
+    const curvedX = [1, 0.85, 0.66, 0.46, 0.27, 0.12, 0.06, 0.013, 0];
+    const curvedY = [1, 0.84, 0.61, 0.34, 0.14, 0.02, 0.008, 0, 0];
+    const straight = [1, 0.84, 0.62, 0.42, 0.25, 0.12, 0.06, 0.013, 0];
+    const usesStraightPath = weaponIndex >= 4;
+    const xProgress = usesStraightPath ? straight : curvedX;
+    const yProgress = usesStraightPath ? straight : curvedY;
+    const positions = xProgress.map((progress, index) => [
+        startX * progress,
+        startY * yProgress[index],
+    ]);
+    const direction = (from, to) =>
+        `${((Math.atan2(to[1] - from[1], to[0] - from[0]) * 180) / Math.PI).toFixed(2)}deg`;
+    const style = {
+        '--throw-x-0': point(positions[0][0]),
+        '--throw-y-0': point(positions[0][1]),
+        '--throw-x-18': point(positions[1][0]),
+        '--throw-y-18': point(positions[1][1]),
+        '--throw-x-36': point(positions[2][0]),
+        '--throw-y-36': point(positions[2][1]),
+        '--throw-x-54': point(positions[3][0]),
+        '--throw-y-54': point(positions[3][1]),
+        '--throw-x-70': point(positions[4][0]),
+        '--throw-y-70': point(positions[4][1]),
+        '--throw-x-84': point(positions[5][0]),
+        '--throw-y-84': point(positions[5][1]),
+        '--throw-x-90': point(positions[6][0]),
+        '--throw-y-90': point(positions[6][1]),
+        '--throw-x-96': point(positions[7][0]),
+        '--throw-y-96': point(positions[7][1]),
+        '--throw-scale': (0.72 - weaponIndex * 0.04).toFixed(2),
+        '--throw-r-0': direction(positions[0], positions[1]),
+        '--throw-r-18': direction(positions[1], positions[2]),
+        '--throw-r-36': direction(positions[2], positions[3]),
+        '--throw-r-54': direction(positions[3], positions[4]),
+        '--throw-r-70': direction(positions[4], positions[5]),
+        '--throw-r-84': direction(positions[5], positions[6]),
+        '--throw-r-90': direction(positions[6], positions[7]),
+        '--throw-r-96': direction(positions[7], positions[8]),
+    };
+
+    return (
+        <div
+            key={weaponId}
+            className="splatoon-con2__paint-projectile"
+            style={style}
+            aria-hidden="true"
+        >
+            <span className="splatoon-con2__paint-projectile-body" />
+        </div>
+    );
+}
+
 const panels = [
     ['6c7b4.svg', 6.58, 138.818, 352.901, 167.205, -177.51, true],
     ['7b2eb.svg', 370.31, 114.745, 338.497, 175.084, -177.51, true],
@@ -164,17 +235,19 @@ function ShooterDetails() {
     return (
         <>
             <Art file="e1aa7.svg" x={-19} y={-12.677} w={1282} h={746.73} />
-            <div className="splatoon-con2__shooter-paint-projectile" aria-hidden="true" />
+            <PaintProjectile weaponId="shooter" />
             <div className="splatoon-con2__shooter-paint">
-                <Art
-                    file="42855.png"
-                    x={650}
-                    y={0}
-                    w={620}
-                    h={690}
-                    angle={-2.89}
-                    crop={{ width: '185%', height: '135.88%', left: 0, top: '-22.53%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="42855.png"
+                        x={650}
+                        y={0}
+                        w={620}
+                        h={690}
+                        angle={-2.89}
+                        crop={{ width: '185%', height: '135.88%', left: 0, top: '-22.53%' }}
+                    />
+                </div>
             </div>
             {panels.map(([file, x, y, w, h, angle, flip]) => (
                 <Art key={file} {...{ file, x, y, w, h, angle, flip }} />
@@ -191,7 +264,7 @@ function ShooterDetails() {
                 crop={{ width: '360.97%', height: '190.35%', left: '-14.68%', top: '-41.65%' }}
                 alt="난이도 낮음"
             />
-            <div className="splatoon-con2__shooter-character-reveal">
+            <div className="splatoon-con2__character-reveal">
                 <Art
                     file="b1bca.png"
                     x={415.919}
@@ -224,16 +297,24 @@ function RollerDetails() {
     return (
         <>
             <Art file="b9edd.svg" x={-19} y={-12.677} w={1282} h={746.73} />
+            <PaintProjectile weaponId="roller" />
             <div className="splatoon-con2__roller-paint">
-                <Art
-                    file="69621.png"
-                    x={539.726}
-                    y={30.39}
-                    w={708.844}
-                    h={696.947}
-                    angle={-1.29}
-                    crop={{ width: '187.49%', height: '169.74%', left: '-49.39%', top: '-56.39%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="69621.png"
+                        x={539.726}
+                        y={30.39}
+                        w={708.844}
+                        h={696.947}
+                        angle={-1.29}
+                        crop={{
+                            width: '187.49%',
+                            height: '169.74%',
+                            left: '-49.39%',
+                            top: '-56.39%',
+                        }}
+                    />
+                </div>
             </div>
             {panels.map(([file, x, y, w, h, angle, flip]) => (
                 <Art key={file} {...{ file, x, y, w, h, angle, flip }} />
@@ -241,16 +322,18 @@ function RollerDetails() {
             {rollerStats.slice(0, 6).map(([label, x, y, size, angle]) => (
                 <StatLabel key={label} {...{ label, x, y, size, angle }} />
             ))}
-            <Art
-                file="31c8e.png"
-                x={629.523}
-                y={-34.835}
-                w={628.077}
-                h={631.102}
-                angle={-5.36}
-                crop={{ width: '102.57%', height: '102.08%', left: '-1.12%', top: '-2.08%' }}
-                alt="Splat Roller"
-            />
+            <div className="splatoon-con2__character-reveal">
+                <Art
+                    file="31c8e.png"
+                    x={629.523}
+                    y={-34.835}
+                    w={628.077}
+                    h={631.102}
+                    angle={-5.36}
+                    crop={{ width: '102.57%', height: '102.08%', left: '-1.12%', top: '-2.08%' }}
+                    alt="Splat Roller"
+                />
+            </div>
             {rollerStats.slice(6).map(([label, x, y, size, angle]) => (
                 <p
                     key={label}
@@ -295,29 +378,39 @@ function ChargerDetails() {
     return (
         <>
             <Art file="45d87.svg" x={-19} y={-12.677} w={1282} h={746.73} />
+            <PaintProjectile weaponId="charger" />
             {[0, 2, 4, 5].map(panel)}
             <div className="splatoon-con2__charger-paint">
-                <Art
-                    file="dceb1.png"
-                    x={650}
-                    y={24}
-                    w={606}
-                    h={696}
-                    angle={-0.34}
-                    crop={{ width: '211.78%', height: '182.39%', left: '-53.69%', top: '-50.75%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="dceb1.png"
+                        x={650}
+                        y={24}
+                        w={606}
+                        h={696}
+                        angle={-0.34}
+                        crop={{
+                            width: '211.78%',
+                            height: '182.39%',
+                            left: '-53.69%',
+                            top: '-50.75%',
+                        }}
+                    />
+                </div>
             </div>
             {[1, 3].map(panel)}
-            <Art
-                file="6a993.png"
-                x={370.599}
-                y={43.934}
-                w={968.891}
-                h={497.228}
-                angle={-43.31}
-                crop={{ width: '116.16%', height: '114.78%', left: '-8.18%', top: '-8.48%' }}
-                alt="스플랫 차저를 조준하는 캐릭터"
-            />
+            <div className="splatoon-con2__character-reveal">
+                <Art
+                    file="6a993.png"
+                    x={370.599}
+                    y={43.934}
+                    w={968.891}
+                    h={497.228}
+                    angle={-43.31}
+                    crop={{ width: '116.16%', height: '114.78%', left: '-8.18%', top: '-8.48%' }}
+                    alt="스플랫 차저를 조준하는 캐릭터"
+                />
+            </div>
             {chargerStats.map(([label, x, y, size, angle, value]) => (
                 <StatLabel key={label} {...{ label, x, y, size, angle, value }} />
             ))}
@@ -352,30 +445,40 @@ function SlosherDetails() {
     return (
         <>
             <Art file="e934a.svg" x={-19} y={-12.677} w={1282} h={746.73} />
+            <PaintProjectile weaponId="slosher" />
             <div className="splatoon-con2__slosher-paint">
-                <Art
-                    file="e184f.png"
-                    x={456.171}
-                    y={20.807}
-                    w={797.215}
-                    h={709.083}
-                    angle={-0.87}
-                    crop={{ width: '181.91%', height: '153.28%', left: '-32.85%', top: '-47.42%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="e184f.png"
+                        x={456.171}
+                        y={20.807}
+                        w={797.215}
+                        h={709.083}
+                        angle={-0.87}
+                        crop={{
+                            width: '181.91%',
+                            height: '153.28%',
+                            left: '-32.85%',
+                            top: '-47.42%',
+                        }}
+                    />
+                </div>
             </div>
             {panels.map(([file, x, y, w, h, angle, flip]) => (
                 <Art key={file} {...{ file, x, y, w, h, angle, flip }} />
             ))}
-            <Art
-                file="c2b50.png"
-                x={576.855}
-                y={24.559}
-                w={666.22}
-                h={649.959}
-                angle={1.28}
-                crop={{ width: '108.47%', height: '111.18%', left: '-4.35%', top: '-1.52%' }}
-                alt="버킷 슬로셔를 든 캐릭터"
-            />
+            <div className="splatoon-con2__character-reveal">
+                <Art
+                    file="c2b50.png"
+                    x={576.855}
+                    y={24.559}
+                    w={666.22}
+                    h={649.959}
+                    angle={1.28}
+                    crop={{ width: '108.47%', height: '111.18%', left: '-4.35%', top: '-1.52%' }}
+                    alt="버킷 슬로셔를 든 캐릭터"
+                />
+            </div>
             {slosherStats.map(([label, x, y, size, angle, value]) => (
                 <StatLabel key={label} {...{ label, x, y, size, angle, value }} />
             ))}
@@ -410,16 +513,24 @@ function SplatlingDetails() {
     return (
         <>
             <Art file="70d4b.svg" x={-19} y={-12.677} w={1282} h={746.73} />
+            <PaintProjectile weaponId="splatling" />
             <div className="splatoon-con2__splatling-paint">
-                <Art
-                    file="94b3e.png"
-                    x={615.877}
-                    y={29.255}
-                    w={632.662}
-                    h={678.45}
-                    angle={-0.85}
-                    crop={{ width: '160.91%', height: '150.05%', left: '-43.23%', top: '-34.05%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="94b3e.png"
+                        x={615.877}
+                        y={29.255}
+                        w={632.662}
+                        h={678.45}
+                        angle={-0.85}
+                        crop={{
+                            width: '160.91%',
+                            height: '150.05%',
+                            left: '-43.23%',
+                            top: '-34.05%',
+                        }}
+                    />
+                </div>
             </div>
             {panels.map(([file, x, y, w, h, angle, flip]) => (
                 <Art key={file} {...{ file, x, y, w, h, angle, flip }} />
@@ -436,16 +547,18 @@ function SplatlingDetails() {
                 crop={{ width: '358.96%', height: '204.01%', left: '-242.77%', top: '-48.98%' }}
                 alt="난이도 높음"
             />
-            <Art
-                file="434b5.png"
-                x={622.913}
-                y={-21.493}
-                w={644.496}
-                h={626.959}
-                angle={-3.77}
-                crop={{ width: '106.63%', height: '109.62%', left: '-4.34%', top: '-6.82%' }}
-                alt="배럴 스피너를 든 캐릭터"
-            />
+            <div className="splatoon-con2__character-reveal">
+                <Art
+                    file="434b5.png"
+                    x={622.913}
+                    y={-21.493}
+                    w={644.496}
+                    h={626.959}
+                    angle={-3.77}
+                    crop={{ width: '106.63%', height: '109.62%', left: '-4.34%', top: '-6.82%' }}
+                    alt="배럴 스피너를 든 캐릭터"
+                />
+            </div>
         </>
     );
 }
@@ -468,15 +581,23 @@ function DualiesDetails() {
     return (
         <>
             <Art file="fd54f.svg" x={-19} y={-12.677} w={1282} h={746.73} />
+            <PaintProjectile weaponId="dualies" />
             <div className="splatoon-con2__dualies-paint">
-                <Art
-                    file="7f459.png"
-                    x={492}
-                    y={18}
-                    w={759}
-                    h={957}
-                    crop={{ width: '165.22%', height: '131.03%', left: '-24.64%', top: '-31.03%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="7f459.png"
+                        x={492}
+                        y={18}
+                        w={759}
+                        h={957}
+                        crop={{
+                            width: '165.22%',
+                            height: '131.03%',
+                            left: '-24.64%',
+                            top: '-31.03%',
+                        }}
+                    />
+                </div>
             </div>
             {panels.map(([file, x, y, w, h, angle, flip]) => (
                 <Art key={file} {...{ file, x, y, w, h, angle, flip }} />
@@ -493,16 +614,18 @@ function DualiesDetails() {
                 crop={{ width: '358.96%', height: '189.69%', left: '-127.73%', top: '-42.91%' }}
                 alt="난이도 낮음"
             />
-            <Art
-                file="8ab95.png"
-                x={666.193}
-                y={73.652}
-                w={596.443}
-                h={509.706}
-                angle={16.18}
-                crop={{ width: '119.77%', height: '102.58%', left: '-12.09%', top: 0 }}
-                alt="스플랫 머누버를 든 캐릭터"
-            />
+            <div className="splatoon-con2__character-reveal">
+                <Art
+                    file="8ab95.png"
+                    x={666.193}
+                    y={73.652}
+                    w={596.443}
+                    h={509.706}
+                    angle={16.18}
+                    crop={{ width: '119.77%', height: '102.58%', left: '-12.09%', top: 0 }}
+                    alt="스플랫 머누버를 든 캐릭터"
+                />
+            </div>
         </>
     );
 }
@@ -530,32 +653,42 @@ function StringerDetails() {
     return (
         <>
             <Art file="1d25d.svg" x={-19} y={-12.677} w={1282} h={746.73} />
+            <PaintProjectile weaponId="stringer" />
             {[0, 2, 4].map(panel)}
             <div className="splatoon-con2__stringer-paint">
-                <Art
-                    file="69621.png"
-                    x={490.546}
-                    y={22.476}
-                    w={751.574}
-                    h={706.966}
-                    angle={178.58}
-                    crop={{ width: '176.83%', height: '167.33%', left: '-50.56%', top: '-42.56%' }}
-                />
+                <div className="splatoon-con2__paint-reveal">
+                    <Art
+                        file="69621.png"
+                        x={490.546}
+                        y={22.476}
+                        w={751.574}
+                        h={706.966}
+                        angle={178.58}
+                        crop={{
+                            width: '176.83%',
+                            height: '167.33%',
+                            left: '-50.56%',
+                            top: '-42.56%',
+                        }}
+                    />
+                </div>
             </div>
             {[1, 3, 5].map(panel)}
             {stringerStats.slice(0, 6).map(([label, x, y, size, angle]) => (
                 <StatLabel key={label} {...{ label, x, y, size, angle }} />
             ))}
-            <Art
-                file="72dc0.png"
-                x={562.958}
-                y={23.882}
-                w={714.325}
-                h={559.454}
-                angle={-0.39}
-                crop={{ width: '126.89%', height: '111.8%', left: '-14.45%', top: '-5.15%' }}
-                alt="트라이 스트링거를 든 캐릭터"
-            />
+            <div className="splatoon-con2__character-reveal">
+                <Art
+                    file="72dc0.png"
+                    x={562.958}
+                    y={23.882}
+                    w={714.325}
+                    h={559.454}
+                    angle={-0.39}
+                    crop={{ width: '126.89%', height: '111.8%', left: '-14.45%', top: '-5.15%' }}
+                    alt="트라이 스트링거를 든 캐릭터"
+                />
+            </div>
             {stringerStats.slice(6).map(([label, x, y, size, angle, value]) => (
                 <StatLabel key={label} {...{ label, x, y, size, angle, value }} />
             ))}
@@ -572,9 +705,15 @@ function StringerDetails() {
     );
 }
 
-export default function Con2() {
+export default function Con2({ scrollController }) {
     const container = useRef(null);
-    const title = useRef(null);
+    const selectedWeaponRef = useRef('shooter');
+    const isWheelLockedRef = useRef(false);
+    const lastExitDirectionRef = useRef(0);
+    const wheelAccumulatorRef = useRef(0);
+    const wheelInputDirectionRef = useRef(0);
+    const nextWheelStepAtRef = useRef(0);
+    const isPinSettlingRef = useRef(false);
     const [scale, setScale] = useState(1);
     const [isTitleRevealed, setIsTitleRevealed] = useState(false);
     // Additional weapon panels can be registered here when their designs arrive.
@@ -594,7 +733,7 @@ export default function Con2() {
         return () => observer.disconnect();
     }, []);
     useEffect(() => {
-        const target = title.current;
+        const target = container.current;
         if (!target) return undefined;
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -602,11 +741,188 @@ export default function Con2() {
                 setIsTitleRevealed(true);
                 observer.disconnect();
             },
-            { threshold: 0.2 }
+            { threshold: 0.12 }
         );
         observer.observe(target);
         return () => observer.disconnect();
     }, []);
+    useEffect(() => {
+        const resetWheelGesture = () => {
+            wheelAccumulatorRef.current = 0;
+            wheelInputDirectionRef.current = 0;
+        };
+
+        const finishSequence = (direction) => {
+            isWheelLockedRef.current = false;
+            lastExitDirectionRef.current = direction;
+            resetWheelGesture();
+        };
+
+        const animateWeaponButton = (weaponIndex) => {
+            const nextWeapon = weapons[weaponIndex].id;
+            selectedWeaponRef.current = nextWeapon;
+
+            const button = container.current?.querySelector(
+                `.splatoon-con2__weapon--${nextWeapon}`
+            );
+            if (!button || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                setSelectedWeapon(nextWeapon);
+                return;
+            }
+
+            if (button.getAttribute('aria-pressed') === 'true') {
+                button.classList.remove('is-wheel-selecting');
+                setSelectedWeapon(nextWeapon);
+                return;
+            }
+
+            button.classList.remove('is-ink-returning', 'is-wheel-selecting');
+            void button.offsetWidth;
+            button.classList.add('is-wheel-selecting');
+            setSelectedWeapon(nextWeapon);
+        };
+
+        const advanceWeapon = (direction) => {
+            const currentIndex = weapons.findIndex(({ id }) => id === selectedWeaponRef.current);
+            const lastIndex = weapons.length - 1;
+            const isExitBoundary =
+                (direction > 0 && currentIndex === lastIndex) ||
+                (direction < 0 && currentIndex === 0);
+
+            if (isExitBoundary) {
+                finishSequence(direction);
+                return true;
+            }
+
+            animateWeaponButton(currentIndex + direction);
+            return false;
+        };
+
+        const handleWheel = (event) => {
+            if (
+                event.ctrlKey ||
+                event.defaultPrevented ||
+                Math.abs(event.deltaX) > Math.abs(event.deltaY)
+            ) {
+                return;
+            }
+
+            const section = container.current;
+            if (!section) return;
+
+            if (isPinSettlingRef.current) {
+                event.preventDefault();
+                return;
+            }
+
+            const normalizedDelta =
+                event.deltaMode === WheelEvent.DOM_DELTA_LINE
+                    ? event.deltaY * 16
+                    : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+                      ? event.deltaY * window.innerHeight
+                      : event.deltaY;
+
+            if (!isWheelLockedRef.current) {
+                if (normalizedDelta === 0) return;
+                const entryDirection = Math.sign(normalizedDelta);
+                if (lastExitDirectionRef.current === entryDirection) return;
+
+                const inner = section.querySelector('.splatoon-con2__inner');
+                if (!inner) return;
+
+                const innerBounds = inner.getBoundingClientRect();
+                const distanceUntilPin = innerBounds.bottom - window.innerHeight;
+                const pinPosition = window.scrollY + distanceUntilPin;
+                const currentTarget = scrollController.current?.getTargetY?.() ?? window.scrollY;
+                const projectedTarget = currentTarget + normalizedDelta * 1.05;
+                const reachesFullView =
+                    entryDirection > 0
+                        ? projectedTarget >= pinPosition - 20
+                        : projectedTarget <= pinPosition + 20;
+                const approachesPinFromCorrectSide =
+                    entryDirection > 0 ? distanceUntilPin >= -20 : distanceUntilPin <= 20;
+                if (!approachesPinFromCorrectSide || !reachesFullView) return;
+
+                event.preventDefault();
+                isWheelLockedRef.current = true;
+                setIsTitleRevealed(true);
+                const entryIndex = entryDirection > 0 ? 0 : weapons.length - 1;
+                const entryWeapon = weapons[entryIndex].id;
+                container.current
+                    ?.querySelectorAll('.splatoon-con2__weapon.is-wheel-selecting')
+                    .forEach((button) => button.classList.remove('is-wheel-selecting'));
+                selectedWeaponRef.current = entryWeapon;
+                setSelectedWeapon(entryWeapon);
+                resetWheelGesture();
+                nextWheelStepAtRef.current = performance.now() + WHEEL_STEP_COOLDOWN_MS;
+                isPinSettlingRef.current = true;
+                if (scrollController.current) {
+                    scrollController.current.settleAt(pinPosition, (didSettle) => {
+                        isPinSettlingRef.current = false;
+                        if (!didSettle) {
+                            isWheelLockedRef.current = false;
+                            resetWheelGesture();
+                            return;
+                        }
+                    });
+                } else {
+                    window.scrollTo({
+                        left: window.scrollX,
+                        top: pinPosition,
+                        behavior: 'instant',
+                    });
+                    isPinSettlingRef.current = false;
+                }
+                return;
+            }
+
+            if (normalizedDelta === 0) return;
+            const direction = Math.sign(normalizedDelta);
+
+            if (performance.now() < nextWheelStepAtRef.current) {
+                event.preventDefault();
+                return;
+            }
+            if (wheelInputDirectionRef.current !== direction) {
+                wheelAccumulatorRef.current = 0;
+                wheelInputDirectionRef.current = direction;
+            }
+
+            const limitedDelta = Math.max(
+                -MAX_WHEEL_DELTA,
+                Math.min(MAX_WHEEL_DELTA, normalizedDelta)
+            );
+            wheelAccumulatorRef.current += Math.abs(limitedDelta);
+            if (wheelAccumulatorRef.current < WHEEL_DISTANCE_PER_WEAPON) {
+                event.preventDefault();
+                return;
+            }
+
+            wheelAccumulatorRef.current = 0;
+            nextWheelStepAtRef.current = performance.now() + WHEEL_STEP_COOLDOWN_MS;
+            const didExitPin = advanceWeapon(direction);
+            if (!didExitPin) event.preventDefault();
+        };
+
+        const page = container.current?.closest('.splatoon-page');
+        if (!page) return undefined;
+
+        page.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+        return () => {
+            page.removeEventListener('wheel', handleWheel, { capture: true });
+        };
+    }, [scrollController]);
+    const selectWeapon = (id) => {
+        setIsTitleRevealed(true);
+        container.current
+            ?.querySelectorAll('.splatoon-con2__weapon.is-wheel-selecting')
+            .forEach((button) => button.classList.remove('is-wheel-selecting'));
+        selectedWeaponRef.current = id;
+        setSelectedWeapon(id);
+        wheelAccumulatorRef.current = 0;
+        wheelInputDirectionRef.current = 0;
+        nextWheelStepAtRef.current = 0;
+    };
     const startWeaponInk = (event) => {
         const button = event.currentTarget;
         button.classList.remove('is-ink-returning');
@@ -623,16 +939,32 @@ export default function Con2() {
         if (event.animationName !== 'splatoon-con2-weapon-ink-fill') return;
         const button = event.currentTarget;
         const pseudoElement = event.nativeEvent.pseudoElement;
+        if (pseudoElement === '::before' && button.classList.contains('is-wheel-selecting')) {
+            button.classList.remove('is-wheel-selecting');
+            const weaponId = button.dataset.weaponId;
+            if (weaponId !== selectedWeaponRef.current) return;
+
+            setSelectedWeapon(weaponId);
+            return;
+        }
         if (pseudoElement === '::before' && button.matches(':hover'))
             button.dataset.inkComplete = 'true';
         if (pseudoElement === '::after' && button.classList.contains('is-ink-returning'))
             button.classList.remove('is-ink-returning');
+    };
+    const selectedWeaponIndex = weapons.findIndex(({ id }) => id === selectedWeapon);
+    const projectileDuration = PROJECTILE_DURATIONS[selectedWeaponIndex];
+    const interactionTiming = {
+        '--paint-throw-duration': `${projectileDuration.toFixed(2)}s`,
+        '--paint-expand-delay': `${(0.54 + projectileDuration * 0.84).toFixed(2)}s`,
+        '--character-enter-delay': `${(0.56 + projectileDuration).toFixed(2)}s`,
     };
     return (
         <section
             id="con2"
             ref={container}
             className={`splatoon-con2 splatoon-con2--${selectedWeapon}${isTitleRevealed ? ' is-entered' : ''}`}
+            style={interactionTiming}
             aria-labelledby="splatoon-con2-title"
         >
             <div className="splatoon-con2__stage" style={{ transform: `scale(${scale})` }}>
@@ -640,11 +972,7 @@ export default function Con2() {
                     <img src={asset('222a5.png')} alt="" />
                 </div>
                 <div className="splatoon-con2__inner">
-                    <h2
-                        ref={title}
-                        id="splatoon-con2-title"
-                        className={`splatoon-con2__title splatoon-title-splat${isTitleRevealed ? ' is-revealed' : ''}`}
-                    >
+                    <h2 id="splatoon-con2-title" className="splatoon-con2__title">
                         색칠하는 방식을 선택해
                         <br />
                         나만의 무기를 골라보자!
@@ -715,30 +1043,32 @@ export default function Con2() {
                     <Art
                         file="55c2f.png"
                         x={hasAlternateLayout ? 1776.981 : 1516.677}
-                        y={isShooter ? 978.981 : hasAlternateLayout ? 985.981 : 1014.677}
+                        y={hasAlternateLayout ? 985.981 : 1014.677}
                         w={hasAlternateLayout ? 92.594 : 48.772}
                         h={hasAlternateLayout ? 92.594 : 48.772}
                         angle={-9.46}
                     />
                     <div role="group" aria-label="무기 선택">
-                        {weapons.map(({ id, name, x, y, h, angle, file, art, crop }) => (
+                        {weapons.map(({ id, name, x, y, w, h, angle, file, art, crop }) => (
                             <button
                                 key={id}
                                 type="button"
                                 className={`splatoon-con2__weapon splatoon-con2__weapon--${id}`}
                                 style={{
                                     left: x,
-                                    top: hasAlternateLayout ? y - 7.5 : y,
+                                    top: y,
+                                    width: w,
                                     height: h,
                                     transform: `rotate(${angle}deg)`,
                                 }}
                                 aria-label={name}
+                                data-weapon-id={id}
                                 aria-pressed={selectedWeapon === id}
                                 aria-controls="weapon-details"
                                 onMouseEnter={startWeaponInk}
                                 onMouseLeave={stopWeaponInk}
                                 onAnimationEnd={finishWeaponInk}
-                                onClick={() => setSelectedWeapon(id)}
+                                onClick={() => selectWeapon(id)}
                             >
                                 <Art
                                     file={file}

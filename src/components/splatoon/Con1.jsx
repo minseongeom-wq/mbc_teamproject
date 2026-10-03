@@ -8,43 +8,41 @@ const clips = [
   { key: 'yellow', title: '노랑 잉크 플레이 장면', frame: 'e003f.png', image: 'gameplay-3.png', video: 'con1-gameplay-3.mp4' },
 ];
 
-function restartVideo(event) {
-  event.currentTarget.currentTime = 0;
-  void event.currentTarget.play();
-}
-
-function startVideo(event) {
-  void event.currentTarget.play();
-}
-
 // Supply the original clips as { pink, victory, yellow } video URLs.
 export default function Con1({ videos = {} }) {
   const container = useRef(null);
-  const title = useRef(null);
+  const videoElements = useRef([]);
   const [scale, setScale] = useState(1);
-  const [isTitleRevealed, setIsTitleRevealed] = useState(false);
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => setScale(entry.contentRect.width / 1920));
     observer.observe(container.current);
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
-    const target = title.current;
+    const target = container.current;
     if (!target) return undefined;
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      setIsTitleRevealed(true);
-      observer.disconnect();
-    }, { threshold: 0.2 });
+      videoElements.current.forEach((video) => {
+        if (!video) return;
+        if (entry.isIntersecting) {
+          void video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '200px 0px', threshold: 0 });
     observer.observe(target);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      videoElements.current.forEach((video) => video?.pause());
+    };
   }, []);
   return (
     <section id="con1" ref={container} className="splatoon-con1" aria-labelledby="splatoon-con1-title">
       <div className="splatoon-con1__stage" style={{ transform: `scale(${scale})` }}>
         <div className="splatoon-con1__background" aria-hidden="true"><img src={asset('222a5.png')} alt="" /></div>
         <div className="splatoon-con1__inner">
-          <h2 ref={title} id="splatoon-con1-title" className={`splatoon-con1__title splatoon-title-splat${isTitleRevealed ? ' is-revealed' : ''}`}>쏘고, 물들이고, 점령해라!<br />나의 색깔로 세상을 물들이세요!</h2>
+          <h2 id="splatoon-con1-title" className="splatoon-con1__title">쏘고, 물들이고, 점령해라!<br />나의 색깔로 세상을 물들이세요!</h2>
           <div className="splatoon-con1__graffiti" aria-hidden="true"><img src={asset('d0f08.png')} alt="" /></div>
           <div className="splatoon-con1__bear" aria-hidden="true">
             <div className="splatoon-con1__bear-paper" />
@@ -55,9 +53,9 @@ export default function Con1({ videos = {} }) {
             </div>
             <img className="splatoon-con1__bear-frame" src={asset('0a9e4.png')} alt="" />
           </div>
-          {clips.map(({ key, title, frame, image, video }) => (
+          {clips.map(({ key, title, frame, image, video }, index) => (
             <div key={key} className={`splatoon-con1__clip splatoon-con1__clip--${key}`}>
-              {videos[key] || video ? <video className="splatoon-con1__video" src={videos[key] || asset(video)} poster={asset(image)} aria-label={title} autoPlay muted loop playsInline preload={key === 'yellow' ? 'auto' : 'metadata'} onCanPlay={key === 'yellow' ? startVideo : undefined} onEnded={key === 'yellow' ? restartVideo : undefined} /> : <div className="splatoon-con1__video splatoon-con1__still"><img src={asset(image)} alt={title} /></div>}
+              {videos[key] || video ? <video ref={(element) => { videoElements.current[index] = element; }} className="splatoon-con1__video" src={videos[key] || asset(video)} poster={asset(image)} aria-label={title} muted loop playsInline preload="metadata" /> : <div className="splatoon-con1__video splatoon-con1__still"><img src={asset(image)} alt={title} /></div>}
               <div className="splatoon-con1__ink" aria-hidden="true"><img src={asset(frame)} alt="" /></div>
             </div>
           ))}

@@ -8,23 +8,30 @@
 .splatoon-con2__title { position: absolute; left: 180px; top: 0; margin: 0; font-size: 70px; font-weight: 400; line-height: 1.4; white-space: nowrap; }
 .splatoon-con2__name { position: absolute; left: 80px; top: 623px; width: 431px; text-align: center; }
 .splatoon-con2__name h3 { margin: 0; font-size: 100px; font-weight: 400; line-height: 1.4; white-space: nowrap; }
-.splatoon-con2__name p { position: absolute; top: 127px; width: 100%; margin: 0; color: #979797; font-family: 'Common Pretendard', Pretendard, sans-serif; font-size: 32px; font-weight: 300; line-height: 1.3; }
+.splatoon-con2__name p { position: absolute; top: 127px; width: 100%; margin: 0; color: #979797; font-family: 'Common Pretendard', Pretendard, sans-serif; font-size: 26px; font-weight: 600; line-height: normal; }
 .splatoon-con2__details { position: absolute; left: 624px; top: 322px; width: 1288px; height: 727px; }
+.splatoon-con2--shooter { --weapon-ink: #5b42e4; --weapon-ink-light: #8a78ff; --weapon-ink-dark: #422bbd; --weapon-ink-shadow: #23128b; --character-start-x: -360px; --character-start-y: -240px; }
+.splatoon-con2--roller { --weapon-ink: #fdd41b; --weapon-ink-light: #fff36a; --weapon-ink-dark: #c58b00; --weapon-ink-shadow: #725200; --character-start-x: 360px; --character-start-y: -240px; }
+.splatoon-con2--charger { --weapon-ink: #fd8227; --weapon-ink-light: #ffb15b; --weapon-ink-dark: #ca4c12; --weapon-ink-shadow: #792605; --character-start-x: -360px; --character-start-y: 240px; }
+.splatoon-con2--slosher { --weapon-ink: #e8362b; --weapon-ink-light: #ff7768; --weapon-ink-dark: #ad1d20; --weapon-ink-shadow: #681016; --character-start-x: -360px; --character-start-y: 0px; }
+.splatoon-con2--splatling { --weapon-ink: #ea729a; --weapon-ink-light: #ffafc8; --weapon-ink-dark: #b6406d; --weapon-ink-shadow: #71213f; }
+.splatoon-con2--dualies { --weapon-ink: #93f93e; --weapon-ink-light: #c9ff75; --weapon-ink-dark: #4fbd1f; --weapon-ink-shadow: #286d12; --character-start-x: 360px; --character-start-y: 240px; }
+.splatoon-con2--stringer { --weapon-ink: #fcd319; --weapon-ink-light: #fff36b; --weapon-ink-dark: #c38a00; --weapon-ink-shadow: #705000; }
 .splatoon-con2__shooter-paint,
 .splatoon-con2__roller-paint,
 .splatoon-con2__slosher-paint,
 .splatoon-con2__splatling-paint { position: absolute; inset: 0; overflow: hidden; clip-path: polygon(0 70px, 1251px 0, 1251px 644px, 890px 666px, 868px 695px, 586px 720px, 594px 684px, 0 714px); pointer-events: none; }
-.splatoon-con2__shooter-paint { opacity: 0; }
-.splatoon-con2__shooter-paint-projectile { position: absolute; left: 899px; top: 261px; z-index: 3; width: 176px; height: 176px; border-radius: 50%; opacity: 0; pointer-events: none; background: radial-gradient(circle at 42% 35%, #806cff 0 8%, #725aff 24%, #5b42e4 72%, #4d35cb 100%); transform: translateZ(0); transform-origin: center; backface-visibility: hidden; will-change: transform, opacity; }
-.splatoon-con2__shooter-paint-projectile::before { content: ''; position: absolute; right: 112px; top: 104px; width: 290px; height: 34px; border-radius: 50%; background: linear-gradient(90deg, transparent, rgba(91, 66, 228, .06) 18%, rgba(91, 66, 228, .42) 72%, rgba(114, 90, 255, .76)); filter: blur(3px); transform: rotate(-30deg) scaleX(1); transform-origin: right center; }
-.splatoon-con2__shooter-paint-projectile::after { content: ''; position: absolute; left: -51px; top: 48px; width: 112px; height: 86px; background: radial-gradient(circle at 16% 66%, #654ced 0 7px, transparent 8px), radial-gradient(circle at 48% 23%, #725aff 0 9px, transparent 10px), radial-gradient(circle at 82% 76%, #5b42e4 0 6px, transparent 7px); }
-.splatoon-con2__shooter-paint .splatoon-con2__art { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%); will-change: clip-path; }
-.splatoon-con2.is-entered .splatoon-con2__shooter-paint { opacity: 1; }
-.splatoon-con2.is-entered .splatoon-con2__shooter-paint-projectile { animation: splatoon-con2-shooter-paint-throw .62s linear both; }
-.splatoon-con2.is-entered .splatoon-con2__shooter-paint-projectile::before { animation: splatoon-con2-shooter-paint-trail .62s linear both; }
-.splatoon-con2.is-entered .splatoon-con2__shooter-paint .splatoon-con2__art { animation: splatoon-con2-shooter-paint-expand .22s .58s cubic-bezier(.08, .82, .12, 1) both; }
-.splatoon-con2__shooter-character-reveal { position: absolute; inset: 0; opacity: 0; will-change: transform, opacity, filter; }
-.splatoon-con2.is-entered .splatoon-con2__shooter-character-reveal { animation: splatoon-con2-shooter-character-enter .58s .58s cubic-bezier(.18, .72, .2, 1) both; }
+.splatoon-con2__paint-projectile { position: absolute; left: 857px; top: 254px; z-index: 3; width: 260px; height: 190px; opacity: 0; pointer-events: none; isolation: isolate; transform: translateZ(0); transform-origin: center; backface-visibility: hidden; will-change: transform, opacity; }
+.splatoon-con2__paint-projectile-body { position: absolute; inset: 0; z-index: 1; display: block; border-radius: 58% 42% 51% 49% / 43% 54% 46% 57%; background: radial-gradient(ellipse at 85% 43%, rgba(255, 255, 255, .72) 0 3%, rgba(255, 255, 255, .28) 5% 10%, transparent 15%), radial-gradient(ellipse at 62% 79%, color-mix(in srgb, var(--weapon-ink-shadow) 48%, var(--weapon-ink)) 0 17%, color-mix(in srgb, var(--weapon-ink-dark) 65%, var(--weapon-ink)) 31%, transparent 58%), radial-gradient(circle at 42% 35%, var(--weapon-ink-light) 0 8%, var(--weapon-ink) 38%, var(--weapon-ink-dark) 100%); box-shadow: inset 14px 12px 20px rgba(255, 255, 255, .18), inset -20px -24px 28px color-mix(in srgb, var(--weapon-ink-shadow) 38%, transparent); filter: drop-shadow(0 9px 8px color-mix(in srgb, var(--weapon-ink-shadow) 22%, transparent)) drop-shadow(0 2px 1px color-mix(in srgb, var(--weapon-ink-shadow) 30%, transparent)); -webkit-clip-path: path('M 258 96 C 258 142 225 180 176 186 C 140 190 111 178 92 166 C 72 153 62 160 45 162 C 26 164 17 154 27 142 C 38 128 56 125 68 116 C 49 115 35 118 21 111 C 9 105 10 94 24 90 C 40 86 57 94 73 86 C 57 78 42 75 27 65 C 15 57 19 45 34 43 C 53 41 66 56 87 56 C 76 45 68 34 73 23 C 80 9 96 14 111 29 C 129 46 139 47 157 42 C 193 30 230 47 248 70 C 255 79 258 87 258 96 Z'); clip-path: path('M 258 96 C 258 142 225 180 176 186 C 140 190 111 178 92 166 C 72 153 62 160 45 162 C 26 164 17 154 27 142 C 38 128 56 125 68 116 C 49 115 35 118 21 111 C 9 105 10 94 24 90 C 40 86 57 94 73 86 C 57 78 42 75 27 65 C 15 57 19 45 34 43 C 53 41 66 56 87 56 C 76 45 68 34 73 23 C 80 9 96 14 111 29 C 129 46 139 47 157 42 C 193 30 230 47 248 70 C 255 79 258 87 258 96 Z'); }
+.splatoon-con2__paint-projectile-body::after { content: ''; position: absolute; right: 29px; top: 66px; width: 27px; height: 53px; border-radius: 50%; background: linear-gradient(180deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .08)); filter: blur(1px); transform: rotate(-13deg); }
+.splatoon-con2__paint-projectile::before { content: ''; position: absolute; right: 202px; top: 99px; z-index: 0; width: 330px; height: 46px; border-radius: 68% 12% 58% 18% / 55% 30% 70% 45%; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--weapon-ink) 6%, transparent) 18%, color-mix(in srgb, var(--weapon-ink) 42%, transparent) 72%, var(--weapon-ink-light)); filter: blur(3px); transform: rotate(-24deg); transform-origin: right center; }
+.splatoon-con2__paint-projectile::after { content: ''; position: absolute; left: -76px; top: 58px; z-index: 2; width: 142px; height: 110px; background: radial-gradient(ellipse at 13% 69%, var(--weapon-ink-dark) 0 9px, transparent 10px), radial-gradient(ellipse at 47% 21%, var(--weapon-ink) 0 12px, transparent 13px), radial-gradient(ellipse at 79% 79%, var(--weapon-ink-dark) 0 8px, transparent 9px), radial-gradient(ellipse at 42% 72%, var(--weapon-ink-light) 0 5px, transparent 6px); transform: rotate(-8deg); }
+.splatoon-con2__paint-reveal { position: absolute; inset: 0; opacity: 0; clip-path: ellipse(0 0 at 77% 48%); transform: translateZ(0) scale(.96); transform-origin: 77% 48%; backface-visibility: hidden; will-change: clip-path, transform, opacity; }
+.splatoon-con2.is-entered .splatoon-con2__paint-projectile { animation: splatoon-con2-shooter-paint-throw var(--paint-throw-duration, .62s) .54s linear both; }
+.splatoon-con2.is-entered .splatoon-con2__paint-projectile::before { animation: splatoon-con2-shooter-paint-trail var(--paint-throw-duration, .62s) .54s linear both; }
+.splatoon-con2.is-entered .splatoon-con2__paint-reveal { animation: splatoon-con2-shooter-paint-expand .52s var(--paint-expand-delay, 1.06s) cubic-bezier(.2, .68, .18, 1) both; }
+.splatoon-con2__character-reveal { position: absolute; inset: 0; opacity: 0; will-change: transform, opacity; }
+.splatoon-con2.is-entered .splatoon-con2__character-reveal { animation: splatoon-con2-shooter-character-enter .6s var(--character-enter-delay, 1.18s) cubic-bezier(.18, .72, .2, 1) both; }
 .splatoon-con2__roller-paint .splatoon-con2__art { overflow: visible; clip-path: inset(-10px); }
 .splatoon-con2__splatling-paint .splatoon-con2__art { overflow: visible; clip-path: inset(-40px -12px 0 0); }
 .splatoon-con2__charger-paint { position: absolute; inset: 0; clip-path: polygon(-2000px -2000px, 1251px -2000px, 1251px 3000px, -2000px 3000px); pointer-events: none; }
@@ -35,7 +42,7 @@
 .splatoon-con2__true-damage { position: absolute; width: 265.003px; height: 79.437px; display: flex; align-items: center; justify-content: center; transform: translateX(-50%); }
 .splatoon-con2__true-damage .splatoon-con2__stat { position: relative; line-height: normal; }
 .splatoon-con2__stat--value { color: #fff; }
-.splatoon-con2__weapon { position: absolute; width: 180px; padding: 0; border: 5px solid #000; background: #fff; overflow: hidden; cursor: pointer; transform-origin: center; transition: transform 180ms ease-out; }
+.splatoon-con2__weapon { position: absolute; padding: 0; border: 0; outline: 7px solid #000; outline-offset: 0; background: #fff; overflow: hidden; cursor: pointer; transform-origin: center; transition: transform 180ms ease-out; }
 .splatoon-con2__weapon > .splatoon-con2__art { z-index: 1; }
 .splatoon-con2__weapon--shooter { --weapon-hover-ink: #5b42e4; }
 .splatoon-con2__weapon--roller { --weapon-hover-ink: #fdd41b; }
@@ -45,9 +52,11 @@
 .splatoon-con2__weapon--dualies { --weapon-hover-ink: #93f93e; }
 .splatoon-con2__weapon--stringer { --weapon-hover-ink: #fcd319; }
 .splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::before,
-.splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::after,
+.splatoon-con2 .splatoon-con2__weapon.is-wheel-selecting::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::before,
-.splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::after {
+.splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::after,
+.splatoon-con2 .splatoon-con2__weapon.is-wheel-selecting::before {
   inset: -90px -14px auto;
   height: calc(100% + 120px);
   opacity: 0;
@@ -56,10 +65,15 @@
   transform: translateY(-100%);
 }
 .splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::before { background: var(--weapon-hover-ink); }
+.splatoon-con2 .splatoon-con2__weapon.is-wheel-selecting::before { background: var(--weapon-hover-ink); }
 .splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true'])::after { background: #fff; }
-.splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true']):hover::before { animation: splatoon-con2-weapon-ink-fill .54s linear both; }
+.splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true']):hover::before,
+.splatoon-con2 .splatoon-con2__weapon.is-wheel-selecting::before { animation: splatoon-con2-weapon-ink-fill .54s linear both; }
+.splatoon-con2 .splatoon-con2__weapon.is-wheel-selecting[aria-pressed='true'] { background: #fff; }
 .splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true']).is-ink-returning::before { opacity: 1; transform: translateY(76px); }
 .splatoon-con2 .splatoon-con2__weapon:not([aria-pressed='true']).is-ink-returning::after { animation: splatoon-con2-weapon-ink-fill .54s linear both; }
+.splatoon-con2--shooter .splatoon-con2__weapon--shooter[aria-pressed='true']::before { content: ''; position: absolute; inset: -90px -14px auto; z-index: 0; height: calc(100% + 120px); opacity: 0; pointer-events: none; background: #5b42e4; -webkit-mask: url('./assets/weapon-hover-ink-mask.svg') center / 100% 100% no-repeat; mask: url('./assets/weapon-hover-ink-mask.svg') center / 100% 100% no-repeat; transform: translateY(-100%); }
+.splatoon-con2--shooter.is-entered .splatoon-con2__weapon--shooter[aria-pressed='true']::before { animation: splatoon-con2-weapon-ink-fill .54s linear both; }
 .splatoon-con2 .splatoon-con2__weapon:hover { z-index: 2; transform: rotate(0deg) scale(1.1) !important; }
 .splatoon-con2__weapon[aria-pressed='true'] { background: #5b42e4; }
 .splatoon-con2__weapon:disabled { opacity: 1; cursor: default; }
@@ -67,31 +81,31 @@
 .splatoon-con2__stat--value { -webkit-text-stroke: 2px #000; paint-order: stroke fill; }
 .splatoon-con2--shooter .splatoon-con2__inner { left: 4px; top: 281px; height: 1288px; }
 .splatoon-con2--shooter .splatoon-con2__name { top: 604px; }
-.splatoon-con2--shooter .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
-.splatoon-con2--shooter .splatoon-con2__weapon--shooter[aria-pressed='true'] { background: #5b42e4; }
+.splatoon-con2--shooter .splatoon-con2__name p { font-size: 26px; }
+.splatoon-con2--shooter .splatoon-con2__weapon--shooter[aria-pressed='true'] { background: #fff; }
 .splatoon-con2--roller .splatoon-con2__inner { left: 4px; top: 281px; height: 1288px; }
 .splatoon-con2--roller .splatoon-con2__name { top: 604px; }
-.splatoon-con2--roller .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
+.splatoon-con2--roller .splatoon-con2__name p { font-size: 26px; }
 .splatoon-con2--roller .splatoon-con2__weapon[aria-pressed='true'] { background: #fdd41b; }
 .splatoon-con2--charger .splatoon-con2__inner { left: 4px; top: 281px; height: 1288px; }
 .splatoon-con2--charger .splatoon-con2__name { top: 604px; }
-.splatoon-con2--charger .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
+.splatoon-con2--charger .splatoon-con2__name p { font-size: 26px; }
 .splatoon-con2--charger .splatoon-con2__weapon[aria-pressed='true'] { background: #fd8227; }
 .splatoon-con2--slosher .splatoon-con2__inner { left: 4px; top: 281px; height: 1288px; }
 .splatoon-con2--slosher .splatoon-con2__name { top: 604px; }
-.splatoon-con2--slosher .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
+.splatoon-con2--slosher .splatoon-con2__name p { font-size: 26px; }
 .splatoon-con2--slosher .splatoon-con2__weapon[aria-pressed='true'] { background: #e8362b; }
 .splatoon-con2--splatling .splatoon-con2__inner { left: 4px; top: 281px; height: 1288px; }
 .splatoon-con2--splatling .splatoon-con2__name { top: 604px; }
-.splatoon-con2--splatling .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
+.splatoon-con2--splatling .splatoon-con2__name p { font-size: 26px; }
 .splatoon-con2--splatling .splatoon-con2__weapon[aria-pressed='true'] { background: #ea729a; }
 .splatoon-con2--dualies .splatoon-con2__inner { left: 4px; top: 281px; width: 1912px; height: 1288px; }
 .splatoon-con2--dualies .splatoon-con2__name { top: 604px; }
-.splatoon-con2--dualies .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
+.splatoon-con2--dualies .splatoon-con2__name p { font-size: 26px; }
 .splatoon-con2--dualies .splatoon-con2__weapon[aria-pressed='true'] { background: #93f93e; }
 .splatoon-con2--stringer .splatoon-con2__inner { left: 4px; top: 281px; width: 1912px; height: 1288px; }
 .splatoon-con2--stringer .splatoon-con2__name { left: 87px; top: 604px; }
-.splatoon-con2--stringer .splatoon-con2__name p { font-size: 40px; font-weight: 600; line-height: 1.4; }
+.splatoon-con2--stringer .splatoon-con2__name p { font-size: 26px; }
 .splatoon-con2--stringer .splatoon-con2__weapon[aria-pressed='true'] { background: #fcd319; }
 
 @keyframes splatoon-con2-weapon-ink-fill {
@@ -100,23 +114,22 @@
 }
 
 @keyframes splatoon-con2-shooter-paint-expand {
-  0% { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%); }
-  12% { clip-path: polygon(39% 38%, 50% 17%, 68% 31%, 86% 39%, 92% 50%, 72% 68%, 50% 84%, 31% 72%, 19% 61%, 14% 50%); }
-  34% { clip-path: polygon(22% 19%, 50% 3%, 86% 13%, 100% 27%, 100% 50%, 88% 84%, 50% 96%, 13% 90%, 4% 77%, 1% 50%); }
-  58% { clip-path: polygon(7% 4%, 50% 0, 100% 2%, 100% 8%, 100% 50%, 98% 98%, 50% 100%, 2% 100%, 0 96%, 0 50%); }
-  100% { clip-path: polygon(0 0, 50% 0, 100% 0, 100% 25%, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 75%, 0 50%); }
+  0% { opacity: .15; clip-path: ellipse(0 0 at 77% 48%); transform: translateZ(0) scale(.96); }
+  18% { opacity: .82; }
+  100% { opacity: 1; clip-path: ellipse(120% 145% at 77% 48%); transform: translateZ(0) scale(1); }
 }
 
 @keyframes splatoon-con2-shooter-paint-throw {
-  0% { opacity: 0; transform: translate3d(-655px, 370px, 0) rotate(-31deg) scale(2.8); }
-  5% { opacity: 1; }
-  18% { opacity: 1; transform: translate3d(-565px, 245px, 0) rotate(-24deg) scale(2.38); }
-  36% { opacity: 1; transform: translate3d(-445px, 100px, 0) rotate(-14deg) scale(1.95); }
-  54% { opacity: 1; transform: translate3d(-315px, 15px, 0) rotate(-3deg) scale(1.52); }
-  70% { opacity: 1; transform: translate3d(-180px, -32px, 0) rotate(7deg) scale(1.16); }
-  84% { opacity: 1; transform: translate3d(-70px, -20px, 0) rotate(14deg) scale(.84); }
-  95% { opacity: 1; transform: translate3d(0, 0, 0) rotate(18deg) scale(.62); }
-  100% { opacity: 0; transform: translate3d(0, 0, 0) rotate(18deg) scale(.62, .22); }
+  0% { opacity: 0; transform: translate3d(var(--throw-x-0), var(--throw-y-0), 0) rotate(var(--throw-r-0)) scale(var(--throw-scale)); }
+  4% { opacity: 1; transform: translate3d(var(--throw-x-0), var(--throw-y-0), 0) rotate(var(--throw-r-0)) scale(var(--throw-scale)); }
+  18% { opacity: 1; transform: translate3d(var(--throw-x-18), var(--throw-y-18), 0) rotate(var(--throw-r-18)) scale(var(--throw-scale)); }
+  36% { opacity: 1; transform: translate3d(var(--throw-x-36), var(--throw-y-36), 0) rotate(var(--throw-r-36)) scale(var(--throw-scale)); }
+  54% { opacity: 1; transform: translate3d(var(--throw-x-54), var(--throw-y-54), 0) rotate(var(--throw-r-54)) scale(var(--throw-scale)); }
+  70% { opacity: 1; transform: translate3d(var(--throw-x-70), var(--throw-y-70), 0) rotate(var(--throw-r-70)) scale(var(--throw-scale)); }
+  84% { opacity: 1; transform: translate3d(var(--throw-x-84), var(--throw-y-84), 0) rotate(var(--throw-r-84)) scale(var(--throw-scale)); }
+  90% { opacity: .72; transform: translate3d(var(--throw-x-90), var(--throw-y-90), 0) rotate(var(--throw-r-90)) scale(var(--throw-scale)); }
+  96% { opacity: .28; transform: translate3d(var(--throw-x-96), var(--throw-y-96), 0) rotate(var(--throw-r-96)) scale(var(--throw-scale)); }
+  100% { opacity: 0; transform: translate3d(0, 0, 0) rotate(var(--throw-r-96)) scale(var(--throw-scale)); }
 }
 
 @keyframes splatoon-con2-shooter-paint-trail {
@@ -127,6 +140,12 @@
 }
 
 @keyframes splatoon-con2-shooter-character-enter {
-  from { opacity: 0; filter: blur(12px) saturate(.65); transform: translate3d(-360px, -240px, 0); }
-  to { opacity: 1; filter: blur(0) saturate(1); transform: translate3d(0, 0, 0); }
+  from { opacity: 0; transform: translate3d(var(--character-start-x, -360px), var(--character-start-y, -240px), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splatoon-con2__paint-projectile { display: none; }
+  .splatoon-con2.is-entered .splatoon-con2__paint-reveal { opacity: 1; animation: none; clip-path: none; }
+  .splatoon-con2.is-entered .splatoon-con2__character-reveal { opacity: 1; animation: none; transform: none; }
 }
