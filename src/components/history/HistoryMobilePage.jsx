@@ -5,6 +5,7 @@ import HistoryHeroStorySection from './HistoryHeroStorySection.jsx';
 import HistoryBrandStatement01 from './HistoryBrandStatement01.jsx';
 import HistoryBrandStatement02 from './HistoryBrandStatement02.jsx';
 import HistoryBrandStatement03 from './HistoryBrandStatement03.jsx';
+import HistoryMobileOverview from './HistoryMobileOverview.jsx';
 import './HistoryMobilePage.css';
 
 const asset = name => `${import.meta.env.BASE_URL}images/history/mobile/${name}`;
@@ -84,17 +85,7 @@ export default function HistoryMobilePage() {
           <p>익숙한 방식에 머무르지 않고<br />새로운 아이디어와 기술을 통해<br />지금까지 없던 놀이를 만들어갑니다</p>
         </article>)}
       </section>
-      <section className="history-mobile__overview" data-node-id="2119:6311" aria-label="1889년부터 이어진 놀이의 역사">
-        <p className="history-mobile__location">KYOTO, JAPAN</p>
-        <h2>FROM TODAY<br />1889-2026</h2>
-        <p className="history-mobile__evolved">How Play evolved</p>
-        <img className="history-mobile__dots" src={asset('overview-dots.png')} alt="" />
-        <p className="history-mobile__year">1889</p>
-        <img className="history-mobile__paper history-mobile__paper--1" src={asset('74565.svg')} alt="" />
-        <img className="history-mobile__paper history-mobile__paper--2" src={asset('1e853.svg')} alt="" />
-        <img className="history-mobile__fold" src={asset('fc895.svg')} alt="" />
-        <img className="history-mobile__fold-back" src={asset('6a09e.svg')} alt="" />
-      </section>
+      <HistoryMobileOverview />
       <section className="history-mobile__awards" data-node-id="2287:4076" aria-labelledby="history-mobile-awards-title">
         <img className="history-mobile__award-grid" src={asset('awards-grid.png')} alt="" />
         <h2 id="history-mobile-awards-title">Awards<span>수상기록들</span></h2>

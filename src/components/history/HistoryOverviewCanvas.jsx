@@ -14,19 +14,21 @@ function disposeTree(root) {
   });
 }
 
-export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMotionRef }) {
+export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMotionRef, mobile = false }) {
   const hostRef = useRef(null);
 
   useEffect(() => {
     const host = hostRef.current;
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-    renderer.setSize(1920, 1080, false);
+    const width = mobile ? 360 : 1920;
+    const height = mobile ? 643 : 1080;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5));
+    renderer.setSize(width, height, false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.setAttribute('aria-hidden', 'true');
     host.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(THREE.MathUtils.radToDeg(2 * Math.atan(540 / CAMERA_Z)), 1920 / 1080, 1, 6000);
+    const camera = new THREE.PerspectiveCamera(THREE.MathUtils.radToDeg(2 * Math.atan(height / 2 / CAMERA_Z)), width / height, 1, 6000);
     camera.position.z = CAMERA_Z;
     scene.add(new THREE.AmbientLight(0xffffff, 1.6));
     const light = new THREE.DirectionalLight(0xffffff, 2.2);
@@ -52,7 +54,7 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
 
     // Surface-space dots foreshorten naturally around the sphere.
     // The dark depth-writing body occludes rear cards without a specular highlight.
-    const sphere = new THREE.Mesh(new THREE.SphereGeometry(402, 64, 48), new THREE.ShaderMaterial({
+    const sphere = new THREE.Mesh(new THREE.SphereGeometry(mobile ? 114 : 402, mobile ? 32 : 64, mobile ? 24 : 48), new THREE.ShaderMaterial({
       vertexShader: `
         varying vec3 localNormal;
         varying vec3 surfaceNormal;
@@ -72,10 +74,10 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
           const float PI = 3.14159265359;
           vec3 local = normalize(localNormal);
           float latitude = asin(clamp(local.y, -1.0, 1.0));
-          float row = (latitude / PI + 0.5) * 48.0;
-          float rowLatitude = ((floor(row) + 0.5) / 48.0 - 0.5) * PI;
+          float row = (latitude / PI + 0.5) * ${mobile ? '12.0' : '48.0'};
+          float rowLatitude = ((floor(row) + 0.5) / ${mobile ? '12.0' : '48.0'} - 0.5) * PI;
           // Fewer dots near the poles keeps their surface spacing consistent.
-          float columns = max(4.0, floor(96.0 * cos(rowLatitude) / 2.0) * 2.0);
+          float columns = max(4.0, floor(${mobile ? '24.0' : '96.0'} * cos(rowLatitude) / 2.0) * 2.0);
           float column = (atan(local.x, local.z) / (2.0 * PI) + 0.5) * columns;
           vec2 cell = fract(vec2(column, row)) - 0.5;
           float distanceToDot = length(cell);
@@ -88,7 +90,8 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
           #include <colorspace_fragment>
         }`,
     }));
-    sphere.position.x = -13;
+    sphere.position.x = mobile ? 0 : -13;
+    if (mobile) sphere.position.y = -3.5;
     scene.add(sphere);
     const world = new THREE.Group();
     scene.add(world);
@@ -98,22 +101,23 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
     const orbitItems = historyOverviewYears.flatMap((item, yearIndex) => {
       const visuals = [{ ...item.yearVisual, slotOffset: 0 }, ...item.cards];
       return visuals.map((visual) => {
-        const geometry = new THREE.PlaneGeometry(visual.width, visual.height, visual.slotOffset === 0 ? 24 : 48, 1);
+        const mobileScale = visual.slotOffset === 0 ? .244 : .21;
+        const geometry = new THREE.PlaneGeometry(visual.width * (mobile ? mobileScale : 1), visual.height * (mobile ? mobileScale : 1), visual.slotOffset === 0 ? 24 : 48, 1);
         // Years wrap gently around a cylinder; their center stays on the orbit.
         // Cards bend along the orbit, with their center anchored to the same slot.
         const positions = geometry.attributes.position;
         // Retain flat coordinates so repeated bending never deforms the mesh cumulatively.
         const flatX = Float32Array.from({ length: positions.count }, (_, index) => positions.getX(index));
-        const baseBendRadius = visual.slotOffset === 0 ? 1800 : 1000;
+        const baseBendRadius = (visual.slotOffset === 0 ? 1800 : 1000) * (mobile ? .244 : 1);
         if (visual.slotOffset !== 0) {
-          const radius = 1000;
+          const radius = baseBendRadius;
           for (let i = 0; i < positions.count; i++) {
             const angle = positions.getX(i) / radius;
             positions.setX(i, Math.sin(angle) * radius);
             positions.setZ(i, (Math.cos(angle) - 1) * radius);
           }
         } else {
-          const radius = 1800;
+          const radius = baseBendRadius;
           for (let i = 0; i < positions.count; i++) {
             const angle = positions.getX(i) / radius;
             positions.setX(i, Math.sin(angle) * radius);
@@ -151,9 +155,9 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
       const now = performance.now();
       const elapsed = Math.max(0, Math.min((now - lastRenderTime) / 1000, .05));
       lastRenderTime = now;
-      const motion = scrollMotionRef.current;
+      const motion = scrollMotionRef?.current;
       // Both scroll directions bend inward. Expire the velocity sample when scrolling stops.
-      const target = !reducedMotion.matches && motion.active && now - motion.updatedAt < 120
+      const target = !mobile && !reducedMotion.matches && motion?.active && now - motion.updatedAt < 120
         ? Math.min(motion.velocity / 2400, 1) : 0;
       const previousBend = bend;
       bend = reducedMotion.matches ? 0 : THREE.MathUtils.lerp(bend, target, 1 - Math.exp(-elapsed / (target > bend ? .1 : .28)));
@@ -174,6 +178,14 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
 
       orbitItems.forEach(({ mesh, config }) => {
         const state = getEventOrbitState(config, phase);
+        if (mobile) {
+          const distance = config.slot - phase * 3;
+          const radius = 174 + (config.slot % 3 === 2 ? 8 : 0);
+          state.x = Math.sin(state.angle) * radius;
+          state.y = -3.5 - distance * 90;
+          state.z = Math.cos(state.angle) * radius;
+          state.scale = (CAMERA_Z - radius) / CAMERA_Z;
+        }
         mesh.position.set(state.x, state.y, state.z);
         // Radial orientation reveals the side naturally as the item turns away.
         mesh.rotation.set(0, state.angle, 0);
@@ -183,7 +195,7 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
         const t = THREE.MathUtils.clamp(value, 0, 1);
         return t * t * (3 - 2 * t);
       };
-      sphere.scale.setScalar(Math.max(0.0001, 1 - smooth((phase + 0.35) / 0.35)));
+      sphere.scale.setScalar(mobile ? 1 : Math.max(0.0001, 1 - smooth((phase + 0.35) / 0.35)));
       sphere.rotation.y = phase * 0.08;
       models.forEach((model, index) => {
         if (!model) return;
@@ -200,7 +212,7 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
     }
     renderRef.current = render;
     const loader = new GLTFLoader();
-    historyOverviewYears.forEach((item, index) => {
+    if (!mobile) historyOverviewYears.forEach((item, index) => {
       loader.load(item.model, (gltf) => {
         if (disposed) { disposeTree(gltf.scene); return; }
         const root = gltf.scene;
@@ -233,7 +245,7 @@ export default function HistoryOverviewCanvas({ progressRef, renderRef, scrollMo
       renderer.forceContextLoss();
       renderer.domElement.remove();
     };
-  }, [progressRef, renderRef, scrollMotionRef]);
+  }, [progressRef, renderRef, scrollMotionRef, mobile]);
 
   return <div className="history-overview__canvas" ref={hostRef} aria-hidden="true" />;
 }
